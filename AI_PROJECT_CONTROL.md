@@ -759,7 +759,7 @@ Completion criterion đạt ở local: negative-boundary tests chứng minh USER
 
 ### P4b — Northwest editorial homepage và product navigation
 
-**Status: `IN_PROGRESS` — Paw yêu cầu trực tiếp ngày 2026-09-28; P5/P6 master giữ nguyên trạng thái.**
+**Status: `IMPLEMENTED_UNREVIEWED` — source, production build và browser gates xong tại Entry 015; P5/P6 master giữ nguyên trạng thái.**
 
 **UX/UI guardrails chống AI slop (áp dụng cho P4b và các màn hình tiếp theo).** “Slop” là nội dung số chất lượng thấp được AI sản xuất hàng loạt theo [Merriam-Webster](https://www.merriam-webster.com/dictionary/slop). [NN/g](https://www.nngroup.com/articles/ai-prototyping/) ghi nhận prototype AI thiếu brief cụ thể dễ có diện mạo đại trà và lỗi visual hierarchy/contrast/spacing. Vì vậy reviewer phải xét từng màn hình theo tiêu chí sau, không chỉ nhìn build pass:
 
@@ -767,13 +767,13 @@ Completion criterion đạt ở local: negative-boundary tests chứng minh USER
 - Nội dung gọi đúng địa danh và đặc điểm riêng; câu chữ có nguồn. Không lặp đoạn mô tả chung cho 10 card, không bịa giá, rating, số chỗ, lịch khởi hành hoặc lời chứng thực.
 - Ngôn ngữ hình ảnh Tây Bắc dùng typography biên tập, nền giấy sáng, sắc rừng/đất và ảnh địa điểm thật có quyền sử dụng. Minh họa phải ghi rõ là minh họa; không tải ảnh/asset từ đối thủ rồi thay logo.
 - Card có hierarchy nhất quán: địa danh, vùng, nét cảnh quan, mô tả ngắn, lối vào bài. Nhịp section và khoảng trắng phục vụ đọc/so sánh; tránh gradient, kính mờ, icon/badge trang trí lặp vô nghĩa.
-- Chức năng dùng được bằng bàn phím, screen reader và khi giảm chuyển động; mobile 1 card, tablet 2, desktop 4. Ảnh responsive qua Next Image; không thêm 3D/animation chặn đọc nội dung hoặc làm tăng tải không cần thiết.
+- Chức năng dùng được bằng bàn phím, screen reader và khi giảm chuyển động; mobile 1 card, tablet 2, desktop 4. Ảnh card/bài dùng WebP tĩnh đã cắt kích thước qua Next Image `unoptimized` để tránh request chuyển ảnh lúc xem trang; không thêm 3D/animation chặn đọc nội dung hoặc làm tăng tải không cần thiết.
 - Sau code phải kiểm tra UI production ở nhiều viewport, thao tác nav/card/carousel bằng trình duyệt, và tự hỏi: chi tiết nào chỉ thuộc về Tây Bắc và người dùng dự án này? Nếu thay tên brand mà trang vẫn giống site mẫu, phải chỉnh lại.
 
-- [ ] Trang chủ có section Tây Bắc rõ thứ bậc và 10 bài địa điểm có nguồn; carousel hiển thị 4 card desktop, 2 tablet, 1 mobile với nút trước/sau.
-- [ ] Card dẫn tới bài chi tiết; ảnh có giấy phép và attribution, nơi thiếu ảnh dùng minh họa ghi rõ.
-- [ ] Năm mục main navigation theo §5.1 dẫn tới năm route/chức năng riêng, không anchor scroll hay booking giả.
-- [ ] Local Git snapshot và commit thay đổi trước final build; kiểm tra route, responsive, keyboard và browser.
+- [x] Trang chủ có section Tây Bắc rõ thứ bậc và 10 bài địa điểm có nguồn; carousel hiển thị 4 card desktop, 2 tablet, 1 mobile với nút trước/sau.
+- [x] Card dẫn tới bài chi tiết; ảnh có giấy phép và attribution, nơi thiếu ảnh dùng minh họa ghi rõ.
+- [x] Năm mục main navigation theo §5.1 dẫn tới năm route/chức năng riêng, không anchor scroll hay booking giả.
+- [x] Local Git snapshot và commit thay đổi trước final build; kiểm tra route, responsive, keyboard và browser.
 
 Completion criterion: 10 bài có trang riêng, carousel và cả năm route hoạt động trên production build; ảnh và nội dung có nguồn; không sao chép bố cục/asset/copy từ Travel.com.vn.
 
@@ -1621,6 +1621,77 @@ Deletion rationale: global loading boundary khiến nội dung streamed ẩn tro
 - `apps/web/src/features/auth/auth-form-shell.tsx`
 
 Generated Prisma client `apps/api/src/generated/prisma/**` được regenerate, gitignored và không hand-edit. Prompt cho coder vẫn chỉ nằm trong chat; docs này là trạng thái/contract/evidence dự án.
+
+### Entry 015 — P4b Northwest showcase, five planning routes và image runtime repair
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-28, Asia/Saigon |
+| Authorization | Paw yêu cầu giữ kế hoạch cũ sau khi cân nhắc landing page ngắn: trang chủ editorial Tây Bắc, 10 card, carousel 4/2/1, năm nhãn header cố định dẫn tới chức năng riêng; cho phép Git snapshot trước build và tiếp tục không hỏi lại. |
+| Status | `IMPLEMENTED_UNREVIEWED` — P4b source, review tĩnh, build và browser acceptance đã xong; không tự gán release approval. P4 auth vẫn giữ trạng thái Entry 014; P5/P6/P7 chưa mở. |
+| Git | Khởi tạo local `main`; baseline `27a7921` trước sửa; feature `831086e` trước first build; image repair `f341a1b` trước final build. Không remote, không push. Commit tài liệu cuối sẽ nối tiếp Entry này. |
+| Scope | Trang chủ section mười nơi/mười nhịp núi; carousel scroll-snap với nút trái/phải; `/kham-pha` và 10 bài `/diem-den/[slug]`; năm route `/tour-tron-goi`, `/ve-may-bay`, `/khach-san`, `/combo-du-lich`, `/dich-vu-cong-them` có tương tác riêng. Header đi route, không anchor. Hero cinematic P2 giữ nguyên. |
+| Content | 10 địa danh Sa Pa, Mù Cang Chải, Tà Xùa, Mộc Châu, Y Tý, Bắc Hà, Ngọc Chiến, Mai Châu, Sin Suối Hồ, Mường Thanh; mỗi bài có intro/highlight/travel note và link nguồn du lịch. Tám ảnh Commons/Unsplash có tác giả/license/source ở bài và `/nguon-anh`; hai card thiếu ảnh phù hợp dùng minh họa tự vẽ ghi rõ. Không gán giá/rating/lịch bay/phòng/chỗ trống giả. |
+| Image repair | Browser production đầu tiên thấy 5/8 card ảnh blank >30 giây: exact `/_next/image` WebP key treo trên process cũ, process mới trả 200 nhanh; Sharp xử lý source 34–119 ms, nguyên nhân gốc của cache in-flight chưa chứng minh. Chuyển tám ảnh sang 16 WebP tĩnh: card 1200×900, bài rộng tối đa 2400px (Tà Xùa giữ 1959px), `next/image unoptimized`. Tổng card 2,270,082 bytes; bài 6,351,440 bytes; master originals giữ để đối chiếu nguồn. Trade-off: card cố định có thể tải thừa bytes trên máy nhỏ, đổi lại không lệ thuộc optimizer runtime và đủ pixel cho màn hình mật độ cao. |
+| Review / fixes | Static independent review tìm ba lỗi: CTA bài chi tiết mất slug, ảnh bài 960–1280px không đủ DPR cao, Tour phân loại Mường Thanh sai; cả ba sửa trước browser. Browser phát hiện thêm image optimizer stall, repair và retest. |
+| Gates | Final `npm run lint` exit0; `npm run typecheck` exit0; `npm run test` exit0 (16 unit suites/106 tests + health/OpenAPI e2e 3); `npm run build` exit0 sau commit `f341a1b`, 43 page outputs gồm 10 SSG bài. |
+| Browser | Production `next start` port 11405, Chrome headless Playwright temp: viewport 1440/800/390 đo 4/2/1 card, nút next/prev và keyboard Enter, không horizontal overflow; năm desktop links mở đúng route/H1; mobile menu mở/Escape/focus/route; card→bài→Combo giữ slug; Tour filter, flight planner, hotel checklist, add-on draft đều phản hồi; 10 bài HTTP200; tám card WebP giải mã trong Chrome và ảnh bài WebP tải xong. Screenshot ở `D:\codex-task-temp\p4b-browser-verify\home-1440.png`, `home-390.png`, `section-1440.png`, `section-390.png`; test script temp `verify.mjs` không nằm trong repo. |
+| Risks | Nhãn thương mại ở header có thể gợi kỳ vọng đặt/bán thật; đầu mỗi trang nói rõ đây là công cụ lập kế hoạch, không xác nhận booking. Ảnh hero P2 do Paw cung cấp vẫn cần chứng minh quyền sử dụng và source resolution trước submission/deploy; chưa kiểm tra thiết bị mobile vật lý. Card static WebP chưa có srcset theo DPR để giảm bytes hơn nữa; P6 data binding và P5 CMS còn riêng. |
+| Next action | Paw review visual/product P4b; nếu nhận thì lên một phase riêng cho P5 hoặc P6 theo ưu tiên cuộc thi. Không tự bắt đầu phase khác. |
+
+**P4b exact write-set từ baseline `27a7921` (49 paths, relative to `D:\webdulich`; doc path gồm lần cập nhật Entry này):**
+
+```text
+AI_PROJECT_CONTROL.md
+apps/web/public/images/destinations/bac-ha-article.webp
+apps/web/public/images/destinations/bac-ha-card.webp
+apps/web/public/images/destinations/bac-ha.jpg
+apps/web/public/images/destinations/mai-chau-article.webp
+apps/web/public/images/destinations/mai-chau-card.webp
+apps/web/public/images/destinations/mai-chau.jpg
+apps/web/public/images/destinations/moc-chau-article.webp
+apps/web/public/images/destinations/moc-chau-card.webp
+apps/web/public/images/destinations/moc-chau.jpg
+apps/web/public/images/destinations/mu-cang-chai-article.webp
+apps/web/public/images/destinations/mu-cang-chai-card.webp
+apps/web/public/images/destinations/mu-cang-chai.jpg
+apps/web/public/images/destinations/muong-thanh-article.webp
+apps/web/public/images/destinations/muong-thanh-card.webp
+apps/web/public/images/destinations/muong-thanh.jpg
+apps/web/public/images/destinations/sa-pa-article.webp
+apps/web/public/images/destinations/sa-pa-card.webp
+apps/web/public/images/destinations/sa-pa.jpg
+apps/web/public/images/destinations/ta-xua-article.webp
+apps/web/public/images/destinations/ta-xua-card.webp
+apps/web/public/images/destinations/ta-xua.png
+apps/web/public/images/destinations/y-ty-article.webp
+apps/web/public/images/destinations/y-ty-card.webp
+apps/web/public/images/destinations/y-ty.jpg
+apps/web/src/app/(public)/combo-du-lich/page.tsx
+apps/web/src/app/(public)/dich-vu-cong-them/page.tsx
+apps/web/src/app/(public)/diem-den/[slug]/page.tsx
+apps/web/src/app/(public)/khach-san/page.tsx
+apps/web/src/app/(public)/kham-pha/page.tsx
+apps/web/src/app/(public)/nguon-anh/page.tsx
+apps/web/src/app/(public)/page.tsx
+apps/web/src/app/(public)/tour-tron-goi/page.tsx
+apps/web/src/app/(public)/ve-may-bay/page.tsx
+apps/web/src/components/layout/site-footer.tsx
+apps/web/src/components/placeholders/final-cta.tsx
+apps/web/src/config/navigation.ts
+apps/web/src/features/destinations/destination-card.tsx
+apps/web/src/features/destinations/northwest-carousel.module.css
+apps/web/src/features/destinations/northwest-carousel.tsx
+apps/web/src/features/destinations/northwest-destinations.ts
+apps/web/src/features/product-navigation-a/combo-planner.tsx
+apps/web/src/features/product-navigation-a/tour-explorer.tsx
+apps/web/src/features/product-navigation-b/add-on-selector.tsx
+apps/web/src/features/product-navigation-b/copy-text-button.tsx
+apps/web/src/features/product-navigation-b/flight-gateway-planner.tsx
+apps/web/src/features/product-navigation-b/flight-gateways.ts
+apps/web/src/features/product-navigation-b/stay-checklist.tsx
+apps/web/src/lib/auth/safe-next.ts
+```
 
 ### Handoff template
 
