@@ -15,11 +15,14 @@ export function SiteFooter() {
             Mỗi hành trình bắt đầu bằng sự tò mò và sự tôn trọng với vùng đất,
             con người nơi mình đặt chân đến.
           </p>
+          <Link href="/nguon-anh" className="mt-4 inline-flex min-h-11 items-center text-xs text-ivory/85 underline underline-offset-4 hover:text-white">
+            Nguồn và giấy phép ảnh
+          </Link>
         </div>
 
         <nav aria-label="Liên kết khám phá ở chân trang">
           <h2 className="text-sm font-semibold uppercase tracking-wider text-gold">
-            Khám phá
+            Lên kế hoạch
           </h2>
           <ul className="mt-3 space-y-2">
             {primaryNav.map((item) => (

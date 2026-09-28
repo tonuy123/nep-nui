@@ -335,16 +335,17 @@ Controller
 
 ### 5.1 Main navigation
 
-Top navigation chỉ có:
+Top navigation theo yêu cầu cập nhật 2026-09-28 chỉ có:
 
-1. `Khám phá` → `/kham-pha`
-2. `Trải nghiệm` → `/trai-nghiem`
-3. `Hành trình` → `/hanh-trinh`
-4. `Bản đồ` → `/ban-do`
-5. `Chuyện bản địa` → `/chuyen-ban-dia`
-6. `Cẩm nang` → `/cam-nang`
+1. `Tour trọn gói` → `/tour-tron-goi`
+2. `Vé máy bay` → `/ve-may-bay`
+3. `Khách sạn` → `/khach-san`
+4. `Combo du lịch` → `/combo-du-lich`
+5. `Dịch vụ cộng thêm` → `/dich-vu-cong-them`
 
-CTA bên phải: `Lập chuyến đi` → `/hanh-trinh`.
+Mỗi mục là một route riêng với chức năng khám phá/lên kế hoạch phù hợp dữ liệu hiện có. Không mô phỏng tồn kho, giá hay thanh toán khi chưa có integration. Sáu route editorial cũ vẫn truy cập trực tiếp từ nội dung/CTA để giữ deep link; chúng không còn nằm trên main navigation.
+
+CTA bên phải: `Lập chuyến đi` → `/combo-du-lich`.
 
 User menu dẫn tới `/dang-nhap` khi guest và `/tai-khoan` khi authenticated. Admin không xuất hiện trong main navigation công khai.
 
@@ -755,6 +756,26 @@ Completion criterion: database mới migrate được; seed chạy hai lần đ�
 - [x] Route/API authorization tests.
 
 Completion criterion đạt ở local: negative-boundary tests chứng minh USER không vào Editor/Admin API và revoked session không refresh được. P4 chờ Paw review; P5 chưa mở.
+
+### P4b — Northwest editorial homepage và product navigation
+
+**Status: `IN_PROGRESS` — Paw yêu cầu trực tiếp ngày 2026-09-28; P5/P6 master giữ nguyên trạng thái.**
+
+**UX/UI guardrails chống AI slop (áp dụng cho P4b và các màn hình tiếp theo).** “Slop” là nội dung số chất lượng thấp được AI sản xuất hàng loạt theo [Merriam-Webster](https://www.merriam-webster.com/dictionary/slop). [NN/g](https://www.nngroup.com/articles/ai-prototyping/) ghi nhận prototype AI thiếu brief cụ thể dễ có diện mạo đại trà và lỗi visual hierarchy/contrast/spacing. Vì vậy reviewer phải xét từng màn hình theo tiêu chí sau, không chỉ nhìn build pass:
+
+- Một trang có **một tác vụ chính** và một kết quả có ích: bài điểm đến để đọc, tour để lọc, vé để lập đường đi, khách sạn để kiểm tra tiêu chí, combo để tạo bản nháp, dịch vụ để soạn nhu cầu. Nav không cuộn đến section thay cho route.
+- Nội dung gọi đúng địa danh và đặc điểm riêng; câu chữ có nguồn. Không lặp đoạn mô tả chung cho 10 card, không bịa giá, rating, số chỗ, lịch khởi hành hoặc lời chứng thực.
+- Ngôn ngữ hình ảnh Tây Bắc dùng typography biên tập, nền giấy sáng, sắc rừng/đất và ảnh địa điểm thật có quyền sử dụng. Minh họa phải ghi rõ là minh họa; không tải ảnh/asset từ đối thủ rồi thay logo.
+- Card có hierarchy nhất quán: địa danh, vùng, nét cảnh quan, mô tả ngắn, lối vào bài. Nhịp section và khoảng trắng phục vụ đọc/so sánh; tránh gradient, kính mờ, icon/badge trang trí lặp vô nghĩa.
+- Chức năng dùng được bằng bàn phím, screen reader và khi giảm chuyển động; mobile 1 card, tablet 2, desktop 4. Ảnh responsive qua Next Image; không thêm 3D/animation chặn đọc nội dung hoặc làm tăng tải không cần thiết.
+- Sau code phải kiểm tra UI production ở nhiều viewport, thao tác nav/card/carousel bằng trình duyệt, và tự hỏi: chi tiết nào chỉ thuộc về Tây Bắc và người dùng dự án này? Nếu thay tên brand mà trang vẫn giống site mẫu, phải chỉnh lại.
+
+- [ ] Trang chủ có section Tây Bắc rõ thứ bậc và 10 bài địa điểm có nguồn; carousel hiển thị 4 card desktop, 2 tablet, 1 mobile với nút trước/sau.
+- [ ] Card dẫn tới bài chi tiết; ảnh có giấy phép và attribution, nơi thiếu ảnh dùng minh họa ghi rõ.
+- [ ] Năm mục main navigation theo §5.1 dẫn tới năm route/chức năng riêng, không anchor scroll hay booking giả.
+- [ ] Local Git snapshot và commit thay đổi trước final build; kiểm tra route, responsive, keyboard và browser.
+
+Completion criterion: 10 bài có trang riêng, carousel và cả năm route hoạt động trên production build; ảnh và nội dung có nguồn; không sao chép bố cục/asset/copy từ Travel.com.vn.
 
 ### P5 — Admin/Editor CMS
 

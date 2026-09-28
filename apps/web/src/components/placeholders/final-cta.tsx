@@ -10,21 +10,22 @@ export function FinalCta() {
             id="final-cta-title"
             className="mt-5 max-w-xl text-balance font-display text-4xl leading-tight tracking-tight text-ivory sm:text-5xl"
           >
-            Chuyến đi tiếp theo bắt đầu từ đây.
+            Một chuyến đi bắt đầu bằng một câu hỏi hay.
           </h2>
           <p className="mt-6 max-w-lg text-sm leading-relaxed text-ivory/85">
-            Xem hành trình và cẩm nang đang được chuẩn bị, để tìm
-            cảm hứng cho chuyến đi của bạn. Nội dung chi tiết đang được xác minh.
+            Bạn muốn đi giữa ruộng bậc thang, nghỉ ở một bản làng hay tìm
+            một cung đường ngắm núi? Ghép ý tưởng trước, rồi hỏi rõ những
+            dịch vụ mình thực sự cần.
           </p>
         </div>
         <div className="min-w-0 border-t border-ivory/20 pt-7 lg:border-t-0 lg:border-l lg:pl-10 lg:pt-0">
-          <p className="mb-6 font-display text-xl text-ivory sm:text-2xl">Bắt đầu từ một điều bạn muốn khám phá.</p>
+          <p className="mb-6 font-display text-xl text-ivory sm:text-2xl">Lưu lại ý tưởng trước khi lên đường.</p>
           <div className="flex flex-wrap gap-3">
-            <CtaLink href="/hanh-trinh" size="lg">
+            <CtaLink href="/combo-du-lich" size="lg">
               Lập chuyến đi
             </CtaLink>
-            <CtaLink href="/cam-nang" variant="inverseOutline" size="lg">
-              Xem cẩm nang
+            <CtaLink href="/kham-pha" variant="inverseOutline" size="lg">
+              Xem điểm đến
             </CtaLink>
           </div>
         </div>

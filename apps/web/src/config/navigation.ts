@@ -5,17 +5,16 @@ export interface NavItem {
 }
 
 export const primaryNav: NavItem[] = [
-  { label: "Khám phá", href: "/kham-pha" },
-  { label: "Trải nghiệm", href: "/trai-nghiem" },
-  { label: "Hành trình", href: "/hanh-trinh" },
-  { label: "Bản đồ", href: "/ban-do" },
-  { label: "Chuyện bản địa", href: "/chuyen-ban-dia" },
-  { label: "Cẩm nang", href: "/cam-nang" },
+  { label: "Tour trọn gói", href: "/tour-tron-goi" },
+  { label: "Vé máy bay", href: "/ve-may-bay" },
+  { label: "Khách sạn", href: "/khach-san" },
+  { label: "Combo du lịch", href: "/combo-du-lich" },
+  { label: "Dịch vụ cộng thêm", href: "/dich-vu-cong-them" },
 ];
 
 export const primaryCta: NavItem = {
   label: "Lập chuyến đi",
-  href: "/hanh-trinh",
+  href: "/combo-du-lich",
 };
 
 export const guestAction: NavItem = {
