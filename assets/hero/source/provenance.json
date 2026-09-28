@@ -1,0 +1,20 @@
+{
+  "source": "https://www.pinterest.com/pin/224265256438235287/",
+  "image": "https://i.pinimg.com/originals/95/7c/f8/957cf873bd8256dbb1359fdb246e1e65.jpg",
+  "sha256": "e87dec1261669441ec56c51cd4379fdfaa9c8b337ea63db2d12401309823c452",
+  "width": 2048,
+  "height": 1365,
+  "bytes": 267143,
+  "licenseStatus": "UNVERIFIED",
+  "locationStatus": "UNVERIFIED",
+  "usage": "Local P2 prototype; no deployment or submission authorization inferred",
+  "visibleSignature": "Hoang Cuong; photographer identity unconfirmed",
+  "derivedBackground": {
+    "file": "../work/sky-generated.png",
+    "method": "image_gen editing referenced original",
+    "synthetic": true,
+    "width": 1536,
+    "height": 1024,
+    "note": "Only for revealed background. Original sky and all terrain pixels use original photograph."
+  }
+}

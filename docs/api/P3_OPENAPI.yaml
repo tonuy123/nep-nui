@@ -1,0 +1,687 @@
+openapi: 3.1.0
+info:
+  title: Tourism API — Public Content (P3)
+  version: "1.0.0"
+  description: |
+    Public read-only content API cho website du lịch vùng sâu, vùng xa.
+    Các endpoint public không yêu cầu đăng nhập (security: [] cho mọi operation).
+    P3 không có endpoint ghi nội dung, không có auth, không có search engine.
+    List dùng cursor pagination `publishedAt DESC, id DESC`; mọi response public
+    dùng `Cache-Control: no-store`.
+servers:
+  - url: http://127.0.0.1:3001
+    description: Local API (dev)
+tags:
+  - name: destinations
+  - name: experiences
+  - name: itineraries
+  - name: stories
+  - name: guides
+paths:
+  /api/v1/destinations:
+    get:
+      tags: [destinations]
+      summary: List published destinations
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: Danh sách destination đã publish.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DestinationListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /api/v1/destinations/{slug}:
+    get:
+      tags: [destinations]
+      summary: Get a published destination by slug
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/Slug'
+      responses:
+        '200':
+          description: Chi tiết destination đã publish, gallery chỉ gồm media CLEARED.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DestinationDetailResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /api/v1/experiences:
+    get:
+      tags: [experiences]
+      summary: List published experiences
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/DestinationSlug'
+      responses:
+        '200':
+          description: Danh sách experience đã publish; destination cha phải PUBLISHED.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExperienceListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /api/v1/experiences/{slug}:
+    get:
+      tags: [experiences]
+      summary: Get a published experience by slug
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/Slug'
+      responses:
+        '200':
+          description: Chi tiết experience đã publish.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExperienceDetailResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /api/v1/itineraries:
+    get:
+      tags: [itineraries]
+      summary: List published itineraries
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: Danh sách itinerary đã publish (dayCount, không kèm days).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItineraryListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /api/v1/itineraries/{slug}:
+    get:
+      tags: [itineraries]
+      summary: Get a published itinerary by slug
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/Slug'
+      responses:
+        '200':
+          description: |
+            Chi tiết itinerary; tối đa 30 ngày đầu theo dayNumber tăng dần.
+            Destination reference của mỗi ngày chỉ xuất hiện khi destination PUBLISHED.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItineraryDetailResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /api/v1/stories:
+    get:
+      tags: [stories]
+      summary: List published stories
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/DestinationSlug'
+      responses:
+        '200':
+          description: |
+            Danh sách story đã publish. Story không gắn destination vẫn public;
+            story gắn destination draft/archived không public.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoryListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /api/v1/stories/{slug}:
+    get:
+      tags: [stories]
+      summary: Get a published story by slug
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/Slug'
+      responses:
+        '200':
+          description: Chi tiết story đã publish.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoryDetailResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /api/v1/guides:
+    get:
+      tags: [guides]
+      summary: List published guides
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/DestinationSlug'
+      responses:
+        '200':
+          description: Danh sách guide đã publish (cùng policy destination như story).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuideListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /api/v1/guides/{slug}:
+    get:
+      tags: [guides]
+      summary: Get a published guide by slug
+      security: []
+      parameters:
+        - $ref: '#/components/parameters/Slug'
+      responses:
+        '200':
+          description: Chi tiết guide đã publish.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GuideDetailResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+components:
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: So ban ghi moi trang (1-50, mac dinh 12). Chi nhan chu so, khong nhan so am/decimal/boolean/array.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 12
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: Base64url cursor (8-512 ky tu) tra tu pagination.nextCursor. Cursor bi rang buoc theo resource va filter; dung sai se tra 400.
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 512
+        pattern: '^[A-Za-z0-9_-]+$'
+    DestinationSlug:
+      name: destinationSlug
+      in: query
+      required: false
+      description: Loc theo destination da publish (chi experiences/stories/guides).
+      schema:
+        type: string
+        maxLength: 120
+        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+    Slug:
+      name: slug
+      in: path
+      required: true
+      description: Slug ASCII kebab-case cua resource.
+      schema:
+        type: string
+        maxLength: 120
+        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+  responses:
+    BadRequest:
+      description: Query/cursor/slug khong hop le.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorResponse'
+    NotFound:
+      description: |
+        Slug khong ton tai, DRAFT hoac ARCHIVED — cung mot contract, khong phan biet trang thai an.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorResponse'
+    ServiceUnavailable:
+      description: Content database khong san sang (khong lo chi tiet noi bo).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorResponse'
+    InternalError:
+      description: Loi noi bo da sanitize.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorResponse'
+  schemas:
+    PublicMedia:
+      type: object
+      required: [publicUrl, alt, width, height, attribution]
+      additionalProperties: false
+      properties:
+        publicUrl:
+          type: string
+          maxLength: 2048
+          description: URL http/https hoac site-relative path, khong chua credential.
+        alt:
+          type: string
+        width:
+          type: integer
+          minimum: 1
+        height:
+          type: integer
+          minimum: 1
+        attribution:
+          type: [string, 'null']
+    DestinationRef:
+      type: object
+      required: [slug, title]
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+    Pagination:
+      type: object
+      required: [nextCursor, hasMore]
+      additionalProperties: false
+      properties:
+        nextCursor:
+          type: [string, 'null']
+        hasMore:
+          type: boolean
+    ApiErrorDetail:
+      type: object
+      required: [field, message]
+      additionalProperties: false
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+    ApiErrorBody:
+      type: object
+      required: [code, message]
+      additionalProperties: false
+      properties:
+        code:
+          type: string
+          examples: [INVALID_QUERY, NOT_FOUND, DATABASE_UNAVAILABLE, INTERNAL_ERROR]
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiErrorDetail'
+    ApiErrorResponse:
+      type: object
+      required: [error, requestId]
+      additionalProperties: false
+      properties:
+        error:
+          $ref: '#/components/schemas/ApiErrorBody'
+        requestId:
+          type: string
+    DestinationSummary:
+      type: object
+      required: [slug, title, excerpt, coverMedia, publishedAt]
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: [string, 'null']
+        coverMedia:
+          oneOf:
+            - $ref: '#/components/schemas/PublicMedia'
+            - type: 'null'
+        publishedAt:
+          type: string
+          format: date-time
+    DestinationDetail:
+      type: object
+      required: [slug, title, excerpt, coverMedia, publishedAt, body, gallery]
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: [string, 'null']
+        coverMedia:
+          oneOf:
+            - $ref: '#/components/schemas/PublicMedia'
+            - type: 'null'
+        publishedAt:
+          type: string
+          format: date-time
+        body:
+          type: [string, 'null']
+          maxLength: 20000
+        gallery:
+          type: array
+          maxItems: 24
+          items:
+            $ref: '#/components/schemas/PublicMedia'
+    DestinationListResponse:
+      type: object
+      required: [data, pagination]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DestinationSummary'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    DestinationDetailResponse:
+      type: object
+      required: [data]
+      properties:
+        data:
+          $ref: '#/components/schemas/DestinationDetail'
+    ExperienceSummary:
+      type: object
+      required: [slug, title, excerpt, coverMedia, destination, publishedAt]
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: [string, 'null']
+        coverMedia:
+          oneOf:
+            - $ref: '#/components/schemas/PublicMedia'
+            - type: 'null'
+        destination:
+          $ref: '#/components/schemas/DestinationRef'
+        publishedAt:
+          type: string
+          format: date-time
+    ExperienceDetail:
+      type: object
+      required: [slug, title, excerpt, coverMedia, destination, publishedAt, body]
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: [string, 'null']
+        coverMedia:
+          oneOf:
+            - $ref: '#/components/schemas/PublicMedia'
+            - type: 'null'
+        destination:
+          $ref: '#/components/schemas/DestinationRef'
+        publishedAt:
+          type: string
+          format: date-time
+        body:
+          type: [string, 'null']
+          maxLength: 20000
+    ExperienceListResponse:
+      type: object
+      required: [data, pagination]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExperienceSummary'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    ExperienceDetailResponse:
+      type: object
+      required: [data]
+      properties:
+        data:
+          $ref: '#/components/schemas/ExperienceDetail'
+    ItineraryDay:
+      type: object
+      required: [dayNumber, title, content, destination]
+      additionalProperties: false
+      properties:
+        dayNumber:
+          type: integer
+          minimum: 1
+          maximum: 30
+        title:
+          type: [string, 'null']
+        content:
+          type: string
+          maxLength: 5000
+        destination:
+          oneOf:
+            - $ref: '#/components/schemas/DestinationRef'
+            - type: 'null'
+    ItinerarySummary:
+      type: object
+      required: [slug, title, excerpt, coverMedia, dayCount, publishedAt]
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: [string, 'null']
+        coverMedia:
+          oneOf:
+            - $ref: '#/components/schemas/PublicMedia'
+            - type: 'null'
+        dayCount:
+          type: integer
+          minimum: 0
+        publishedAt:
+          type: string
+          format: date-time
+    ItineraryDetail:
+      type: object
+      required: [slug, title, excerpt, coverMedia, dayCount, publishedAt, body, days]
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: [string, 'null']
+        coverMedia:
+          oneOf:
+            - $ref: '#/components/schemas/PublicMedia'
+            - type: 'null'
+        dayCount:
+          type: integer
+          minimum: 0
+        publishedAt:
+          type: string
+          format: date-time
+        body:
+          type: [string, 'null']
+          maxLength: 20000
+        days:
+          type: array
+          maxItems: 30
+          items:
+            $ref: '#/components/schemas/ItineraryDay'
+    ItineraryListResponse:
+      type: object
+      required: [data, pagination]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItinerarySummary'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    ItineraryDetailResponse:
+      type: object
+      required: [data]
+      properties:
+        data:
+          $ref: '#/components/schemas/ItineraryDetail'
+    StorySummary:
+      type: object
+      required: [slug, title, excerpt, coverMedia, destination, publishedAt]
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: [string, 'null']
+        coverMedia:
+          oneOf:
+            - $ref: '#/components/schemas/PublicMedia'
+            - type: 'null'
+        destination:
+          oneOf:
+            - $ref: '#/components/schemas/DestinationRef'
+            - type: 'null'
+        publishedAt:
+          type: string
+          format: date-time
+    StoryDetail:
+      type: object
+      required: [slug, title, excerpt, coverMedia, destination, publishedAt, body]
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: [string, 'null']
+        coverMedia:
+          oneOf:
+            - $ref: '#/components/schemas/PublicMedia'
+            - type: 'null'
+        destination:
+          oneOf:
+            - $ref: '#/components/schemas/DestinationRef'
+            - type: 'null'
+        publishedAt:
+          type: string
+          format: date-time
+        body:
+          type: [string, 'null']
+          maxLength: 20000
+    StoryListResponse:
+      type: object
+      required: [data, pagination]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StorySummary'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    StoryDetailResponse:
+      type: object
+      required: [data]
+      properties:
+        data:
+          $ref: '#/components/schemas/StoryDetail'
+    GuideSummary:
+      type: object
+      required: [slug, title, excerpt, coverMedia, destination, publishedAt]
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: [string, 'null']
+        coverMedia:
+          oneOf:
+            - $ref: '#/components/schemas/PublicMedia'
+            - type: 'null'
+        destination:
+          oneOf:
+            - $ref: '#/components/schemas/DestinationRef'
+            - type: 'null'
+        publishedAt:
+          type: string
+          format: date-time
+    GuideDetail:
+      type: object
+      required: [slug, title, excerpt, coverMedia, destination, publishedAt, body]
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          type: string
+        excerpt:
+          type: [string, 'null']
+        coverMedia:
+          oneOf:
+            - $ref: '#/components/schemas/PublicMedia'
+            - type: 'null'
+        destination:
+          oneOf:
+            - $ref: '#/components/schemas/DestinationRef'
+            - type: 'null'
+        publishedAt:
+          type: string
+          format: date-time
+        body:
+          type: [string, 'null']
+          maxLength: 20000
+    GuideListResponse:
+      type: object
+      required: [data, pagination]
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GuideSummary'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    GuideDetailResponse:
+      type: object
+      required: [data]
+      properties:
+        data:
+          $ref: '#/components/schemas/GuideDetail'

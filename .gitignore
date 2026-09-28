@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build output
+.next/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Prisma generated client + compiled tools (regenerate: npm run prisma:generate / build:tools)
+apps/api/src/generated/
+apps/api/dist-tools/
+
+# Next.js generated
+next-env.d.ts
+
+# Environment (never commit real secrets)
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*.local
+
+# Deploy
+.vercel

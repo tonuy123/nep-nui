@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": false,
+    "sourceMap": false,
+    "incremental": false,
+    "rootDir": ".",
+    "outDir": "./dist-tools",
+    "types": ["node"]
+  },
+  "include": ["prisma/**/*.ts"]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "webdulich",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Monorepo website quang ba du lich vung sau, vung xa",
+  "engines": {
+    "node": "^24.18.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "postinstall": "npm run build --workspace @webdulich/contracts && npm run prisma:generate --workspace @webdulich/api",
+    "dev:web": "npm run dev --workspace @webdulich/web",
+    "dev:api": "npm run dev --workspace @webdulich/api",
+    "build": "npm run build --workspace @webdulich/contracts && npm run build --workspace @webdulich/api && npm run build --workspace @webdulich/web",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "test:content": "npm run test:content --workspace @webdulich/api",
+    "test:auth": "npm run test:auth --workspace @webdulich/api",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down"
+  }
+}

@@ -1,0 +1,44 @@
+name: webdulich
+
+services:
+  postgres:
+    image: postgres:17.6-alpine
+    container_name: webdulich-postgres-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: webdulich
+      POSTGRES_PASSWORD: webdulich_local
+      POSTGRES_DB: webdulich_dev
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - webdulich-dev-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U webdulich -d webdulich_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  postgres-test:
+    image: postgres:17.6-alpine
+    container_name: webdulich-postgres-test
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: webdulich
+      POSTGRES_PASSWORD: webdulich_local
+      POSTGRES_DB: webdulich_test
+    ports:
+      - "127.0.0.1:55433:5432"
+    volumes:
+      - webdulich-test-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U webdulich -d webdulich_test"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+volumes:
+  webdulich-dev-pgdata:
+  webdulich-test-pgdata:

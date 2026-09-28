@@ -1,0 +1,290 @@
+generator client {
+  provider               = "prisma-client"
+  output                 = "../src/generated/prisma"
+  moduleFormat           = "esm"
+  generatedFileExtension = "ts"
+  importFileExtension    = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum MediaClearance {
+  UNVERIFIED
+  CLEARED
+  BLOCKED
+}
+
+model Destination {
+  id            String             @id @default(uuid()) @db.Uuid
+  slug          String             @unique @db.VarChar(120)
+  title         String             @db.VarChar(160)
+  excerpt       String?            @db.VarChar(400)
+  body          String?            @db.Text
+  status        ContentStatus      @default(DRAFT)
+  publishedAt   DateTime?          @db.Timestamptz(3)
+  createdAt     DateTime           @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime           @updatedAt @db.Timestamptz(3)
+  coverMediaId  String?            @db.Uuid
+  coverMedia    Media?             @relation(fields: [coverMediaId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  gallery       DestinationMedia[]
+  experiences   Experience[]
+  stories       Story[]
+  guides        Guide[]
+  itineraryDays ItineraryDay[]
+  favorites     Favorite[]
+  inquiries     Inquiry[]
+
+  @@index([status, publishedAt(sort: Desc), id(sort: Desc)])
+  @@index([coverMediaId])
+  @@map("destinations")
+}
+
+model Media {
+  id                String             @id @default(uuid()) @db.Uuid
+  publicUrl         String             @db.VarChar(2048)
+  alt               String             @db.VarChar(300)
+  width             Int
+  height            Int
+  attribution       String?            @db.VarChar(400)
+  source            String?            @db.VarChar(1000)
+  clearance         MediaClearance     @default(UNVERIFIED)
+  createdAt         DateTime           @default(now()) @db.Timestamptz(3)
+  updatedAt         DateTime           @updatedAt @db.Timestamptz(3)
+  destinationCovers Destination[]
+  experienceCovers  Experience[]
+  itineraryCovers   Itinerary[]
+  storyCovers       Story[]
+  guideCovers       Guide[]
+  destinationLinks  DestinationMedia[]
+
+  @@index([clearance])
+  @@map("media")
+}
+
+model DestinationMedia {
+  id            String      @id @default(uuid()) @db.Uuid
+  destinationId String      @db.Uuid
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  mediaId       String      @db.Uuid
+  media         Media       @relation(fields: [mediaId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  position      Int
+  createdAt     DateTime    @default(now()) @db.Timestamptz(3)
+
+  @@unique([destinationId, mediaId])
+  @@unique([destinationId, position])
+  @@index([mediaId])
+  @@map("destination_media")
+}
+
+model Experience {
+  id            String        @id @default(uuid()) @db.Uuid
+  slug          String        @unique @db.VarChar(120)
+  title         String        @db.VarChar(160)
+  excerpt       String?       @db.VarChar(400)
+  body          String?       @db.Text
+  status        ContentStatus @default(DRAFT)
+  publishedAt   DateTime?     @db.Timestamptz(3)
+  createdAt     DateTime      @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime      @updatedAt @db.Timestamptz(3)
+  destinationId String        @db.Uuid
+  destination   Destination   @relation(fields: [destinationId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  coverMediaId  String?       @db.Uuid
+  coverMedia    Media?        @relation(fields: [coverMediaId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([destinationId])
+  @@index([destinationId, status, publishedAt(sort: Desc), id(sort: Desc)])
+  @@index([status, publishedAt(sort: Desc), id(sort: Desc)])
+  @@index([coverMediaId])
+  @@map("experiences")
+}
+
+model Itinerary {
+  id           String         @id @default(uuid()) @db.Uuid
+  slug         String         @unique @db.VarChar(120)
+  title        String         @db.VarChar(160)
+  excerpt      String?        @db.VarChar(400)
+  body         String?        @db.Text
+  status       ContentStatus  @default(DRAFT)
+  publishedAt  DateTime?      @db.Timestamptz(3)
+  createdAt    DateTime       @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime       @updatedAt @db.Timestamptz(3)
+  coverMediaId String?        @db.Uuid
+  coverMedia   Media?         @relation(fields: [coverMediaId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  days         ItineraryDay[]
+  savedBy      SavedItinerary[]
+
+  @@index([status, publishedAt(sort: Desc), id(sort: Desc)])
+  @@index([coverMediaId])
+  @@map("itineraries")
+}
+
+model ItineraryDay {
+  id            String       @id @default(uuid()) @db.Uuid
+  itineraryId   String       @db.Uuid
+  itinerary     Itinerary    @relation(fields: [itineraryId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  dayNumber     Int
+  title         String?      @db.VarChar(160)
+  content       String       @db.Text
+  destinationId String?      @db.Uuid
+  destination   Destination? @relation(fields: [destinationId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  createdAt     DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime     @updatedAt @db.Timestamptz(3)
+
+  @@unique([itineraryId, dayNumber])
+  @@index([destinationId])
+  @@map("itinerary_days")
+}
+
+model Story {
+  id            String        @id @default(uuid()) @db.Uuid
+  slug          String        @unique @db.VarChar(120)
+  title         String        @db.VarChar(160)
+  excerpt       String?       @db.VarChar(400)
+  body          String?       @db.Text
+  status        ContentStatus @default(DRAFT)
+  publishedAt   DateTime?     @db.Timestamptz(3)
+  createdAt     DateTime      @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime      @updatedAt @db.Timestamptz(3)
+  destinationId String?       @db.Uuid
+  destination   Destination?  @relation(fields: [destinationId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  coverMediaId  String?       @db.Uuid
+  coverMedia    Media?        @relation(fields: [coverMediaId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([destinationId])
+  @@index([destinationId, status, publishedAt(sort: Desc), id(sort: Desc)])
+  @@index([status, publishedAt(sort: Desc), id(sort: Desc)])
+  @@index([coverMediaId])
+  @@map("stories")
+}
+
+model Guide {
+  id            String        @id @default(uuid()) @db.Uuid
+  slug          String        @unique @db.VarChar(120)
+  title         String        @db.VarChar(160)
+  excerpt       String?       @db.VarChar(400)
+  body          String?       @db.Text
+  status        ContentStatus @default(DRAFT)
+  publishedAt   DateTime?     @db.Timestamptz(3)
+  createdAt     DateTime      @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime      @updatedAt @db.Timestamptz(3)
+  destinationId String?       @db.Uuid
+  destination   Destination?  @relation(fields: [destinationId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  coverMediaId  String?       @db.Uuid
+  coverMedia    Media?        @relation(fields: [coverMediaId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@index([destinationId])
+  @@index([destinationId, status, publishedAt(sort: Desc), id(sort: Desc)])
+  @@index([status, publishedAt(sort: Desc), id(sort: Desc)])
+  @@index([coverMediaId])
+  @@map("guides")
+}
+
+enum UserRole {
+  USER
+  EDITOR
+  ADMIN
+}
+enum UserStatus {
+  ACTIVE
+  DISABLED
+}
+enum InquiryStatus {
+  NEW
+  IN_PROGRESS
+  CLOSED
+}
+
+model User {
+  id           String @id @default(uuid()) @db.Uuid
+  email        String @unique @db.VarChar(320)
+  name         String @db.VarChar(100)
+  passwordHash String @db.VarChar(255)
+  role         UserRole @default(USER)
+  status       UserStatus @default(ACTIVE)
+  createdAt    DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime @updatedAt @db.Timestamptz(3)
+  sessions     AuthSession[]
+  favorites    Favorite[]
+  savedItineraries SavedItinerary[]
+  inquiries    Inquiry[]
+  @@map("users")
+}
+
+model AuthSession {
+  id              String @id @default(uuid()) @db.Uuid
+  userId          String @db.Uuid
+  user            User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  accessTokenHash String @unique @db.Char(64)
+  accessExpiresAt DateTime @db.Timestamptz(3)
+  expiresAt       DateTime @db.Timestamptz(3)
+  revokedAt       DateTime? @db.Timestamptz(3)
+  createdAt       DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime @updatedAt @db.Timestamptz(3)
+  refreshTokens   AuthRefreshToken[]
+  @@index([userId, createdAt(sort: Desc), id(sort: Desc)])
+  @@index([expiresAt])
+  @@map("auth_sessions")
+}
+
+model AuthRefreshToken {
+  id        String @id @default(uuid()) @db.Uuid
+  sessionId String @db.Uuid
+  session   AuthSession @relation(fields: [sessionId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  tokenHash String @unique @db.Char(64)
+  expiresAt DateTime @db.Timestamptz(3)
+  usedAt    DateTime? @db.Timestamptz(3)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  @@index([sessionId])
+  @@index([expiresAt])
+  @@map("auth_refresh_tokens")
+}
+
+model Favorite {
+  id            String @id @default(uuid()) @db.Uuid
+  userId        String @db.Uuid
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  destinationId String @db.Uuid
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  createdAt     DateTime @default(now()) @db.Timestamptz(3)
+  @@unique([userId, destinationId])
+  @@index([userId, createdAt(sort: Desc), id(sort: Desc)])
+  @@index([destinationId])
+  @@map("favorites")
+}
+
+model SavedItinerary {
+  id          String @id @default(uuid()) @db.Uuid
+  userId      String @db.Uuid
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  itineraryId String @db.Uuid
+  itinerary   Itinerary @relation(fields: [itineraryId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  @@unique([userId, itineraryId])
+  @@index([userId, createdAt(sort: Desc), id(sort: Desc)])
+  @@index([itineraryId])
+  @@map("saved_itineraries")
+}
+
+model Inquiry {
+  id            String @id @default(uuid()) @db.Uuid
+  userId        String @db.Uuid
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict)
+  destinationId String? @db.Uuid
+  destination   Destination? @relation(fields: [destinationId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  subject       String @db.VarChar(160)
+  message       String @db.VarChar(2000)
+  status        InquiryStatus @default(NEW)
+  createdAt     DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime @updatedAt @db.Timestamptz(3)
+  @@index([userId, createdAt(sort: Desc), id(sort: Desc)])
+  @@index([destinationId])
+  @@map("inquiries")
+}

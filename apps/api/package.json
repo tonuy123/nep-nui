@@ -1,0 +1,87 @@
+{
+  "name": "@webdulich/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "NestJS REST API cho website du lich vung sau, vung xa",
+  "scripts": {
+    "build": "nest build",
+    "build:tools": "tsc -p tsconfig.tools.json",
+    "dev": "nest start --watch",
+    "start": "nest start",
+    "start:prod": "node dist/main.js",
+    "lint": "eslint \"src/**/*.ts\" \"test/**/*.ts\" \"prisma/**/*.ts\" \"prisma7.config.ts\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prisma:generate": "prisma generate",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "seed": "npm run build:tools && node dist-tools/prisma/seed.js",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "node --experimental-vm-modules ../../node_modules/jest/bin/jest.js",
+    "test:e2e": "node --experimental-vm-modules ../../node_modules/jest/bin/jest.js --config ./test/jest-e2e.json",
+    "test:content": "node --experimental-vm-modules ../../node_modules/jest/bin/jest.js --config ./test/jest-content-e2e.json",
+    "test:auth": "node --experimental-vm-modules ../../node_modules/jest/bin/jest.js --config ./test/jest-auth-e2e.json",
+    "admin:create": "npm run build:tools && node dist-tools/prisma/bootstrap-admin.js"
+  },
+  "dependencies": {
+    "@nestjs/common": "^12.1.0",
+    "@nestjs/core": "^12.1.0",
+    "@nestjs/platform-express": "^12.1.0",
+    "@nestjs/swagger": "^12.0.2",
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "@webdulich/contracts": "*",
+    "argon2": "0.45.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@nestjs/cli": "^12.0.7",
+    "@nestjs/schematics": "^12.0.5",
+    "@nestjs/testing": "^12.1.0",
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^26.6.3",
+    "@types/pg": "^8.23.1",
+    "@types/supertest": "^7.2.1",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "eslint": "^9.39.5",
+    "globals": "^17.12.0",
+    "jest": "^30.5.2",
+    "js-yaml": "^4.3.2",
+    "pg": "^8.23.0",
+    "prisma": "^7.10.0",
+    "supertest": "^7.3.0",
+    "ts-jest": "^29.4.14",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.70.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": [
+        "ts-jest",
+        {
+          "useESM": true
+        }
+      ]
+    },
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "testEnvironment": "node"
+  }
+}
