@@ -19,11 +19,11 @@ export function DestinationCard({ destination, index }: DestinationCardProps) {
         <div className="relative aspect-[4/3] overflow-hidden bg-[#d9dfd2]">
           {destination.photo ? (
             <Image
-              src={destination.photo.src}
+              src={destination.photo.cardSrc}
               alt={destination.photo.alt}
               fill
               sizes="(min-width: 1280px) 280px, (min-width: 768px) 45vw, 90vw"
-              quality={90}
+              unoptimized
               className="object-cover transition-transform duration-500 group-hover:scale-[1.035]"
             />
           ) : (

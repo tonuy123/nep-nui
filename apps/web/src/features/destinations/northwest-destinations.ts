@@ -1,5 +1,8 @@
 export interface DestinationPhoto {
+  // Keep the original for provenance; serve pre-sized derivatives to browsers.
   src: string;
+  cardSrc: string;
+  articleSrc: string;
   alt: string;
   author: string;
   sourceUrl: string;
@@ -37,7 +40,7 @@ export interface DestinationPreview {
   landscape: string;
   theme: DestinationTheme;
   teaser: string;
-  photo?: Pick<DestinationPhoto, "src" | "alt">;
+  photo?: Pick<DestinationPhoto, "cardSrc" | "alt">;
   illustration?: NorthwestDestination["illustration"];
 }
 
@@ -63,6 +66,8 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     sourceUrl: "https://www.vietnam.travel/vi/places-to-go/northern-vietnam/sapa",
     photo: {
       src: "/images/destinations/sa-pa.jpg",
+      cardSrc: "/images/destinations/sa-pa-card.webp",
+      articleSrc: "/images/destinations/sa-pa-article.webp",
       alt: "Ruộng bậc thang và dãy núi ở Sa Pa",
       author: "Eerin25",
       sourceUrl: "https://commons.wikimedia.org/wiki/File:Rice_terraces_in_Sapa,_Vietnam.jpg",
@@ -89,6 +94,8 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     sourceUrl: "https://www.vietnam.travel/vi/things-to-do/mu-cang-chai-spectacle-water-pouring-season",
     photo: {
       src: "/images/destinations/mu-cang-chai.jpg",
+      cardSrc: "/images/destinations/mu-cang-chai-card.webp",
+      articleSrc: "/images/destinations/mu-cang-chai-article.webp",
       alt: "Ruộng bậc thang ở Chế Cu Nha, Mù Cang Chải",
       author: "Doan Tuan",
       sourceUrl: "https://commons.wikimedia.org/wiki/File:Terraces_in_Che_Cu_Nha_commune,_Mu_Cang_Chai_(Unsplash).jpg",
@@ -115,6 +122,8 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     sourceUrl: "https://vietnam.travel/vi/things-to-do/ta-xua-staircase-thousand-clouds",
     photo: {
       src: "/images/destinations/ta-xua.png",
+      cardSrc: "/images/destinations/ta-xua-card.webp",
+      articleSrc: "/images/destinations/ta-xua-article.webp",
       alt: "Bản vùng núi Tà Xùa trong nắng sớm và sương",
       author: "NKSTTSSHNVN",
       sourceUrl: "https://commons.wikimedia.org/wiki/File:T%C3%A0_X%C3%B9a_in_morning_mist.png",
@@ -141,6 +150,8 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     sourceUrl: "https://www.vietnam.travel/things-to-do/moc-chau-green-and-peaceful-summer-oasis-near-hanoi",
     photo: {
       src: "/images/destinations/moc-chau.jpg",
+      cardSrc: "/images/destinations/moc-chau-card.webp",
+      articleSrc: "/images/destinations/moc-chau-article.webp",
       alt: "Hai người thu hoạch chè trên sườn đồi Mộc Châu",
       author: "Long (lTiga) Nguyen",
       sourceUrl: "https://unsplash.com/photos/two-people-harvesting-tea-on-a-hillside-GDp6L255rXY",
@@ -168,6 +179,8 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     sourceUrl: "https://vietnam.travel/node/1251",
     photo: {
       src: "/images/destinations/y-ty.jpg",
+      cardSrc: "/images/destinations/y-ty-card.webp",
+      articleSrc: "/images/destinations/y-ty-article.webp",
       alt: "Ruộng lúa và núi mây quanh bản Y Tý",
       author: "Peter Hammer",
       sourceUrl: "https://unsplash.com/photos/scenery-of-rice-fields-ggQy5lGtwb0",
@@ -195,6 +208,8 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     sourceUrl: "https://image.vietnam.travel/things-to-do/sapa-itinerary-sustainable-travellers",
     photo: {
       src: "/images/destinations/bac-ha.jpg",
+      cardSrc: "/images/destinations/bac-ha-card.webp",
+      articleSrc: "/images/destinations/bac-ha-article.webp",
       alt: "Người dân trao đổi hàng hóa tại chợ Bắc Hà",
       author: "Peter Olshevsky",
       sourceUrl: "https://commons.wikimedia.org/wiki/File:Bac_Ha_market_day,_Vietnam.jpg",
@@ -240,6 +255,8 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     sourceUrl: "https://vietnam.travel/vi/places-to-go/northern-vietnam/mai-chau",
     photo: {
       src: "/images/destinations/mai-chau.jpg",
+      cardSrc: "/images/destinations/mai-chau-card.webp",
+      articleSrc: "/images/destinations/mai-chau-article.webp",
       alt: "Thung lũng Mai Châu nhìn từ trên cao",
       author: "Shyamal",
       sourceUrl: "https://commons.wikimedia.org/wiki/File:Mai_Chau_2.jpg",
@@ -285,6 +302,8 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     sourceUrl: "https://muongthanh.dienbien.gov.vn/TIN_TUC/View/?PageIndex=9&UserKey=Xay-dung-diem-den-van-hoa---du-lich-Muong-Thanh",
     photo: {
       src: "/images/destinations/muong-thanh.jpg",
+      cardSrc: "/images/destinations/muong-thanh-card.webp",
+      articleSrc: "/images/destinations/muong-thanh-article.webp",
       alt: "Núi và ánh nắng trên thung lũng Mường Thanh",
       author: "Tycho",
       sourceUrl: "https://commons.wikimedia.org/wiki/File:M%C6%B0%E1%BB%9Dng_Thanh_Valley.jpg",
@@ -306,6 +325,6 @@ export const northwestDestinationPreviews: readonly DestinationPreview[] =
     landscape,
     theme,
     teaser,
-    photo: photo ? { src: photo.src, alt: photo.alt } : undefined,
+    photo: photo ? { cardSrc: photo.cardSrc, alt: photo.alt } : undefined,
     illustration,
   }));

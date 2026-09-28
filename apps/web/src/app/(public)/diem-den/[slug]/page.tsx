@@ -66,11 +66,11 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
           <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[#d9dfd2] sm:aspect-[16/9]">
             {destination.photo ? (
               <Image
-                src={destination.photo.src}
+                src={destination.photo.articleSrc}
                 alt={destination.photo.alt}
                 fill
                 sizes="(min-width: 1280px) 1120px, (min-width: 768px) 90vw, 100vw"
-                quality={90}
+                unoptimized
                 className="object-cover"
               />
             ) : (
