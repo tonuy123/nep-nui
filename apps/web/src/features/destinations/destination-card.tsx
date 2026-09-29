@@ -50,8 +50,8 @@ export function DestinationCard({ destination }: DestinationCardProps) {
           </span>
         </div>
 
-        <div className="flex flex-1 flex-col p-4">
-          <h3 className="font-sans text-base font-bold leading-snug text-forest-deep">{destination.name}</h3>
+        <div className="flex flex-1 flex-col p-5">
+          <h3 className="font-sans text-[17px] font-bold leading-snug text-forest-deep">{destination.name}</h3>
           <p className="mt-1 text-[11px] font-semibold uppercase tracking-[.12em] text-earth">
             {destination.province} <span aria-hidden="true">·</span> {destination.landscape}
           </p>
@@ -85,7 +85,7 @@ export function DestinationCard({ destination }: DestinationCardProps) {
             {meta ? (
               <p className="text-[11px] text-ink/70">
                 Tour từ
-                <span className="block text-base font-bold leading-tight text-[#b02430]">
+                <span className="block text-lg font-bold leading-tight text-[#b02430]">
                   {d(meta.priceFrom)}đ{" "}
                   <span className="text-[11px] font-normal text-ink/70">/ khách</span>
                 </span>

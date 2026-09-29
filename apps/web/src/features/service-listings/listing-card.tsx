@@ -30,8 +30,8 @@ export function ListingCardView({ card }: { card: ListingCard }) {
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col p-4">
-        <h3 className="line-clamp-2 font-sans text-[15px] font-bold leading-snug text-forest-deep">{card.name}</h3>
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="line-clamp-2 font-sans text-base font-bold leading-snug text-forest-deep">{card.name}</h3>
         {card.stars ? (
           <p className="mt-1 text-sm">
             <span role="img" aria-label={`${card.stars} trên 5 sao`} className="tracking-wide text-[#b07b16]">
@@ -73,7 +73,7 @@ export function ListingCardView({ card }: { card: ListingCard }) {
         <div className="mt-auto flex items-end justify-between gap-3 pt-3">
           <p className="text-[11px] text-ink/70">
             Giá từ
-            <span className="block text-lg font-bold leading-tight text-[#b02430]">
+            <span className="block text-xl font-bold leading-tight text-[#b02430]">
               {formatPrice(card.priceFrom)}{" "}
               <span className="text-[11px] font-normal text-ink/70">{card.priceUnit}</span>
             </span>

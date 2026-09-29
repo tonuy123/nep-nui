@@ -58,7 +58,7 @@ export function ListingSection({
             </div>
           ) : null}
 
-          <ul className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {visible.map((card) => (
               <li key={card.id}>
                 <ListingCardView card={card} />

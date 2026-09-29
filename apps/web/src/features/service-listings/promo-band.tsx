@@ -32,7 +32,7 @@ export function PromoBand({ items, heading = "Ưu đãi giờ chốt", moreHref 
             ) : null}
           </div>
 
-          <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((card, index) => (
               <li key={card.id} className="group flex h-full flex-col overflow-hidden rounded-xl bg-white">
                 <div className="relative aspect-[16/10] overflow-hidden bg-[#f6e7e8]">
@@ -50,8 +50,8 @@ export function PromoBand({ items, heading = "Ưu đãi giờ chốt", moreHref 
                   </span>
                 </div>
 
-                <div className="flex flex-1 flex-col p-4">
-                  <h3 className="line-clamp-2 font-sans text-[15px] font-bold leading-snug text-forest-deep">{card.name}</h3>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="line-clamp-2 font-sans text-base font-bold leading-snug text-forest-deep">{card.name}</h3>
 
                   <div className="mt-2 space-y-1.5 text-xs text-ink/70">
                     {card.code ? <p className="text-[11px] font-medium text-ink/70">Mã: {card.code}</p> : null}
@@ -74,7 +74,7 @@ export function PromoBand({ items, heading = "Ưu đãi giờ chốt", moreHref 
                     <p className="text-[11px] text-ink/70">
                       Giá từ
                       <span className="block text-xs text-ink/70 line-through">{formatPrice(card.priceOld)}</span>
-                      <span className="block text-lg font-bold leading-tight text-[#b02430]">
+                      <span className="block text-xl font-bold leading-tight text-[#b02430]">
                         {formatPrice(card.priceFrom)}{" "}
                         <span className="text-[11px] font-normal text-ink/70">{card.unit}</span>
                       </span>

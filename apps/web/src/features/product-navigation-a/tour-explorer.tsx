@@ -51,7 +51,7 @@ export function TourExplorer({ places }: { places: readonly TourPlace[] }) {
             ))}
           </div>
 
-          <ul className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {visiblePlaces.map((place) => {
               const meta = destinationTourMeta[place.slug];
               return (
@@ -88,8 +88,8 @@ export function TourExplorer({ places }: { places: readonly TourPlace[] }) {
                         </span>
                       </div>
 
-                      <div className="flex flex-1 flex-col p-4">
-                        <h3 className="font-sans text-[15px] font-bold leading-snug text-forest-deep">{place.name}</h3>
+                      <div className="flex flex-1 flex-col p-5">
+                        <h3 className="font-sans text-base font-bold leading-snug text-forest-deep">{place.name}</h3>
                         <p className="mt-1 text-[11px] font-semibold uppercase tracking-[.12em] text-earth">
                           {place.province} <span aria-hidden="true">·</span> {place.landscape}
                         </p>
@@ -123,7 +123,7 @@ export function TourExplorer({ places }: { places: readonly TourPlace[] }) {
                           {meta ? (
                             <p className="text-[11px] text-ink/70">
                               Tour từ
-                              <span className="block text-base font-bold leading-tight text-[#b02430]">
+                              <span className="block text-lg font-bold leading-tight text-[#b02430]">
                                 {d(meta.priceFrom)}đ{" "}
                                 <span className="text-[11px] font-normal text-ink/70">/ khách</span>
                               </span>

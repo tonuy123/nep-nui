@@ -56,7 +56,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
       </div>
 
       <footer className="border-t border-forest/15">
-        <p className="mx-auto max-w-7xl px-4 py-4 text-xs text-ink/55 sm:px-6 lg:px-8">
+        <p className="mx-auto max-w-7xl px-4 py-4 text-center text-xs text-ink/70 sm:px-6 lg:px-8">
           Chỉ nội dung Đã xuất bản mới hiển thị trên website công khai.
         </p>
       </footer>
