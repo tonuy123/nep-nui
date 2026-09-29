@@ -32,5 +32,8 @@ Thumbs.db
 .idea/
 .vscode/*.local
 
+# Demo runtime state
+scripts/demo/.pids.json
+
 # Deploy
 .vercel
