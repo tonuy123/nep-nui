@@ -13,7 +13,7 @@ export function WeatherCard({ province, weather }: WeatherCardProps) {
 
   return (
     <article className="group flex h-full flex-col">
-      <div className="relative aspect-square overflow-hidden rounded-md bg-[#eef1ea]">
+      <div className="relative aspect-[6/7] overflow-hidden rounded-md bg-[#eef1ea]">
         <Image
           src={province.photo.src}
           alt={province.photo.alt}

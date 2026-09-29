@@ -73,9 +73,8 @@ export async function WeatherSection() {
 
   return (
     <section aria-labelledby="weather-heading" className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-0">
-        <div className="grid gap-10 lg:min-h-dvh lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:items-stretch lg:gap-12">
-          <div data-weather-panel className="relative min-h-[340px] overflow-hidden rounded-2xl bg-forest-deep lg:min-h-0">
+      <div className="grid lg:min-h-dvh lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:items-stretch">
+        <div data-weather-panel className="relative min-h-[340px] overflow-hidden bg-forest-deep lg:min-h-0">
             <Image
               src={weatherPanelPhoto.src}
               alt={weatherPanelPhoto.alt}
@@ -85,7 +84,7 @@ export async function WeatherSection() {
               className="object-cover"
             />
             <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-forest-deep via-forest-deep/75 to-forest-deep/30" />
-            <div className="relative flex h-full min-h-[340px] flex-col justify-center p-6 lg:min-h-0 lg:p-8">
+            <div className="relative flex h-full min-h-[340px] flex-col justify-center p-6 sm:p-8 lg:min-h-0 lg:p-12 xl:p-16">
               <p className="text-xs font-semibold uppercase tracking-[.2em] text-gold">Dự báo</p>
               <h2 id="weather-heading" className="mt-4 font-display text-4xl leading-[1.05] text-ivory sm:text-5xl">
                 Thời tiết
@@ -104,9 +103,8 @@ export async function WeatherSection() {
             </div>
           </div>
 
-          <div className="min-w-0 lg:self-center">
-            <WeatherCarousel items={items} />
-          </div>
+        <div className="min-w-0 px-5 py-12 sm:px-6 sm:py-16 lg:self-center lg:py-0 lg:pl-12 lg:pr-0 xl:pl-16">
+          <WeatherCarousel items={items} />
         </div>
       </div>
     </section>

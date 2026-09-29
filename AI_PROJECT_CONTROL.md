@@ -1827,6 +1827,21 @@ apps/web/src/lib/auth/safe-next.ts
 | Risks | Agent không nhìn được ảnh — layout mới cần Paw chụp màn hình xác nhận; nếu chưa đạt sẽ chỉnh tiếp. |
 | Next action | Paw chụp ảnh màn hình khối thời tiết tại `http://127.0.0.1:3000` để duyệt; mọi chỉnh sửa visual tiếp theo chỉ chốt bằng ảnh. |
 
+### Entry 025 — Weather section full-bleed ngang theo bố cục Cocoon
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase / status | P4b follow-up, `IMPLEMENTED_UNREVIEWED` — chờ Paw duyệt ảnh. |
+| Authorization | Paw duyệt plan full-bleed và yêu cầu chỉnh bố cục giống Cocoon (ảnh tham chiếu kèm chat). |
+| Scope | `weather-section.tsx`: bỏ container `max-w-7xl` + lề ngang — grid tràn viền; panel trái chạm mép trái (bỏ bo góc, padding text `lg:p-12 xl:p-16`); khối carousel `lg:pl-12 xl:pl-16` + `pr-0` — track tràn tới mép phải màn hình, nút `→` và progress line sát mép; mobile giữ lề 20px + padding dọc. `weather-carousel.module.css`: desktop gap 1.5rem, cơ số 3.2 card (~3 card + peek cắt mép như Cocoon). `weather-card.tsx`: ảnh card từ vuông → `aspect-[6/7]` dọc hơn giống tỷ lệ card Cocoon. |
+| Files changed | `apps/web/src/features/weather/weather-section.tsx`; `weather-carousel.module.css`; `weather-card.tsx`; tài liệu này. |
+| Commands run | typecheck/lint/build exit0 (43 pages). |
+| Browser verification | Playwright 47/47 — panel flush left 0; panel one-third viewport 480/480 @1440; carousel flush right 1440/1440; panel full height 900/900; text centered 322/322; 8 card dữ liệu thật; wrap 1320/1320; các check cũ không hồi quy. Chưa thay thế duyệt visual của người. |
+| Risks | Full-bleed chỉ verify bằng số ở 1440 — cần ảnh chụp thực tế 1920 để duyệt; card desktop 256px @1440, ~370px @1920. |
+| Next action | Paw chụp ảnh khối thời tiết tại `http://127.0.0.1:3000` để duyệt; chỉnh tiếp nếu chưa đạt. |
+
 ### Handoff template
 
 ```text
