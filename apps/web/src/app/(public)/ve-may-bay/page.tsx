@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { northwestDestinationPreviews } from "@/features/destinations/northwest-destinations";
-import { FlightGatewayPlanner } from "@/features/product-navigation-b/flight-gateway-planner";
 import { gateways } from "@/features/product-navigation-b/flight-gateways";
 import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceClosing } from "@/features/service-page/service-closing";
-import { ServiceFacts } from "@/features/service-page/service-facts";
 import { ServiceHero } from "@/features/service-page/service-hero";
 import { ServiceSection } from "@/features/service-page/service-section";
 import { coachListings, coachPromos, guides, promoSubtext } from "@/features/service-listings/listings-data";
@@ -17,29 +14,6 @@ export const metadata: Metadata = {
   description: "Chọn sân bay cửa ngõ, lập khung nối chuyến đường bộ và kiểm tra thông tin tại nguồn chính thức trước khi đi Tây Bắc.",
 };
 
-const flightFacts = [
-  {
-    title: "Cửa ngõ Nội Bài và Điện Biên",
-    description:
-      "Hai sân bay cửa ngõ chính cho Tây Bắc: Nội Bài (Hà Nội) và Điện Biên. Từ đó đi tiếp bằng đường bộ tới điểm đến.",
-  },
-  {
-    title: "Đối chiếu trước khi mua",
-    description:
-      "Lịch bay, giá và chỗ trống thay đổi liên tục. Kiểm tra trên kênh bán vé chính thức tại thời điểm đặt.",
-  },
-  {
-    title: "Chặng đường bộ quan trọng ngang chặng bay",
-    description:
-      "Thời gian xe từ sân bay tới điểm đến có thể vài giờ, tùy tuyến. Lên khung nối chuyến trước khi mua vé.",
-  },
-  {
-    title: "Mùa và tần suất bay",
-    description:
-      "Một số tuyến giảm tần suất ngoài mùa; mùa mưa (khoảng tháng 6–8) có thể ảnh hưởng lịch bay.",
-  },
-];
-
 export default function FlightsPage() {
   return (
     <>
@@ -49,12 +23,6 @@ export default function FlightsPage() {
         lead="Chọn sân bay hạ cánh và chuẩn bị chặng xe tới điểm đến trước khi mua vé."
         image={{ src: "/images/services/flight.webp", alt: "Sân bay Điện Biên nhìn từ sân đỗ với tháp điều khiển" }}
       />
-
-      <ServiceFacts items={flightFacts} />
-
-      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8" aria-label="Lập kế hoạch đến Tây Bắc bằng máy bay">
-        <FlightGatewayPlanner destinationNames={northwestDestinationPreviews.map(({ name }) => name)} />
-      </section>
 
       <ListingSection
         eyebrow="Chuyến xe đường dài"
