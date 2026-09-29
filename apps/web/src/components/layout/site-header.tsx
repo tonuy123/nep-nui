@@ -32,19 +32,23 @@ export function SiteHeader() {
           <span className="flex flex-col"><span className="font-display text-lg font-semibold tracking-tight">{siteConfig.shortName}</span><span className="text-[8px] font-semibold uppercase tracking-[.22em] text-earth">Cảnh quan & cộng đồng</span></span>
         </Link>
 
-        <DesktopNav />
+        <div className="flex items-center gap-3 xl:gap-5">
+          <DesktopNav />
 
-        <div className="hidden items-center gap-2 xl:flex">
-          <AccountAction />
-          <Link
-            href={primaryCta.href}
-            className="inline-flex min-h-11 items-center rounded-full bg-forest px-4 py-2.5 text-xs font-semibold text-ivory transition-colors hover:bg-forest-deep"
-          >
-            {primaryCta.label}
-          </Link>
+          <div aria-hidden="true" className="hidden h-6 w-px bg-forest/15 xl:block" />
+
+          <div className="hidden items-center gap-2 xl:flex">
+            <AccountAction />
+            <Link
+              href={primaryCta.href}
+              className="inline-flex min-h-11 items-center rounded-full bg-forest px-4 py-2.5 text-xs font-semibold text-ivory transition-colors hover:bg-forest-deep"
+            >
+              {primaryCta.label}
+            </Link>
+          </div>
+
+          <MobileNav />
         </div>
-
-        <MobileNav />
       </div>
       <noscript>
         <style>{`header [aria-controls="mobile-navigation"], [data-cinematic-controls] { display: none !important; }`}</style>

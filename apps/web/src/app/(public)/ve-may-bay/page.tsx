@@ -3,46 +3,73 @@ import Link from "next/link";
 import { northwestDestinationPreviews } from "@/features/destinations/northwest-destinations";
 import { FlightGatewayPlanner } from "@/features/product-navigation-b/flight-gateway-planner";
 import { gateways } from "@/features/product-navigation-b/flight-gateways";
+import { ServiceClosing } from "@/features/service-page/service-closing";
+import { ServiceFacts } from "@/features/service-page/service-facts";
+import { ServiceHero } from "@/features/service-page/service-hero";
+import { ServiceSection } from "@/features/service-page/service-section";
 
 export const metadata: Metadata = {
   title: "Vé máy bay và cửa ngõ Tây Bắc",
   description: "Chọn sân bay cửa ngõ, lập khung nối chuyến đường bộ và kiểm tra thông tin tại nguồn chính thức trước khi đi Tây Bắc.",
 };
 
+const flightFacts = [
+  {
+    title: "Cửa ngõ Nội Bài và Điện Biên",
+    description:
+      "Hai sân bay cửa ngõ chính cho Tây Bắc: Nội Bài (Hà Nội) và Điện Biên. Từ đó đi tiếp bằng đường bộ tới điểm đến.",
+  },
+  {
+    title: "Đối chiếu trước khi mua",
+    description:
+      "Lịch bay, giá và chỗ trống thay đổi liên tục. Kiểm tra trên kênh bán vé chính thức tại thời điểm đặt.",
+  },
+  {
+    title: "Chặng đường bộ quan trọng ngang chặng bay",
+    description:
+      "Thời gian xe từ sân bay tới điểm đến có thể vài giờ, tùy tuyến. Lên khung nối chuyến trước khi mua vé.",
+  },
+  {
+    title: "Mùa và tần suất bay",
+    description:
+      "Một số tuyến giảm tần suất ngoài mùa; mùa mưa (khoảng tháng 6–8) có thể ảnh hưởng lịch bay.",
+  },
+];
+
 export default function FlightsPage() {
   return (
     <>
-      <header className="border-b border-ivory/15 bg-forest-deep text-ivory">
-        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:px-8 lg:py-24">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">Vé máy bay</p>
-            <h1 className="mt-6 max-w-3xl font-display text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">Bay đến cửa ngõ.<br /><em className="font-normal">Đi tiếp bằng đường bộ.</em></h1>
-            <p className="mt-7 max-w-xl text-base leading-relaxed text-ivory/80">Chọn sân bay hạ cánh và chuẩn bị chặng xe tới điểm đến trước khi mua vé.</p>
-          </div>
-          <div className="self-end border-l border-gold pl-6 sm:pl-8">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">Trước khi mua vé</p>
-            <p className="mt-4 font-display text-2xl leading-snug sm:text-3xl">Xác nhận cả chặng đường bộ.</p>
-            <p className="mt-5 text-sm leading-relaxed text-ivory/70">Kiểm tra tuyến bay, giá và chỗ trống trên kênh bán vé tại thời điểm đặt.</p>
-          </div>
-        </div>
-      </header>
+      <ServiceHero
+        eyebrow="Vé máy bay"
+        title={<>Bay đến cửa ngõ.<br /><em className="font-normal">Đi tiếp bằng đường bộ.</em></>}
+        lead="Chọn sân bay hạ cánh và chuẩn bị chặng xe tới điểm đến trước khi mua vé."
+        image={{ src: "/images/destinations/ta-xua.png", alt: "Tà Xùa trong sương sớm, biển mây phủ kín thung lũng" }}
+      />
+
+      <ServiceFacts items={flightFacts} />
 
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8" aria-label="Lập kế hoạch đến Tây Bắc bằng máy bay">
         <FlightGatewayPlanner destinationNames={northwestDestinationPreviews.map(({ name }) => name)} />
       </section>
 
-      <section className="border-t border-forest/15 bg-white/65">
-        <div className="mx-auto grid max-w-6xl gap-6 px-5 py-10 sm:px-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:px-8">
-          <div>
-            <h2 className="font-display text-2xl text-forest">Nguồn để đối chiếu</h2>
-            <p className="mt-2 text-sm leading-relaxed text-ink/70">Thông tin sân bay lấy từ Tổng công ty Cảng hàng không Việt Nam; lịch bay và giá phải được kiểm tra tại kênh đặt vé thực tế.</p>
-          </div>
+      <ServiceSection
+        eyebrow="Nguồn để đối chiếu"
+        heading="Thông tin sân bay và lịch bay"
+        className="border-t border-forest/15 bg-white/65"
+      >
+        <div className="mt-8 grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+          <p className="text-sm leading-relaxed text-ink/70">Thông tin sân bay lấy từ Tổng công ty Cảng hàng không Việt Nam; lịch bay và giá phải được kiểm tra tại kênh đặt vé thực tế.</p>
           <div className="flex flex-col items-start gap-3 text-sm">
             {gateways.map((gateway) => <a key={gateway.code} href={gateway.officialUrl} target="_blank" rel="noopener noreferrer" className="min-h-11 border-b border-forest/30 py-2 font-semibold text-forest underline-offset-4 hover:underline">Thông tin sân bay {gateway.name} ({gateway.code}) ↗</a>)}
             <Link href="/tai-khoan/yeu-cau-tu-van" className="min-h-11 py-2 font-semibold text-earth underline-offset-4 hover:underline">Cần hỗ trợ sắp xếp chặng đường bộ? Gửi yêu cầu tư vấn →</Link>
           </div>
         </div>
-      </section>
+      </ServiceSection>
+
+      <ServiceClosing
+        heading="Cần hỗ trợ sắp xếp chặng đường bộ?"
+        cta={{ label: "Gửi yêu cầu tư vấn", href: "/tai-khoan/yeu-cau-tu-van" }}
+      />
     </>
   );
 }
