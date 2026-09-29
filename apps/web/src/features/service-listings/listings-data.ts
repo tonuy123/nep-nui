@@ -197,4 +197,3 @@ export const guides: Record<"tour" | "coach" | "hotel" | "combo" | "addon", Guid
 
 export const promoHeading = "Ưu đãi giờ chốt";
 export const promoSubtext = "Khám phá Tây Bắc với mức giá ưu đãi khi đặt trong khung giờ này.";
-export const listingPriceNote = "Giá minh họa cho bản demo, chưa phải giá bán chính thức.";

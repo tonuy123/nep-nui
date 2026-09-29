@@ -54,10 +54,6 @@ export default function HomePage() {
               </h2>
             </div>
             <div className="space-y-5 lg:pb-1">
-              <p className="max-w-md text-sm leading-7 text-ink/75 sm:text-base">
-                Từ ruộng bậc thang Mù Cang Chải tới cao nguyên đá Đồng Văn.
-                Lọc theo tỉnh và chọn nơi bạn muốn tìm hiểu trước khi đi.
-              </p>
               <CtaLink href="/kham-pha" variant="outline">
                 Xem toàn bộ điểm đến
               </CtaLink>

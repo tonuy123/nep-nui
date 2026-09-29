@@ -84,13 +84,6 @@ export async function WeatherSection() {
                 Thời tiết
                 <span className="block"><em className="font-normal text-gold">Tây Bắc</em></span>
               </h2>
-              <p className="mt-6 text-[11px] leading-5 text-ivory/60">
-                Dữ liệu:{" "}
-                <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ivory">Open-Meteo.com</a>
-                {" "}(CC BY 4.0) · Ảnh:{" "}
-                <a href={weatherPanelPhoto.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ivory">{weatherPanelPhoto.author}</a>
-                {" "}({weatherPanelPhoto.license})
-              </p>
             </div>
           </div>
 

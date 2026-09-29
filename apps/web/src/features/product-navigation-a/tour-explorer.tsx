@@ -140,8 +140,6 @@ export function TourExplorer({ places }: { places: readonly TourPlace[] }) {
               );
             })}
           </ul>
-
-          <p className="mt-5 text-xs text-ink/70">Giá minh họa cho bản demo, chưa phải giá bán chính thức.</p>
         </div>
       </div>
     </section>

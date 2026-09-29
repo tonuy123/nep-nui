@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ListingCardView } from "./listing-card";
-import { listingPriceNote, type ListingCard } from "./listings-data";
+import type { ListingCard } from "./listings-data";
 
 interface ListingSectionProps {
   eyebrow: string;
@@ -83,8 +83,6 @@ export function ListingSection({
               ))}
             </div>
           ) : null}
-
-          <p className="mt-5 text-xs text-ink/70">{listingPriceNote}</p>
         </div>
       </div>
     </section>

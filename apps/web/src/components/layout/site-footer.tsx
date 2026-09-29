@@ -73,8 +73,7 @@ export function SiteFooter() {
 
       <div className="border-t border-white/10">
         <p className="mx-auto max-w-6xl px-4 py-4 text-xs text-ivory/70 sm:px-6 lg:px-8">
-          © {new Date().getFullYear()} {siteConfig.name}. Dự án đang trong giai
-          đoạn xây dựng — nội dung chưa được xác minh sẽ được ghi chú rõ.
+          © {new Date().getFullYear()} {siteConfig.name}.
         </p>
       </div>
     </footer>

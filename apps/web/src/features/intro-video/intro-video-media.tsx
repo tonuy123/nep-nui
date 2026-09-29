@@ -87,7 +87,6 @@ export function IntroVideoMedia({ videoSrc, photo }: IntroVideoMediaProps) {
           Ảnh nền: {photo.author} ·{" "}
           <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ivory">{photo.sourceLabel ?? "Wikimedia Commons"}</a>
           {" "}· <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ivory">{photo.license}</a>
-          . Ảnh minh họa cho khung phim, chưa phải khung hình chính thức.
         </figcaption>
       ) : null}
     </figure>

@@ -89,7 +89,7 @@ export function CoverFigure({
                   : " — chi tiết nguồn trong mục Nguồn ảnh."
               }`
             : "Ảnh trong bộ sưu tập của dự án."
-          : "Minh họa do dự án tự vẽ, không phải ảnh chụp thực tế tại địa danh."}
+          : "Minh họa do dự án tự vẽ."}
       </figcaption>
     </figure>
   );
