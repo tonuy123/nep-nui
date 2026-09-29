@@ -1738,6 +1738,21 @@ apps/web/src/lib/auth/safe-next.ts
 | Risks | Nguồn/provenance video do Paw cung cấp chưa được ghi — giữ release gate như ảnh hero P2 (UNVERIFIED). Poster vẫn là ảnh Mù Cang Chải CC0 có credit. Video 8.2MB tải theo preload=metadata khi vào view — chưa đo field/mobile cho khối này. |
 | Next action | Paw xem preview `http://127.0.0.1:3000` (cuộn xuống cuối trang) xác nhận video; phase khác chờ Paw mở. |
 
+### Entry 019 — Carousel loop hai chiều, mỗi bấm một card
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase / status | P4b follow-up, `IMPLEMENTED_UNREVIEWED`. Không đụng vùng P5 của DeepSeek. |
+| Authorization | Paw duyệt PA A trong chat: nút trái/phải chạy được ngay từ vị trí đầu, mỗi lần bấm chỉ nhích 1 card, wrap tại hai biên. |
+| Scope | `northwest-carousel.tsx`: bỏ `disabled` hai đầu; bấm trước tại vị trí đầu → nhảy thẳng về vị trí cuối (instant, không trượt quét qua dãy card); bấm sau tại vị trí cuối → nhảy thẳng về đầu; các bước giữa giữ smooth đúng 1 card như cũ; state rút gọn còn `first` cho counter. `eslint.config.mjs` (web): mở rộng ignores thành `.next*/**` để build artifact distDir phụ `.next-p5` (từ lane P5 chạy song song) không làm fail gate `eslint .` — chỉ đổi ignore, không đổi rule. |
+| Files changed | `apps/web/src/features/destinations/northwest-carousel.tsx`; `apps/web/eslint.config.mjs`; tài liệu này. |
+| Commands run | `npm run typecheck --workspace @webdulich/web` exit0; `npm run lint --workspace @webdulich/web` exit0 (sau ignore fix; lần đầu fail vì ESLint quét `.next-p5` của lane P5, không phải lỗi source); `npm run build --workspace @webdulich/web` exit0 (43 page outputs). |
+| Browser verification | Production `next start` port 3000 + Chrome headless Playwright: 39/39 checks — prev/next enabled ngay từ đầu; prev tại vị trí đầu → 1848/1848 (cuối track); next tại vị trí cuối → 0; next sau wrap dịch đúng 308px = 1 card; các check layout 50/50 full-height, video autoplay/pause, mobile 390/320, no-JS không hồi quy. |
+| Risks | Wrap dùng nhảy tức thì (theo chốt "chỉ qua 1 box card"); chưa test thiết bị cảm ứng vật lý. |
+| Next action | Paw xem `http://127.0.0.1:3000` xác nhận hành vi carousel; phase khác chờ Paw mở. |
+
 ### Handoff template
 
 ```text
