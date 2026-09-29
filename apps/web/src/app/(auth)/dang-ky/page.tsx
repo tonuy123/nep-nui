@@ -18,7 +18,7 @@ export default async function RegisterPage({
   return (
     <section className="w-full max-w-3xl rounded-2xl bg-white p-6 shadow-lg sm:p-8">
       <h1 className="text-center font-display text-2xl font-semibold text-ink">Đăng ký tài khoản</h1>
-      <p className="mx-auto mt-2 max-w-xl text-center text-sm leading-6 text-ink/60">
+      <p className="mx-auto mt-2 max-w-xl text-center text-sm leading-6 text-ink/70">
         Điền thông tin bên dưới để tạo tài khoản, lưu địa điểm yêu thích và gửi yêu cầu tư vấn.
       </p>
       <div className="mt-6">

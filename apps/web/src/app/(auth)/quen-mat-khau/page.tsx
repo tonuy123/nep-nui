@@ -13,7 +13,7 @@ export default async function ForgotPasswordPage() {
   return (
     <section className="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg sm:p-8">
       <h1 className="text-center font-display text-2xl font-semibold text-ink">Quên mật khẩu</h1>
-      <p className="mt-2 text-center text-sm leading-6 text-ink/60">
+      <p className="mt-2 text-center text-sm leading-6 text-ink/70">
         Nhập số điện thoại hoặc email đã đăng ký. Hệ thống sẽ gửi liên kết đặt lại mật khẩu (hết hạn sau 30 phút).
       </p>
       <div className="mt-6">
