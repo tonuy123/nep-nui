@@ -1769,6 +1769,21 @@ apps/web/src/lib/auth/safe-next.ts
 | Risks | Open-Meteo là dữ liệu model (không phải trạm đo tại chỗ) nên có sai số vùng núi; build/revalidate cần mạng; ảnh mới chưa được review visual bởi người (agent không xem được ảnh) — Paw duyệt preview. |
 | Next action | Paw xem `http://127.0.0.1:3000` duyệt visual khối thời tiết; phase khác chờ Paw mở. |
 
+### Entry 021 — Khối thời tiết full-screen
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase / status | P4b follow-up, `IMPLEMENTED_UNREVIEWED`. Không đụng vùng P5. |
+| Authorization | Paw yêu cầu trong chat: khối thời tiết phải full screen. |
+| Scope | `weather-section.tsx`: container desktop bỏ padding dọc (`lg:py-0`), grid `lg:min-h-dvh lg:items-stretch`, panel ảnh trái stretch cao đúng một màn hình, carousel `lg:self-center`; mobile giữ stack + padding cũ. |
+| Files changed | `apps/web/src/features/weather/weather-section.tsx`; tài liệu này. |
+| Commands run | `npm run typecheck --workspace @webdulich/web` exit0; `npm run lint --workspace @webdulich/web` exit0; `npm run build --workspace @webdulich/web` exit0 (43 page outputs). |
+| Browser verification | Production `next start` port 3000 + Chrome headless Playwright: 46/46 checks — weather panel full viewport height 900/900; 8 card + số liệu thật, nút wrap 1185/1185; carousel 10 điểm, video autoplay, mobile 390/320, no-JS không hồi quy. |
+| Risks | Panel 100dvh crop ảnh mạnh trên màn hình rất cao; chưa test thiết bị thật. |
+| Next action | Paw xem `http://127.0.0.1:3000` duyệt; phase khác chờ Paw mở. |
+
 ### Handoff template
 
 ```text
