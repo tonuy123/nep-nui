@@ -4,7 +4,7 @@ import { APP_CONFIG } from "../../config/app-config.module.js";
 import type { AppConfig } from "../../config/app-config.js";
 import { CSRF_TTL_MS } from "./auth.tokens.js";
 
-export const AUTH_COOKIE_NAMES = { access: "wd_access", refresh: "wd_refresh", csrf: "wd_csrf" } as const;
+export const AUTH_COOKIE_NAMES = { access: "wd_access", refresh: "wd_refresh", csrf: "wd_csrf", oauthState: "wd_oauth_state" } as const;
 export function readCookie(request: Request, name: string): string | undefined {
   const raw = request.headers.cookie;
   if (!raw || raw.length > 8192) return undefined;
@@ -20,8 +20,11 @@ export function readCookie(request: Request, name: string): string | undefined {
 @Injectable()
 export class AuthCookies {
   private readonly options: CookieOptions;
+  private readonly oauthOptions: CookieOptions;
   constructor(@Inject(APP_CONFIG) config: AppConfig) {
     this.options = { httpOnly: true, sameSite: "strict", path: "/", secure: config.nodeEnv === "production" };
+    // State cookie phải Lax: provider quay về bằng top-level cross-site navigation.
+    this.oauthOptions = { httpOnly: true, sameSite: "lax", path: "/", secure: config.nodeEnv === "production" };
   }
   setSession(response: Response, tokens: { accessToken: string; refreshToken: string; accessExpiresAt: Date; expiresAt: Date }): void {
     response.cookie(AUTH_COOKIE_NAMES.access, tokens.accessToken, { ...this.options, expires: tokens.accessExpiresAt });
@@ -30,7 +33,15 @@ export class AuthCookies {
   setCsrf(response: Response, token: string): void {
     response.cookie(AUTH_COOKIE_NAMES.csrf, token, { ...this.options, maxAge: CSRF_TTL_MS });
   }
+  setOAuthState(response: Response, value: string): void {
+    response.cookie(AUTH_COOKIE_NAMES.oauthState, value, { ...this.oauthOptions, maxAge: 10 * 60 * 1000 });
+  }
+  clearOAuthState(response: Response): void {
+    response.clearCookie(AUTH_COOKIE_NAMES.oauthState, this.oauthOptions);
+  }
   clear(response: Response): void {
-    for (const name of Object.values(AUTH_COOKIE_NAMES)) response.clearCookie(name, this.options);
+    for (const name of [AUTH_COOKIE_NAMES.access, AUTH_COOKIE_NAMES.refresh, AUTH_COOKIE_NAMES.csrf]) {
+      response.clearCookie(name, this.options);
+    }
   }
 }

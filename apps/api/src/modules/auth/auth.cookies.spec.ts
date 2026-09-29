@@ -13,7 +13,22 @@ describe("auth cookie boundary", () => {
       cookie: (name: string, _value: string, options: unknown) => { calls.push({ name, options }); },
       clearCookie: (name: string, options: unknown) => { calls.push({ name, options }); },
     } as unknown as Response;
-    const config: AppConfig = { databaseUrl: "unused", port: 0, corsOrigins: [], nodeEnv };
+    const config: AppConfig = {
+      databaseUrl: "unused",
+      port: 0,
+      corsOrigins: [],
+      nodeEnv,
+      webOrigin: "http://localhost:3000",
+      googleClientId: null,
+      googleClientSecret: null,
+      facebookAppId: null,
+      facebookAppSecret: null,
+      oauthStateSecret: null,
+      recaptchaSecretKey: null,
+      recaptchaSiteKey: null,
+      smtpUrl: null,
+      mailFrom: null,
+    };
     const authCookies = new AuthCookies(config);
     const now = Date.now();
     authCookies.setSession(response, {

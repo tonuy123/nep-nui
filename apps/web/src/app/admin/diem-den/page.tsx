@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
-import { AdminModulePlaceholder } from "@/features/admin/module-placeholder";
+import { AdminContentManager } from "@/features/admin/content-manager";
+import { ADMIN_RESOURCES } from "@/features/admin/admin-resources";
 
 export const metadata: Metadata = {
   title: "Quản trị — Địa danh",
-  description: "Quản trị địa danh — shell P1, chưa có CRUD.",
+  description: "Quản lý địa danh, ảnh bìa và thư viện ảnh.",
 };
 
 export default function AdminDestinationsPage() {
-  return (
-    <AdminModulePlaceholder
-      heading="Địa danh"
-      title="Module địa danh chưa kích hoạt"
-      description="Danh sách, chỉnh sửa và publish địa danh sẽ được kết nối ở P3/P5."
-      bullets={["Chưa có bản ghi", "Chưa có dữ liệu", "Không publish trong P1"]}
-    />
-  );
+  return <AdminContentManager config={ADMIN_RESOURCES.destinations} />;
 }

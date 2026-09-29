@@ -12,6 +12,8 @@ import { createTestDatabaseHarness, type TestDatabaseHarness } from "./helpers/t
 const ROOT = "/api/v1";
 const ORIGIN = "http://localhost:3000";
 const PASSWORD = "SecurePassword123!";
+let phoneSequence = 0;
+const testPhone = () => `09${String(30_000_000 + (phoneSequence++)).slice(-8)}`;
 interface Session { cookies: string[]; csrf: string; userId: string }
 interface PublicUser { id: string; email: string; name: string; role: string }
 
@@ -44,7 +46,7 @@ describe("Me account API (e2e, isolated PostgreSQL)", () => {
     const challenge = await csrf();
     const response = await server().post(`${ROOT}/auth/register`)
       .set("Origin", ORIGIN).set("X-CSRF-Token", challenge.token).set("Cookie", challenge.cookie)
-      .send({ email, name, password: PASSWORD }).expect(201);
+      .send({ email, name, phone: testPhone(), password: PASSWORD }).expect(201);
     return {
       csrf: challenge.token, userId: (response.body.user as PublicUser).id,
       cookies: [challenge.cookie, cookiePair(response.headers, "wd_access"), cookiePair(response.headers, "wd_refresh")],

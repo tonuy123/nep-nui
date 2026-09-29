@@ -5,8 +5,24 @@ import { AuthError, unauthenticated } from "./auth.errors.js";
 import { hasDatabaseErrorCode, isRetryableTransactionError } from "../content-common/transaction-errors.js";
 
 export interface SessionValues { accessTokenHash: string; refreshTokenHash: string; accessExpiresAt: Date; expiresAt: Date }
+export interface RegistrationInput {
+  name: string;
+  email: string;
+  phone: string;
+  province: string | null;
+  ward: string | null;
+}
 class RotationConflict extends Error {}
-const userSelect = { id: true, email: true, name: true, role: true, createdAt: true } as const;
+const userSelect = {
+  id: true,
+  email: true,
+  name: true,
+  phone: true,
+  province: true,
+  ward: true,
+  role: true,
+  createdAt: true,
+} as const;
 export type RefreshResult =
   | { kind: "rotated"; user: Pick<User, keyof typeof userSelect>; expiresAt: Date }
   | { kind: "invalid" };
@@ -15,15 +31,31 @@ export type RefreshResult =
 export class AuthRepository {
   constructor(private readonly prisma: PrismaService) {}
   findUser(email: string) { return this.prisma.user.findUnique({ where: { email } }); }
-  async register(name: string, email: string, passwordHash: string, session: SessionValues) {
+  findUserByIdentifier(identifier: { kind: "email" | "phone"; value: string }) {
+    return identifier.kind === "email"
+      ? this.prisma.user.findUnique({ where: { email: identifier.value } })
+      : this.prisma.user.findUnique({ where: { phone: identifier.value } });
+  }
+  async register(input: RegistrationInput, passwordHash: string, session: SessionValues) {
     try {
       return await this.serializable(async (tx) => {
-        const user = await tx.user.create({ data: { name, email, passwordHash, role: "USER" }, select: userSelect });
+        const user = await tx.user.create({
+          data: {
+            name: input.name,
+            email: input.email,
+            phone: input.phone,
+            province: input.province,
+            ward: input.ward,
+            passwordHash,
+            role: "USER",
+          },
+          select: userSelect,
+        });
         await this.addSession(tx, user.id, session);
         return user;
       });
     } catch (error) {
-      if (hasDatabaseErrorCode(error, ["P2002", "23505"])) throw new AuthError(409, "EMAIL_UNAVAILABLE", "Unable to register with this email.");
+      if (hasDatabaseErrorCode(error, ["P2002", "23505"])) throw new AuthError(409, "EMAIL_UNAVAILABLE", "Unable to register with this email or phone.");
       throw error;
     }
   }
@@ -32,6 +64,16 @@ export class AuthRepository {
       const user = await tx.user.findUnique({ where: { id: userId } });
       if (!user || user.status !== "ACTIVE" || user.passwordHash !== verifiedPasswordHash) {
         throw new AuthError(401, "INVALID_CREDENTIALS", "Invalid email or password.");
+      }
+      await this.addSession(tx, userId, session);
+      return user;
+    });
+  }
+  async openSession(userId: string, session: SessionValues) {
+    return this.serializable(async (tx) => {
+      const user = await tx.user.findUnique({ where: { id: userId }, select: { ...userSelect, status: true } });
+      if (!user || user.status !== "ACTIVE") {
+        throw new AuthError(403, "FORBIDDEN", "Account is not active.");
       }
       await this.addSession(tx, userId, session);
       return user;
@@ -86,6 +128,77 @@ export class AuthRepository {
   }
   async revokeAll(userId: string): Promise<void> {
     await this.prisma.authSession.updateMany({ where: { userId, revokedAt: null }, data: { revokedAt: new Date() } });
+  }
+  async createPasswordReset(userId: string, tokenHash: string, expiresAt: Date): Promise<void> {
+    await this.prisma.$transaction(async (tx) => {
+      await tx.passwordResetToken.updateMany({
+        where: { userId, usedAt: null },
+        data: { usedAt: new Date() },
+      });
+      await tx.passwordResetToken.create({ data: { userId, tokenHash, expiresAt } });
+    });
+  }
+  async consumePasswordReset(tokenHash: string, newPasswordHash: string, now: Date): Promise<boolean> {
+    return this.serializable(async (tx) => {
+      const token = await tx.passwordResetToken.findUnique({
+        where: { tokenHash },
+        select: { id: true, userId: true, expiresAt: true, usedAt: true, user: { select: { status: true } } },
+      });
+      if (!token || token.usedAt !== null || token.expiresAt <= now || token.user.status !== "ACTIVE") return false;
+      const used = await tx.passwordResetToken.updateMany({ where: { id: token.id, usedAt: null }, data: { usedAt: now } });
+      if (used.count !== 1) throw new RotationConflict();
+      await tx.user.update({ where: { id: token.userId }, data: { passwordHash: newPasswordHash } });
+      await tx.authSession.updateMany({ where: { userId: token.userId, revokedAt: null }, data: { revokedAt: now } });
+      return true;
+    });
+  }
+  async findOAuthAccount(provider: string, providerUserId: string) {
+    return this.prisma.oAuthAccount.findUnique({
+      where: { provider_providerUserId: { provider, providerUserId } },
+      select: { user: { select: { ...userSelect, status: true } } },
+    });
+  }
+  async linkOrCreateOAuthUser(input: {
+    provider: string;
+    providerUserId: string;
+    email: string;
+    name: string;
+  }) {
+    try {
+      return await this.serializable(async (tx) => {
+        const existing = await tx.user.findUnique({
+          where: { email: input.email },
+          select: { ...userSelect, status: true },
+        });
+
+        if (existing) {
+          await tx.oAuthAccount.create({
+            data: { userId: existing.id, provider: input.provider, providerUserId: input.providerUserId },
+          });
+          return existing;
+        }
+
+        return await tx.user.create({
+          data: {
+            email: input.email,
+            name: input.name,
+            // OAuth-only account: không có mật khẩu dùng được (KHÔNG phải hash Argon2).
+            passwordHash: `oauth!${crypto.randomUUID()}`,
+            role: "USER",
+            oauthAccounts: {
+              create: { provider: input.provider, providerUserId: input.providerUserId },
+            },
+          },
+          select: { ...userSelect, status: true },
+        });
+      });
+    } catch (error) {
+      if (hasDatabaseErrorCode(error, ["P2002", "23505"])) {
+        const linked = await this.findOAuthAccount(input.provider, input.providerUserId);
+        if (linked) return linked.user;
+      }
+      throw error;
+    }
   }
   private async addSession(tx: Prisma.TransactionClient, userId: string, session: SessionValues) {
     return tx.authSession.create({ data: {

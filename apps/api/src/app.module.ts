@@ -11,6 +11,7 @@ import { ItinerariesModule } from "./modules/itineraries/itineraries.module.js";
 import { StoriesModule } from "./modules/stories/stories.module.js";
 import { AuthModule } from "./modules/auth/auth.module.js";
 import { MeModule } from "./modules/me/me.module.js";
+import { AdminModule } from "./modules/admin/admin.module.js";
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { MeModule } from "./modules/me/me.module.js";
     GuidesModule,
     AuthModule,
     MeModule,
+    AdminModule,
   ],
   providers: [{ provide: APP_FILTER, useClass: ApiExceptionFilter }],
 })

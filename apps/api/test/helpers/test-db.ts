@@ -7,7 +7,7 @@ const SOURCE_DATABASE_NAME = /^[a-z][a-z0-9_]*$/;
 const PORT_PATTERN = /^[0-9]{1,5}$/;
 
 const FIXED_RESET_SQL =
-  'TRUNCATE TABLE public."auth_refresh_tokens", public."auth_sessions", public."favorites", public."saved_itineraries", public."inquiries", public."users", public."destination_media", public."itinerary_days", public."experiences", public."stories", public."guides", public."itineraries", public."destinations", public."media" RESTART IDENTITY';
+  'TRUNCATE TABLE public."password_reset_tokens", public."oauth_accounts", public."audit_logs", public."auth_refresh_tokens", public."auth_sessions", public."favorites", public."saved_itineraries", public."inquiries", public."users", public."destination_media", public."itinerary_days", public."experiences", public."stories", public."guides", public."itineraries", public."destinations", public."media" RESTART IDENTITY';
 
 export class TestDatabaseGuardError extends Error {
   constructor(message: string) {
@@ -234,6 +234,16 @@ export function createTestDatabaseHarness(
     port: 0,
     corsOrigins: ["http://localhost:3000"],
     nodeEnv: "test",
+    webOrigin: "http://localhost:3000",
+    googleClientId: null,
+    googleClientSecret: null,
+    facebookAppId: null,
+    facebookAppSecret: null,
+    oauthStateSecret: null,
+    recaptchaSecretKey: null,
+    recaptchaSiteKey: null,
+    smtpUrl: null,
+    mailFrom: null,
   };
 
   const client = new PrismaService(appConfig);

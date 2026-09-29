@@ -79,6 +79,27 @@ export class PublicationService {
       return { status: "ARCHIVED" };
     });
   }
+
+  async restore(
+    resource: PublishableResource,
+    id: string,
+  ): Promise<PublicationRecord> {
+    return this.repository.transition(resource, id, (record) => {
+      if (!record) {
+        throw new ContentNotFoundError(`Content not found for id ${id}.`);
+      }
+
+      if (record.status === "DRAFT") {
+        return null;
+      }
+
+      if (record.status === "PUBLISHED") {
+        throw new InvalidTransitionError(resource, "PUBLISHED", "DRAFT");
+      }
+
+      return { status: "DRAFT" };
+    });
+  }
 }
 
 function validatePublishable(

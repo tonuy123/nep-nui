@@ -16,6 +16,12 @@ export class DestinationSummaryDto {
   @ApiProperty({ type: String, nullable: true })
   excerpt!: string | null;
 
+  @ApiProperty({ type: String, nullable: true })
+  province!: string | null;
+
+  @ApiProperty({ type: String, nullable: true })
+  landscape!: string | null;
+
   @ApiProperty({ type: PublicMediaDto, nullable: true })
   coverMedia!: PublicMediaDto | null;
 
@@ -30,6 +36,15 @@ export class DestinationDetailDto extends DestinationSummaryDto {
     maxLength: MAX_CONTENT_BODY_CODE_POINTS,
   })
   body!: string | null;
+
+  @ApiProperty({ type: [String], maxItems: 8 })
+  highlights!: string[];
+
+  @ApiProperty({ type: String, nullable: true })
+  travelNote!: string | null;
+
+  @ApiProperty({ type: String, nullable: true })
+  sourceUrl!: string | null;
 
   @ApiProperty({ type: [PublicMediaDto], maxItems: MAX_DESTINATION_GALLERY_ITEMS })
   gallery!: PublicMediaDto[];

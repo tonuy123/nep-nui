@@ -1,44 +1,77 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/page-hero";
-import { Section } from "@/components/ui/section";
-import { LeadStoryPlaceholder } from "@/features/stories/lead-story-placeholder";
-import { StoryCardPlaceholder } from "@/features/stories/story-card-placeholder";
+import { ContentCard, ContentEmpty, ContentHero, ContentUnavailable } from "@/features/content/content-ui";
+import { ContentUnavailableError, listStories } from "@/lib/content/api";
 
 export const metadata: Metadata = {
   title: "Chuyện bản địa",
-  description:
-    "Câu chuyện cộng đồng địa phương đang được biên tập và xác minh trước khi xuất bản.",
+  description: "Câu chuyện về con người, nghề truyền thống và đời sống cộng đồng ở vùng cao Tây Bắc.",
 };
 
-export default function StoriesPage() {
+export const dynamic = "force-dynamic";
+
+export default async function StoriesPage() {
+  let stories: Awaited<ReturnType<typeof listStories>> | undefined;
+  try {
+    stories = await listStories();
+  } catch (error) {
+    if (!(error instanceof ContentUnavailableError)) throw error;
+  }
+
+  if (!stories) {
+    return (
+      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">
+        <h1 className="font-display text-4xl text-forest-deep">Chuyện bản địa</h1>
+        <div className="mt-8">
+          <ContentUnavailable label="Danh sách câu chuyện" />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <>
-      <PageHero
-        eyebrow="Chuyện bản địa"
-        title="Một vùng đất được kể từ bên trong"
-        description="Dành chỗ cho tiếng nói, con người và nhịp sống bản địa. Câu chuyện đang được biên tập và xác minh cùng cộng đồng trước khi xuất bản."
-        art="village"
-        chapter="05"
-      />
+      <>
+        <ContentHero
+          eyebrow="Chuyện bản địa"
+          title="Người ở lại kể"
+          accent="chuyện núi rừng"
+          description="Câu chuyện về con người, nghề truyền thống và đời sống cộng đồng nơi đoàn khách đi qua."
+        />
 
-      <Section
-        id="cau-chuyen-noi-bat"
-        eyebrow="Nổi bật"
-        title="Bắt đầu bằng việc lắng nghe"
-        description="Khung chuyên đề dẫn. Bài viết, tác giả và nguồn đang được xác minh; chưa có câu chuyện thực tế xuất bản."
-      >
-        <LeadStoryPlaceholder />
-      </Section>
+        <section aria-labelledby="stories-heading" className="bg-[#edf0e9]">
+          <div className="mx-auto max-w-7xl px-5 py-14 sm:px-6 sm:py-20 lg:px-8">
+            <div className="mb-8 border-b border-forest/20 pb-5">
+              <h2 id="stories-heading" className="font-display text-3xl text-forest-deep sm:text-4xl">
+                Bài viết
+              </h2>
+            </div>
 
-      <Section
-        id="cau-chuyen-khac"
-        eyebrow="Danh sách"
-        title="Những góc kể đang được chuẩn bị"
-        description="Tên dưới đây là chủ đề biên tập mẫu, chưa phải bài viết hoặc dữ kiện văn hóa đã được xác minh."
-        tone="muted"
-      >
-        <StoryCardPlaceholder />
-      </Section>
-    </>
+            <p className="mb-6 text-sm text-ink/60" role="status">
+              {stories.length} câu chuyện đã xuất bản.
+            </p>
+
+            {stories.length === 0 ? (
+              <ContentEmpty
+                label="Chưa có câu chuyện nào được xuất bản."
+                hint="Nội dung sẽ xuất hiện sau khi được biên tập và xuất bản trong bảng điều khiển."
+              />
+            ) : (
+              <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {stories.map((story) => (
+                  <li key={story.slug}>
+                    <ContentCard
+                      href={`/chuyen-ban-dia/${story.slug}`}
+                      media={story.coverMedia}
+                      title={story.title}
+                      meta={story.destination?.title ?? "Câu chuyện vùng cao"}
+                      excerpt={story.excerpt}
+                      fallbackKind="village"
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
+      </>
   );
 }

@@ -12,6 +12,8 @@ export const destinationListSelect = {
   slug: true,
   title: true,
   excerpt: true,
+  province: true,
+  landscape: true,
   publishedAt: true,
   coverMedia: { select: mediaSelect },
 } as const;
@@ -19,6 +21,9 @@ export const destinationListSelect = {
 export const destinationDetailSelect = {
   ...destinationListSelect,
   body: true,
+  highlights: true,
+  travelNote: true,
+  sourceUrl: true,
   gallery: {
     where: { media: { clearance: MediaClearance.CLEARED } },
     orderBy: { position: "asc" },

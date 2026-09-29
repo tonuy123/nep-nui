@@ -779,30 +779,57 @@ Completion criterion: 10 bài có trang riêng, carousel và cả năm route ho�
 
 ### P5 — Admin/Editor CMS
 
-**Status: `NOT_STARTED`**
+**Status: `IMPLEMENTED_UNREVIEWED` — source, gates và browser evidence tại Entry 018.**
 
-- [ ] Admin dashboard.
-- [ ] Destination/experience/itinerary/story/guide CRUD.
-- [ ] Media upload/use protection.
-- [ ] Publish workflow.
-- [ ] User/role/status management.
-- [ ] Inquiry processing.
-- [ ] Audit log.
+Plan/contract: [docs/plans/P5_CMS_PLAN.md](docs/plans/P5_CMS_PLAN.md).
+Admin API dưới `/api/v1/admin/*` (RBAC EDITOR/ADMIN, ADMIN-only cho người dùng
+và audit), audit log thật trong bảng `audit_logs` (migration additive
+`20260929045501_p5_cms`), publish/archive/restore dùng `PublicationService`,
+media library có use-protection. Media upload thật vẫn chờ quyết định
+object-storage provider (§14) — không tự chọn provider.
 
-Completion criterion: Editor/Admin matrix đúng, content publish xuất hiện ở public API, unauthorized mutation bị từ chối.
+- [x] Admin dashboard (đếm theo trạng thái, hoạt động gần đây, yêu cầu mới).
+- [x] Destination/experience/itinerary/story/guide CRUD + gallery + days.
+- [x] Media library + use protection; upload adapter defer theo §14.
+- [x] Publish workflow (+ restore ARCHIVED→DRAFT).
+- [x] User/role/status management (self-guard, last-admin guard, khóa thu hồi phiên).
+- [x] Inquiry processing (trạng thái + ghi chú nội bộ + handledAt).
+- [x] Audit log (ghi mọi mutation, đọc ADMIN-only).
+
+Completion criterion local: Editor/Admin matrix đúng (7/7 admin e2e trên
+PostgreSQL thật), content publish xuất hiện ở public API (browser + HTTP),
+unauthorized mutation bị từ chối (USER 403, RBAC guard). Chờ Codex/Paw review.
+
+Yêu cầu mở rộng auth (Google/Facebook OAuth, reCAPTCHA, quên mật khẩu, số
+điện thoại + tỉnh/xã) do Paw nêu ngày 2026-09-29 được ghi nhận và **hoãn**
+theo lệnh "làm xong các phase đã rồi hẳn làm phần đó"; cần credentials
+(OAuth client, captcha site key, SMTP) và một phase riêng khi Paw mở.
 
 ### P6 — Public data integration, map và itinerary UX
 
-**Status: `NOT_STARTED`**
+**Status: `IMPLEMENTED_UNREVIEWED` — source, gates và browser evidence tại Entry 019.**
 
-- [ ] Bind public pages với API.
-- [ ] Loading/empty/error states.
-- [ ] Search/filter.
-- [ ] Lazy interactive map + list fallback.
-- [ ] Itinerary detail/builder.
-- [ ] SEO metadata và structured data.
+Plan/contract: [docs/plans/P6_INTEGRATION_PLAN.md](docs/plans/P6_INTEGRATION_PLAN.md).
+DB trở thành nguồn nội dung công khai: `destinations` mở rộng field biên tập
+(province/landscape/travelNote/highlights/sourceUrl), seed 10 địa danh P4b kèm
+nguồn + ảnh attribution (16 media CLEARED); toàn bộ trang public bind content
+API server-side với loading/empty/error thật; favorite/save/inquiry chạy
+end-to-end; SEO metadata + JSON-LD.
 
-Completion criterion: user journey từ Home tới save/inquiry chạy end-to-end.
+- [x] Bind public pages với API (kham-pha, diem-den, trai-nghiem, hanh-trinh,
+  chuyen-ban-dia, cam-nang, ban-do; CMS editor có field mới).
+- [x] Loading/empty/error states + 404 slug lạ.
+- [x] Search/filter (kham-pha theo từ khóa + tỉnh; trai-nghiem theo địa danh).
+- [ ] Lazy interactive map: **hoãn** — nhà cung cấp tile là open decision §14;
+  list fallback theo tỉnh đã có dữ liệu thật.
+- [x] Itinerary detail (lịch trình ngày) + nút lưu hành trình (builder chọn
+  điểm đến thuộc combo planner P4b, chưa nối DB).
+- [x] SEO metadata và structured data (TouristAttraction, TouristTrip).
+
+Completion criterion local: journey từ danh sách/chi tiết địa danh → đăng ký →
+lưu yêu thích → gửi yêu cầu tư vấn chạy end-to-end trong browser (28/28 check).
+Lưu ý chính sách: seed chuyển nội dung P4b đã có nguồn vào CMS — cần Paw xác
+nhận khi review (trước đây P3 giữ seed rỗng).
 
 ### P7 — Hardening, deployment và contest demo
 
@@ -1841,6 +1868,179 @@ apps/web/src/lib/auth/safe-next.ts
 | Browser verification | Playwright 47/47 — panel flush left 0; panel one-third viewport 480/480 @1440; carousel flush right 1440/1440; panel full height 900/900; text centered 322/322; 8 card dữ liệu thật; wrap 1320/1320; các check cũ không hồi quy. Chưa thay thế duyệt visual của người. |
 | Risks | Full-bleed chỉ verify bằng số ở 1440 — cần ảnh chụp thực tế 1920 để duyệt; card desktop 256px @1440, ~370px @1920. |
 | Next action | Paw chụp ảnh khối thời tiết tại `http://127.0.0.1:3000` để duyệt; chỉnh tiếp nếu chưa đạt. |
+
+### Entry 018 — P5 Admin/Editor CMS, audit log và admin UI
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase | P5 — Admin/Editor CMS |
+| Status | `IMPLEMENTED_UNREVIEWED` |
+| Authorization | Paw: "build những phase còn lại… đọc ai_project và làm những gì còn thiếu"; giữa session Paw yêu cầu thêm UI/backend auth mở rộng, sau đó chỉ thị "làm xong các phase đã rồi hẳn làm phần đó" → auth mở rộng hoãn, P5 hoàn thành. Không mở P6/P7. |
+| Scope | Admin API `/api/v1/admin/*` (RBAC EDITOR/ADMIN; ADMIN-only users/audit), CRUD 5 resource + itinerary days + destination gallery, publish/archive/restore qua PublicationService, media library + use protection, inquiry inbox, user role/status management, audit log bảng mới, dashboard tổng quan; admin UI 10 route; BFF allowlist mở rộng; contracts admin. Không CMS upload thật (provider §14 chưa chốt), không P6 binding, không auth mở rộng. |
+| Dependencies added | Không. Không upgrade Next/React/Nest/Prisma/TypeScript. |
+| Migration | `apps/api/prisma/migrations/20260929045501_p5_cms/migration.sql` (additive): bảng `audit_logs` + FK SetNull; cột `inquiries.adminNote/handledAt` + index `(status, createdAt DESC, id DESC)`. Applied dev DB và shared test DB (additive, không reset; content rows giữ nguyên). Hai scratch DB `webdulich_p5_test`/`webdulich_p5_ui_test` tạo để test rồi drop. |
+| Contracts | `packages/contracts/src/admin.ts`: `ContentResourceKey`, DTO admin (content list/detail, media, inquiry, user, audit, overview, page wrapper); export qua index. |
+| API rules | Slug unique (409 `SLUG_TAKEN`); PUBLISHED không đổi slug/xóa (409 `CONTENT_LOCKED`); FK reference khi xóa → 409 `CONTENT_IN_USE`; media đang dùng → 409 `MEDIA_IN_USE`; publish thiếu điều kiện → 422 kèm details; self-update → 409 `USER_SELF_UPDATE`; last-admin guard; khóa user thu hồi session; mọi mutation ghi audit (cùng transaction, publish/archive/restore ghi sau transition thành công). |
+| BFF | `bff.ts` thêm allowlist admin chính xác (path tường minh, id UUID, method/query theo route), body limit 64 KiB cho POST/PATCH `admin/content/*`, bỏ yêu cầu Content-Type JSON khi request không body. |
+| Commands run | `npx prisma migrate dev --create-only --name p5_cms` 0; `prisma migrate deploy` dev 0 + test 0; `prisma generate` 0; `npm run lint` 0; `npm run typecheck` 0; `npm run test` 0 (17 suite/118 unit + health/OpenAPI e2e 3); `npm run test:admin` 0 (7/7 PostgreSQL thật: RBAC USER 403, lifecycle + public API, publish validation, media use protection, inquiry flow, user rules, audit); `npm run build` 0 (contracts → API → web, 43 page outputs; web build cô lập `NEXT_DIST_DIR=.next-p5` để không đụng `.next` của process 3000). |
+| Browser verification | Chrome headless production build cô lập (web 3100, API 3001, scratch DB, admin bootstrap CLI): 25/25 check PASS — login admin, dashboard, tạo media + destination (slug auto, cover qua media picker, Escape đóng dialog), publish + public API trả slug, list/filter/search, audit log ghi + filter, users self-guard disabled, no overflow 390px, RBAC USER bị chặn ở `/admin` và `/admin/nguoi-dung`, 0 console/page error. Screenshot `D:\codex-task-temp\p5-verify\{dashboard-1440,list-1440}.png`. |
+| Cleanup | Process API 3001/web 3100 do task dừng; scratch DB drop; `.next-p5` xóa. Process 3000 (phiên khác) giữ nguyên, không rebuild `.next` chia sẻ. |
+| Co-writer | Phiên P4b khác commit `795183a`/`7886ee2` trong lúc task chạy; không file nào của họ bị sửa/xóa. Entry 000–017 giữ nguyên. |
+| Risks | Media upload/processing chờ provider (§14). Allowlist BFF được phủ bằng browser E2E, chưa có unit test. Link "Xem trên website" từ admin tới bài public sẽ 404 tới khi P6 bind data (đã tắt prefetch). Audit chưa có retention/export. P5 chưa qua independent review; không tự coi là release approval. Auth mở rộng (OAuth/captcha/reset/SĐT) chưa bắt đầu, cần credentials + phase riêng. |
+| Next authorized work | Codex/Paw review P5 (đối chiếu code + chạy `npm run test:admin`). P6 `NOT_STARTED`; auth mở rộng chờ Paw mở phase riêng. |
+
+**Files created — 27:**
+
+```text
+docs/plans/P5_CMS_PLAN.md
+packages/contracts/src/admin.ts
+apps/api/prisma/migrations/20260929045501_p5_cms/migration.sql
+apps/api/src/modules/admin/admin.types.ts
+apps/api/src/modules/admin/admin.dto.ts
+apps/api/src/modules/admin/admin.dto.spec.ts
+apps/api/src/modules/admin/admin-content.repository.ts
+apps/api/src/modules/admin/admin-content.service.ts
+apps/api/src/modules/admin/admin-content.controller.ts
+apps/api/src/modules/admin/admin-ops.repository.ts
+apps/api/src/modules/admin/admin-ops.service.ts
+apps/api/src/modules/admin/admin-ops.controller.ts
+apps/api/src/modules/admin/admin.module.ts
+apps/api/src/modules/admin/audit.service.ts
+apps/api/test/admin.e2e-spec.ts
+apps/api/test/jest-admin-e2e.json
+apps/web/src/features/admin/admin-api.ts
+apps/web/src/features/admin/admin-resources.ts
+apps/web/src/features/admin/admin-ui.tsx
+apps/web/src/features/admin/audit-table.tsx
+apps/web/src/features/admin/content-editor.tsx
+apps/web/src/features/admin/content-manager.tsx
+apps/web/src/features/admin/dashboard.tsx
+apps/web/src/features/admin/inquiry-manager.tsx
+apps/web/src/features/admin/media-manager.tsx
+apps/web/src/features/admin/media-picker.tsx
+apps/web/src/features/admin/user-manager.tsx
+```
+
+**Files modified — 23:**
+
+```text
+AI_PROJECT_CONTROL.md
+README.md
+package.json
+apps/api/package.json
+apps/api/prisma/schema.prisma
+apps/api/src/app.module.ts
+apps/api/src/modules/content-common/publication/publication.service.ts
+apps/api/test/helpers/test-db.ts
+packages/contracts/src/index.ts
+apps/web/next.config.ts
+apps/web/src/lib/auth/api-client.ts
+apps/web/src/lib/auth/bff.ts
+apps/web/src/app/admin/page.tsx
+apps/web/src/app/admin/layout.tsx
+apps/web/src/app/admin/diem-den/page.tsx
+apps/web/src/app/admin/trai-nghiem/page.tsx
+apps/web/src/app/admin/hanh-trinh/page.tsx
+apps/web/src/app/admin/chuyen-ban-dia/page.tsx
+apps/web/src/app/admin/cam-nang/page.tsx
+apps/web/src/app/admin/media/page.tsx
+apps/web/src/app/admin/yeu-cau/page.tsx
+apps/web/src/app/admin/nguoi-dung/page.tsx
+apps/web/src/app/admin/audit-log/page.tsx
+```
+
+**Files deleted — 1:**
+
+```text
+apps/web/src/features/admin/module-placeholder.tsx
+```
+
+### Entry 019 — P6 public data integration và journey end-to-end
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase | P6 — Public data integration, map fallback và itinerary UX |
+| Status | `IMPLEMENTED_UNREVIEWED` |
+| Authorization | Paw: "oke vậy mày làm p6 đi". Không mở P7; auth mở rộng vẫn hoãn. |
+| Scope | Mở rộng DB destinations (province/landscape/travelNote/highlights/sourceUrl), seed 10 địa danh P4b + 16 media CLEARED có attribution; bind 7 khu vực trang public vào content API server-side; search/filter; favorite/save/inquiry end-to-end; SEO metadata + JSON-LD; admin editor field mới; bỏ 16 placeholder component đã hết consumer. Map tương tác hoãn theo §14. |
+| Dependencies added | Không. |
+| Migration | `apps/api/prisma/migrations/20260929073424_p6_destination_editorial/migration.sql`: 5 cột mới + index `province`. Applied dev DB và shared test DB (additive). Scratch DB test tạo/drop: `webdulich_p6_test`, `webdulich_p6_ui_test`. |
+| Seed | `apps/api/prisma/seed-data/northwest-destinations.json` sinh từ dữ liệu P4b (Node type-stripping), kèm kích thước ảnh WebP đo thật; `seed.ts` upsert theo slug, skip nếu tồn tại, media tái dùng theo publicUrl. Chạy 2 lần: 10 created → 0 created/10 skipped. Dev DB hiện có 10 destinations PUBLISHED + 16 media CLEARED. |
+| Contracts/API | `DestinationSummary` + province/landscape; `DestinationDetail` + highlights/travelNote/sourceUrl (Swagger DTO và `docs/api/P3_OPENAPI.yaml` cập nhật đồng bộ — parity test pass); admin DTO/repository/service nhận field mới cho destinations. |
+| Web | `lib/content/api.ts` (server-only, no-store, timeout 6s, React cache); `features/content/` (content-ui, favorite-button, save-itinerary-button); 7 trang public viết lại + 4 trang chi tiết mới; favorite/save nhận `signedIn` từ server để guest không gọi API thừa. |
+| Commands run | `npm run lint` 0; `npm run typecheck` 0; `npm run test` 0 (119 unit + 3 health/OpenAPI); `npm run test:content` 0 (50/50 PostgreSQL thật trên scratch); `npm run test:admin` 0 (7/7); `npm run build` 0 (contracts → API → web, web build cô lập `NEXT_DIST_DIR=.next-p6`). Migration + seed trên scratch và dev DB exit 0. |
+| Browser verification | Chrome headless production (web 3100, API 3001, scratch DB seed đầy đủ): **28/28 PASS** — 10 card + filter từ khóa/tỉnh + empty state; chi tiết Sa Pa (highlights 3, travel note, ảnh tải thật naturalWidth>0, attribution, JSON-LD TouristAttraction); guest CTA đăng nhập; đăng ký mới → lưu yêu thích → hiển thị trong tài khoản; gửi yêu cầu tư vấn → hiện trong lịch sử; empty state 4 trang; bản đồ nhóm theo tỉnh + 10 link; slug lạ → HTTP 404; 0 overflow tại 390px (kham-pha, chi tiết, ban-do); 0 pageerror/console error (ngoài 401 probe guest và 404 kiểm thử theo thiết kế). Screenshot `D:\codex-task-temp\p6-verify\{explore-1440,detail-1440}.png`. |
+| Cleanup | API/web test process dừng; 2 scratch DB drop; `.next-p6` xóa; `apps/web/tsconfig.json` hoàn nguyên sau build cô lập (Next tự thêm include distDir). Process 3000 phiên khác giữ nguyên. |
+| Risks | (1) Seed chuyển nội dung P4b vào CMS là thay đổi chính sách P3 "seed rỗng" — cần Paw xác nhận quyền nội dung/ảnh khi review; (2) highlights/travelNote là văn bản biên tập sẵn có, không kiểm chứng lại thực địa; (3) map tương tác + POI coordinates chờ provider §14; (4) carousel trang chủ vẫn dùng dữ liệu TS cục bộ (tránh xung đột P4b), chưa bind homepage; (5) experiences/itineraries/stories/guides rỗng đến khi CMS biên tập — trang hiển thị empty state trung thực; (6) `lib/content/api.ts` chưa có unit test, phủ bằng E2E. |
+| Next authorized work | Codex/Paw review P6 (mở DB dev có sẵn 10 destinations, chạy `npm run test:content`/`test:admin`). P7 `NOT_STARTED`; auth mở rộng và homepage binding chờ quyết định riêng. |
+
+**Files created — 11:**
+
+```text
+docs/plans/P6_INTEGRATION_PLAN.md
+apps/api/prisma/migrations/20260929073424_p6_destination_editorial/migration.sql
+apps/api/prisma/seed-data/northwest-destinations.json
+apps/web/src/lib/content/api.ts
+apps/web/src/features/content/content-ui.tsx
+apps/web/src/features/content/favorite-button.tsx
+apps/web/src/features/content/save-itinerary-button.tsx
+apps/web/src/app/(public)/trai-nghiem/[slug]/page.tsx
+apps/web/src/app/(public)/hanh-trinh/[slug]/page.tsx
+apps/web/src/app/(public)/chuyen-ban-dia/[slug]/page.tsx
+apps/web/src/app/(public)/cam-nang/[slug]/page.tsx
+```
+
+**Files modified — 22:**
+
+```text
+AI_PROJECT_CONTROL.md
+README.md
+apps/api/prisma/schema.prisma
+apps/api/prisma/seed.ts
+apps/api/src/modules/destinations/destination.repository.ts
+apps/api/src/modules/destinations/destination.service.ts
+apps/api/src/modules/destinations/dto.ts
+apps/api/src/modules/admin/admin.dto.ts
+apps/api/src/modules/admin/admin.dto.spec.ts
+apps/api/src/modules/admin/admin-content.repository.ts
+apps/api/src/modules/admin/admin-content.service.ts
+apps/web/src/features/admin/content-editor.tsx
+packages/contracts/src/content/destinations.ts
+packages/contracts/src/admin.ts
+docs/api/P3_OPENAPI.yaml
+apps/web/src/app/(public)/kham-pha/page.tsx
+apps/web/src/app/(public)/diem-den/[slug]/page.tsx
+apps/web/src/app/(public)/trai-nghiem/page.tsx
+apps/web/src/app/(public)/hanh-trinh/page.tsx
+apps/web/src/app/(public)/chuyen-ban-dia/page.tsx
+apps/web/src/app/(public)/cam-nang/page.tsx
+apps/web/src/app/(public)/ban-do/page.tsx
+```
+
+**Files deleted — 16 (placeholder hết consumer sau khi bind API):**
+
+```text
+apps/web/src/features/destinations/filter-bar-placeholder.tsx
+apps/web/src/features/destinations/destination-grid-placeholder.tsx
+apps/web/src/features/experiences/category-chips-placeholder.tsx
+apps/web/src/features/experiences/experience-grid-placeholder.tsx
+apps/web/src/features/experiences/editorial-feature-placeholder.tsx
+apps/web/src/features/itineraries/itinerary-cards-placeholder.tsx
+apps/web/src/features/itineraries/itinerary-filters-placeholder.tsx
+apps/web/src/features/itineraries/trip-planner-placeholder.tsx
+apps/web/src/features/map/poi-filters-placeholder.tsx
+apps/web/src/features/map/poi-list-placeholder.tsx
+apps/web/src/features/map/map-teaser-placeholder.tsx
+apps/web/src/features/stories/lead-story-placeholder.tsx
+apps/web/src/features/stories/story-card-placeholder.tsx
+apps/web/src/features/guides/guide-topic-placeholder.tsx
+apps/web/src/features/guides/faq-placeholder.tsx
+apps/web/src/components/ui/page-hero.tsx
+```
 
 ### Handoff template
 

@@ -1,3 +1,4 @@
+import { isVietnamProvince } from "@webdulich/contracts";
 import { isWithinCodePointLimit } from "../content-common/content-length.js";
 import { invalidBody } from "./auth.errors.js";
 
@@ -19,6 +20,37 @@ export function parseEmail(value: unknown): string {
   if (!isWithinCodePointLimit(email, 320)) throw invalidBody();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw invalidBody();
   return email;
+}
+export function parsePhone(value: unknown): string {
+  if (typeof value !== "string") throw invalidBody();
+  const phone = value.replace(/[\s.-]/g, "");
+  if (!/^0[0-9]{9}$/.test(phone)) throw invalidBody();
+  return phone;
+}
+export function parseOptionalProvince(value: unknown): string | null {
+  if (value === undefined || value === null || value === "") return null;
+  if (typeof value !== "string") throw invalidBody();
+  const province = value.trim();
+  if (!isVietnamProvince(province)) throw invalidBody();
+  return province;
+}
+export function parseOptionalWard(value: unknown): string | null {
+  if (value === undefined || value === null || value === "") return null;
+  if (typeof value !== "string" || !isWithinCodePointLimit(value, 120)) throw invalidBody();
+  const ward = value.trim();
+  if (!ward) return null;
+  return ward;
+}
+export function parseCaptchaToken(value: unknown): string | null {
+  if (value === undefined || value === null || value === "") return null;
+  if (typeof value !== "string" || !isWithinCodePointLimit(value, 4096)) throw invalidBody();
+  return value;
+}
+export function parseIdentifier(value: unknown): { kind: "email" | "phone"; value: string } {
+  if (typeof value !== "string") throw invalidBody();
+  const raw = value.trim();
+  if (raw.includes("@")) return { kind: "email", value: parseEmail(raw) };
+  return { kind: "phone", value: parsePhone(raw) };
 }
 export function parsePassword(value: unknown): string {
   if (typeof value !== "string" || !isWithinCodePointLimit(value, 128)) throw invalidBody();

@@ -10,6 +10,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
   const session = await serverSession();
   if (!session.user && !session.canRefresh && !session.unavailable) redirect(signInHref("/admin"));
   if (session.user?.role === "USER") return <main id="main-content" className="mx-auto max-w-4xl p-6"><ForbiddenPanel /></main>;
+  const roleLabel = session.user?.role === "ADMIN" ? "Quản trị viên" : "Biên tập viên";
   return (
     <div className="flex min-h-dvh flex-col bg-ivory">
       <SessionBoundary initialUser={session.user} requiredRoles={["EDITOR", "ADMIN"]}>
@@ -21,12 +22,19 @@ export default async function AdminLayout({ children }: { children: ReactNode })
             </span>
             <span className="rounded-full bg-gold/20 px-2.5 py-0.5 text-xs font-medium text-gold">Khu vực biên tập</span>
           </div>
-          <Link
-            href="/"
-            className="rounded-md text-sm font-medium text-ivory/80 transition-colors hover:text-ivory"
-          >
-            Về trang chủ
-          </Link>
+          <div className="flex items-center gap-4">
+            {session.user ? (
+              <span className="hidden text-xs text-ivory/70 sm:inline">
+                {session.user.name} · {roleLabel}
+              </span>
+            ) : null}
+            <Link
+              href="/"
+              className="rounded-md text-sm font-medium text-ivory/80 transition-colors hover:text-ivory"
+            >
+              Về trang chủ
+            </Link>
+          </div>
         </div>
         <div className="mx-auto max-w-7xl px-4 pb-3 sm:px-6 lg:hidden">
           <AdminLinks mobile />
@@ -49,7 +57,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
 
       <footer className="border-t border-forest/15">
         <p className="mx-auto max-w-7xl px-4 py-4 text-xs text-ink/55 sm:px-6 lg:px-8">
-          Quyền truy cập được kiểm tra qua tài khoản. Công cụ quản trị nội dung sẽ mở ở P5.
+          Chỉ nội dung Đã xuất bản mới hiển thị trên website công khai.
         </p>
       </footer>
       </SessionBoundary>

@@ -1,82 +1,76 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/page-hero";
-import { Section } from "@/components/ui/section";
-import { FaqPlaceholder } from "@/features/guides/faq-placeholder";
-import { GuideTopicPlaceholder } from "@/features/guides/guide-topic-placeholder";
+import { ContentCard, ContentEmpty, ContentHero, ContentUnavailable } from "@/features/content/content-ui";
+import { ContentUnavailableError, listGuides } from "@/lib/content/api";
 
 export const metadata: Metadata = {
   title: "Cẩm nang",
-  description:
-    "Cẩm nang du lịch: cách đến, mùa phù hợp, chi phí, an toàn và ứng xử với cộng đồng địa phương. Thông tin đang được xác minh.",
+  description: "Hướng dẫn thực dụng cho chuyến đi vùng cao: cách đến, mùa đi, chi phí, an toàn và ứng xử.",
 };
 
-const guideTopics = [
-  {
-    title: "Cách đến",
-    description:
-      "Phương tiện, cung đường và điểm trung chuyển dự kiến. Thông tin chi tiết đang được thu thập.",
-  },
-  {
-    title: "Mùa phù hợp",
-    description:
-      "Thời điểm và điều kiện thời tiết theo mùa. Số liệu sẽ được kiểm chứng trước khi đăng.",
-  },
-  {
-    title: "Chi phí",
-    description:
-      "Khoảng chi phí tham khảo cho di chuyển, lưu trú và ăn uống. Chưa có số liệu xác minh.",
-  },
-  {
-    title: "An toàn",
-    description:
-      "Lưu ý an toàn, sức khỏe và liên hệ hỗ trợ. Nội dung đang được biên soạn.",
-  },
-  {
-    title: "Ứng xử với cộng đồng địa phương",
-    description:
-      "Nguyên tắc ứng xử tôn trọng văn hóa bản địa. Nội dung đang được biên soạn cùng cộng đồng.",
-  },
-];
+export const dynamic = "force-dynamic";
 
-export default function GuidesPage() {
+export default async function GuidesPage() {
+  let guides: Awaited<ReturnType<typeof listGuides>> | undefined;
+  try {
+    guides = await listGuides();
+  } catch (error) {
+    if (!(error instanceof ContentUnavailableError)) throw error;
+  }
+
+  if (!guides) {
+    return (
+      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 lg:px-8">
+        <h1 className="font-display text-4xl text-forest-deep">Cẩm nang</h1>
+        <div className="mt-8">
+          <ContentUnavailable label="Danh sách cẩm nang" />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <>
-      <PageHero
-        eyebrow="Cẩm nang"
-        title="Mang theo một chút hiểu biết"
-        description="Cách đến, mùa phù hợp, chi phí, an toàn và ứng xử: những nhóm thông tin cần cho chuyến đi. Nội dung chi tiết đang được biên soạn và xác minh."
-        art="river"
-        chapter="06"
-      />
+      <>
+        <ContentHero
+          eyebrow="Cẩm nang"
+          title="Chuẩn bị trước"
+          accent="khi lên đường"
+          description="Hướng dẫn thực dụng cho chuyến đi vùng cao: cách đến, mùa đi, chi phí, an toàn và ứng xử."
+        />
 
-      <Section
-        id="chu-de-cam-nang"
-        eyebrow="Chủ đề"
-        title="Chuẩn bị để trải nghiệm trọn vẹn hơn"
-        description="Năm nhóm nội dung xem trước. Các thẻ chưa chứa hướng dẫn đường đi, chi phí hoặc lời khuyên an toàn đã kiểm chứng."
-      >
-        <ul className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-          {guideTopics.map((topic, index) => (
-            <li key={topic.title}>
-              <GuideTopicPlaceholder
-                title={topic.title}
-                description={topic.description}
-                index={String(index + 1).padStart(2, "0")}
+        <section aria-labelledby="guides-heading" className="bg-[#edf0e9]">
+          <div className="mx-auto max-w-7xl px-5 py-14 sm:px-6 sm:py-20 lg:px-8">
+            <div className="mb-8 border-b border-forest/20 pb-5">
+              <h2 id="guides-heading" className="font-display text-3xl text-forest-deep sm:text-4xl">
+                Bài cẩm nang
+              </h2>
+            </div>
+
+            <p className="mb-6 text-sm text-ink/60" role="status">
+              {guides.length} bài cẩm nang đã xuất bản.
+            </p>
+
+            {guides.length === 0 ? (
+              <ContentEmpty
+                label="Chưa có bài cẩm nang nào được xuất bản."
+                hint="Nội dung sẽ xuất hiện sau khi được biên tập và xuất bản trong bảng điều khiển."
               />
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      <Section
-        id="faq"
-        eyebrow="Hỏi đáp"
-        title="Câu hỏi thường gặp"
-        description="Các câu hỏi phổ biến sẽ được trả lời cùng nội dung cẩm nang đã kiểm chứng."
-        tone="muted"
-      >
-        <FaqPlaceholder />
-      </Section>
-    </>
+            ) : (
+              <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {guides.map((guide) => (
+                  <li key={guide.slug}>
+                    <ContentCard
+                      href={`/cam-nang/${guide.slug}`}
+                      media={guide.coverMedia}
+                      title={guide.title}
+                      meta={guide.destination?.title ?? "Cẩm nang chung"}
+                      excerpt={guide.excerpt}
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
+      </>
   );
 }

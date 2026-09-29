@@ -1,24 +1,29 @@
 import type { Metadata } from "next";
-import { AuthFormShell } from "@/features/auth/auth-form-shell";
+import { RegisterForm } from "@/features/auth/register-form";
+import { authConfig } from "@/lib/auth/config";
 
 export const metadata: Metadata = {
   title: "Đăng ký",
   description: "Tạo tài khoản để lưu địa điểm, hành trình và gửi yêu cầu tư vấn.",
 };
 
-export default async function RegisterPage({ searchParams }: { searchParams: Promise<{ next?: string | string[] }> }) {
+export default async function RegisterPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ next?: string | string[] }>;
+}) {
   const { next } = await searchParams;
+  const config = await authConfig();
+
   return (
-    <>
-      <h1 className="font-display text-2xl font-semibold text-forest">
-        Đăng ký
-      </h1>
-      <p className="mt-1 text-sm leading-relaxed text-ink/70">
-        Tạo tài khoản để lưu địa điểm và hành trình. Mật khẩu cần ít nhất 12 ký tự.
+    <section className="w-full max-w-3xl rounded-2xl bg-white p-6 shadow-lg sm:p-8">
+      <h1 className="text-center font-display text-2xl font-semibold text-ink">Đăng ký tài khoản</h1>
+      <p className="mx-auto mt-2 max-w-xl text-center text-sm leading-6 text-ink/60">
+        Điền thông tin bên dưới để tạo tài khoản, lưu địa điểm yêu thích và gửi yêu cầu tư vấn.
       </p>
       <div className="mt-6">
-        <AuthFormShell variant="register" next={typeof next === "string" ? next : "/tai-khoan"} />
+        <RegisterForm next={typeof next === "string" ? next : "/tai-khoan"} config={config} />
       </div>
-    </>
+    </section>
   );
 }

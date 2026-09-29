@@ -55,6 +55,9 @@ export class DestinationsService {
       data: {
         ...toSummary(row),
         body: row.body,
+        highlights: row.highlights,
+        travelNote: row.travelNote,
+        sourceUrl: row.sourceUrl,
         gallery: toGallery(row.gallery),
       },
     };
@@ -66,6 +69,8 @@ function toSummary(row: DestinationListRow): DestinationSummary {
     slug: row.slug,
     title: row.title,
     excerpt: row.excerpt,
+    province: row.province,
+    landscape: row.landscape,
     coverMedia: toPublicMedia(row.coverMedia),
     publishedAt: requirePublishedAt(row.publishedAt).toISOString(),
   };

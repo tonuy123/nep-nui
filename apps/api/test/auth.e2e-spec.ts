@@ -8,11 +8,26 @@ import { configureApp } from "../src/app.setup.js";
 import { APP_CONFIG } from "../src/config/app-config.module.js";
 import { PrismaService } from "../src/database/prisma.service.js";
 import { PasswordService } from "../src/modules/auth/password.service.js";
+import { AuthMailer } from "../src/modules/auth/auth-mailer.js";
+import { CaptchaService } from "../src/modules/auth/captcha.service.js";
+import { AuthError } from "../src/modules/auth/auth.errors.js";
 import { createTestDatabaseHarness, type TestDatabaseHarness } from "./helpers/test-db.js";
 
 const ORIGIN = "http://localhost:3000";
 const PASSWORD = "VungSauXa#2026";
-const validUser = (email: string) => ({ name: "Nguoi du lich", email, password: PASSWORD });
+let phoneSequence = 0;
+const testPhone = () => `09${String(20_000_000 + (phoneSequence++)).slice(-8)}`;
+const validUser = (email: string) => ({ name: "Nguoi du lich", email, phone: testPhone(), password: PASSWORD });
+
+const mailerStub = {
+  configured: false,
+  sent: [] as Array<{ to: string; url: string }>,
+  async sendPasswordReset(to: string, url: string) { mailerStub.sent.push({ to, url }); },
+};
+const captchaStub = {
+  required: false,
+  async assertValid(_token: string | null, _ip: string | undefined): Promise<void> {},
+};
 function cookies(response: Response): string[] {
   const header = response.headers["set-cookie"] as string[] | string | undefined;
   return Array.isArray(header) ? header : header ? [header] : [];
@@ -31,9 +46,15 @@ describe("P4 auth HTTP, real PostgreSQL", () => {
   beforeEach(async () => {
     try {
       await harness.resetSafe();
+      mailerStub.configured = false;
+      mailerStub.sent = [];
+      captchaStub.required = false;
+      captchaStub.assertValid = async () => undefined;
       const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
         .overrideProvider(PrismaService).useValue(harness.client)
-        .overrideProvider(APP_CONFIG).useValue(harness.appConfig).compile();
+        .overrideProvider(APP_CONFIG).useValue(harness.appConfig)
+        .overrideProvider(AuthMailer).useValue(mailerStub)
+        .overrideProvider(CaptchaService).useValue(captchaStub).compile();
       app = moduleRef.createNestApplication();
       configureApp(app); await app.init();
     } catch (error) { if (app) await app.close(); throw error; }
@@ -251,5 +272,108 @@ describe("P4 auth HTTP, real PostgreSQL", () => {
     const freshCsrf = await csrf();
     await api().post("/api/v1/auth/logout").set("Origin", ORIGIN)
       .set("X-CSRF-Token", freshCsrf.token).set("Cookie", freshCsrf.cookie).send({}).expect(204);
+  });
+  it("register requires a Vietnamese phone, enforces uniqueness and login works by phone", async () => {
+    const stamp = await csrf();
+    const missing = await api().post("/api/v1/auth/register").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", stamp.token).set("Cookie", stamp.cookie)
+      .send({ name: "Thieu sdt", email: "no-phone@example.test", password: PASSWORD }).expect(400);
+    expect(missing.body.error.code).toBe("INVALID_BODY");
+    const invalid = await api().post("/api/v1/auth/register").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", stamp.token).set("Cookie", stamp.cookie)
+      .send({ name: "Sdt sai", email: "bad-phone@example.test", phone: "123", password: PASSWORD }).expect(400);
+    expect(invalid.body.error.code).toBe("INVALID_BODY");
+
+    const phone = testPhone();
+    const created = await api().post("/api/v1/auth/register").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", stamp.token).set("Cookie", stamp.cookie)
+      .send({ name: "Co sdt", email: "by-phone@example.test", phone, province: "Lào Cai", ward: "Phường Sa Pa", password: PASSWORD })
+      .expect(201);
+    expect(created.body.user).toMatchObject({ phone, province: "Lào Cai", ward: "Phường Sa Pa" });
+
+    const duplicate = await api().post("/api/v1/auth/register").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", stamp.token).set("Cookie", stamp.cookie)
+      .send({ name: "Trung sdt", email: "dup-phone@example.test", phone, password: PASSWORD }).expect(409);
+    expect(duplicate.body.error.code).toBe("EMAIL_UNAVAILABLE");
+
+    const fresh = await csrf();
+    const byPhone = await api().post("/api/v1/auth/login").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", fresh.token).set("Cookie", fresh.cookie)
+      .send({ identifier: phone, password: PASSWORD }).expect(200);
+    expect(byPhone.body.user.email).toBe("by-phone@example.test");
+  });
+  it("rejects province values outside the 2025 list and exposes auth config without secrets", async () => {
+    const stamp = await csrf();
+    const rejected = await api().post("/api/v1/auth/register").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", stamp.token).set("Cookie", stamp.cookie)
+      .send({ ...validUser("bad-province@example.test"), province: "Tỉnh Không Có" }).expect(400);
+    expect(rejected.body.error.code).toBe("INVALID_BODY");
+
+    const config = await api().get("/api/v1/auth/config").expect(200);
+    expect(config.body).toEqual({ providers: { google: false, facebook: false }, captchaSiteKey: null });
+    expect(JSON.stringify(config.body)).not.toMatch(/secret/i);
+  });
+  it("gates captcha when the verifier requires it", async () => {
+    captchaStub.required = true;
+    captchaStub.assertValid = async (token) => {
+      if (!token) throw new AuthError(400, "CAPTCHA_FAILED", "Captcha verification required.");
+    };
+    const stamp = await csrf();
+    const refused = await api().post("/api/v1/auth/register").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", stamp.token).set("Cookie", stamp.cookie)
+      .send(validUser("captcha@example.test")).expect(400);
+    expect(refused.body.error.code).toBe("CAPTCHA_FAILED");
+    const accepted = await api().post("/api/v1/auth/register").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", stamp.token).set("Cookie", stamp.cookie)
+      .send({ ...validUser("captcha@example.test"), captchaToken: "stub-token" }).expect(201);
+    expect(accepted.body.user.email).toBe("captcha@example.test");
+  });
+  it("forgot password is gated by mail config, and reset is one-shot with session revoke", async () => {
+    await register("reset@example.test");
+
+    const gatedStamp = await csrf();
+    const gated = await api().post("/api/v1/auth/forgot-password").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", gatedStamp.token).set("Cookie", gatedStamp.cookie)
+      .send({ identifier: "reset@example.test" }).expect(503);
+    expect(gated.body.error.code).toBe("MAIL_NOT_CONFIGURED");
+
+    mailerStub.configured = true;
+    const requestStamp = await csrf();
+    await api().post("/api/v1/auth/forgot-password").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", requestStamp.token).set("Cookie", requestStamp.cookie)
+      .send({ identifier: "reset@example.test" }).expect(204);
+    expect(mailerStub.sent).toHaveLength(1);
+    const token = new URL(mailerStub.sent[0]!.url).searchParams.get("token");
+    expect(token).toMatch(/^[A-Za-z0-9_-]{43}$/);
+
+    const before = await login("reset@example.test");
+    const beforeCookie = cookieHeader(before);
+    const resetStamp = await csrf();
+    await api().post("/api/v1/auth/reset-password").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", resetStamp.token).set("Cookie", resetStamp.cookie)
+      .send({ token, newPassword: "MatKhauMoi#2026" }).expect(204);
+
+    await api().get("/api/v1/auth/me").set("Cookie", beforeCookie).expect(401);
+    expect((await login("reset@example.test")).status).toBe(401);
+
+    const reloginStamp = await csrf();
+    const relogin = await api().post("/api/v1/auth/login").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", reloginStamp.token).set("Cookie", reloginStamp.cookie)
+      .send({ identifier: "reset@example.test", password: "MatKhauMoi#2026" }).expect(200);
+    expect(relogin.body.user.email).toBe("reset@example.test");
+
+    const reuseStamp = await csrf();
+    const reused = await api().post("/api/v1/auth/reset-password").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", reuseStamp.token).set("Cookie", reuseStamp.cookie)
+      .send({ token, newPassword: "KhacNua#2026aa" }).expect(400);
+    expect(reused.body.error.code).toBe("RESET_INVALID");
+  });
+  it("forgot password does not leak unknown identifiers", async () => {
+    mailerStub.configured = true;
+    const stamp = await csrf();
+    await api().post("/api/v1/auth/forgot-password").set("Origin", ORIGIN)
+      .set("X-CSRF-Token", stamp.token).set("Cookie", stamp.cookie)
+      .send({ identifier: "missing@example.test" }).expect(204);
+    expect(mailerStub.sent).toHaveLength(0);
   });
 });

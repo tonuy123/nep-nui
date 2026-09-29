@@ -1,24 +1,26 @@
 import type { Metadata } from "next";
-import { AuthFormShell } from "@/features/auth/auth-form-shell";
+import { LoginForm } from "@/features/auth/login-form";
+import { authConfig } from "@/lib/auth/config";
 
 export const metadata: Metadata = {
   title: "Đăng nhập",
   description: "Đăng nhập để lưu địa điểm, hành trình và theo dõi yêu cầu tư vấn.",
 };
 
-export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string | string[] }> }) {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ next?: string | string[] }>;
+}) {
   const { next } = await searchParams;
+  const config = await authConfig();
+
   return (
-    <>
-      <h1 className="font-display text-2xl font-semibold text-forest">
-        Đăng nhập
-      </h1>
-      <p className="mt-1 text-sm leading-relaxed text-ink/70">
-        Tài khoản dùng để lưu địa điểm yêu thích và hành trình đã lưu.
-      </p>
+    <section className="w-full max-w-md rounded-2xl bg-white p-6 shadow-lg sm:p-8">
+      <h1 className="text-center font-display text-2xl font-semibold text-ink">Đăng nhập</h1>
       <div className="mt-6">
-        <AuthFormShell variant="login" next={typeof next === "string" ? next : "/tai-khoan"} />
+        <LoginForm next={typeof next === "string" ? next : "/tai-khoan"} config={config} />
       </div>
-    </>
+    </section>
   );
 }

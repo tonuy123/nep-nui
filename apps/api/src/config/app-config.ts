@@ -3,6 +3,16 @@ export interface AppConfig {
   readonly databaseUrl: string;
   readonly corsOrigins: string[];
   readonly nodeEnv: string;
+  readonly webOrigin: string;
+  readonly googleClientId: string | null;
+  readonly googleClientSecret: string | null;
+  readonly facebookAppId: string | null;
+  readonly facebookAppSecret: string | null;
+  readonly oauthStateSecret: string | null;
+  readonly recaptchaSecretKey: string | null;
+  readonly recaptchaSiteKey: string | null;
+  readonly smtpUrl: string | null;
+  readonly mailFrom: string | null;
 }
 
 export class ConfigurationError extends Error {
@@ -30,12 +40,29 @@ export function loadAppConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
 
   assertPostgresUrl(databaseUrl);
 
+  const corsOrigins = parseCorsOrigins(env.CORS_ORIGINS);
+
   return {
     databaseUrl,
     port: parsePort(env.PORT),
-    corsOrigins: parseCorsOrigins(env.CORS_ORIGINS),
+    corsOrigins,
     nodeEnv: env.NODE_ENV?.trim() || "development",
+    webOrigin: corsOrigins[0] ?? DEFAULT_CORS_ORIGINS[0]!,
+    googleClientId: optional(env.GOOGLE_CLIENT_ID),
+    googleClientSecret: optional(env.GOOGLE_CLIENT_SECRET),
+    facebookAppId: optional(env.FACEBOOK_APP_ID),
+    facebookAppSecret: optional(env.FACEBOOK_APP_SECRET),
+    oauthStateSecret: optional(env.OAUTH_STATE_SECRET),
+    recaptchaSecretKey: optional(env.RECAPTCHA_SECRET_KEY),
+    recaptchaSiteKey: optional(env.RECAPTCHA_SITE_KEY),
+    smtpUrl: optional(env.SMTP_URL),
+    mailFrom: optional(env.MAIL_FROM),
   };
+}
+
+function optional(value: string | undefined): string | null {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : null;
 }
 
 function assertPostgresUrl(url: string): void {

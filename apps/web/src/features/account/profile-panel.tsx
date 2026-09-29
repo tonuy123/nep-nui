@@ -37,6 +37,9 @@ export function ProfilePanel() {
     <AccountCard title="Thông tin tài khoản">
       <dl className="grid gap-3 text-sm sm:grid-cols-2">
         <div><dt className="font-semibold text-earth">Email</dt><dd className="mt-1 break-all text-ink">{user.email}</dd></div>
+        <div><dt className="font-semibold text-earth">Số điện thoại</dt><dd className="mt-1 text-ink">{user.phone ?? "Chưa cập nhật"}</dd></div>
+        <div><dt className="font-semibold text-earth">Tỉnh / Thành</dt><dd className="mt-1 text-ink">{user.province ?? "Chưa cập nhật"}</dd></div>
+        <div><dt className="font-semibold text-earth">Phường / Xã</dt><dd className="mt-1 text-ink">{user.ward ?? "Chưa cập nhật"}</dd></div>
         <div><dt className="font-semibold text-earth">Vai trò</dt><dd className="mt-1 text-ink">{user.role === "USER" ? "Người dùng" : user.role === "EDITOR" ? "Biên tập viên" : "Quản trị viên"}</dd></div>
       </dl>
       {user.role !== "USER" ? <Link href="/admin" className="mt-5 inline-flex rounded-md border border-forest/30 px-4 py-3 text-sm font-semibold text-forest hover:bg-forest/10">Vào khu vực quản trị</Link> : null}

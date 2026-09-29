@@ -13,6 +13,19 @@ Monorepo cho website quảng bá du lịch vùng sâu, vùng xa. Trạng thái h
   với sáu chức năng mở route riêng. Local API/web, PostgreSQL integration tests
   và browser preview đã chạy; xem evidence/handoff ở Entry 014 và
   [P4_AUTH_PLAN.md](docs/plans/P4_AUTH_PLAN.md). P5–P7 chưa mở.
+- **P4b — `IMPLEMENTED_UNREVIEWED`**: trang chủ editorial Tây Bắc, carousel
+  4/2/1, 10 bài địa danh và năm route chức năng; evidence ở Entry 015–017.
+- **P5 — `IMPLEMENTED_UNREVIEWED`**: Admin/Editor CMS — CRUD 5 loại nội dung,
+  publish/archive/restore, media library + use protection, hộp thư yêu cầu,
+  quản lý người dùng (ADMIN), audit log và dashboard. Evidence/gates ở Entry 018
+  và [P5_CMS_PLAN.md](docs/plans/P5_CMS_PLAN.md). P6/P7 chưa mở; media upload
+  thật chờ quyết định object-storage provider.
+- **P6 — `IMPLEMENTED_UNREVIEWED`**: bind toàn bộ trang public vào content API
+  (danh sách + chi tiết + search/filter + empty/error thật), lưu yêu thích/lưu
+  hành trình/gửi yêu cầu tư vấn end-to-end, SEO metadata + JSON-LD; DB
+  destinations mở rộng field biên tập và seed 10 địa danh P4b kèm nguồn. Evidence
+  ở Entry 019 và [P6_INTEGRATION_PLAN.md](docs/plans/P6_INTEGRATION_PLAN.md).
+  Bản đồ tương tác chờ nhà cung cấp tile; P7 chưa mở.
 
 Đọc `AI_PROJECT_CONTROL.md` trước khi làm bất cứ điều gì — đây là single source
 of truth cho scope, architecture, route contract và phase roadmap.
@@ -65,9 +78,11 @@ npm run db:migrate:deploy --workspace @webdulich/api
 npm run seed --workspace @webdulich/api
 ```
 
-Seed là transaction, idempotent và cố ý **không ghi nội dung public** khi chưa có
-destination/content/rights được xác minh (P3 policy). Chạy lại seed không tạo
-bản ghi trùng và không đổi trạng thái publication.
+Seed là transaction và idempotent. Từ P6, seed đưa **10 địa danh Tây Bắc P4b**
+(đã có nguồn du lịch + ảnh CC0/Unsplash/CC BY-SA kèm attribution) vào CMS làm
+nội dung công khai: destination đã tồn tại theo slug thì bỏ qua (không ghi đè
+nội dung đang biên tập), media tái dùng theo `publicUrl`. Chạy lại seed không
+tạo bản ghi trùng. Quyền ảnh/địa điểm vẫn là gate xác nhận của Paw khi review.
 
 ## Command đã được kiểm tra
 
@@ -80,6 +95,7 @@ bản ghi trùng và không đổi trạng thái publication.
 | `npm run test` | Jest unit + health/OpenAPI e2e — **không cần DB** |
 | `npm run test:content` | Integration tests content API trên PostgreSQL test (cần DB) |
 | `npm run test:auth` | Integration tests auth/account trên PostgreSQL test (cần DB) |
+| `npm run test:admin` | Integration tests admin CMS/RBAC/audit trên PostgreSQL test (cần DB) |
 | `npm run build` | contracts → API → web (production build) |
 | `npm run db:up` / `npm run db:down` | Bật/tắt PostgreSQL local |
 
@@ -233,10 +249,16 @@ Auth/Account/Admin: `/dang-nhap`, `/dang-ky`, `/tai-khoan` (+ 4 route con),
 `/admin` (+ 10 route con).
 
 Header trắng/forest/gold có sáu link tới sáu route public riêng, active state
-và menu mobile keyboard/focus. Login/register/account đã nối API qua BFF;
-admin chỉ có role gate và shell vì CMS CRUD thuộc P5. Public pages vẫn là
-visual P2 và **chưa bind toàn bộ dữ liệu content API** (P6); map engine,
-booking và payment chưa triển khai.
+và menu mobile keyboard/focus. Login/register/account đã nối API qua BFF.
+
+Admin (`/admin`) là CMS thật (P5): `/admin/diem-den`, `/admin/trai-nghiem`,
+`/admin/hanh-trinh`, `/admin/chuyen-ban-dia`, `/admin/cam-nang` (CRUD + xuất
+bản/lưu trữ/khôi phục), `/admin/media` (thư viện + trạng thái xác minh),
+`/admin/yeu-cau` (xử lý yêu cầu), `/admin/nguoi-dung` và `/admin/audit-log`
+(chỉ ADMIN). API `/api/v1/admin/*` kiểm tra RBAC ở backend; upload media thật
+chưa triển khai (chờ object-storage provider). Public pages vẫn là visual P2/P4b
+và **chưa bind toàn bộ dữ liệu content API** (P6); map engine, booking và
+payment chưa triển khai.
 
 ## P2 cinematic preview
 

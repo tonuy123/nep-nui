@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
-import { AdminModulePlaceholder } from "@/features/admin/module-placeholder";
+import { AdminContentManager } from "@/features/admin/content-manager";
+import { ADMIN_RESOURCES } from "@/features/admin/admin-resources";
 
 export const metadata: Metadata = {
   title: "Quản trị — Chuyện bản địa",
-  description: "Quản trị chuyện bản địa — shell P1, chưa có CRUD.",
+  description: "Quản lý câu chuyện bản địa.",
 };
 
 export default function AdminStoriesPage() {
-  return (
-    <AdminModulePlaceholder
-      heading="Chuyện bản địa"
-      title="Module chuyện bản địa chưa kích hoạt"
-      description="Bài viết, tác giả và nguồn sẽ được kết nối ở P3/P5."
-      bullets={["Chưa có bản ghi", "Chưa có dữ liệu", "Không publish trong P1"]}
-    />
-  );
+  return <AdminContentManager config={ADMIN_RESOURCES.stories} />;
 }

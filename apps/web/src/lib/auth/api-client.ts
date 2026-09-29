@@ -1,21 +1,36 @@
 "use client";
 
-import type { AuthResponse, CsrfResponse, PublicUser } from "@webdulich/contracts";
+import type { ApiErrorDetail, AuthResponse, CsrfResponse, PublicUser } from "@webdulich/contracts";
 
 export class ApiError extends Error {
-  constructor(readonly status: number, readonly code: string, message: string) {
+  constructor(
+    readonly status: number,
+    readonly code: string,
+    message: string,
+    readonly details: ApiErrorDetail[] = [],
+  ) {
     super(message);
     this.name = "ApiError";
   }
 }
 
 const MESSAGES: Record<string, string> = {
-  INVALID_CREDENTIALS: "Email hoặc mật khẩu không đúng.", EMAIL_UNAVAILABLE: "Không thể đăng ký bằng email này.",
+  INVALID_CREDENTIALS: "Email hoặc mật khẩu không đúng.", EMAIL_UNAVAILABLE: "Không thể đăng ký bằng email hoặc số điện thoại này.",
   INVALID_BODY: "Thông tin chưa hợp lệ. Hãy kiểm tra lại các trường.", CSRF_INVALID: "Phiên biểu mẫu đã hết hạn. Vui lòng thử lại.",
   ORIGIN_FORBIDDEN: "Yêu cầu không được phép từ địa chỉ này.", UNAUTHENTICATED: "Phiên đăng nhập đã hết hạn.",
   FORBIDDEN: "Tài khoản không có quyền thực hiện thao tác này.", RATE_LIMITED: "Quá nhiều yêu cầu. Vui lòng thử lại sau một phút.",
   NOT_FOUND: "Nội dung không còn khả dụng hoặc không tồn tại.", COLLECTION_LIMIT: "Danh sách đã đạt giới hạn 50 mục.",
   DATABASE_UNAVAILABLE: "Dịch vụ dữ liệu tạm thời chưa sẵn sàng.", UPSTREAM_UNAVAILABLE: "Chưa kết nối được dịch vụ. Vui lòng thử lại.",
+  INVALID_QUERY: "Tham số truy vấn chưa hợp lệ.", SLUG_TAKEN: "Slug đã được sử dụng. Hãy chọn slug khác.",
+  CONTENT_LOCKED: "Thao tác không hợp lệ với trạng thái hiện tại của nội dung.", CONTENT_IN_USE: "Không thể xóa vì còn nội dung hoặc dữ liệu tham chiếu.",
+  MEDIA_IN_USE: "Media đang được dùng trong nội dung. Hãy gỡ media trước khi xóa.", USER_SELF_UPDATE: "Không thể tự đổi vai trò hoặc trạng thái của chính mình.",
+  LAST_ADMIN: "Không thể hạ quyền hoặc khóa quản trị viên hoạt động cuối cùng.", PUBLICATION_NOT_ALLOWED: "Nội dung chưa đủ điều kiện xuất bản.",
+  INVALID_TRANSITION: "Không thể chuyển trạng thái theo yêu cầu.", PUBLICATION_CONFLICT: "Có thay đổi đồng thời từ phiên khác. Hãy tải lại và thử lại.",
+  CAPTCHA_FAILED: "Xác minh reCAPTCHA chưa đạt. Hãy thử lại.", RESET_INVALID: "Liên kết đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.",
+  MAIL_NOT_CONFIGURED: "Hệ thống gửi email chưa được cấu hình cho môi trường này.",
+  OAUTH_UNAVAILABLE: "Đăng nhập mạng xã hội chưa được cấu hình cho môi trường này.",
+  OAUTH_INVALID_STATE: "Phiên đăng nhập mạng xã hội không hợp lệ. Hãy thử lại.", OAUTH_EMAIL_REQUIRED: "Nhà cung cấp không trả về email đã xác minh.",
+  OAUTH_FAILED: "Không kết nối được nhà cung cấp đăng nhập. Hãy thử lại sau.",
 };
 
 let csrfToken: string | null = null;
@@ -26,14 +41,24 @@ let refreshVersion = 0;
 
 async function errorFrom(response: Response): Promise<ApiError> {
   let code = "REQUEST_FAILED";
+  let details: ApiErrorDetail[] = [];
   try {
     const body: unknown = await response.json();
     if (body && typeof body === "object" && "error" in body) {
       const error = body.error;
       if (error && typeof error === "object" && "code" in error && typeof error.code === "string") code = error.code;
+      if (error && typeof error === "object" && "details" in error && Array.isArray(error.details)) {
+        details = error.details.filter(
+          (detail): detail is ApiErrorDetail =>
+            detail !== null &&
+            typeof detail === "object" &&
+            typeof (detail as { field?: unknown }).field === "string" &&
+            typeof (detail as { message?: unknown }).message === "string",
+        );
+      }
     }
   } catch { /* Responses from unavailable upstreams may have no JSON. */ }
-  return new ApiError(response.status, code, MESSAGES[code] ?? "Không thực hiện được yêu cầu. Vui lòng thử lại.");
+  return new ApiError(response.status, code, MESSAGES[code] ?? "Không thực hiện được yêu cầu. Vui lòng thử lại.", details);
 }
 
 async function csrf(force = false, staleToken?: string | null): Promise<string> {

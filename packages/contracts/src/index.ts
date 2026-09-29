@@ -11,3 +11,5 @@ export * from "./content/itineraries.js";
 export * from "./content/stories.js";
 export * from "./content/guides.js";
 export * from "./auth.js";
+export * from "./provinces.js";
+export * from "./admin.js";

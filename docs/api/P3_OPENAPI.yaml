@@ -358,7 +358,7 @@ components:
           type: string
     DestinationSummary:
       type: object
-      required: [slug, title, excerpt, coverMedia, publishedAt]
+      required: [slug, title, excerpt, province, landscape, coverMedia, publishedAt]
       additionalProperties: false
       properties:
         slug:
@@ -366,6 +366,10 @@ components:
         title:
           type: string
         excerpt:
+          type: [string, 'null']
+        province:
+          type: [string, 'null']
+        landscape:
           type: [string, 'null']
         coverMedia:
           oneOf:
@@ -376,7 +380,7 @@ components:
           format: date-time
     DestinationDetail:
       type: object
-      required: [slug, title, excerpt, coverMedia, publishedAt, body, gallery]
+      required: [slug, title, excerpt, province, landscape, coverMedia, publishedAt, body, highlights, travelNote, sourceUrl, gallery]
       additionalProperties: false
       properties:
         slug:
@@ -384,6 +388,10 @@ components:
         title:
           type: string
         excerpt:
+          type: [string, 'null']
+        province:
+          type: [string, 'null']
+        landscape:
           type: [string, 'null']
         coverMedia:
           oneOf:
@@ -395,6 +403,15 @@ components:
         body:
           type: [string, 'null']
           maxLength: 20000
+        highlights:
+          type: array
+          maxItems: 8
+          items:
+            type: string
+        travelNote:
+          type: [string, 'null']
+        sourceUrl:
+          type: [string, 'null']
         gallery:
           type: array
           maxItems: 24

@@ -20,6 +20,7 @@
     "test": "npm run test --workspaces --if-present",
     "test:content": "npm run test:content --workspace @webdulich/api",
     "test:auth": "npm run test:auth --workspace @webdulich/api",
+    "test:admin": "npm run test:admin --workspace @webdulich/api",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down"
   }

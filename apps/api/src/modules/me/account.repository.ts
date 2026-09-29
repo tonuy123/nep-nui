@@ -4,7 +4,16 @@ import { ContentApiError, ContentNotFoundError } from "../content-common/errors.
 import type { InquiryInput, InquiryQuery } from "./me.dto.js";
 import { accountTransaction, requireActiveUser } from "./me.transaction.js";
 
-const userSelect = { id: true, email: true, name: true, role: true, createdAt: true } as const;
+const userSelect = {
+  id: true,
+  email: true,
+  name: true,
+  phone: true,
+  province: true,
+  ward: true,
+  role: true,
+  createdAt: true,
+} as const;
 export const inquirySelect = {
   id: true, subject: true, message: true, status: true, createdAt: true, updatedAt: true,
   destination: { select: { slug: true, title: true, status: true, publishedAt: true } },
