@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceHero } from "@/features/service-page/service-hero";
-import { addOnListings, addOnPromos, guides } from "@/features/service-listings/listings-data";
-import { ListingSection } from "@/features/service-listings/listing-section";
-import { PromoBand } from "@/features/service-listings/promo-band";
+import { guides } from "@/features/service-listings/listings-data";
 
 export const metadata: Metadata = {
   title: "Dịch vụ cộng thêm",
-  description: "Chọn dịch vụ nối chặng, người dẫn đường, thiết bị hoặc hỗ trợ tiếp cận và chuẩn bị yêu cầu tư vấn cho chuyến đi.",
+  description: "Các dịch vụ cộng thêm cho chuyến đi Tây Bắc đang được cập nhật.",
 };
 
 export default function AddOnServicesPage() {
@@ -19,15 +17,22 @@ export default function AddOnServicesPage() {
         image={{ src: "/images/services/addon.webp", alt: "Cảnh quan vùng cao Hà Giang" }}
       />
 
-      <ListingSection
-        eyebrow="Dịch vụ"
-        title="Dịch vụ phổ biến"
-        description="Các dịch vụ được yêu cầu nhiều nhất; thời gian và phạm vi phục vụ xác nhận khi gửi yêu cầu."
-        items={addOnListings}
-        showFilter={false}
-      />
-
-      <PromoBand items={addOnPromos} moreHref="#listing-heading" />
+      <section aria-labelledby="addon-heading" className="bg-[#f1f2ee]">
+        <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <div className="rounded-2xl bg-white p-6 text-center shadow-sm sm:p-8 lg:p-10">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-earth">Dịch vụ</p>
+            <h2
+              id="addon-heading"
+              className="mt-3 font-sans text-2xl font-bold leading-tight text-forest-deep sm:text-3xl"
+            >
+              Dịch vụ cộng thêm
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-ink/70">
+              Hệ thống sẽ cập nhật thêm các dịch vụ trong thời gian tới.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <GuideBlock content={guides.addon} />
 

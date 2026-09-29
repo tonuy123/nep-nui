@@ -72,7 +72,7 @@ export function ListingSection({
                   type="button"
                   aria-pressed={selected === province}
                   onClick={() => selectProvince(province)}
-                  className="min-h-10 rounded-full border border-forest/25 px-4 text-sm font-medium text-forest transition-colors hover:border-forest aria-pressed:border-forest aria-pressed:bg-forest aria-pressed:text-ivory"
+                  className="min-h-10 border border-forest/25 px-4 text-sm font-medium text-forest transition-colors hover:border-forest aria-pressed:border-forest aria-pressed:bg-forest aria-pressed:text-ivory"
                 >
                   {province}
                 </button>

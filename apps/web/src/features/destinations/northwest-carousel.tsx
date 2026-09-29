@@ -54,7 +54,7 @@ export function NorthwestCarousel({ destinations }: NorthwestCarouselProps) {
             type="button"
             aria-pressed={province === item}
             onClick={() => setProvince(item)}
-            className="min-h-10 rounded-full border border-forest/25 bg-white/70 px-4 text-sm font-medium text-forest transition-colors hover:border-forest aria-pressed:border-forest aria-pressed:bg-forest aria-pressed:text-ivory"
+            className="min-h-10 border border-forest/25 bg-white/70 px-4 text-sm font-medium text-forest transition-colors hover:border-forest aria-pressed:border-forest aria-pressed:bg-forest aria-pressed:text-ivory"
           >
             {item}
           </button>

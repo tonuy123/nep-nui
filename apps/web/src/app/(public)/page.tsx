@@ -41,14 +41,9 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
           <div className="mb-10 grid items-end gap-7 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,.7fr)] lg:gap-20">
             <div>
-              <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.2em] text-earth">
-                <span className="font-display text-2xl tracking-normal text-forest">01</span>
-                <span aria-hidden="true" className="h-px w-8 bg-earth/50" />
-                Khám phá
-              </p>
               <h2
                 id="northwest-heading"
-                className="mt-4 max-w-3xl text-balance font-display text-4xl leading-[1.04] text-forest-deep sm:text-5xl lg:text-[3.65rem]"
+                className="max-w-3xl text-balance font-display text-4xl leading-[1.04] text-forest-deep sm:text-5xl lg:text-[3.65rem]"
               >
                 Điểm đến <em className="font-normal text-earth">Tây Bắc</em>
               </h2>

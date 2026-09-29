@@ -44,7 +44,7 @@ export function TourExplorer({ places }: { places: readonly TourPlace[] }) {
                 type="button"
                 aria-pressed={theme === item}
                 onClick={() => setTheme(item)}
-                className="min-h-10 rounded-full border border-forest/25 px-4 text-sm font-medium text-forest transition-colors hover:border-forest aria-pressed:border-forest aria-pressed:bg-forest aria-pressed:text-ivory"
+                className="min-h-10 border border-forest/25 px-4 text-sm font-medium text-forest transition-colors hover:border-forest aria-pressed:border-forest aria-pressed:bg-forest aria-pressed:text-ivory"
               >
                 {item}
               </button>

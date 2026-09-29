@@ -6,7 +6,7 @@ import { siteConfig } from "@/config/site";
 export function SiteFooter() {
   return (
     <footer className="border-t border-forest/15 bg-forest text-ivory">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 text-center sm:px-6 md:grid-cols-3 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 text-center sm:px-6 md:grid-cols-3 lg:px-8">
         <div className="flex flex-col items-center">
           <Image
             src="/brand/nep-nui-logo-dark.svg"
@@ -80,7 +80,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
-        <p className="mx-auto max-w-6xl px-4 py-4 text-center text-xs text-ivory/70 sm:px-6 lg:px-8">
+        <p className="mx-auto max-w-6xl px-4 py-3 text-center text-xs text-ivory/70 sm:px-6 lg:px-8">
           © {new Date().getFullYear()} {siteConfig.name}.
         </p>
       </div>
