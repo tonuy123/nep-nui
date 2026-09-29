@@ -3,7 +3,7 @@ import { findNorthwestDestination } from "@/features/destinations/northwest-dest
 import { IntroVideoMedia } from "./intro-video-media";
 
 const posterPhoto = findNorthwestDestination("mu-cang-chai")?.photo;
-const introVideoSrc: string | undefined = undefined;
+const introVideoSrc: string | undefined = "/videos/intro-tay-bac.mp4";
 
 const introPoints = [
   "Ruộng bậc thang, sống núi và những buổi sáng mây phủ",
@@ -24,9 +24,9 @@ export function IntroVideo() {
               Gặp Tây Bắc <em className="font-normal text-gold">trước khi lên đường.</em>
             </h2>
             <p className="mt-6 max-w-lg text-sm leading-7 text-ivory/80 sm:text-base">
-              Khung phim giới thiệu đang chờ tư liệu chuyển động. Trong lúc đó,
-              mười bài điểm đến với nguồn tham khảo rõ ràng đã sẵn sàng để bạn
-              bắt đầu chuyến đi của mình.
+              Đoạn phim ngắn sẽ tự phát khi bạn lướt tới. Sau đó, mười bài
+              điểm đến với nguồn tham khảo rõ ràng đã sẵn sàng để bắt đầu
+              chuyến đi của bạn.
             </p>
             <ul className="mt-8 space-y-0 border-t border-ivory/20">
               {introPoints.map((point, index) => (

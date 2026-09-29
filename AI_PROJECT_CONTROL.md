@@ -1723,6 +1723,21 @@ apps/web/src/lib/auth/safe-next.ts
 | Risks | Nút overlay đè mép card ~44px (pattern slider chuẩn, chưa kiểm thiết bị cảm ứng thật); poster video là ảnh Mù Cang Chải CC0 có credit minh họa rõ, cần thay bằng video khi có tư liệu; agent không xem được ảnh nên chưa có đánh giá visual bởi người — cần Paw nhìn preview/screenshot. |
 | Next action | Paw xem preview/screenshot duyệt visual; wire video thật khi có tư liệu; không tự mở phase khác. |
 
+### Entry 018 — Wire video thật cho khối intro trang chủ
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase / status | P4b follow-up, `IMPLEMENTED_UNREVIEWED`. Không mở phase khác; không đụng vùng P5/P6 của DeepSeek. |
+| Authorization | Paw yêu cầu trong chat: lấy video trong mục Downloads hôm nay wire vào khối intro trang chủ. |
+| Scope | Copy `intro-tay-bac.mp4` (31 giây, 8.2MB, Paw cung cấp) vào `apps/web/public/videos/`; `introVideoSrc` chuyển từ `undefined` sang đường dẫn; panel text cập nhật theo trạng thái đã có video; cơ chế autoplay-on-view dựng sẵn ở Entry 017 được kích hoạt: muted/loop/playsInline, tự play khi 40% khối vào màn hình, tự pause khi rời view, tôn trọng prefers-reduced-motion. |
+| Files changed | `apps/web/public/videos/intro-tay-bac.mp4` (mới); `apps/web/src/features/intro-video/intro-video.tsx`; tài liệu này. |
+| Commands run | `npm run typecheck --workspace @webdulich/web` exit0; `npm run lint --workspace @webdulich/web` exit0; `npm run build --workspace @webdulich/web` exit0 (43 page outputs). |
+| Browser verification | Production `next start` port 3000 + Chrome headless Playwright: 35/35 checks pass — video element muted/loop/playsInline; không tự chạy trước khi vào view (paused=true); scrollIntoView → autoplay thật (paused=false, currentTime=1.511s, readyState=4); cuộn lên đầu → tự pause (true); layout 50/50 full-height, carousel, mobile 390/320 và no-JS không hồi quy. |
+| Risks | Nguồn/provenance video do Paw cung cấp chưa được ghi — giữ release gate như ảnh hero P2 (UNVERIFIED). Poster vẫn là ảnh Mù Cang Chải CC0 có credit. Video 8.2MB tải theo preload=metadata khi vào view — chưa đo field/mobile cho khối này. |
+| Next action | Paw xem preview `http://127.0.0.1:3000` (cuộn xuống cuối trang) xác nhận video; phase khác chờ Paw mở. |
+
 ### Handoff template
 
 ```text
