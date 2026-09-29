@@ -6,7 +6,7 @@ export interface NavItem {
 
 export const primaryNav: NavItem[] = [
   { label: "Tour trọn gói", href: "/tour-tron-goi" },
-  { label: "Vé máy bay", href: "/ve-may-bay" },
+  { label: "Chuyến xe", href: "/ve-may-bay" },
   { label: "Khách sạn", href: "/khach-san" },
   { label: "Combo du lịch", href: "/combo-du-lich" },
   { label: "Dịch vụ cộng thêm", href: "/dich-vu-cong-them" },

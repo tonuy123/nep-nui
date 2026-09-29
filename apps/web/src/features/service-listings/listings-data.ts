@@ -58,19 +58,19 @@ export const hotelListings: ListingCard[] = [
   { id: "bac-ha-house", name: "Nhà cổ Bắc Hà", province: "Lào Cai", image: "/images/destinations/bac-ha-card.webp", description: "Gần chợ phiên Bắc Hà, kiến trúc gỗ giữ nguyên nếp cũ.", stars: 4, priceFrom: 690000, priceUnit: "/ đêm", code: "KS-BH-08", seats: 4 },
 ];
 
-// --- Chuyến xe đường dài (cho trang Vé máy bay) ---
+// --- Chuyến xe đường dài (cho trang Chuyến xe) ---
 export const coachListings: ListingCard[] = [
   { id: "hn-sapa", name: "Hà Nội → Sa Pa", province: "Lào Cai", image: "/images/destinations/sa-pa-card.webp", description: "Xe giường nằm, khởi hành 7:00 và 22:00, khoảng 5 giờ.", priceFrom: 280000, priceUnit: "/ khách", badge: "Phổ biến", code: "CX-HN-SAPA", duration: "5 giờ", departureFrom: "Hà Nội", seats: 12, dates: ["07:00", "22:00"] },
   { id: "hn-hagiang", name: "Hà Nội → Hà Giang", province: "Hà Giang", image: "/images/services/addon.webp", description: "Xe limousine 9 chỗ, trả khách tại trung tâm thành phố Hà Giang.", priceFrom: 320000, priceUnit: "/ khách", code: "CX-HN-HG", duration: "7 giờ", departureFrom: "Hà Nội", seats: 9, dates: ["06:30", "21:00"] },
   { id: "hn-mocchau", name: "Hà Nội → Mộc Châu", province: "Sơn La", image: "/images/destinations/moc-chau-card.webp", description: "Xe giường nằm, khoảng 4 giờ, dừng nghỉ giữa chặng.", priceFrom: 200000, priceUnit: "/ khách", badge: "Tiết kiệm", code: "CX-HN-MC", duration: "4 giờ", departureFrom: "Hà Nội", seats: 14, dates: ["06:00", "09:00", "14:00", "20:00"] },
   { id: "hn-maichau", name: "Hà Nội → Mai Châu", province: "Phú Thọ", image: "/images/destinations/mai-chau-card.webp", description: "Xe 16 chỗ, khoảng 3 giờ, đón tại bến Mỹ Đình.", priceFrom: 180000, priceUnit: "/ khách", code: "CX-HN-MAIC", duration: "3 giờ", departureFrom: "Hà Nội", seats: 10, dates: ["07:30", "13:30"] },
   { id: "hn-taxua", name: "Hà Nội → Tà Xùa", province: "Sơn La", image: "/images/destinations/ta-xua-card.webp", description: "Xe giường nằm tới Bắc Yên rồi trung chuyển lên Tà Xùa.", priceFrom: 350000, priceUnit: "/ khách", code: "CX-HN-TX", duration: "6 giờ", departureFrom: "Hà Nội", seats: 8, dates: ["20:30"] },
-  { id: "dienbien-hanoi", name: "Điện Biên → Hà Nội", province: "Điện Biên", image: "/images/services/flight.webp", description: "Xe giường nằm VIP, khoảng 12 giờ, có cổng phụ tại sân bay.", priceFrom: 420000, priceUnit: "/ khách", code: "CX-DB-HN", duration: "12 giờ", departureFrom: "Điện Biên", seats: 6, dates: ["18:00"] },
+  { id: "dienbien-hanoi", name: "Điện Biên → Hà Nội", province: "Điện Biên", image: "/images/services/coach.webp", description: "Xe giường nằm VIP, khoảng 12 giờ, nhận đón tại trung tâm thành phố.", priceFrom: 420000, priceUnit: "/ khách", code: "CX-DB-HN", duration: "12 giờ", departureFrom: "Điện Biên", seats: 6, dates: ["18:00"] },
 ];
 
 // --- Dịch vụ cộng thêm ---
 export const addOnListings: ListingCard[] = [
-  { id: "transfer", name: "Xe nối chặng", province: "Tất cả", image: "/images/services/combo.webp", description: "Đón từ sân bay, ga tàu tới điểm bắt đầu chuyến đi.", priceFrom: 350000, priceUnit: "/ chuyến", badge: "Phổ biến", code: "DV-01", duration: "theo chặng" },
+  { id: "transfer", name: "Xe nối chặng", province: "Tất cả", image: "/images/services/combo.webp", description: "Đón từ bến xe, ga tàu tới điểm bắt đầu chuyến đi.", priceFrom: 350000, priceUnit: "/ chuyến", badge: "Phổ biến", code: "DV-01", duration: "theo chặng" },
   { id: "guide", name: "Người dẫn đường địa phương", province: "Tất cả", image: "/images/destinations/bac-ha-card.webp", description: "Dẫn tuyến, thuyết minh văn hóa và hỗ trợ giao tiếp tại bản.", priceFrom: 500000, priceUnit: "/ ngày", code: "DV-02", duration: "theo ngày" },
   { id: "equipment", name: "Thiết bị cho chuyến đi", province: "Tất cả", image: "/images/destinations/moc-chau-card.webp", description: "Thuê lều, gậy trekking, áo mưa và đèn pin tại điểm đến.", priceFrom: 120000, priceUnit: "/ ngày", badge: "Tiết kiệm", code: "DV-03", duration: "theo ngày" },
   { id: "access", name: "Hỗ trợ tiếp cận", province: "Tất cả", image: "/images/destinations/muong-thanh-card.webp", description: "Sắp xếp phương tiện và lộ trình phù hợp điều kiện cá nhân.", priceFrom: 400000, priceUnit: "/ chuyến", code: "DV-04", duration: "theo chặng" },
@@ -107,7 +107,7 @@ export const tourPromos: PromoCard[] = [
 
 export const comboPromos: PromoCard[] = tourPromos;
 
-export const guides: Record<"tour" | "flight" | "hotel" | "combo" | "addon", GuideContent> = {
+export const guides: Record<"tour" | "coach" | "hotel" | "combo" | "addon", GuideContent> = {
   tour: {
     title: "Cách đặt tour và tiêu chuẩn dịch vụ",
     bookHeading: "Cách đặt tour",
@@ -125,11 +125,11 @@ export const guides: Record<"tour" | "flight" | "hotel" | "combo" | "addon", Gui
       "Điểm lưu trú được xác nhận trước và có phương án thay thế tương đương.",
     ],
   },
-  flight: {
+  coach: {
     title: "Cách đặt chuyến xe và tiêu chuẩn dịch vụ",
     bookHeading: "Cách đặt chuyến xe",
     bookSteps: [
-      "Chọn tuyến và giờ xuất phát phù hợp với chuyến bay của bạn.",
+      "Chọn tuyến và giờ xuất phát phù hợp với lịch trình của bạn.",
       "Ghi rõ điểm đón, số người và hành lý khi xác nhận.",
       "Xác nhận lại giờ khởi hành 24 giờ trước khi đi.",
       "Có mặt trước giờ khởi hành 30 phút tại điểm hẹn.",

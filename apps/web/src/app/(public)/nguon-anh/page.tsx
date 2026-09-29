@@ -28,12 +28,12 @@ const weatherPhotoCredits = [
 
 const serviceBannerCredits = [
   {
-    key: "flight",
-    name: "Vé máy bay — Sân bay Điện Biên",
-    author: "Tycho",
-    sourceUrl: "https://commons.wikimedia.org/wiki/File:Dien_Bien_Phu_Airport_aux2.JPG",
-    license: "CC BY-SA 3.0",
-    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
+    key: "coach",
+    name: "Chuyến xe — Cung đường Hà Giang",
+    author: "miketnorton",
+    sourceUrl: "https://www.flickr.com/photos/49665685@N06/39567166870",
+    license: "CC BY 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.0/",
   },
   {
     key: "hotel",
@@ -112,7 +112,7 @@ export default function ImageCreditsPage() {
 
       <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Ảnh banner trang dịch vụ</h2>
       <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
-        Bốn ảnh banner đầu trang cho các mục Vé máy bay, Khách sạn, Combo du lịch
+        Bốn ảnh banner đầu trang cho các mục Chuyến xe, Khách sạn, Combo du lịch
         và Dịch vụ cộng thêm.
       </p>
       <ul className="mt-8 divide-y divide-forest/20 border-y border-forest/20">
