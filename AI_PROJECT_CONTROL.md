@@ -1753,6 +1753,22 @@ apps/web/src/lib/auth/safe-next.ts
 | Risks | Wrap dùng nhảy tức thì (theo chốt "chỉ qua 1 box card"); chưa test thiết bị cảm ứng vật lý. |
 | Next action | Paw xem `http://127.0.0.1:3000` xác nhận hành vi carousel; phase khác chờ Paw mở. |
 
+### Entry 020 — Khối "Thời tiết Tây Bắc" trên trang chủ (Open-Meteo realtime)
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase / status | P4b follow-up, `IMPLEMENTED_UNREVIEWED`. Không đụng vùng P5 của DeepSeek. |
+| Authorization | Paw duyệt plan trong chat: khối bố cục kiểu "Sản phẩm bán chạy" của Cocoon (heading trái + carousel card phải, nút vuông đen) nhưng thay nội dung bằng dự báo thời tiết 8 tỉnh; không dùng nền kem pastel kiểu Cocoon; panel trái dùng ảnh nền đẹp; ảnh card chọn đẹp và có license. |
+| Scope | Section mới giữa "Lên kế hoạch" và khối video: panel trái ảnh nền Hoàng Liên Sơn + overlay + heading "Thời tiết Tây Bắc" + credit; carousel 8 card tỉnh (Lai Châu, Lào Cai, Hà Giang, Điện Biên, Sơn La, Yên Bái, Phú Thọ, Hòa Bình) — mỗi card ảnh núi + nhiệt độ hiện tại + trạng thái + min/max + mưa/ẩm/gió; nút vuông đen kiểu Cocoon hai chiều wrap đúng 1 card; progress line dưới track. Dữ liệu Open-Meteo fetch server-side với `next.revalidate 600` (route `/` thành ISR 10 phút); API lỗi/thiếu mạng → ẩn toàn bộ section, không hiện số bịa. Attribution Open-Meteo + credit ảnh hiển thị trên panel và trang `/nguon-anh`. |
+| Files changed | `apps/web/src/features/weather/weather-provinces.ts`, `weather-codes.ts`, `weather-icon.tsx`, `weather-card.tsx`, `weather-carousel.tsx`, `weather-carousel.module.css`, `weather-section.tsx` (mới); `apps/web/public/images/provinces/` (6 ảnh WebP mới, sharp crop 4:3 card + 4:5 panel); `apps/web/src/app/(public)/page.tsx`; `apps/web/src/app/(public)/nguon-anh/page.tsx`; tài liệu này. |
+| Ảnh mới | Hà Giang Mã Pí Lèng (CC0, Hoach Le Dinh, gốc 6000×4000); Yên Bái Khau Phạ (Public domain, Viethavvh); Lai Châu Ô Quy Hồ sunset (CC BY-SA 4.0, Dansapa); Hòa Bình Mai Châu (CC BY-SA 3.0, Franzfoto); Phú Thọ đồi chè (CC BY-SA 3.0, Bùi Thụy Đào Nguyên); panel Hoàng Liên Sơn (CC BY-SA 4.0, Christophe95). 3 ảnh tỉnh còn lại reuse từ repo (Sa Pa CC0, Mường Thanh CC BY-SA 3.0, Tà Xùa CC BY-SA 4.0). |
+| Commands run | `npm run typecheck --workspace @webdulich/web` exit0; `npm run lint --workspace @webdulich/web` exit0; `npm run build --workspace @webdulich/web` exit0 (43 page outputs, `/` có Revalidate 10m). |
+| Browser verification | Production `next start` port 3000 + Chrome headless Playwright: 45/45 checks — weather section hiện diện, đúng 8 card, heading "Thời tiết Tây Bắc", card render số thật từ Open-Meteo (Lai Châu 28°C, Mưa phùn, 21–29°C, mưa 75%, ẩm 59%, gió 5 km/h), ảnh card load (naturalWidth 1200), hai nút enabled từ đầu, next click scroll, prev wrap về cuối 1185/1185; carousel 10 điểm, intro video autoplay, mobile 390/320 và no-JS không hồi quy. |
+| Risks | Open-Meteo là dữ liệu model (không phải trạm đo tại chỗ) nên có sai số vùng núi; build/revalidate cần mạng; ảnh mới chưa được review visual bởi người (agent không xem được ảnh) — Paw duyệt preview. |
+| Next action | Paw xem `http://127.0.0.1:3000` duyệt visual khối thời tiết; phase khác chờ Paw mở. |
+
 ### Handoff template
 
 ```text

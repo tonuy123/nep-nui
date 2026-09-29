@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CinematicHero } from "@/features/cinematic/cinematic-hero";
 import { IntroVideo } from "@/features/intro-video/intro-video";
+import { WeatherSection } from "@/features/weather/weather-section";
 import { CtaLink } from "@/components/ui/cta-link";
 import { NorthwestCarousel } from "@/features/destinations/northwest-carousel";
 import { northwestDestinationPreviews } from "@/features/destinations/northwest-destinations";
@@ -98,6 +99,8 @@ export default function HomePage() {
           </ol>
         </div>
       </section>
+
+      <WeatherSection />
 
       <IntroVideo />
     </>
