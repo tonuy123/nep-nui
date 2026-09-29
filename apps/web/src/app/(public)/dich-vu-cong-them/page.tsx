@@ -60,7 +60,7 @@ export default function AddOnServicesPage() {
         showFilter={false}
       />
 
-      <PromoBand items={addOnPromos} subtext={promoSubtext} />
+      <PromoBand items={addOnPromos} subtext={promoSubtext} moreHref="#listing-heading" />
 
       <GuideBlock content={guides.addon} />
 

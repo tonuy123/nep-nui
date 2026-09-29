@@ -63,7 +63,7 @@ export default function FlightsPage() {
         items={coachListings}
       />
 
-      <PromoBand items={coachPromos} subtext={promoSubtext} />
+      <PromoBand items={coachPromos} subtext={promoSubtext} moreHref="#listing-heading" />
 
       <ServiceSection
         eyebrow="Nguồn để đối chiếu"

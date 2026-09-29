@@ -49,9 +49,9 @@ export default function ToursPage() {
 
       <ServiceFacts items={tourFacts} />
 
-      <TourExplorer places={northwestDestinationPreviews.map(({ slug, name, province, theme, teaser }) => ({ slug, name, province, theme, teaser }))} />
+      <TourExplorer places={northwestDestinationPreviews} />
 
-      <PromoBand items={tourPromos} subtext={promoSubtext} />
+      <PromoBand items={tourPromos} subtext={promoSubtext} moreHref="#tour-collection-heading" />
 
       <GuideBlock content={guides.tour} />
 

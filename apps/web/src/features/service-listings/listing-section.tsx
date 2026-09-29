@@ -25,45 +25,67 @@ export function ListingSection({
   );
   const [selected, setSelected] = useState("Tất cả");
   const visible = selected === "Tất cả" ? items : items.filter((item) => item.province === selected);
+  const featured = provinces.filter((province) => province !== "Tất cả");
 
   return (
-    <section aria-labelledby="listing-heading" className="border-t border-forest/15 bg-white/60">
-      <div className="mx-auto max-w-6xl px-5 py-14 sm:px-6 sm:py-20 lg:px-8">
-        <p className="text-xs font-bold uppercase tracking-[0.22em] text-earth">{eyebrow}</p>
-        <h2
-          id="listing-heading"
-          className="mt-3 max-w-2xl font-display text-3xl leading-tight text-forest sm:text-4xl"
-        >
-          {title}
-        </h2>
-        {description ? (
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-ink/70">{description}</p>
-        ) : null}
+    <section aria-labelledby="listing-heading" className="bg-[#f1f2ee]">
+      <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <div className="rounded-2xl bg-white p-6 shadow-sm sm:p-8 lg:p-10">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-earth">{eyebrow}</p>
+          <h2
+            id="listing-heading"
+            className="mt-3 max-w-2xl font-sans text-2xl font-bold leading-tight text-forest-deep sm:text-3xl"
+          >
+            {title}
+          </h2>
+          {description ? (
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-ink/70">{description}</p>
+          ) : null}
 
-        {showFilter ? (
-          <div aria-label="Lọc theo tỉnh" className="mt-7 flex flex-wrap gap-2">
-            {provinces.map((province) => (
-              <button
-                key={province}
-                type="button"
-                aria-pressed={selected === province}
-                onClick={() => setSelected(province)}
-                className="min-h-10 rounded-full border border-forest/25 px-4 text-sm font-medium text-forest transition-colors hover:border-forest aria-pressed:border-forest aria-pressed:bg-forest aria-pressed:text-ivory"
-              >
-                {province}
-              </button>
+          {showFilter ? (
+            <div aria-label="Lọc theo tỉnh" className="mt-6 flex flex-wrap gap-2">
+              {provinces.map((province) => (
+                <button
+                  key={province}
+                  type="button"
+                  aria-pressed={selected === province}
+                  onClick={() => setSelected(province)}
+                  className="min-h-10 rounded-full border border-forest/25 px-4 text-sm font-medium text-forest transition-colors hover:border-forest aria-pressed:border-forest aria-pressed:bg-forest aria-pressed:text-ivory"
+                >
+                  {province}
+                </button>
+              ))}
+            </div>
+          ) : null}
+
+          <ul className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {visible.map((card) => (
+              <li key={card.id}>
+                <ListingCardView card={card} />
+              </li>
             ))}
-          </div>
-        ) : null}
+          </ul>
 
-        <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {visible.map((card) => (
-            <li key={card.id}>
-              <ListingCardView card={card} />
-            </li>
-          ))}
-        </ul>
-        <p className="mt-6 text-xs text-ink/70">{listingPriceNote}</p>
+          {showFilter && featured.length > 1 ? (
+            <div className="mt-8 flex flex-wrap items-center gap-2 border-t border-forest/10 pt-5">
+              <span className="text-[11px] font-bold uppercase tracking-[.14em] text-ink/70">
+                Tìm kiếm nổi bật:
+              </span>
+              {featured.map((province) => (
+                <button
+                  key={province}
+                  type="button"
+                  onClick={() => setSelected(province)}
+                  className="rounded-full border border-forest/20 px-3 py-1 text-xs font-semibold uppercase tracking-[.06em] text-forest transition-colors hover:border-forest hover:bg-forest hover:text-ivory"
+                >
+                  {province}
+                </button>
+              ))}
+            </div>
+          ) : null}
+
+          <p className="mt-5 text-xs text-ink/70">{listingPriceNote}</p>
+        </div>
       </div>
     </section>
   );

@@ -99,9 +99,9 @@ export function NorthwestCarousel({ destinations }: NorthwestCarouselProps) {
           aria-label="Các bài khám phá Tây Bắc"
           className={styles.track}
         >
-          {visible.map((destination, index) => (
+          {visible.map((destination) => (
             <li key={destination.slug} className={styles.item}>
-              <DestinationCard destination={destination} index={index} />
+              <DestinationCard destination={destination} />
             </li>
           ))}
         </ul>

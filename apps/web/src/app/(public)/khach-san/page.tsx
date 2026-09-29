@@ -59,7 +59,7 @@ export default function HotelsPage() {
         items={hotelListings}
       />
 
-      <PromoBand items={hotelPromos} subtext={promoSubtext} />
+      <PromoBand items={hotelPromos} subtext={promoSubtext} moreHref="#listing-heading" />
 
       <GuideBlock content={guides.hotel} />
 
