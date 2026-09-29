@@ -26,7 +26,10 @@ const mailerStub = {
 };
 const captchaStub = {
   required: false,
-  async assertValid(_token: string | null, _ip: string | undefined): Promise<void> {},
+  async assertValid(token: string | null, remoteIp: string | undefined): Promise<void> {
+    void token;
+    void remoteIp;
+  },
 };
 function cookies(response: Response): string[] {
   const header = response.headers["set-cookie"] as string[] | string | undefined;
