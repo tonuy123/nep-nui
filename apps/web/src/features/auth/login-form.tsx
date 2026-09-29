@@ -106,7 +106,7 @@ export function LoginForm({ next, config }: { next: string; config: AuthConfigRe
             onClick={() => setShowPassword((value) => !value)}
             aria-label={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
             aria-pressed={showPassword}
-            className="absolute inset-y-0 right-0 flex w-12 items-center justify-center text-ink/50 hover:text-ink"
+            className="absolute inset-y-0 right-0 flex w-12 items-center justify-center text-ink/70 hover:text-ink"
           >
             {showPassword ? "Ẩn" : "Hiện"}
           </button>
@@ -137,7 +137,7 @@ export function LoginForm({ next, config }: { next: string; config: AuthConfigRe
         </button>
       </div>
 
-      <div className="flex items-center gap-3 text-sm text-ink/50">
+      <div className="flex items-center gap-3 text-sm text-ink/70">
         <span aria-hidden="true" className="h-px flex-1 bg-ink/15" />
         Hoặc
         <span aria-hidden="true" className="h-px flex-1 bg-ink/15" />

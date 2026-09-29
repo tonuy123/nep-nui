@@ -131,7 +131,7 @@ export default async function ExplorePage({ searchParams }: ExplorePageProps) {
             </form>
           </div>
 
-          <p className="mb-6 text-sm text-ink/60" role="status">
+          <p className="mb-6 text-sm text-ink/70" role="status">
             {filtered.length} điểm đến{province ? ` tại ${province}` : ""}
             {query ? ` cho “${query}”` : ""}.
           </p>

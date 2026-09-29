@@ -45,7 +45,7 @@ export default async function GuidesPage() {
               </h2>
             </div>
 
-            <p className="mb-6 text-sm text-ink/60" role="status">
+            <p className="mb-6 text-sm text-ink/70" role="status">
               {guides.length} bài cẩm nang đã xuất bản.
             </p>
 

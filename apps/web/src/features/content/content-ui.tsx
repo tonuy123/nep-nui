@@ -45,7 +45,7 @@ export function ContentEmpty({ label, hint }: { label: string; hint?: string }) 
   return (
     <div className="rounded-xl border border-dashed border-forest/25 px-6 py-12 text-center">
       <p className="text-sm text-ink/70">{label}</p>
-      {hint ? <p className="mt-2 text-xs text-ink/50">{hint}</p> : null}
+      {hint ? <p className="mt-2 text-xs text-ink/70">{hint}</p> : null}
     </div>
   );
 }

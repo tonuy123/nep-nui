@@ -21,7 +21,7 @@ export function SiteFooter() {
         </div>
 
         <nav aria-label="Liên kết khám phá ở chân trang">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-gold">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-gold-light">
             Lên kế hoạch
           </h2>
           <ul className="mt-3 space-y-2">
@@ -39,7 +39,7 @@ export function SiteFooter() {
         </nav>
 
         <nav aria-label="Liên kết tài khoản ở chân trang">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-gold">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-gold-light">
             Tài khoản
           </h2>
           <ul className="mt-3 space-y-2">

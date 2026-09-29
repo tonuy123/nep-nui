@@ -92,7 +92,7 @@ export default async function MapPage() {
                                 {destination.title}
                               </span>
                               {destination.landscape ? (
-                                <span className="text-xs uppercase tracking-[.12em] text-ink/50">
+                                <span className="text-xs uppercase tracking-[.12em] text-ink/70">
                                   {destination.landscape}
                                 </span>
                               ) : null}

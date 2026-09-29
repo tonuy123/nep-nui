@@ -18,7 +18,7 @@ export function ServiceClosing({
     <section aria-label="Bước tiếp theo" className="border-t border-forest/20 bg-forest text-ivory">
       <div className="mx-auto flex max-w-6xl flex-col gap-7 px-5 py-12 sm:px-6 md:flex-row md:items-end md:justify-between lg:px-8">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{eyebrow}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-light">{eyebrow}</p>
           <h2 className="mt-3 max-w-xl font-display text-3xl leading-tight sm:text-4xl">
             {heading}
           </h2>

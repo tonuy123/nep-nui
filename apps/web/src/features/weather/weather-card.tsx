@@ -25,7 +25,7 @@ export function WeatherCard({ province, weather }: WeatherCardProps) {
       </div>
       <div className="flex flex-1 flex-col pt-4">
         <h3 className="text-[17px] font-bold leading-snug text-forest-deep">{province.name}</h3>
-        <p className="mt-1 text-[11px] font-semibold uppercase tracking-[.12em] text-ink/55">
+        <p className="mt-1 text-[11px] font-semibold uppercase tracking-[.12em] text-ink/70">
           {described.label}
         </p>
         <div className="mt-3 flex items-center justify-between gap-3">
@@ -36,7 +36,7 @@ export function WeatherCard({ province, weather }: WeatherCardProps) {
             <WeatherIcon kind={described.icon} className="h-6 w-6" />
           </span>
         </div>
-        <p className="mt-3 text-xs leading-5 text-ink/60">
+        <p className="mt-3 text-xs leading-5 text-ink/70">
           Hôm nay {Math.round(weather.min)}–{Math.round(weather.max)}°C · Mưa {Math.round(weather.rain)}%
           <br />
           Độ ẩm {Math.round(weather.humidity)}% · Gió {Math.round(weather.wind)} km/h

@@ -92,15 +92,15 @@ export function AddOnSelector() {
 
         <div className="mt-6 space-y-4">
           <div>
-            <label htmlFor="service-area" className="mb-2 block text-sm font-semibold text-forest">Khu vực dự kiến <span className="font-normal text-ink/55">(không bắt buộc)</span></label>
+            <label htmlFor="service-area" className="mb-2 block text-sm font-semibold text-forest">Khu vực dự kiến <span className="font-normal text-ink/70">(không bắt buộc)</span></label>
             <input id="service-area" type="text" value={area} onChange={(event) => setArea(event.target.value)} maxLength={80} placeholder="Ví dụ: Sa Pa" className="min-h-11 w-full rounded-none border border-forest/30 bg-ivory px-3 py-2 text-sm text-ink placeholder:text-ink/45" />
           </div>
           <div>
-            <label htmlFor="service-date" className="mb-2 block text-sm font-semibold text-forest">Ngày dự kiến <span className="font-normal text-ink/55">(không bắt buộc)</span></label>
+            <label htmlFor="service-date" className="mb-2 block text-sm font-semibold text-forest">Ngày dự kiến <span className="font-normal text-ink/70">(không bắt buộc)</span></label>
             <input id="service-date" type="date" value={date} onChange={(event) => setDate(event.target.value)} className="min-h-11 w-full rounded-none border border-forest/30 bg-ivory px-3 py-2 text-sm text-ink" />
           </div>
           <div>
-            <label htmlFor="service-note" className="mb-2 block text-sm font-semibold text-forest">Ghi chú <span className="font-normal text-ink/55">(không bắt buộc)</span></label>
+            <label htmlFor="service-note" className="mb-2 block text-sm font-semibold text-forest">Ghi chú <span className="font-normal text-ink/70">(không bắt buộc)</span></label>
             <textarea id="service-note" value={note} onChange={(event) => setNote(event.target.value)} maxLength={240} rows={3} placeholder="Điểm đón, số người, điều kiện cần lưu ý…" className="w-full resize-y rounded-none border border-forest/30 bg-ivory px-3 py-2 text-sm text-ink placeholder:text-ink/45" />
           </div>
         </div>

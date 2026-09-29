@@ -62,6 +62,7 @@ export function WeatherCarousel({ items }: WeatherCarouselProps) {
         <ul
           id="province-weather-track"
           ref={trackRef}
+          tabIndex={0}
           aria-label="Thời tiết tám tỉnh Tây Bắc"
           className={styles.track}
         >

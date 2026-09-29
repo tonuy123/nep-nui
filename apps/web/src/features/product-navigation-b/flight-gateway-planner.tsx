@@ -39,7 +39,7 @@ export function FlightGatewayPlanner({ destinationNames }: { destinationNames: r
                 onClick={() => setGatewayCode(item.code)}
                 className={`min-h-36 border p-5 text-left transition-colors ${gatewayCode === item.code ? "border-forest bg-forest text-ivory" : "border-forest/25 bg-white text-ink hover:border-forest"}`}
               >
-                <span className={`text-xs font-bold tracking-[0.2em] ${gatewayCode === item.code ? "text-gold" : "text-earth"}`}>{item.code}</span>
+                <span className={`text-xs font-bold tracking-[0.2em] ${gatewayCode === item.code ? "text-gold-light" : "text-earth"}`}>{item.code}</span>
                 <span className="mt-3 block font-display text-2xl">{item.name}</span>
                 <span className={`mt-2 block text-sm leading-relaxed ${gatewayCode === item.code ? "text-ivory/85" : "text-ink/70"}`}>{item.detail}</span>
               </button>

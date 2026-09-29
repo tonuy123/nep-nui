@@ -84,9 +84,9 @@ export function CaptchaBox({
       >
         <span className="flex items-center gap-3">
           <span aria-hidden="true" className="inline-block h-5 w-5 rounded-sm border-2 border-ink/30 bg-white" />
-          <span className="text-sm text-ink/60">I&apos;m not a robot</span>
+          <span className="text-sm text-ink/70">I&apos;m not a robot</span>
         </span>
-        <span className="text-xs text-ink/45">reCAPTCHA — chưa cấu hình</span>
+        <span className="text-xs text-ink/70">reCAPTCHA — chưa cấu hình</span>
       </div>
     );
   }

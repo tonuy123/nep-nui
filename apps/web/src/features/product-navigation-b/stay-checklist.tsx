@@ -85,7 +85,7 @@ export function StayChecklist() {
               onClick={() => chooseStyle(item.id)}
               className={`min-h-40 p-5 text-left transition-colors ${styleId === item.id ? "bg-forest text-ivory" : "bg-ivory text-ink hover:bg-white"}`}
             >
-              <span className={`text-xs font-bold tracking-[0.2em] ${styleId === item.id ? "text-gold" : "text-earth"}`}>0{index + 1}</span>
+              <span className={`text-xs font-bold tracking-[0.2em] ${styleId === item.id ? "text-gold-light" : "text-earth"}`}>0{index + 1}</span>
               <span className="mt-5 block font-display text-xl leading-snug">{item.name}</span>
             </button>
           ))}
@@ -98,7 +98,7 @@ export function StayChecklist() {
           <h3 className="mt-4 font-display text-3xl text-forest">{style.name}</h3>
           <p className="mt-3 max-w-md text-sm leading-relaxed text-ink/75">{style.lead}</p>
           <p role="status" className="mt-6 inline-block border-b-2 border-gold pb-2 text-sm font-semibold text-forest">{checked.size}/{style.questions.length} điều đã xác minh</p>
-          <p className="mt-4 text-xs leading-relaxed text-ink/60">Chỉ đánh dấu sau khi bạn tự kiểm tra với nơi lưu trú. Lựa chọn của bạn chưa được lưu khi rời trang.</p>
+          <p className="mt-4 text-xs leading-relaxed text-ink/70">Chỉ đánh dấu sau khi bạn tự kiểm tra với nơi lưu trú. Lựa chọn của bạn chưa được lưu khi rời trang.</p>
         </div>
         <fieldset>
           <legend className="sr-only">Các câu hỏi cần kiểm tra cho {style.name}</legend>
@@ -116,7 +116,7 @@ export function StayChecklist() {
             ))}
           </div>
           <div className="mt-7"><CopyTextButton text={summary} label="Sao chép câu hỏi" /></div>
-          <pre className="mt-5 whitespace-pre-wrap break-words border-l-2 border-forest/25 pl-4 font-sans text-xs leading-relaxed text-ink/60">{summary}</pre>
+          <pre className="mt-5 whitespace-pre-wrap break-words border-l-2 border-forest/25 pl-4 font-sans text-xs leading-relaxed text-ink/70">{summary}</pre>
           <Link href="/tai-khoan/yeu-cau-tu-van" className="mt-5 inline-flex min-h-11 items-center text-sm font-semibold text-forest underline underline-offset-4">Hỏi thêm về lựa chọn lưu trú →</Link>
         </fieldset>
       </div>

@@ -47,7 +47,7 @@ export function TourExplorer({ places }: { places: readonly TourPlace[] }) {
               <article className="group flex h-full flex-col justify-between border border-forest/20 bg-white p-5 transition-colors hover:border-forest/60 sm:p-7">
                 <div>
                   <div className="flex items-start justify-between gap-4">
-                    <span className="font-display text-3xl leading-none text-earth/55" aria-hidden="true">{index.toString().padStart(2, "0")}</span>
+                    <span className="font-display text-3xl leading-none text-earth/75" aria-hidden="true">{index.toString().padStart(2, "0")}</span>
                     <span className="border-b border-earth/30 pb-1 text-xs font-semibold uppercase tracking-[0.13em] text-earth">{place.theme}</span>
                   </div>
                   <h3 className="mt-6 font-display text-3xl leading-tight text-forest sm:text-4xl">{place.name}</h3>

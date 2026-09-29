@@ -45,7 +45,7 @@ export default async function StoriesPage() {
               </h2>
             </div>
 
-            <p className="mb-6 text-sm text-ink/60" role="status">
+            <p className="mb-6 text-sm text-ink/70" role="status">
               {stories.length} câu chuyện đã xuất bản.
             </p>
 
