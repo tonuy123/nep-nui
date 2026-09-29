@@ -1812,6 +1812,21 @@ apps/web/src/lib/auth/safe-next.ts
 | Browser verification | Playwright 47/47 — card render đúng thứ tự mới (Lai Châu › Mưa phùn › 28°C › Hôm nay 21–29°C · Mưa 75% › Độ ẩm 59% · Gió 5 km/h); panel full-screen 1/3, wrap, ảnh load không hồi quy. |
 | Next action | Paw xem preview duyệt visual. |
 
+### Entry 024 — Repair bố cục khối thời tiết sau review visual của Paw
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase / status | P4b follow-up, `IMPLEMENTED_UNREVIEWED` — chờ Paw duyệt ảnh; agent không tự chốt visual. |
+| Authorization | Paw yêu cầu fix các lỗi bố cục sau khi chỉ ra ảnh chụp: panel rỗng nửa trên, heading wrap lẻ "Bắc", hai cột lệch nhịp, card bé (213px), ô icon lơ lửng. |
+| Scope | `weather-section.tsx`: panel text từ dồn đáy → căn giữa dọc (đo đối xứng 322/322); heading tách hai dòng chủ đích "Thời tiết" / "Tây Bắc" italic gold. `weather-carousel.module.css`: desktop 3.4 → 2.6 card hiển thị (card ~283px). `weather-card.tsx`: hàng nhiệt độ + ô icon cùng trục ngang (hết lơ lửng), stats xuống dưới full-width cỡ 12px thoáng hơn, tên tỉnh 17px. |
+| Files changed | `apps/web/src/features/weather/weather-section.tsx`; `weather-carousel.module.css`; `weather-card.tsx`; tài liệu này. |
+| Commands run | typecheck/lint/build exit0 (43 pages). |
+| Browser verification | Playwright 47/47 — panel content vertically centered 322/322; card desktop 283px; panel full height 900/900; split 0.333; các check khác không hồi quy. Đây là số liệu tự động, không thay thế duyệt visual của người. |
+| Risks | Agent không nhìn được ảnh — layout mới cần Paw chụp màn hình xác nhận; nếu chưa đạt sẽ chỉnh tiếp. |
+| Next action | Paw chụp ảnh màn hình khối thời tiết tại `http://127.0.0.1:3000` để duyệt; mọi chỉnh sửa visual tiếp theo chỉ chốt bằng ảnh. |
+
 ### Handoff template
 
 ```text
