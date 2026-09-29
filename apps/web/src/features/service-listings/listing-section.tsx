@@ -5,7 +5,7 @@ import { ListingCardView } from "./listing-card";
 import { Pagination } from "./pagination";
 import type { ListingCard } from "./listings-data";
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 4;
 
 interface ListingSectionProps {
   eyebrow: string;
@@ -51,7 +51,7 @@ export function ListingSection({
 
   return (
     <section aria-labelledby="listing-heading" className="bg-[#f1f2ee]">
-      <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <div className="mx-auto max-w-[90rem] px-5 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="rounded-2xl bg-white p-6 shadow-sm sm:p-8 lg:p-10">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-earth">{eyebrow}</p>
           <h2
@@ -80,7 +80,7 @@ export function ListingSection({
             </div>
           ) : null}
 
-          <ul className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {visible.map((card) => (
               <li key={card.id}>
                 <ListingCardView card={card} />

@@ -22,7 +22,7 @@ export function HeaderSearch({ id = "header-search" }: { id?: string }) {
         type="search"
         maxLength={80}
         placeholder="Tìm điểm đến, cảnh quan…"
-        className="h-11 w-full rounded-full border border-forest/20 bg-ivory pl-10 pr-4 text-sm text-ink placeholder:text-ink/45 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
+        className="h-11 w-full rounded-full border border-forest/20 bg-ivory pl-10 pr-4 text-[15px] text-ink placeholder:text-ink/45 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
       />
     </form>
   );

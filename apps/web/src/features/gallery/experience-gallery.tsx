@@ -4,17 +4,15 @@ import { galleryItems } from "./experience-gallery-data";
 export function ExperienceGallery() {
   return (
     <section aria-labelledby="gallery-heading" className="bg-ivory">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <h2
-            id="gallery-heading"
-            className="max-w-3xl font-display text-3xl uppercase leading-[1.1] tracking-[.03em] text-forest-deep sm:text-4xl lg:text-5xl"
-          >
-            Kỷ niệm trải nghiệm cảnh quan
-          </h2>
-        </div>
+      <div className="mx-auto max-w-[90rem] px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <h2
+          id="gallery-heading"
+          className="text-center font-display text-3xl uppercase leading-[1.1] tracking-[.03em] text-forest-deep sm:text-4xl lg:text-5xl lg:whitespace-nowrap xl:text-6xl"
+        >
+          Kỷ niệm trải nghiệm cảnh quan
+        </h2>
 
-        <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {galleryItems.map((item) => (
             <li key={item.id}>
               <figure className="group relative overflow-hidden rounded-lg bg-[#d9dfd2]">

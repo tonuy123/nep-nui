@@ -39,7 +39,11 @@
     ".next-p7/types/**/*.ts",
     ".next-p7/dev/types/**/*.ts",
     ".next-auth-preview/types/**/*.ts",
-    ".next-auth-preview/dev/types/**/*.ts"
+    ".next-auth-preview/dev/types/**/*.ts",
+    ".next-banner-visual-11437/types/**/*.ts",
+    ".next-banner-visual-11437/dev/types/**/*.ts",
+    ".next-banner-build/types/**/*.ts",
+    ".next-banner-build/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

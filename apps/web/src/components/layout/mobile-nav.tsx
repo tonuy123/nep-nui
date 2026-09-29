@@ -7,6 +7,7 @@ import { HeaderSearch } from "@/components/navigation/header-search";
 import { primaryNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { AccountAction } from "@/features/auth/account-action";
+import { CartAction } from "@/features/cart/cart-action";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -176,6 +177,7 @@ export function MobileNav() {
                 ))}
               </ul>
               <div className="mt-4 flex flex-col gap-2 border-t border-forest/15 pt-4">
+                <CartAction mobile />
                 <AccountAction mobile />
               </div>
             </nav>

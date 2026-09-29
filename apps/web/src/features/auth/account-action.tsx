@@ -20,7 +20,7 @@ export function AccountAction({ mobile = false }: { mobile?: boolean }) {
     return () => controller.abort();
   }, [pathname]);
   return <Link href={session.user ? "/tai-khoan" : "/dang-nhap"} aria-busy={!session.loaded}
-    className={mobile ? "flex items-center justify-center gap-2 rounded-md border border-forest/30 px-4 py-3 text-center text-sm font-semibold text-forest hover:bg-forest/10" : "inline-flex min-h-11 w-28 items-center justify-center gap-2 rounded-md px-2 text-sm font-semibold text-forest hover:bg-forest/10"}>
+    className={mobile ? "flex items-center justify-center gap-2 rounded-md border border-forest/30 px-4 py-3 text-center text-sm font-semibold text-forest hover:bg-forest/10" : "inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-2.5 text-[15px] font-semibold text-forest hover:bg-forest/10"}>
     <UserIcon className="h-4 w-4 shrink-0" />
     {session.loaded ? session.user ? "Tài khoản" : "Đăng nhập" : "Tài khoản"}
   </Link>;

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GuideBlock } from "@/features/service-page/guide-block";
+import { ServiceBenefits } from "@/features/service-page/service-benefits";
 import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceHero } from "@/features/service-page/service-hero";
 import { guides, hotelListings, hotelPromos } from "@/features/service-listings/listings-data";
@@ -27,6 +28,8 @@ export default function HotelsPage() {
       />
 
       <PromoBand items={hotelPromos} moreHref="#listing-heading" />
+
+      <ServiceBenefits service="hotel" />
 
       <GuideBlock content={guides.hotel} />
 

@@ -59,11 +59,9 @@ export function ComboPlanner({ destinations, initialSlug }: { destinations: read
     <section aria-labelledby="compose-heading" className="mx-auto max-w-6xl px-5 py-14 sm:px-6 sm:py-20 lg:px-8">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-earth">01 / Chọn nguyên liệu</p>
-          <h2 id="compose-heading" className="mt-3 font-display text-3xl leading-tight text-forest sm:text-4xl">Bốn lựa chọn, một hướng đi.</h2>
-          <p className="mt-3 max-w-md text-sm leading-relaxed text-ink/75">Bản nháp giúp bạn diễn đạt nhu cầu rõ hơn khi trao đổi với người tư vấn. Mỗi chuyến chỉ chọn một khu vực để tránh ghép các chặng xa nhau thiếu thực tế.</p>
+          <p id="compose-heading" className="text-xs font-semibold uppercase tracking-[0.2em] text-earth">01 / Chọn nguyên liệu</p>
 
-          <div className="mt-9 space-y-7">
+          <div className="mt-7 space-y-7">
             <div className="border-t border-forest/25 pt-5">
               <label htmlFor="combo-destination" className="block text-sm font-semibold text-forest">Điểm đến</label>
               <select id="combo-destination" value={slug} onChange={(event) => { setSlug(event.target.value as typeof slug); setCopyStatus(""); }} className="mt-3 min-h-12 w-full rounded-none border border-forest/40 bg-white px-3 text-base text-ink">

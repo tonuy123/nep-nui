@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { contactConfig } from "@/config/contact";
 import { primaryNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 
@@ -19,10 +20,21 @@ export function SiteFooter() {
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-ivory/80">
             {siteConfig.description}
           </p>
-          <p className="mt-4 text-xs leading-relaxed text-ivory/70">
-            Mỗi hành trình bắt đầu bằng sự tò mò và sự tôn trọng với vùng đất,
-            con người nơi mình đặt chân đến.
-          </p>
+          <address className="mt-4 space-y-1 text-xs not-italic leading-5 text-ivory/75">
+            <span className="block">{contactConfig.address}</span>
+            <a
+              href={`tel:${contactConfig.phone.replace(/[^+0-9]/g, "")}`}
+              className="block transition-colors hover:text-white hover:underline hover:underline-offset-4"
+            >
+              Hotline: {contactConfig.phone}
+            </a>
+            <a
+              href={`mailto:${contactConfig.email}`}
+              className="block transition-colors hover:text-white hover:underline hover:underline-offset-4"
+            >
+              {contactConfig.email}
+            </a>
+          </address>
           <Link href="/nguon-anh" className="mt-4 inline-flex min-h-11 items-center text-xs text-ivory/85 underline underline-offset-4 hover:text-white">
             Nguồn và giấy phép ảnh
           </Link>

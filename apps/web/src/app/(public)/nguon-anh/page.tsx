@@ -67,10 +67,9 @@ export default function ImageCreditsPage() {
       <p className="text-xs font-semibold uppercase tracking-[.2em] text-earth">Tư liệu / Minh bạch nguồn</p>
       <h1 className="mt-4 font-display text-4xl text-forest-deep sm:text-5xl">Nguồn và giấy phép ảnh</h1>
       <p className="mt-6 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
-        Ảnh dùng trên website lấy từ Wikimedia Commons và Unsplash, đều có
+        Ảnh chụp dùng trên website lấy từ Wikimedia Commons và Unsplash, đều có
         trang nguồn cùng giấy phép riêng bên dưới. Trình duyệt có thể cắt khung
-        ảnh để vừa card. Hai điểm chưa có ảnh phù hợp dùng minh họa do dự án tự
-        vẽ và được ghi nhãn trên card.
+        ảnh để vừa card. Những hình do dự án tự tạo được ghi nhãn minh họa.
       </p>
 
       <ul className="mt-10 divide-y divide-forest/20 border-y border-forest/20">
@@ -127,6 +126,29 @@ export default function ImageCreditsPage() {
           </li>
         ))}
       </ul>
+
+      <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Bản đồ</h2>
+      <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
+        Bản đồ hành chính các tỉnh phía bắc dùng ở mục &ldquo;Chọn cách đi Tây Bắc&rdquo; trên
+        trang chủ.
+      </p>
+      <ul className="mt-8 divide-y divide-forest/20 border-y border-forest/20">
+        <li className="grid gap-2 py-5 sm:grid-cols-[minmax(0,.35fr)_minmax(0,.65fr)] sm:gap-8">
+          <p className="font-display text-xl text-forest-deep">Bản đồ vùng Tây Bắc</p>
+          <p className="text-sm leading-7 text-ink/75">
+            TUBS ·{" "}
+            <a href="https://commons.wikimedia.org/wiki/File:Vietnam,_administrative_divisions_(regions%2Bprovinces)_-_Nmbrs_-_colored.svg" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">Ảnh gốc</a>
+            {" "}· <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">CC BY-SA 3.0</a>
+          </p>
+        </li>
+      </ul>
+
+      <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Minh họa banner chuyến xe</h2>
+      <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
+        Cảnh xe trên đường núi ở cuối trang Chuyến xe là minh họa tạo bằng AI
+        theo thiết kế của Nếp Núi, không phải ảnh chụp một cung đường hay địa
+        điểm cụ thể. Ảnh được xuất thành WebP để tải gọn hơn.
+      </p>
 
       <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Ảnh khoảnh khắc trải nghiệm</h2>
       <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">

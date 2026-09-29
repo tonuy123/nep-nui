@@ -60,7 +60,7 @@ export function NorthwestCarousel({ destinations }: NorthwestCarouselProps) {
           </button>
         ))}
       </div>
-      <div className="relative">
+      <div className="group relative">
         <ul
           id="northwest-destinations-track"
           ref={trackRef}
@@ -79,7 +79,7 @@ export function NorthwestCarousel({ destinations }: NorthwestCarouselProps) {
           aria-label="Xem địa điểm trước"
           aria-controls="northwest-destinations-track"
           data-carousel-controls
-          className="absolute left-1 top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-forest/30 bg-white/95 text-xl text-forest-deep shadow-[0_2px_12px_rgba(23,33,27,.22)] transition-colors hover:bg-forest hover:text-white sm:left-2"
+          className="absolute left-1 top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center border border-forest/30 bg-white/95 text-xl text-forest-deep opacity-0 shadow-[0_2px_12px_rgba(23,33,27,.22)] transition hover:bg-forest hover:text-white focus-visible:opacity-100 group-hover:opacity-100 motion-reduce:transition-none sm:left-2 [@media(hover:none)]:opacity-100"
         >
           <span aria-hidden="true">←</span>
         </button>
@@ -89,7 +89,7 @@ export function NorthwestCarousel({ destinations }: NorthwestCarouselProps) {
           aria-label="Xem địa điểm tiếp theo"
           aria-controls="northwest-destinations-track"
           data-carousel-controls
-          className="absolute right-1 top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-forest/30 bg-white/95 text-xl text-forest-deep shadow-[0_2px_12px_rgba(23,33,27,.22)] transition-colors hover:bg-forest hover:text-white sm:right-2"
+          className="absolute right-1 top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center border border-forest/30 bg-white/95 text-xl text-forest-deep opacity-0 shadow-[0_2px_12px_rgba(23,33,27,.22)] transition hover:bg-forest hover:text-white focus-visible:opacity-100 group-hover:opacity-100 motion-reduce:transition-none sm:right-2 [@media(hover:none)]:opacity-100"
         >
           <span aria-hidden="true">→</span>
         </button>

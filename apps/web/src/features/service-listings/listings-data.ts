@@ -82,6 +82,10 @@ export const hotelPromos: PromoCard[] = [
   { id: "p-mocchau", name: "Farmstay Đồi Chè", image: "/images/destinations/moc-chau-card.webp", priceFrom: 455000, priceOld: 650000, discount: 30, unit: "/ đêm", code: "KS-MC-02", seats: 4 },
   { id: "p-bacha", name: "Nhà cổ Bắc Hà", image: "/images/destinations/bac-ha-card.webp", priceFrom: 483000, priceOld: 690000, discount: 30, unit: "/ đêm", code: "KS-BH-08", seats: 4 },
   { id: "p-muong", name: "Khách sạn Thung lũng", image: "/images/destinations/muong-thanh-card.webp", priceFrom: 546000, priceOld: 780000, discount: 30, unit: "/ đêm", code: "KS-MT-05", seats: 5 },
+  { id: "p-mucang", name: "Homestay Bản Mù Cang", image: "/images/destinations/mu-cang-chai-card.webp", priceFrom: 294000, priceOld: 420000, discount: 30, unit: "/ đêm", code: "KS-MCC-07", seats: 3 },
+  { id: "p-hagiang", name: "Nhà nghỉ Cao Nguyên", image: "/images/services/addon.webp", priceFrom: 266000, priceOld: 380000, discount: 30, unit: "/ đêm", code: "KS-HG-06", seats: 7 },
+  { id: "p-maichau", name: "Nhà sàn Bản Lác", image: "/images/destinations/mai-chau-card.webp", priceFrom: 364000, priceOld: 520000, discount: 30, unit: "/ đêm", code: "KS-MAIC-04", seats: 6 },
+  { id: "p-taxua", name: "Săn mây Tà Xùa Homestay", image: "/images/destinations/ta-xua-card.webp", priceFrom: 315000, priceOld: 450000, discount: 30, unit: "/ đêm", code: "KS-TX-03", seats: 8 },
 ];
 
 export const coachPromos: PromoCard[] = [
@@ -89,6 +93,10 @@ export const coachPromos: PromoCard[] = [
   { id: "p-hn-hg", name: "Hà Nội → Hà Giang", image: "/images/services/addon.webp", priceFrom: 224000, priceOld: 320000, discount: 30, unit: "/ khách", code: "CX-HN-HG", duration: "7 giờ", departureFrom: "Hà Nội", seats: 9 },
   { id: "p-hn-mc", name: "Hà Nội → Mộc Châu", image: "/images/destinations/moc-chau-card.webp", priceFrom: 140000, priceOld: 200000, discount: 30, unit: "/ khách", code: "CX-HN-MC", duration: "4 giờ", departureFrom: "Hà Nội", seats: 14 },
   { id: "p-hn-tx", name: "Hà Nội → Tà Xùa", image: "/images/destinations/ta-xua-card.webp", priceFrom: 245000, priceOld: 350000, discount: 30, unit: "/ khách", code: "CX-HN-TX", duration: "6 giờ", departureFrom: "Hà Nội", seats: 8 },
+  { id: "p-hn-maic", name: "Hà Nội → Mai Châu", image: "/images/destinations/mai-chau-card.webp", priceFrom: 126000, priceOld: 180000, discount: 30, unit: "/ khách", code: "CX-HN-MAIC", duration: "3 giờ", departureFrom: "Hà Nội", seats: 10 },
+  { id: "p-db-hn", name: "Điện Biên → Hà Nội", image: "/images/services/coach.webp", priceFrom: 294000, priceOld: 420000, discount: 30, unit: "/ khách", code: "CX-DB-HN", duration: "12 giờ", departureFrom: "Điện Biên", seats: 6 },
+  { id: "p-hn-mcc", name: "Hà Nội → Mù Cang Chải", image: "/images/destinations/mu-cang-chai-card.webp", priceFrom: 266000, priceOld: 380000, discount: 30, unit: "/ khách", code: "CX-HN-MCC", duration: "6 giờ", departureFrom: "Hà Nội", seats: 8 },
+  { id: "p-hn-bacha", name: "Hà Nội → Bắc Hà", image: "/images/destinations/bac-ha-card.webp", priceFrom: 259000, priceOld: 370000, discount: 30, unit: "/ khách", code: "CX-HN-BACHA", duration: "5 giờ", departureFrom: "Hà Nội", seats: 10 },
 ];
 
 export const addOnPromos: PromoCard[] = [
@@ -103,6 +111,10 @@ export const tourPromos: PromoCard[] = [
   { id: "p-tour-hg", name: "Hà Giang mùa hoa", image: "/images/services/addon.webp", priceFrom: 3190000, priceOld: 4550000, discount: 30, unit: "/ khách", code: "TB-HG-4N3D", duration: "4N3D", departureFrom: "Hà Nội", seats: 8 },
   { id: "p-tour-mc", name: "Mộc Châu trọn gói", image: "/images/destinations/moc-chau-card.webp", priceFrom: 1790000, priceOld: 2550000, discount: 30, unit: "/ khách", code: "TB-MC-2N1D", duration: "2N1D", departureFrom: "Hà Nội", seats: 10 },
   { id: "p-tour-tx", name: "Tà Xùa săn mây", image: "/images/destinations/ta-xua-card.webp", priceFrom: 1990000, priceOld: 2840000, discount: 30, unit: "/ khách", code: "TB-TX-2N1D", duration: "2N1D", departureFrom: "Hà Nội", seats: 7 },
+  { id: "p-tour-mcc", name: "Mù Cang Chải mùa lúa", image: "/images/destinations/mu-cang-chai-card.webp", priceFrom: 2590000, priceOld: 3700000, discount: 30, unit: "/ khách", code: "TB-MCC-3N2D", duration: "3N2D", departureFrom: "Hà Nội", seats: 6 },
+  { id: "p-tour-bh", name: "Bắc Hà mùa chợ phiên", image: "/images/destinations/bac-ha-card.webp", priceFrom: 2030000, priceOld: 2900000, discount: 30, unit: "/ khách", code: "TB-BH-3N2D", duration: "3N2D", departureFrom: "Hà Nội", seats: 8 },
+  { id: "p-tour-db", name: "Điện Biên — Mường Thanh", image: "/images/destinations/muong-thanh-card.webp", priceFrom: 3290000, priceOld: 4700000, discount: 30, unit: "/ khách", code: "TB-DB-4N3D", duration: "4N3D", departureFrom: "Hà Nội", seats: 6 },
+  { id: "p-tour-lc", name: "Lai Châu mùa chè", image: "/images/services/combo.webp", priceFrom: 2870000, priceOld: 4100000, discount: 30, unit: "/ khách", code: "TB-LC-3N2D", duration: "3N2D", departureFrom: "Hà Nội", seats: 8 },
 ];
 
 export const comboPromos: PromoCard[] = tourPromos;

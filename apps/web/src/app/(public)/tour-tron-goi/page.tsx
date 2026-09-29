@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { northwestDestinationPreviews } from "@/features/destinations/northwest-destinations";
 import { TourExplorer } from "@/features/product-navigation-a/tour-explorer";
 import { GuideBlock } from "@/features/service-page/guide-block";
+import { ServiceBenefits } from "@/features/service-page/service-benefits";
 import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceHero } from "@/features/service-page/service-hero";
 import { guides, tourPromos } from "@/features/service-listings/listings-data";
@@ -24,6 +25,8 @@ export default function ToursPage() {
       <TourExplorer places={northwestDestinationPreviews} />
 
       <PromoBand items={tourPromos} moreHref="#tour-collection-heading" />
+
+      <ServiceBenefits service="tour" />
 
       <GuideBlock content={guides.tour} />
 

@@ -1,11 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { contactConfig } from "@/config/contact";
 
 const iconClass = "h-5 w-5";
 const buttonClass =
-  "flex h-11 w-11 items-center justify-center rounded-full shadow-[0_2px_10px_rgba(23,33,27,0.25)] transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest sm:h-12 sm:w-12";
+  "flex h-12 w-12 items-center justify-center shadow-[0_2px_10px_rgba(23,33,27,0.25)] transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest";
 
 function isConfigured(value: string): boolean {
   return value.trim().length > 0;
@@ -22,13 +23,6 @@ export function FloatingActions() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const telHref = isConfigured(contactConfig.phone)
-    ? `tel:${contactConfig.phone.replace(/[^+0-9]/g, "")}`
-    : "#";
-  const zaloHref = isConfigured(contactConfig.zaloUrl) ? contactConfig.zaloUrl : "#";
-  const facebookHref = isConfigured(contactConfig.facebookUrl) ? contactConfig.facebookUrl : "#";
-  const placeholderTitle = "Thông tin liên hệ sẽ được cập nhật.";
 
   return (
     <div
@@ -49,9 +43,9 @@ export function FloatingActions() {
       ) : null}
 
       <a
-        href={telHref}
+        href={`tel:${contactConfig.phone.replace(/[^+0-9]/g, "")}`}
         aria-label="Gọi điện"
-        title={isConfigured(contactConfig.phone) ? contactConfig.phone : placeholderTitle}
+        title={contactConfig.phone}
         className={`${buttonClass} bg-gold text-ink hover:bg-gold-light`}
       >
         <svg aria-hidden="true" viewBox="0 0 24 24" className={iconClass} fill="currentColor">
@@ -59,32 +53,31 @@ export function FloatingActions() {
         </svg>
       </a>
 
-      <a
-        href={zaloHref}
-        aria-label="Chat Zalo"
-        title={isConfigured(contactConfig.zaloUrl) ? "Chat Zalo" : placeholderTitle}
-        target={isConfigured(contactConfig.zaloUrl) ? "_blank" : undefined}
-        rel={isConfigured(contactConfig.zaloUrl) ? "noopener noreferrer" : undefined}
-        className={`${buttonClass} bg-[#0068FF] text-white hover:bg-[#0055d4]`}
-      >
-        <svg aria-hidden="true" viewBox="0 0 24 24" className={iconClass} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" />
-          <path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" />
-        </svg>
-      </a>
+      {isConfigured(contactConfig.zaloUrl) ? (
+        <a
+          href={contactConfig.zaloUrl}
+          aria-label="Chat Zalo"
+          title="Chat Zalo"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${buttonClass} bg-white`}
+        >
+          <Image src="/images/contact/zalo.svg" alt="" width={32} height={32} unoptimized className="h-8 w-8" />
+        </a>
+      ) : null}
 
-      <a
-        href={facebookHref}
-        aria-label="Facebook"
-        title={isConfigured(contactConfig.facebookUrl) ? "Facebook" : placeholderTitle}
-        target={isConfigured(contactConfig.facebookUrl) ? "_blank" : undefined}
-        rel={isConfigured(contactConfig.facebookUrl) ? "noopener noreferrer" : undefined}
-        className={`${buttonClass} bg-[#1877F2] text-white hover:bg-[#0f5fc4]`}
-      >
-        <svg aria-hidden="true" viewBox="0 0 24 24" className={iconClass} fill="currentColor">
-          <path d="M13.5 21v-7h2.4l.36-2.8H13.5V9.4c0-.81.22-1.36 1.38-1.36h1.48V5.55c-.26-.03-1.14-.11-2.16-.11-2.14 0-3.6 1.3-3.6 3.7v2.06H8.2V14h2.4v7h2.9Z" />
-        </svg>
-      </a>
+      {isConfigured(contactConfig.facebookUrl) ? (
+        <a
+          href={contactConfig.facebookUrl}
+          aria-label="Facebook"
+          title="Facebook"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${buttonClass} bg-white`}
+        >
+          <Image src="/images/contact/facebook.svg" alt="" width={32} height={32} unoptimized className="h-8 w-8" />
+        </a>
+      ) : null}
     </div>
   );
 }

@@ -61,22 +61,11 @@
 .actions a { border-radius: 999px; min-height: 48px; }
 .actions a:last-child { background: #fff; }
 .actions a:last-child:hover { background: #183d30; }
-.controls {
-  position: absolute; z-index: 5; right: clamp(20px,4vw,64px); top: 22px;
-  display: flex; gap: 8px;
-}
-.controls button {
-  border: 1px solid #b7c5ba; border-radius: 999px; padding: 8px 12px;
-  font-size: 11px; background: #fff; color: #183d30; cursor: pointer;
-}
-.controls button:disabled { cursor: default; opacity: .7; }
-.status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 @media (max-width:767px) {
   .hero { height: max(700px, 88svh); min-height: 700px; }
   .title { top: 43%; font-size: clamp(1.75rem, 8.7vw, 3.2rem); width: 94%; }
   .actions { bottom: 102px; flex-direction: column; width: min(290px, calc(100% - 40px)); gap: 8px; }
   .actions a { font-size: .85rem; padding: 11px 18px; min-height: 46px; }
-  .controls { top: 18px; right: 18px; }
 }
 @media (max-height:500px) and (min-width:768px) {
   .hero { height: 660px; min-height: 660px; }

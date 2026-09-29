@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GuideBlock } from "@/features/service-page/guide-block";
-import { ServiceClosing } from "@/features/service-page/service-closing";
+import { CoachJourneyBanner } from "@/features/service-page/coach-journey-banner";
+import { ServiceBenefits } from "@/features/service-page/service-benefits";
 import { ServiceHero } from "@/features/service-page/service-hero";
 import { coachListings, coachPromos, guides } from "@/features/service-listings/listings-data";
 import { ListingSection } from "@/features/service-listings/listing-section";
@@ -22,18 +23,16 @@ export default function CoachPage() {
       <ListingSection
         eyebrow="Chuyến xe đường dài"
         title="Chuyến xe nổi bật"
-        description="Các tuyến xe giường nằm và limousine nối Hà Nội với Tây Bắc; giờ chạy và điểm trả khách được xác nhận khi đặt."
         items={coachListings}
       />
 
       <PromoBand items={coachPromos} moreHref="#listing-heading" />
 
+      <ServiceBenefits service="coach" />
+
       <GuideBlock content={guides.coach} />
 
-      <ServiceClosing
-        heading="Cần hỗ trợ sắp xếp chặng đường?"
-        cta={{ label: "Gửi yêu cầu tư vấn", href: "/tai-khoan/yeu-cau-tu-van" }}
-      />
+      <CoachJourneyBanner />
     </>
   );
 }

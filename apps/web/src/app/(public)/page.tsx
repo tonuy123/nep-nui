@@ -1,30 +1,27 @@
-import Link from "next/link";
+import Image from "next/image";
 import { CinematicHero } from "@/features/cinematic/cinematic-hero";
 import { ExperienceGallery } from "@/features/gallery/experience-gallery";
-import { IntroVideo } from "@/features/intro-video/intro-video";
+import { FeatureShowcase } from "@/features/showcase/feature-showcase";
 import { WeatherSection } from "@/features/weather/weather-section";
 import { CtaLink } from "@/components/ui/cta-link";
 import { NorthwestCarousel } from "@/features/destinations/northwest-carousel";
 import { northwestDestinationPreviews } from "@/features/destinations/northwest-destinations";
 
-const nextSteps = [
+const planRegions = [
   {
-    number: "01",
-    title: "Chọn điểm đến",
-    description: "Lọc 10 điểm đến theo cảnh quan.",
-    href: "/tour-tron-goi",
+    name: "Lai Châu",
+    description:
+      "Địa đầu phía tây bắc với những cung đèo dài, ruộng bậc thang và đồi chè. Hợp với hành trình chậm — ít điểm nhưng đi sâu.",
   },
   {
-    number: "02",
-    title: "Tạo bản nháp chuyến đi",
-    description: "Chọn nơi đến, số ngày, kiểu lưu trú và trải nghiệm ưu tiên.",
-    href: "/combo-du-lich",
+    name: "Lào Cai",
+    description:
+      "Nơi có Sa Pa, Bắc Hà và những phiên chợ vùng cao. Cung đường dễ đi, phù hợp cả chuyến đầu tiên lẫn những lần quay lại.",
   },
   {
-    number: "03",
-    title: "Ghi nhu cầu dịch vụ",
-    description: "Chọn xe nối chặng, người dẫn đường hoặc hỗ trợ tiếp cận.",
-    href: "/dich-vu-cong-them",
+    name: "Sơn La",
+    description:
+      "Cao nguyên Mộc Châu và sống núi Tà Xùa — nơi lúa, chè và mây gặp nhau. Điểm dừng lý tưởng cho chuyến 2–3 ngày từ Hà Nội.",
   },
 ];
 
@@ -38,7 +35,7 @@ export default function HomePage() {
         aria-labelledby="northwest-heading"
         className="scroll-mt-24 bg-[#edf0e9]"
       >
-        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <div className="mx-auto max-w-[90rem] px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
           <div className="mb-10 grid items-end gap-7 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,.7fr)] lg:gap-20">
             <div>
               <h2
@@ -60,29 +57,42 @@ export default function HomePage() {
       </section>
 
       <section aria-labelledby="plan-heading" className="bg-ivory">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)] lg:gap-20 lg:px-8 lg:py-24">
+        <div className="mx-auto grid max-w-[90rem] gap-10 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)] lg:gap-20 lg:px-8 lg:py-24">
           <div>
             <h2
               id="plan-heading"
-              className="mt-5 max-w-xl font-display text-4xl leading-[1.08] text-forest-deep sm:text-5xl"
+              className="font-display text-4xl leading-[1.08] text-forest-deep sm:text-5xl"
             >
               Chọn cách đi <em className="font-normal text-earth">Tây Bắc</em>
             </h2>
+            <figure className="mt-8 border border-forest/15 bg-white p-3">
+              <Image
+                src="/images/home/map-north.png"
+                alt="Bản đồ hành chính các tỉnh phía bắc Việt Nam, vùng Tây Bắc nằm bên trái"
+                width={1920}
+                height={1050}
+                unoptimized
+                className="h-auto w-full"
+              />
+              <figcaption className="mt-2 px-1 text-xs leading-5 text-ink/70">
+                Bản đồ vùng Tây Bắc — TUBS, Wikimedia Commons, CC BY-SA 3.0.
+              </figcaption>
+            </figure>
           </div>
-          <ol className="divide-y divide-forest/20 border-y border-forest/20">
-            {nextSteps.map((step) => (
-              <li key={step.href}>
-                <Link
-                  href={step.href}
-                  className="group grid grid-cols-[2.5rem_minmax(0,1fr)_1.5rem] items-start gap-3 py-6 text-forest-deep transition-colors hover:text-earth sm:grid-cols-[3rem_minmax(0,1fr)_2rem] sm:gap-5 sm:py-8"
-                >
-                  <span className="font-display text-2xl text-earth">{step.number}</span>
-                  <span>
-                    <span className="block font-display text-2xl leading-tight sm:text-3xl">{step.title}</span>
-                    <span className="mt-2 block max-w-md text-sm leading-6 text-ink/70">{step.description}</span>
-                  </span>
-                  <span aria-hidden="true" className="pt-1 text-xl transition-transform group-hover:translate-x-1">↗</span>
-                </Link>
+          <ol className="divide-y divide-forest/20 border-y border-forest/20 [&:hover>li:not(:hover)]:pointer-events-none [&:hover>li:not(:hover)]:opacity-0">
+            {planRegions.map((region, index) => (
+              <li key={region.name} className="group/item transition-opacity duration-300">
+                <div className="grid grid-cols-[2.5rem_minmax(0,1fr)] items-start gap-3 py-6 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-5 sm:py-8">
+                  <span className="font-display text-2xl text-earth">{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 className="font-display text-2xl leading-tight text-forest-deep transition-transform duration-300 motion-reduce:transition-none group-hover/item:-translate-y-1 sm:text-3xl">
+                      {region.name}
+                    </h3>
+                    <p className="max-h-0 overflow-hidden text-sm leading-6 text-ink/70 opacity-0 transition-all duration-300 motion-reduce:transition-none group-hover/item:mt-2 group-hover/item:max-h-44 group-hover/item:opacity-100">
+                      {region.description}
+                    </p>
+                  </div>
+                </div>
               </li>
             ))}
           </ol>
@@ -93,7 +103,7 @@ export default function HomePage() {
 
       <ExperienceGallery />
 
-      <IntroVideo />
+      <FeatureShowcase />
     </>
   );
 }

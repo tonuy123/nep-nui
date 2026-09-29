@@ -20,7 +20,7 @@ export function TourExplorer({ places }: { places: readonly TourPlace[] }) {
 
   return (
     <section aria-labelledby="tour-collection-heading" className="bg-[#f1f2ee]">
-      <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <div className="mx-auto max-w-[90rem] px-5 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="rounded-2xl bg-white p-6 shadow-sm sm:p-8 lg:p-10">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
@@ -51,7 +51,7 @@ export function TourExplorer({ places }: { places: readonly TourPlace[] }) {
             ))}
           </div>
 
-          <ul className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {visiblePlaces.map((place) => {
               const meta = destinationTourMeta[place.slug];
               return (
