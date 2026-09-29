@@ -15,14 +15,14 @@ export default function ExplorePage() {
       <header className="bg-forest-deep text-ivory">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,.55fr)] lg:items-end lg:gap-20 lg:px-8 lg:py-24">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[.2em] text-gold">Bộ sưu tập / Tây Bắc</p>
+            <p className="text-xs font-semibold uppercase tracking-[.2em] text-gold">Khám phá Tây Bắc</p>
             <h1 className="mt-5 max-w-3xl font-display text-5xl leading-[1.04] sm:text-6xl">
-              Tìm một nơi để <em className="font-normal text-gold">bắt đầu.</em>
+              10 điểm đến <em className="font-normal text-gold">Tây Bắc</em>
             </h1>
           </div>
           <p className="max-w-md text-sm leading-7 text-ivory/80 sm:text-base">
-            Mười điểm dừng được chọn từ núi, thung lũng, ruộng bậc thang và bản
-            làng. Mỗi bài có nguồn tham khảo cùng thông tin về ảnh ngay bên trong.
+            Sa Pa, Mù Cang Chải, Tà Xùa và những điểm dừng khác. Mở bài viết để
+            xem cảnh quan, lưu ý khi đi và nguồn tham khảo.
           </p>
         </div>
       </header>
@@ -31,9 +31,8 @@ export default function ExplorePage() {
         <div className="mx-auto max-w-7xl px-5 py-14 sm:px-6 sm:py-20 lg:px-8">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-forest/20 pb-5">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[.16em] text-earth">10 bài viết / 5 tỉnh</p>
               <h2 id="destinations-heading" className="mt-2 font-display text-3xl text-forest-deep sm:text-4xl">
-                Các điểm đến
+                Chọn địa điểm
               </h2>
             </div>
             <Link href="/tour-tron-goi" className="inline-flex min-h-11 items-center text-sm font-semibold text-forest underline underline-offset-4 hover:text-earth">

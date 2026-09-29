@@ -16,9 +16,8 @@ export function TourExplorer({ places }: { places: readonly TourPlace[] }) {
     <section aria-labelledby="tour-collection-heading" className="mx-auto max-w-6xl px-5 py-14 sm:px-6 sm:py-20 lg:px-8">
       <div className="flex flex-col gap-5 border-b border-forest/20 pb-7 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-earth">Bộ sưu tập / {places.length} điểm dừng</p>
           <h2 id="tour-collection-heading" className="mt-3 font-display text-3xl leading-tight text-forest sm:text-4xl">
-            Bạn muốn chuyến đi mở ra cảnh gì?
+            Lọc theo cảnh quan
           </h2>
         </div>
         <p role="status" className="text-sm font-medium text-earth">

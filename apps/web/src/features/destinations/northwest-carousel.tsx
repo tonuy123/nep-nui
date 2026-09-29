@@ -59,43 +59,45 @@ export function NorthwestCarousel({ destinations }: NorthwestCarouselProps) {
 
   return (
     <div>
-      <div className="mb-5 flex items-center justify-between gap-3 border-t border-forest/20 pt-4" data-carousel-controls>
+      <div className="relative">
+        <ul
+          id="northwest-destinations-track"
+          ref={trackRef}
+          aria-label="Mười bài khám phá Tây Bắc"
+          className={styles.track}
+        >
+          {destinations.map((destination, index) => (
+            <li key={destination.slug} className={styles.item}>
+              <DestinationCard destination={destination} index={index} />
+            </li>
+          ))}
+        </ul>
         <button
           type="button"
           onClick={() => move(-1)}
           disabled={position.atStart}
           aria-label="Xem địa điểm trước"
           aria-controls="northwest-destinations-track"
-          className="grid size-11 place-items-center rounded-full border border-forest/40 bg-white text-xl text-forest-deep transition-colors hover:bg-forest hover:text-white disabled:cursor-not-allowed disabled:border-forest/15 disabled:text-forest/35 disabled:hover:bg-white"
+          data-carousel-controls
+          className="absolute left-1 top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-forest/30 bg-white/95 text-xl text-forest-deep shadow-[0_2px_12px_rgba(23,33,27,.22)] transition-colors hover:bg-forest hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white/95 disabled:hover:text-forest-deep sm:left-2"
         >
           <span aria-hidden="true">←</span>
         </button>
-        <p className="text-center text-xs font-semibold uppercase tracking-[.12em] text-earth sm:tracking-[.18em]">
-          Bộ sưu tập <span className="ml-1 font-display text-lg tracking-normal text-forest-deep sm:ml-2">{String(position.first).padStart(2, "0")} / {String(destinations.length).padStart(2, "0")}</span>
-        </p>
         <button
           type="button"
           onClick={() => move(1)}
           disabled={position.atEnd}
           aria-label="Xem địa điểm tiếp theo"
           aria-controls="northwest-destinations-track"
-          className="grid size-11 place-items-center rounded-full border border-forest/40 bg-white text-xl text-forest-deep transition-colors hover:bg-forest hover:text-white disabled:cursor-not-allowed disabled:border-forest/15 disabled:text-forest/35 disabled:hover:bg-white"
+          data-carousel-controls
+          className="absolute right-1 top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-forest/30 bg-white/95 text-xl text-forest-deep shadow-[0_2px_12px_rgba(23,33,27,.22)] transition-colors hover:bg-forest hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white/95 disabled:hover:text-forest-deep sm:right-2"
         >
           <span aria-hidden="true">→</span>
         </button>
       </div>
-      <ul
-        id="northwest-destinations-track"
-        ref={trackRef}
-        aria-label="Mười bài khám phá Tây Bắc"
-        className={styles.track}
-      >
-        {destinations.map((destination, index) => (
-          <li key={destination.slug} className={styles.item}>
-            <DestinationCard destination={destination} index={index} />
-          </li>
-        ))}
-      </ul>
+      <p className="mt-5 text-center text-xs font-semibold uppercase tracking-[.12em] text-earth sm:tracking-[.18em]">
+        Bộ sưu tập <span className="ml-1 font-display text-lg tracking-normal text-forest-deep sm:ml-2">{String(position.first).padStart(2, "0")} / {String(destinations.length).padStart(2, "0")}</span>
+      </p>
       <noscript>
         <style>{`[data-carousel-controls] { display: none !important; }`}</style>
       </noscript>

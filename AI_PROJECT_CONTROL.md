@@ -1693,6 +1693,36 @@ apps/web/src/features/product-navigation-b/stay-checklist.tsx
 apps/web/src/lib/auth/safe-next.ts
 ```
 
+### Entry 016 — P4b UI copy cleanup và sửa dấu tiếng Việt trong WebGL hero
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | Codex |
+| Phase / status | P4b polish, `IMPLEMENTED_UNREVIEWED`. Chưa mở P5/P6/P7, chưa commit/push đợt sửa này. |
+| Scope | Hero H1 đúng hai dòng “Vùng núi Tây Bắc” / “Việt Nam”; bỏ lời trang trí và CTA trùng ý; rút gọn lời dẫn trang chủ, `/kham-pha` và đầu năm trang header thành tên địa điểm hoặc tác vụ cụ thể. Bỏ khối CTA cuối trang chủ vì lặp ba lựa chọn ngay phía trên. CTA hero thứ hai dẫn thẳng tới Combo planner. |
+| WebGL repair | Chữ “BẮC” bị cắt phần dấu Ắ ở texture WebGL do glyph cao hơn CSS line box. Mở rộng vùng texture theo cỡ font, dời tọa độ vẽ chữ tương ứng để giữ nguyên vị trí hiển thị; CSS fallback giữ nguyên. |
+| Files changed | `apps/web/src/app/(public)/{page.tsx,kham-pha/page.tsx,tour-tron-goi/page.tsx,ve-may-bay/page.tsx,khach-san/page.tsx,combo-du-lich/page.tsx,dich-vu-cong-them/page.tsx}`; `apps/web/src/features/cinematic/{cinematic-hero.tsx,cinematic.module.css,mountain-renderer.ts}`; `apps/web/src/features/product-navigation-a/tour-explorer.tsx`; xóa component không còn consumer `apps/web/src/components/placeholders/final-cta.tsx`; tài liệu này. |
+| Gates | Web lint exit0 trước thay đổi renderer; renderer ESLint riêng từ `apps/web` exit0 sau sửa; web typecheck exit0; web production build exit0 (43 page outputs); `git diff --check` exit0. Lệnh ESLint riêng từ repo root thất bại vì config nằm trong workspace web, đã chạy lại đúng cwd và pass. |
+| Browser | Production `next start` port 11405; Chrome reduced-motion 1440/800/390/320: H1 đúng hai dòng, không tràn viewport hoặc đè CTA; sáu route công khai HTTP200 và không tràn 390px. Chrome normal-motion 1440/1920/390 và Brave normal-motion 1920 hoàn tất WebGL (`reason=completed`), screenshot sau animation cho thấy dấu Ắ đầy đủ. Script `verify.mjs` ngoài repo pass: carousel 4/2/1, năm header links, mười bài, ảnh, planner, menu mobile. Evidence tạm ở `D:\codex-task-temp\p4b-browser-verify\copy-*.png`. |
+| Risk / next | Chưa kiểm tra điện thoại vật lý; nội dung các trang quản trị/P5/P6 không thuộc đợt copy này. Paw có thể refresh preview `http://127.0.0.1:11405/` để duyệt visual; phase khác chỉ mở theo ưu tiên tiếp theo. |
+
+### Entry 017 — Khối video|info cuối trang chủ và điều hướng carousel hai bên hông
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase / status | P4b follow-up, `IMPLEMENTED_UNREVIEWED`. Không mở P5/P6/P7; không commit. |
+| Authorization | Paw yêu cầu trong chat: (1) khối 1/2 video giới thiệu + 1/2 thông tin tham chiếu Cocoon, đặt trên footer; (2) nút `<>` của carousel chuyển thành hai bên hông canh giữa dọc thay vì hàng trên; (3) video chưa có tư liệu nên build khung + placeholder. |
+| Scope | `apps/web/src/features/intro-video/intro-video.tsx` + `intro-video-media.tsx` mới: section cuối trang chủ (trên footer), grid đôi full-bleed 50/50, cao tối thiểu 100dvh desktop — nửa trái media (khung phim) tràn từ mép trái tới giữa màn hình với poster Mù Cang Chải, badge “Phim giới thiệu — đang chuẩn bị”, nút play disabled, credit overlay; nửa phải panel nền forest-deep từ giữa tới mép phải chứa info + 3 điểm + CTA. `IntroVideoMedia` là client component chứa sẵn cơ chế video: khi có `videoSrc` thì render `<video muted loop playsInline preload=metadata>` tự play/pause theo IntersectionObserver (40% vào view, tôn trọng prefers-reduced-motion), chưa có file thì giữ poster + placeholder. `northwest-carousel.tsx`: bỏ hàng điều khiển trên, nút ←/→ thành overlay hai bên hông canh giữa dọc, counter “Bộ sưu tập 01/10” chuyển xuống dưới track. |
+| Files changed | `apps/web/src/features/intro-video/intro-video.tsx` + `apps/web/src/features/intro-video/intro-video-media.tsx` (mới); `apps/web/src/features/destinations/northwest-carousel.tsx`; `apps/web/src/app/(public)/page.tsx`; tài liệu này. |
+| Dependencies added | Không |
+| Commands run | `npm run typecheck --workspace @webdulich/web` exit0; `npm run lint --workspace @webdulich/web` exit0; `npm run build --workspace @webdulich/web` exit0 (43 page outputs, 10 SSG bài). |
+| Browser verification | Production `next start` port 3000 + Chrome headless Playwright: 31/31 checks pass — layout split 50/50 full-bleed (media 0→720, panel 720→1440 tại 1440px; media cao đúng 900/900 viewport desktop; mobile media full width 390/320); nút prev/next carousel canh giữa dọc lệch 0.0px, sát mép (gap 30px), click next scroll 308px và prev về 0; intro heading hiển thị, nút play disabled, badge placeholder đúng; không overflow ngang; no-JS ẩn controls qua noscript và intro vẫn render. Cơ chế autoplay video chưa test với file thật vì `introVideoSrc` còn `undefined` (chưa có tư liệu). Screenshot: `D:\codex-task-temp\p4b-browser-verify\intro-home-{1440,390,320}.png`. |
+| Risks | Nút overlay đè mép card ~44px (pattern slider chuẩn, chưa kiểm thiết bị cảm ứng thật); poster video là ảnh Mù Cang Chải CC0 có credit minh họa rõ, cần thay bằng video khi có tư liệu; agent không xem được ảnh nên chưa có đánh giá visual bởi người — cần Paw nhìn preview/screenshot. |
+| Next action | Paw xem preview/screenshot duyệt visual; wire video thật khi có tư liệu; không tự mở phase khác. |
+
 ### Handoff template
 
 ```text

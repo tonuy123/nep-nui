@@ -41,12 +41,6 @@
 .hero[data-scene-boot="pending"] .foreground,
 .hero[data-scene-boot="pending"] .title { opacity: 0; }
 .content { position: absolute; inset: 0; margin: auto; text-align: center; }
-.eyebrow {
-  position: absolute; z-index: 4; top: 11%; left: 50%; transform: translateX(-50%);
-  display: flex; align-items: center; gap: 12px; white-space: nowrap;
-  font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600;
-}
-.eyebrow span { width: 24px; height: 1px; background: #a87939; }
 .title {
   position: absolute; z-index: 1; top: 34%; left: 50%;
   transform: translateX(-50%); width: min(92%, 1100px); margin: 0;
@@ -59,12 +53,6 @@
 }
 .title span, .title em { display: block; white-space: nowrap; }
 .title em { font-weight: 700; color: #f5ce88; }
-.description {
-  position: absolute; z-index: 4; bottom: 180px; left: 50%; transform: translateX(-50%);
-  width: max-content; max-width: calc(100% - 40px); margin: 0;
-  padding: 12px 22px; border-radius: 16px;
-  background: rgba(255,255,255,.9); font-size: .9rem; line-height: 1.7;
-}
 .actions {
   position: absolute; z-index: 4; bottom: 110px; left: 50%; transform: translateX(-50%);
   display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
@@ -75,8 +63,7 @@
 .actions a:last-child:hover { background: #183d30; }
 .bottom {
   position: absolute; z-index: 4; bottom: 26px; left: clamp(20px,4vw,64px);
-  right: clamp(20px,4vw,64px); display: flex; justify-content: space-between;
-  align-items: center; gap: 16px; color: #fff; text-shadow: 0 1px 4px #17281e;
+  color: #fff; text-shadow: 0 1px 4px #17281e;
 }
 .scrollCue {
   display: flex; align-items: center; gap: 12px; font-size: .72rem;
@@ -86,7 +73,6 @@
   display: grid; place-items: center; width: 28px; height: 34px;
   border: 1px solid rgba(255,255,255,.6); border-radius: 20px; font-size: 18px;
 }
-.caption { font-size: .65rem; letter-spacing: .06em; }
 .controls {
   position: absolute; z-index: 5; right: clamp(20px,4vw,64px); top: 22px;
   display: flex; gap: 8px;
@@ -99,12 +85,9 @@
 .status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 @media (max-width:767px) {
   .hero { height: max(700px, 88svh); min-height: 700px; }
-  .eyebrow { top: 15%; font-size: .52rem; letter-spacing: .12em; gap: 8px; }
   .title { top: 43%; font-size: clamp(1.75rem, 8.7vw, 3.2rem); width: 94%; }
-  .description { bottom: 220px; width: calc(100% - 40px); font-size: .8rem; padding: 10px 14px; }
   .actions { bottom: 102px; flex-direction: column; width: min(290px, calc(100% - 40px)); gap: 8px; }
   .actions a { font-size: .85rem; padding: 11px 18px; min-height: 46px; }
-  .caption { display: none; }
   .bottom { bottom: 22px; }
   .controls { top: 18px; right: 18px; }
 }

@@ -24,14 +24,13 @@ export default async function ComboPage({ searchParams }: ComboPageProps) {
     <>
       <header className="border-b border-forest/20 bg-[#e9e3d5]">
         <div className="mx-auto max-w-6xl px-5 py-14 sm:px-6 sm:py-20 lg:px-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-earth">Combo du lịch / Bản nháp của bạn</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-earth">Combo du lịch</p>
           <h1 className="mt-6 max-w-4xl font-display text-5xl leading-[1.03] tracking-tight text-forest sm:text-6xl lg:text-7xl">
-            Ghép một chuyến đi vừa với mình.
+            Tạo bản nháp chuyến đi
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/80">
-            Chọn một điểm đến, thời gian ở lại và điều bạn muốn dành thời gian cho. Bản nháp sẽ thay đổi ngay khi bạn điều chỉnh lựa chọn.
+            Chọn điểm đến, số ngày, kiểu lưu trú và trải nghiệm ưu tiên.
           </p>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-earth">Đây là công cụ lên ý tưởng, chưa phải gói dịch vụ có giá hoặc lịch khởi hành.</p>
         </div>
       </header>
       <ComboPlanner key={initialSlug} destinations={destinations} initialSlug={initialSlug} />

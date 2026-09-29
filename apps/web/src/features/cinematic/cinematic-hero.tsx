@@ -22,19 +22,14 @@ export function CinematicHero() {
       />
       <CinematicScene />
       <div className={styles.content}>
-        <p className={styles.eyebrow}><span /> Cảnh quan · Văn hóa · Cộng đồng</p>
-        <h1 id="hero-title" className={styles.title}><span data-title-line>Những vùng đất</span>{" "}<em data-title-line>chờ được kể.</em></h1>
-        <p className={styles.description}>
-          Đi chậm hơn một chút. Để thấy những điều đẹp đẽ<br className="hidden sm:block" /> trên những cung đường ít người biết.
-        </p>
+        <h1 id="hero-title" className={styles.title}><span data-title-line>Vùng núi Tây Bắc</span>{" "}<em data-title-line>Việt Nam</em></h1>
         <div className={styles.actions} data-hero-actions>
-          <CtaLink href="/kham-pha" size="lg">Khám phá điểm đến</CtaLink>
-          <CtaLink href="/hanh-trinh" variant="outline" size="lg">Chọn hành trình</CtaLink>
+          <CtaLink href="/kham-pha" size="lg">Xem 10 điểm đến</CtaLink>
+          <CtaLink href="/combo-du-lich" variant="outline" size="lg">Lập chuyến đi</CtaLink>
         </div>
       </div>
       <div className={styles.bottom}>
-        <a href="#diem-den-noi-bat" className={styles.scrollCue}><span aria-hidden="true">↓</span> Bắt đầu khám phá</a>
-        <span className={styles.caption}>Một góc nhìn về những vùng đất xa</span>
+        <a href="#diem-den-noi-bat" className={styles.scrollCue}><span aria-hidden="true">↓</span> Cuộn xuống</a>
       </div>
     </section>
   );

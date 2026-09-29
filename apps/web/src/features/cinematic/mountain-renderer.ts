@@ -213,11 +213,15 @@ export function createMountainRenderer(
       const photoHeight = sceneConfig.height * scale;
       fit = [(width - photoWidth) / 2, (height - photoHeight) * sceneConfig.focalY, photoWidth, photoHeight];
       const titleBox = title.getBoundingClientRect();
-      titleFit = [titleBox.left - box.left, titleBox.top - box.top, titleBox.width, titleBox.height];
+      // Vietnamese stacked accents (for example Ắ) rise above the CSS line box.
+      // Keep transparent space around the texture so WebGL does not clip them.
+      const titlePadding = Math.ceil(parseFloat(getComputedStyle(title).fontSize) * 0.2);
+      titleFit = [titleBox.left - box.left, titleBox.top - box.top - titlePadding,
+        titleBox.width, titleBox.height + titlePadding * 2];
       const titleCanvas = document.createElement("canvas");
-      const textRatio = Math.min(window.devicePixelRatio || 1, 2, maxTexture / Math.max(titleBox.width, titleBox.height, 1));
+      const textRatio = Math.min(window.devicePixelRatio || 1, 2, maxTexture / Math.max(titleFit[2], titleFit[3], 1));
       titleCanvas.width = Math.max(1, Math.ceil(titleBox.width * textRatio));
-      titleCanvas.height = Math.max(1, Math.ceil(titleBox.height * textRatio));
+      titleCanvas.height = Math.max(1, Math.ceil(titleFit[3] * textRatio));
       const context = titleCanvas.getContext("2d");
       if (!context) throw new Error("Mountain title unavailable");
       context.scale(textRatio, textRatio);
@@ -232,7 +236,7 @@ export function createMountainRenderer(
         context.letterSpacing = style.letterSpacing;
         const text = style.textTransform === "uppercase"
           ? (line.textContent ?? "").toLocaleUpperCase("vi-VN") : line.textContent ?? "";
-        const x = titleBox.width / 2, y = lineBox.top - titleBox.top + lineBox.height / 2;
+        const x = titleBox.width / 2, y = lineBox.top - titleBox.top + lineBox.height / 2 + titlePadding;
         const maxWidth = titleBox.width - 8;
         context.save();
         context.shadowBlur = 0; context.fillStyle = "rgba(24,41,28,.7)";

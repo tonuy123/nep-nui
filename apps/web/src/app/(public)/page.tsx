@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CinematicHero } from "@/features/cinematic/cinematic-hero";
-import { FinalCta } from "@/components/placeholders/final-cta";
+import { IntroVideo } from "@/features/intro-video/intro-video";
 import { CtaLink } from "@/components/ui/cta-link";
 import { NorthwestCarousel } from "@/features/destinations/northwest-carousel";
 import { northwestDestinationPreviews } from "@/features/destinations/northwest-destinations";
@@ -8,20 +8,20 @@ import { northwestDestinationPreviews } from "@/features/destinations/northwest-
 const nextSteps = [
   {
     number: "01",
-    title: "Chọn một cung đi",
-    description: "Nhìn các điểm dừng theo cảnh quan và nhịp trải nghiệm bạn thích.",
+    title: "Chọn điểm đến",
+    description: "Lọc 10 điểm đến theo cảnh quan.",
     href: "/tour-tron-goi",
   },
   {
     number: "02",
-    title: "Ghép thành chuyến riêng",
-    description: "Đặt điểm đến, thời gian và cách nghỉ cạnh nhau trong một bản nháp.",
+    title: "Tạo bản nháp chuyến đi",
+    description: "Chọn nơi đến, số ngày, kiểu lưu trú và trải nghiệm ưu tiên.",
     href: "/combo-du-lich",
   },
   {
     number: "03",
-    title: "Chuẩn bị phần còn lại",
-    description: "Ghi nhu cầu di chuyển, hướng dẫn hoặc trải nghiệm trước khi hỏi tư vấn.",
+    title: "Ghi nhu cầu dịch vụ",
+    description: "Chọn xe nối chặng, người dẫn đường hoặc hỗ trợ tiếp cận.",
     href: "/dich-vu-cong-them",
   },
 ];
@@ -42,22 +42,22 @@ export default function HomePage() {
               <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.2em] text-earth">
                 <span className="font-display text-2xl tracking-normal text-forest">01</span>
                 <span aria-hidden="true" className="h-px w-8 bg-earth/50" />
-                Bộ sưu tập Tây Bắc
+                Khám phá
               </p>
               <h2
                 id="northwest-heading"
                 className="mt-4 max-w-3xl text-balance font-display text-4xl leading-[1.04] text-forest-deep sm:text-5xl lg:text-[3.65rem]"
               >
-                Mười nơi, <em className="font-normal text-earth">mười nhịp núi.</em>
+                10 điểm đến <em className="font-normal text-earth">Tây Bắc</em>
               </h2>
             </div>
             <div className="space-y-5 lg:pb-1">
               <p className="max-w-md text-sm leading-7 text-ink/75 sm:text-base">
-                Từ ruộng bậc thang đến chợ phiên và bản làng. Mỗi card mở ra
-                một bài viết riêng, để bạn chọn nơi muốn tìm hiểu trước khi lên đường.
+                Từ ruộng bậc thang Mù Cang Chải đến chợ phiên Bắc Hà.
+                Chọn nơi bạn muốn tìm hiểu trước khi đi.
               </p>
               <CtaLink href="/kham-pha" variant="outline">
-                Xem đủ 10 điểm đến
+                Xem cả 10 điểm đến
               </CtaLink>
             </div>
           </div>
@@ -70,19 +70,14 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)] lg:gap-20 lg:px-8 lg:py-24">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[.2em] text-earth">
-              02 <span className="mx-2 text-gold">/</span> Từ cảm hứng đến chuyến đi
+              02 <span className="mx-2 text-gold">/</span> Lên kế hoạch
             </p>
             <h2
               id="plan-heading"
               className="mt-5 max-w-xl font-display text-4xl leading-[1.08] text-forest-deep sm:text-5xl"
             >
-              Một cung đường hay bắt đầu từ <em className="font-normal text-earth">cách bạn muốn đi.</em>
+              Chọn cách đi <em className="font-normal text-earth">Tây Bắc</em>
             </h2>
-            <p className="mt-6 max-w-md text-sm leading-7 text-ink/75 sm:text-base">
-              Xem gợi ý, tự ghép điểm dừng rồi ghi lại những điều cần hỏi. Các
-              công cụ này giúp chuẩn bị chuyến đi mà không gán sẵn một mức giá
-              hoặc lịch khởi hành chưa được xác nhận.
-            </p>
           </div>
           <ol className="divide-y divide-forest/20 border-y border-forest/20">
             {nextSteps.map((step) => (
@@ -104,7 +99,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <FinalCta />
+      <IntroVideo />
     </>
   );
 }
