@@ -74,7 +74,7 @@ export async function WeatherSection() {
   return (
     <section aria-labelledby="weather-heading" className="bg-white">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-0">
-        <div className="grid gap-10 lg:min-h-dvh lg:grid-cols-[minmax(0,.72fr)_minmax(0,2.28fr)] lg:items-stretch lg:gap-12">
+        <div className="grid gap-10 lg:min-h-dvh lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:items-stretch lg:gap-12">
           <div data-weather-panel className="relative min-h-[340px] overflow-hidden rounded-2xl bg-forest-deep lg:min-h-0">
             <Image
               src={weatherPanelPhoto.src}

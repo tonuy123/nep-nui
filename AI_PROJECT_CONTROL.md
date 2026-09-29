@@ -1784,6 +1784,20 @@ apps/web/src/lib/auth/safe-next.ts
 | Risks | Panel 100dvh crop ảnh mạnh trên màn hình rất cao; chưa test thiết bị thật. |
 | Next action | Paw xem `http://127.0.0.1:3000` duyệt; phase khác chờ Paw mở. |
 
+### Entry 022 — Khối thời tiết: panel trái đúng 1/3 bố cục
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase / status | P4b follow-up, `IMPLEMENTED_UNREVIEWED`. |
+| Authorization | Paw: panel trái là 1/3 bố cục. |
+| Scope | `weather-section.tsx`: grid desktop đổi `minmax(0,.72fr)_minmax(0,2.28fr)` → `minmax(0,1fr)_minmax(0,2fr)` (1/3 : 2/3). |
+| Files changed | `apps/web/src/features/weather/weather-section.tsx`; tài liệu này. |
+| Commands run | typecheck/lint/build exit0 (43 pages). |
+| Browser verification | Playwright 47/47 — split đo thực tế 0.333 (panel 389 / carousel 779 @1440); panel full viewport height 900/900; các check khác không hồi quy. |
+| Next action | Paw xem preview; không tự mở phase khác. |
+
 ### Handoff template
 
 ```text
