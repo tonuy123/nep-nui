@@ -53,6 +53,7 @@ if ($SkipBuild) {
 Write-Host "[demo] 4/4 Start API :$ApiPort + Web :$WebPort (production)..."
 $env:NODE_ENV = "production"
 $env:PORT = "$ApiPort"
+$env:CORS_ORIGINS = "http://127.0.0.1:$WebPort,http://localhost:$WebPort"
 $apiProc = Start-Process -FilePath "node.exe" -ArgumentList "dist/main.js" -WorkingDirectory (Join-Path $root "apps\api") -WindowStyle Hidden -PassThru
 if (-not (Wait-Http "http://127.0.0.1:$ApiPort/api/v1/health" 30)) { throw "API failed to start on port $ApiPort" }
 
