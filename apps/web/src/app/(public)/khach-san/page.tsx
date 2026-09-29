@@ -39,7 +39,7 @@ export default function HotelsPage() {
         eyebrow="Khách sạn và lưu trú"
         title={<>Kiểm tra chỗ ở <em className="font-normal">trước khi đặt</em></>}
         lead="Chọn kiểu lưu trú, rồi kiểm tra đường vào, giờ nhận phòng và chính sách hủy."
-        image={{ src: "/images/destinations/muong-thanh.jpg", alt: "Thung lũng Mường Thanh nhìn từ trên cao" }}
+        image={{ src: "/images/services/hotel.webp", alt: "Cơ sở lưu trú tại Sa Pa nhìn từ khuôn viên" }}
       />
 
       <ServiceFacts items={stayFacts} />

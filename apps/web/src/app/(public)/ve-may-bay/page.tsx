@@ -43,7 +43,7 @@ export default function FlightsPage() {
         eyebrow="Vé máy bay"
         title={<>Bay đến cửa ngõ.<br /><em className="font-normal">Đi tiếp bằng đường bộ.</em></>}
         lead="Chọn sân bay hạ cánh và chuẩn bị chặng xe tới điểm đến trước khi mua vé."
-        image={{ src: "/images/destinations/ta-xua.png", alt: "Tà Xùa trong sương sớm, biển mây phủ kín thung lũng" }}
+        image={{ src: "/images/services/flight.webp", alt: "Sân bay Điện Biên nhìn từ sân đỗ với tháp điều khiển" }}
       />
 
       <ServiceFacts items={flightFacts} />

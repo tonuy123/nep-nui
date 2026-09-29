@@ -39,7 +39,7 @@ export default function AddOnServicesPage() {
         eyebrow="Dịch vụ cộng thêm"
         title={<>Chọn dịch vụ <em className="font-normal">cho chuyến đi</em></>}
         lead="Ghi nhu cầu xe nối chặng, người dẫn đường hoặc thiết bị để gửi tư vấn."
-        image={{ src: "/images/destinations/moc-chau.jpg", alt: "Đồi chè Mộc Châu xanh mướt dưới nắng" }}
+        image={{ src: "/images/services/addon.webp", alt: "Cảnh quan vùng cao Hà Giang" }}
       />
 
       <ServiceFacts items={addOnFacts} />

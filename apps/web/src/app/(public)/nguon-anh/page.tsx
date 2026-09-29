@@ -25,6 +25,41 @@ const weatherPhotoCredits = [
   },
 ];
 
+const serviceBannerCredits = [
+  {
+    key: "flight",
+    name: "Vé máy bay — Sân bay Điện Biên",
+    author: "Tycho",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Dien_Bien_Phu_Airport_aux2.JPG",
+    license: "CC BY-SA 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
+  },
+  {
+    key: "hotel",
+    name: "Khách sạn — Sa Pa",
+    author: "Andre Hospers",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Sapa_Charm_hotel_Vietnam.jpg",
+    license: "CC BY 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0",
+  },
+  {
+    key: "combo",
+    name: "Combo du lịch — Đèo Mã Pí Lèng",
+    author: "Khánh Hmoong",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Ma_Pi_Leng_Pass_winding_road_Ha_Giang_Vietnam.jpg",
+    license: "CC BY 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.0",
+  },
+  {
+    key: "addon",
+    name: "Dịch vụ cộng thêm — Hà Giang",
+    author: "Benjamin Smith",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:H%C3%A0_Giang_province_landscape.jpg",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
+  },
+];
+
 export default function ImageCreditsPage() {
   return (
     <div className="mx-auto max-w-5xl px-5 py-14 sm:px-6 sm:py-20 lg:px-8">
@@ -69,6 +104,24 @@ export default function ImageCreditsPage() {
               {credit.photo.author} ·{" "}
               <a href={credit.photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">Ảnh gốc</a>
               {" "}· <a href={credit.photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">{credit.photo.license}</a>
+            </p>
+          </li>
+        ))}
+      </ul>
+
+      <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Ảnh banner trang dịch vụ</h2>
+      <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
+        Bốn ảnh banner đầu trang cho các mục Vé máy bay, Khách sạn, Combo du lịch
+        và Dịch vụ cộng thêm.
+      </p>
+      <ul className="mt-8 divide-y divide-forest/20 border-y border-forest/20">
+        {serviceBannerCredits.map((credit) => (
+          <li key={credit.key} className="grid gap-2 py-5 sm:grid-cols-[minmax(0,.35fr)_minmax(0,.65fr)] sm:gap-8">
+            <p className="font-display text-xl text-forest-deep">{credit.name}</p>
+            <p className="text-sm leading-7 text-ink/75">
+              {credit.author} ·{" "}
+              <a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">Ảnh gốc</a>
+              {" "}· <a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">{credit.license}</a>
             </p>
           </li>
         ))}

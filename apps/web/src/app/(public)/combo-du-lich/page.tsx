@@ -52,7 +52,7 @@ export default async function ComboPage({ searchParams }: ComboPageProps) {
         eyebrow="Combo du lịch"
         title="Tạo bản nháp chuyến đi"
         lead="Chọn điểm đến, số ngày, kiểu lưu trú và trải nghiệm ưu tiên."
-        image={{ src: "/images/destinations/sa-pa.jpg", alt: "Ruộng bậc thang ở Sapa, Việt Nam" }}
+        image={{ src: "/images/services/combo.webp", alt: "Đường đèo quanh co tại đèo Mã Pí Lèng, Hà Giang" }}
       />
 
       <ServiceFacts items={comboFacts} />
