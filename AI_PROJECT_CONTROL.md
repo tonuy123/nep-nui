@@ -777,6 +777,22 @@ Completion criterion đạt ở local: negative-boundary tests chứng minh USER
 
 Completion criterion: 10 bài có trang riêng, carousel và cả năm route hoạt động trên production build; ảnh và nội dung có nguồn; không sao chép bố cục/asset/copy từ Travel.com.vn.
 
+### P4c — Auth UI theo mẫu và mở rộng đăng nhập
+
+**Status: `IMPLEMENTED_UNREVIEWED` — source, gates và browser evidence tại Entry 020.**
+
+Plan/contract: [docs/plans/P4C_AUTH_UI_PLAN.md](docs/plans/P4C_AUTH_UI_PLAN.md).
+UI đăng nhập/đăng ký dựng theo mẫu Paw gửi (identifier SĐT-email, quên mật
+khẩu, captcha, social, cặp nút, layout 2 cột); backend thật cho SĐT + tỉnh/xã,
+quên/đặt lại mật khẩu (SMTP gated), reCAPTCHA (key gated), OAuth Google/Facebook
+(credential gated). P7 chưa mở.
+
+- [x] Users: phone unique + province/ward; login identifier email hoặc SĐT.
+- [x] UI 2 màn theo mẫu + trang quên/đặt lại mật khẩu + trang chính sách.
+- [x] Reset token một lần, hết hạn 30 phút, thu hồi mọi phiên.
+- [x] Captcha/OAuth/social: config-gated, hiển thị trung thực khi chưa cấu hình.
+- [ ] Chạy OAuth/captcha/SMTP thật với credential — chờ Paw cấp key (P7 gate).
+
 ### P5 — Admin/Editor CMS
 
 **Status: `IMPLEMENTED_UNREVIEWED` — source, gates và browser evidence tại Entry 018.**
@@ -2041,6 +2057,107 @@ apps/web/src/features/guides/guide-topic-placeholder.tsx
 apps/web/src/features/guides/faq-placeholder.tsx
 apps/web/src/components/ui/page-hero.tsx
 ```
+
+### Entry 020 — P4c auth UI theo mẫu, SĐT/tỉnh-xã và các luồng auth mở rộng
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase | P4c — auth UI + mở rộng đăng nhập (theo yêu cầu Paw, P7 giao phiên khác) |
+| Status | `IMPLEMENTED_UNREVIEWED` |
+| Authorization | Paw: "mày thiết kế auth ui theo mẫu đi để cái p7 thằng khác làm"; trước đó Paw đã chọn "Làm cả backend (OAuth, captcha, reset, SĐT)". |
+| Scope | UI đăng nhập/đăng ký theo mẫu; users.phone unique + province/ward; login identifier; password reset token + SMTP (nodemailer); reCAPTCHA verify; OAuth Google/Facebook + state HMAC + BFF 302 passthrough; trang chính sách/điều khoản; profile hiện SĐT/tỉnh/xã. Không đổi mật khẩu xác thực email, không P7. |
+| Dependencies added | api: `nodemailer@^10.0.12` (gửi email reset qua SMTP, server-side) + dev `@types/nodemailer@^8.0.2`. Không đổi Next/React/Nest/Prisma/TypeScript. |
+| Migration | `apps/api/prisma/migrations/20260929093000_p4c_auth_expansion/migration.sql` (viết tay do `migrate dev` cần interactive vì unique phone): users.phone/province/ward + unique phone; bảng `oauth_accounts` (unique provider+providerUserId); bảng `password_reset_tokens` (tokenHash unique, expiresAt/usedAt). Verify không drift bằng `prisma migrate diff` ("No difference detected"), apply dev + shared test DB. |
+| API contract | `POST /auth/register {name,email,phone,province?,ward?,password,captchaToken?}` (phone bắt buộc, 10 số VN); `POST /auth/login {identifier|email,password,captchaToken?}`; `GET /auth/config` (providers + captchaSiteKey, không lộ secret); `POST /auth/forgot-password` (503 `MAIL_NOT_CONFIGURED` khi thiếu SMTP, 204 im lặng khi identifier lạ); `POST /auth/reset-password` (400 `RESET_INVALID`); `GET /auth/oauth/{provider}/start|callback`. `PublicUser` thêm phone/province/ward. |
+| BFF | allowlist thêm auth/config, forgot/reset, oauth; query theo route; redirect 302 + Set-Cookie passthrough riêng cho oauth; `wd_oauth_state` được forward. |
+| Decisions | Tỉnh/Thành = 34 đơn vị sau sắp xếp 2025 (NQ 202/2025/QH15); cấp huyện bỏ, dùng Phường/Xã text thay "Quận/Huyện" của mẫu — cần Paw chốt. OAuth-only account dùng `passwordHash` marker `oauth!<uuid>` (không login mật khẩu được), loại khỏi luồng reset. |
+| Commands run | `npm install` (nodemailer) 0; migrate deploy dev/test 0; `npm run lint` 0; `npm run typecheck` 0; `npm run test` 0 (18 suite/125 unit + 3 health/OpenAPI); `npm run test:auth` 0 (22/22 PG thật, scratch `webdulich_p4c_test`); `test:content` 0 (50/50); `test:admin` 0 (7/7); `npm run build` 0 (31 page outputs, web cô lập `NEXT_DIST_DIR=.next-p4c`). |
+| Browser verification | Chrome headless production (web 3100/API 3001/scratch `webdulich_p4c_ui_test`): **27/27 PASS** — layout login/register đúng mẫu (8 field, captcha placeholder, 2 nút social disabled, divider, cặp nút), đăng ký thật → profile hiện SĐT/tỉnh/xã, login bằng SĐT và bằng email, sai mật khẩu báo lỗi, trùng SĐT báo lỗi, forgot báo chưa cấu hình mail, reset thiếu token báo lỗi, 2 trang chính sách render, 0 overflow 390px, 0 lỗi console/page ngoài lỗi kiểm thử mong đợi. Ảnh `D:\codex-task-temp\p4c-verify\{login-1440,register-1440,register-390}.png`. |
+| Cleanup | API/web test dừng; scratch DB drop; `.next-p4c` xóa; `apps/web/tsconfig.json` không đổi. Process 3000 phiên khác giữ nguyên. |
+| Risks | OAuth chưa chạy với provider thật (chưa có credential) — mới test stub cho state/link; captcha/SMTP thật cần key; email xác thực tài khoản chưa có; 34 tỉnh/Phường-Xã cần Paw xác nhận; phone giờ bắt buộc khi đăng ký (user cũ nullable không bị ảnh hưởng). |
+| Next authorized work | Paw cấp credential (Google/Facebook, reCAPTCHA, SMTP) để chạy lượt verify thật, hoặc review UI local. P7 (hardening/deploy) chuyển phiên khác theo chỉ đạo. |
+
+**Files created — 19:**
+
+```text
+docs/plans/P4C_AUTH_UI_PLAN.md
+packages/contracts/src/provinces.ts
+apps/api/prisma/migrations/20260929093000_p4c_auth_expansion/migration.sql
+apps/api/src/modules/auth/captcha.service.ts
+apps/api/src/modules/auth/auth-mailer.ts
+apps/api/src/modules/auth/oauth.client.ts
+apps/api/src/modules/auth/oauth.service.ts
+apps/api/src/modules/auth/oauth.service.spec.ts
+apps/web/src/lib/auth/config.ts
+apps/web/src/features/auth/captcha-box.tsx
+apps/web/src/features/auth/social-buttons.tsx
+apps/web/src/features/auth/login-form.tsx
+apps/web/src/features/auth/register-form.tsx
+apps/web/src/features/auth/forgot-password-form.tsx
+apps/web/src/features/auth/reset-password-form.tsx
+apps/web/src/app/(auth)/quen-mat-khau/page.tsx
+apps/web/src/app/(auth)/dat-lai-mat-khau/page.tsx
+apps/web/src/app/(public)/chinh-sach-bao-mat/page.tsx
+apps/web/src/app/(public)/dieu-khoan/page.tsx
+```
+
+**Files modified — 29:**
+
+```text
+AI_PROJECT_CONTROL.md
+README.md
+.env.example
+package-lock.json
+apps/api/package.json
+apps/api/prisma/schema.prisma
+apps/api/src/config/app-config.ts
+apps/api/src/modules/auth/auth.cookies.ts
+apps/api/src/modules/auth/auth.cookies.spec.ts
+apps/api/src/modules/auth/auth.controller.ts
+apps/api/src/modules/auth/auth.dto.ts
+apps/api/src/modules/auth/auth.repository.ts
+apps/api/src/modules/auth/auth.service.ts
+apps/api/src/modules/auth/auth.validation.ts
+apps/api/src/modules/auth/auth.module.ts
+apps/api/src/modules/auth/public-user.ts
+apps/api/src/modules/me/account.repository.ts
+apps/api/test/helpers/test-db.ts
+apps/api/test/auth.e2e-spec.ts
+apps/api/test/me.e2e-spec.ts
+apps/api/test/admin.e2e-spec.ts
+packages/contracts/src/auth.ts
+packages/contracts/src/index.ts
+apps/web/src/lib/auth/api-client.ts
+apps/web/src/lib/auth/bff.ts
+apps/web/src/features/account/profile-panel.tsx
+apps/web/src/app/(auth)/layout.tsx
+apps/web/src/app/(auth)/dang-nhap/page.tsx
+apps/web/src/app/(auth)/dang-ky/page.tsx
+```
+
+**Files deleted — 1:**
+
+```text
+apps/web/src/features/auth/auth-form-shell.tsx
+```
+
+### Entry 021 — P7 hardening, local production demo và backup drill
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase | P7 — Hardening, deployment và demo (local) |
+| Status | `IMPLEMENTED_UNREVIEWED` |
+| Authorization | Paw: "mày làm hết cái p7 cho tao nha" — duyệt plan A→F; chốt deploy local production demo, snapshot toàn bộ làm baseline, mức công khai demo nội bộ. |
+| Scope | Merge branch header/service-pages vào main (fast-forward `c3e59af`); baseline snapshot P4/P5/P6/P4c (`d2ae80f`); gate fix cho code P4c đang dở (`f3c20c7`, kèm migrate deploy P4c lên test DB); security headers web+API và bỏ `X-Powered-By` (`caad032`); WCAG AA contrast/keyboard 19 file (`c968e72`); demo scripts + backup drill (`af2ae01`); báo cáo `docs/plans/P7_HARDENING_REPORT.md` (`13f9313`). Không sửa file P4c UI đang dở của phiên khác (search header, auth layout — đã tách khỏi mọi commit của P7). |
+| Commands run | lint 0; typecheck 0; test 0 (unit + health/OpenAPI); test:content 50/50; test:admin 7/7; test:auth 22/22; build 0 (contracts → api → web, 43 routes); `npm audit --omit=dev` 4 high transitive Prisma (known risk, không downgrade breaking); pg_dump/pg_restore drill exit 0 (counts khớp destinations 10/10, media 16/16, migrations 6); `start-demo.ps1 -SkipBuild -DistDir .next-p7` chạy thật, verify 31/31 sau đó. |
+| Browser verification | Chrome + Edge headless 31/31 mỗi browser (18 route công khai + 5 trang dịch vụ + header nav/active state + admin redirect + mobile menu Escape/focus + no overflow 390px); axe-core WCAG 2.0/2.1 AA trên 15 route: 0 serious/critical (trước fix: 16 violation contrast/keyboard); Firefox install 3 lần fail do mạng (`cdn.playwright.dev` timeout) — known limitation. |
+| Performance | Lab mobile 390: LCP 80–280 ms, CLS ≤ 0.0008, initial JS 155 KB gzip (budget <180 KB đạt); desktop 1440: LCP 92–256 ms, JS 187 KB (vượt nhẹ 4%). |
+| Risks | Media hero/video UNVERIFIED rights (demo local chấp nhận, chặn public release); Firefox + thiết bị di động thật chưa đo; JS desktop vượt budget nhẹ; rate-limit in-memory; P4b/P5/P6/P4c unreviewed tại thời điểm P7 verify; phiên P4c UI khác còn viết dở trong cây chính (search header) — mọi thay đổi P7 đã tách khỏi file của họ. |
+| Next authorized work | Paw/Codex review P7 (chạy `scripts/demo/start-demo.ps1`, xem `docs/plans/P7_HARDENING_REPORT.md`); entry này sống trong working tree cùng các entry chưa commit của phiên P4c — commit khi cây chính ổn định; không tự gán `VERIFIED`. |
 
 ### Handoff template
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { DesktopNav } from "@/components/navigation/desktop-nav";
+import { HeaderSearch } from "@/components/navigation/header-search";
 import { guestAction, primaryCta, primaryNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { AccountAction } from "@/features/auth/account-action";
@@ -26,11 +27,17 @@ export function SiteHeader() {
       <div className="relative mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="flex items-center gap-2 rounded-md text-forest focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
+          className="flex shrink-0 items-center gap-2 rounded-md text-forest focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
         >
           <LogoMark />
-          <span className="flex flex-col"><span className="font-display text-lg font-semibold tracking-tight">{siteConfig.shortName}</span><span className="text-[8px] font-semibold uppercase tracking-[.22em] text-earth">Cảnh quan & cộng đồng</span></span>
+          <span className="hidden flex-col sm:flex"><span className="font-display text-lg font-semibold tracking-tight">{siteConfig.shortName}</span><span className="text-[8px] font-semibold uppercase tracking-[.22em] text-earth">Cảnh quan & cộng đồng</span></span>
         </Link>
+
+        <div className="mx-2 hidden min-w-0 flex-1 lg:block xl:mx-4">
+          <div className="mx-auto max-w-md">
+            <HeaderSearch />
+          </div>
+        </div>
 
         <div className="flex items-center gap-3 xl:gap-5">
           <DesktopNav />

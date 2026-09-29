@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { MouseEvent } from "react";
 import { NavLink } from "@/components/navigation/nav-link";
+import { HeaderSearch } from "@/components/navigation/header-search";
 import { primaryCta, primaryNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { AccountAction } from "@/features/auth/account-action";
@@ -158,6 +159,10 @@ export function MobileNav() {
               </button>
             </div>
 
+            <div className="border-b border-forest/15 px-4 py-3 sm:px-5">
+              <HeaderSearch id="mobile-search" />
+            </div>
+
             <nav aria-label="Điều hướng di động" className="px-4 py-4 sm:px-5">
               <ul className="flex flex-col gap-1">
                 {primaryNav.map((item) => (
@@ -181,7 +186,7 @@ export function MobileNav() {
               </div>
             </nav>
 
-            <p className="mt-auto border-t border-forest/15 px-4 py-4 text-xs leading-relaxed text-ink/60 sm:px-5">
+            <p className="mt-auto border-t border-forest/15 px-4 py-4 text-xs leading-relaxed text-ink/70 sm:px-5">
               Khám phá điểm đến, trải nghiệm và hành trình ở những vùng đất ít người biết tới của Việt Nam.
             </p>
           </div>

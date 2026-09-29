@@ -15,6 +15,12 @@ Monorepo cho website quảng bá du lịch vùng sâu, vùng xa. Trạng thái h
   [P4_AUTH_PLAN.md](docs/plans/P4_AUTH_PLAN.md). P5–P7 chưa mở.
 - **P4b — `IMPLEMENTED_UNREVIEWED`**: trang chủ editorial Tây Bắc, carousel
   4/2/1, 10 bài địa danh và năm route chức năng; evidence ở Entry 015–017.
+- **P4c — `IMPLEMENTED_UNREVIEWED`**: auth UI theo mẫu (đăng nhập bằng SĐT
+  hoặc email; đăng ký có họ tên, SĐT, email, tỉnh/thành 2025, phường/xã, điều
+  khoản; quên/đặt lại mật khẩu; captcha/social config-gated). Backend: phone
+  unique, reset token một lần, reCAPTCHA verify, OAuth Google/Facebook + SMTP
+  (cần credential). Evidence ở Entry 020 và
+  [P4C_AUTH_UI_PLAN.md](docs/plans/P4C_AUTH_UI_PLAN.md).
 - **P5 — `IMPLEMENTED_UNREVIEWED`**: Admin/Editor CMS — CRUD 5 loại nội dung,
   publish/archive/restore, media library + use protection, hộp thư yêu cầu,
   quản lý người dùng (ADMIN), audit log và dashboard. Evidence/gates ở Entry 018
@@ -238,15 +244,24 @@ an toàn. API và Prisma CLI **chỉ đọc process env** (không auto-load `.en
 - `API_INTERNAL_URL` — upstream BFF chỉ ở server Next; mặc định `http://127.0.0.1:3001`.
 - `NODE_ENV` — local HTTP là `development`; production HTTPS là `production`.
 - `ADMIN_EMAIL`, `ADMIN_NAME`, `ADMIN_PASSWORD` — chỉ cho CLI bootstrap theo chủ đích.
+- `SMTP_URL`, `MAIL_FROM` — gửi email đặt lại mật khẩu; thiếu → API trả 503
+  `MAIL_NOT_CONFIGURED` (UI báo chưa cấu hình, không giả gửi).
+- `RECAPTCHA_SITE_KEY`, `RECAPTCHA_SECRET_KEY` — reCAPTCHA v2; đủ cả hai mới bật
+  xác minh. Web lấy site key qua `GET /api/v1/auth/config`.
+- `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `FACEBOOK_APP_ID`, `FACEBOOK_APP_SECRET`,
+  `OAUTH_STATE_SECRET` — OAuth; redirect URI là
+  `<web-origin>/api/backend/auth/oauth/<provider>/callback`; thiếu credential thì
+  nút social hiển thị disabled, không giả lập.
 - `NEXT_PUBLIC_API_BASE_URL` — base URL public content cho các client khác (P6).
 
 ## Route web hiện có
 
-Public: `/`, `/kham-pha`, `/trai-nghiem`, `/hanh-trinh`, `/ban-do`,
-`/chuyen-ban-dia`, `/cam-nang`.
+Public: `/`, `/kham-pha`, `/diem-den/{slug}`, `/trai-nghiem` (+ chi tiết),
+`/hanh-trinh` (+ chi tiết), `/ban-do`, `/chuyen-ban-dia` (+ chi tiết),
+`/cam-nang` (+ chi tiết), `/nguon-anh`, `/chinh-sach-bao-mat`, `/dieu-khoan`.
 
-Auth/Account/Admin: `/dang-nhap`, `/dang-ky`, `/tai-khoan` (+ 4 route con),
-`/admin` (+ 10 route con).
+Auth/Account/Admin: `/dang-nhap`, `/dang-ky`, `/quen-mat-khau`,
+`/dat-lai-mat-khau`, `/tai-khoan` (+ 4 route con), `/admin` (+ 10 route con).
 
 Header trắng/forest/gold có sáu link tới sáu route public riêng, active state
 và menu mobile keyboard/focus. Login/register/account đã nối API qua BFF.
