@@ -3,10 +3,14 @@ import Link from "next/link";
 import { northwestDestinationPreviews } from "@/features/destinations/northwest-destinations";
 import { FlightGatewayPlanner } from "@/features/product-navigation-b/flight-gateway-planner";
 import { gateways } from "@/features/product-navigation-b/flight-gateways";
+import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceFacts } from "@/features/service-page/service-facts";
 import { ServiceHero } from "@/features/service-page/service-hero";
 import { ServiceSection } from "@/features/service-page/service-section";
+import { coachListings, coachPromos, guides, promoSubtext } from "@/features/service-listings/listings-data";
+import { ListingSection } from "@/features/service-listings/listing-section";
+import { PromoBand } from "@/features/service-listings/promo-band";
 
 export const metadata: Metadata = {
   title: "Vé máy bay và cửa ngõ Tây Bắc",
@@ -52,6 +56,15 @@ export default function FlightsPage() {
         <FlightGatewayPlanner destinationNames={northwestDestinationPreviews.map(({ name }) => name)} />
       </section>
 
+      <ListingSection
+        eyebrow="Chuyến xe đường dài"
+        title="Chuyến xe nổi bật"
+        description="Các tuyến xe nối Hà Nội và sân bay Điện Biên với Tây Bắc; giờ chạy và điểm trả khách được xác nhận khi đặt."
+        items={coachListings}
+      />
+
+      <PromoBand items={coachPromos} subtext={promoSubtext} />
+
       <ServiceSection
         eyebrow="Nguồn để đối chiếu"
         heading="Thông tin sân bay và lịch bay"
@@ -65,6 +78,8 @@ export default function FlightsPage() {
           </div>
         </div>
       </ServiceSection>
+
+      <GuideBlock content={guides.flight} />
 
       <ServiceClosing
         heading="Cần hỗ trợ sắp xếp chặng đường bộ?"

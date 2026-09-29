@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { northwestDestinationPreviews } from "@/features/destinations/northwest-destinations";
 import { TourExplorer } from "@/features/product-navigation-a/tour-explorer";
+import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceFacts } from "@/features/service-page/service-facts";
 import { ServiceHero } from "@/features/service-page/service-hero";
+import { guides, promoSubtext, tourPromos } from "@/features/service-listings/listings-data";
+import { PromoBand } from "@/features/service-listings/promo-band";
 
 export const metadata: Metadata = {
   title: "Tour trọn gói Tây Bắc",
@@ -47,6 +50,10 @@ export default function ToursPage() {
       <ServiceFacts items={tourFacts} />
 
       <TourExplorer places={northwestDestinationPreviews.map(({ slug, name, province, theme, teaser }) => ({ slug, name, province, theme, teaser }))} />
+
+      <PromoBand items={tourPromos} subtext={promoSubtext} />
+
+      <GuideBlock content={guides.tour} />
 
       <ServiceClosing
         heading="Tạo bản nháp từ điểm đến đã chọn"

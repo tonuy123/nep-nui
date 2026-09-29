@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { AddOnSelector } from "@/features/product-navigation-b/add-on-selector";
+import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceFacts } from "@/features/service-page/service-facts";
 import { ServiceHero } from "@/features/service-page/service-hero";
+import { addOnListings, addOnPromos, guides, promoSubtext } from "@/features/service-listings/listings-data";
+import { ListingSection } from "@/features/service-listings/listing-section";
+import { PromoBand } from "@/features/service-listings/promo-band";
 
 export const metadata: Metadata = {
   title: "Dịch vụ cộng thêm",
@@ -47,6 +51,18 @@ export default function AddOnServicesPage() {
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8" aria-label="Chọn dịch vụ cộng thêm">
         <AddOnSelector />
       </section>
+
+      <ListingSection
+        eyebrow="Dịch vụ"
+        title="Dịch vụ phổ biến"
+        description="Các dịch vụ được yêu cầu nhiều nhất; thời gian và phạm vi phục vụ xác nhận khi gửi yêu cầu."
+        items={addOnListings}
+        showFilter={false}
+      />
+
+      <PromoBand items={addOnPromos} subtext={promoSubtext} />
+
+      <GuideBlock content={guides.addon} />
 
       <ServiceClosing
         heading="Chuẩn bị xong nhu cầu dịch vụ?"

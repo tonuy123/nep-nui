@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { StayChecklist } from "@/features/product-navigation-b/stay-checklist";
+import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceFacts } from "@/features/service-page/service-facts";
 import { ServiceHero } from "@/features/service-page/service-hero";
+import { guides, hotelListings, hotelPromos, promoSubtext } from "@/features/service-listings/listings-data";
+import { ListingSection } from "@/features/service-listings/listing-section";
+import { PromoBand } from "@/features/service-listings/promo-band";
 
 export const metadata: Metadata = {
   title: "Khách sạn và lưu trú Tây Bắc",
@@ -47,6 +51,17 @@ export default function HotelsPage() {
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-6 sm:py-20 lg:px-8" aria-label="Chọn kiểu lưu trú và kiểm tra trước khi đặt">
         <StayChecklist />
       </section>
+
+      <ListingSection
+        eyebrow="Lưu trú"
+        title="Khách sạn nổi bật Tây Bắc"
+        description="Chọn theo tỉnh — kiểm tra đường vào, giờ nhận phòng và chính sách hủy trước khi đặt."
+        items={hotelListings}
+      />
+
+      <PromoBand items={hotelPromos} subtext={promoSubtext} />
+
+      <GuideBlock content={guides.hotel} />
 
       <ServiceClosing
         heading="Chưa chắc về chỗ ở?"

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { northwestDestinationPreviews } from "@/features/destinations/northwest-destinations";
 import { ComboPlanner } from "@/features/product-navigation-a/combo-planner";
+import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceFacts } from "@/features/service-page/service-facts";
 import { ServiceHero } from "@/features/service-page/service-hero";
+import { comboPromos, guides, promoSubtext } from "@/features/service-listings/listings-data";
+import { PromoBand } from "@/features/service-listings/promo-band";
 
 export const metadata: Metadata = {
   title: "Combo du lịch Tây Bắc",
@@ -58,6 +61,10 @@ export default async function ComboPage({ searchParams }: ComboPageProps) {
       <ServiceFacts items={comboFacts} />
 
       <ComboPlanner key={initialSlug} destinations={destinations} initialSlug={initialSlug} />
+
+      <PromoBand items={comboPromos} subtext={promoSubtext} />
+
+      <GuideBlock content={guides.combo} />
 
       <ServiceClosing
         heading="Chốt phương án và bắt đầu đặt dịch vụ"
