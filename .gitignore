@@ -34,6 +34,7 @@ Thumbs.db
 
 # Demo runtime state
 scripts/demo/.pids.json
+scripts/demo/demo.env
 
 # Deploy
 .vercel

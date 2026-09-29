@@ -14,6 +14,22 @@ $here = $PSScriptRoot
 $root = (Resolve-Path (Join-Path $here "..\..")).Path
 $pidFile = Join-Path $here ".pids.json"
 
+# Optional demo.env (gitignored) chua credentials OAuth / reCAPTCHA / SMTP.
+# Huong dan day du: docs/OAUTH_CAPTCHA_SETUP.md
+$envFile = Join-Path $here "demo.env"
+if (Test-Path $envFile) {
+  Write-Host "[demo] Loading credentials from demo.env"
+  Get-Content $envFile | ForEach-Object {
+    $line = $_.Trim()
+    if (-not $line -or $line.StartsWith("#")) { return }
+    $idx = $line.IndexOf("=")
+    if ($idx -lt 1) { return }
+    $key = $line.Substring(0, $idx).Trim()
+    $value = $line.Substring($idx + 1).Trim()
+    if ($key -and $value) { Set-Item -Path "Env:$key" -Value $value }
+  }
+}
+
 function Wait-Http([string]$Url, [int]$Tries) {
   for ($i = 0; $i -lt $Tries; $i++) {
     Start-Sleep -Seconds 1
