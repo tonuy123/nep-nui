@@ -25,7 +25,7 @@ export function ServiceHero({ eyebrow, title, lead, image }: ServiceHeroProps) {
         aria-hidden="true"
         className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/80 via-ink/45 to-ink/25"
       />
-      <div className="mx-auto flex min-h-[24rem] max-w-6xl flex-col justify-end px-5 py-14 sm:px-6 sm:py-16 lg:min-h-[28rem] lg:px-8 lg:py-20">
+      <div className="mx-auto flex min-h-[24rem] max-w-6xl flex-col justify-center px-5 py-14 sm:px-6 sm:py-16 lg:min-h-[clamp(24rem,27.5vw,36rem)] lg:px-8 lg:py-20">
         <Link
           href="/"
           className="mb-6 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-ivory/80 transition-colors hover:text-ivory"
