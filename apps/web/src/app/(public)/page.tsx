@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CinematicHero } from "@/features/cinematic/cinematic-hero";
+import { ExperienceGallery } from "@/features/gallery/experience-gallery";
 import { IntroVideo } from "@/features/intro-video/intro-video";
 import { WeatherSection } from "@/features/weather/weather-section";
 import { CtaLink } from "@/components/ui/cta-link";
@@ -49,16 +50,16 @@ export default function HomePage() {
                 id="northwest-heading"
                 className="mt-4 max-w-3xl text-balance font-display text-4xl leading-[1.04] text-forest-deep sm:text-5xl lg:text-[3.65rem]"
               >
-                10 điểm đến <em className="font-normal text-earth">Tây Bắc</em>
+                Điểm đến <em className="font-normal text-earth">Tây Bắc</em>
               </h2>
             </div>
             <div className="space-y-5 lg:pb-1">
               <p className="max-w-md text-sm leading-7 text-ink/75 sm:text-base">
-                Từ ruộng bậc thang Mù Cang Chải đến chợ phiên Bắc Hà.
-                Chọn nơi bạn muốn tìm hiểu trước khi đi.
+                Từ ruộng bậc thang Mù Cang Chải tới cao nguyên đá Đồng Văn.
+                Lọc theo tỉnh và chọn nơi bạn muốn tìm hiểu trước khi đi.
               </p>
               <CtaLink href="/kham-pha" variant="outline">
-                Xem cả 10 điểm đến
+                Xem toàn bộ điểm đến
               </CtaLink>
             </div>
           </div>
@@ -101,6 +102,8 @@ export default function HomePage() {
       </section>
 
       <WeatherSection />
+
+      <ExperienceGallery />
 
       <IntroVideo />
     </>

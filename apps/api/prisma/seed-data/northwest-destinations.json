@@ -278,5 +278,251 @@
       "attribution": "Tycho · CC BY-SA 3.0",
       "source": "https://commons.wikimedia.org/wiki/File:M%C6%B0%E1%BB%9Dng_Thanh_Valley.jpg"
     }
+  },
+  {
+    "slug": "dong-van",
+    "title": "Đồng Văn",
+    "excerpt": "Cao nguyên đá, phố cổ nhỏ và những cung đường nối các bản người Mông.",
+    "body": "Đồng Văn nằm trong vùng cao nguyên đá của Hà Giang, nơi đá xám phủ gần như toàn bộ sườn núi. Phố cổ ít nhà nhưng đủ cho một buổi tối đi bộ, còn ban ngày đường lại mở về các bản với chợ phiên và những vườn lanh trước hiên nhà.",
+    "province": "Hà Giang",
+    "landscape": "Cao nguyên đá",
+    "travelNote": "Cao nguyên đá khô và lạnh hơn các vùng lân cận về đêm. Lịch chợ theo phiên từng xã; xác nhận ngày trước khi sắp hành trình.",
+    "highlights": [
+      "Đi bộ buổi tối quanh phố cổ và tìm hiểu tuổi của những ngôi nhà hai tầng mái ngói.",
+      "Ghé chợ phiên khu vực nếu đúng ngày, xem người dân bán nông sản và đồ thủ công.",
+      "Giữ tốc độ chậm trên các cung đường đá; đây là địa hình dốc và dễ trơn khi mưa."
+    ],
+    "sourceUrl": "https://vi.wikipedia.org/wiki/%C4%90%E1%BB%93ng_V%C4%83n"
+  },
+  {
+    "slug": "meo-vac",
+    "title": "Mèo Vạc",
+    "excerpt": "Thị trấn nhỏ dưới chân Mã Pí Lèng, nơi hẻm vực sông Nho Quế mở ra.",
+    "body": "Mèo Vạc là điểm dừng cuối của cung đường từ Đồng Văn xuống, với hẻm vực sông Nho Quế nằm ngay bên. Đứng trên đèo Mã Pí Lèng nhìn xuống, con sông xanh cắt giữa hai vách đá là hình ảnh khó gặp ở nơi khác. Du thuyền trên hẻm vực cần đặt trước theo mùa nước.",
+    "province": "Hà Giang",
+    "landscape": "Đèo núi & hẻm vực",
+    "travelNote": "Đèo Mã Pí Lèng nhiều khúc cua gắt, hạn chế dừng xe ở lòng đường. Mùa nước đẹp nhất thường khác nhau theo năm; xác nhận với đơn vị tổ chức.",
+    "highlights": [
+      "Ngắm hẻm vực sông Nho Quế từ các điểm dừng được phép trên đèo Mã Pí Lèng.",
+      "Hỏi trước về mùa nước và lịch thuyền nếu muốn đi trong hẻm vực.",
+      "Dành thời gian ở thị trấn vào buổi sáng, khi chợ nhỏ họp ở đầu phố."
+    ],
+    "sourceUrl": "https://vi.wikipedia.org/wiki/M%C3%A8o_V%E1%BA%A1c",
+    "photo": {
+      "cover": {
+        "publicUrl": "/images/destinations/meo-vac-card.webp",
+        "alt": "Đèo Mã Pí Lèng nhìn từ trên cao",
+        "width": 1200,
+        "height": 900
+      },
+      "gallery": {
+        "publicUrl": "/images/destinations/meo-vac-article.webp",
+        "alt": "Đèo Mã Pí Lèng nhìn từ trên cao",
+        "width": 2400,
+        "height": 1600
+      },
+      "attribution": "hoaln · CC BY 2.0",
+      "source": "https://www.flickr.com/photos/61859341@N06/6361013773"
+    }
+  },
+  {
+    "slug": "hoang-su-phi",
+    "title": "Hoàng Su Phì",
+    "excerpt": "Những thửa ruộng xếp tầng ở sườn đông, ít đông hơn các cung đường chính.",
+    "body": "Hoàng Su Phì nằm ở phía đông Hà Giang, nơi ruộng bậc thang trải trên nhiều xã và ít khách hơn so với các điểm phía tây. Đường vào còn gập ghềnh, nhưng bù lại là nhịp bản làng còn nguyên vẹn: người dân đi nương, lúa phơi trước nhà, và mùa gặt tháng chín làm cả sườn đồi đổi màu.",
+    "province": "Hà Giang",
+    "landscape": "Ruộng bậc thang",
+    "travelNote": "Đường vào các xã có đoạn hẹp và dốc, cần chạy chậm và tránh đi đêm. Mùa lúa thay đổi theo từng xã; hỏi người địa phương trước khi chốt lịch.",
+    "highlights": [
+      "Đi theo các xã Bản Phùng, Bản Luốc vào mùa lúa chín để thấy ruộng đổi màu theo sườn.",
+      "Nghỉ lại một đêm ở bản để đi bộ buổi sáng sớm, khi sương còn chưa tan hết.",
+      "Đặt trước chỗ ở mùa gặt; khu vực này có ít nhà nghỉ hơn các huyện khác."
+    ],
+    "sourceUrl": "https://vi.wikipedia.org/wiki/Ho%C3%A0ng_Su_Ph%C3%AC",
+    "photo": {
+      "cover": {
+        "publicUrl": "/images/destinations/hoang-su-phi-card.webp",
+        "alt": "Phiên chợ vùng cao ở Hoàng Su Phì",
+        "width": 1200,
+        "height": 900
+      },
+      "gallery": {
+        "publicUrl": "/images/destinations/hoang-su-phi-article.webp",
+        "alt": "Phiên chợ vùng cao ở Hoàng Su Phì",
+        "width": 2400,
+        "height": 1600
+      },
+      "attribution": "bmr-mam · CC BY-SA 2.0",
+      "source": "https://www.flickr.com/photos/122094967@N08/13663097065"
+    }
+  },
+  {
+    "slug": "quan-ba",
+    "title": "Quản Bạ",
+    "excerpt": "Cổng trời mở xuống thị trấn Tam Sơn, với núi đôi đứng giữa thung lũng.",
+    "body": "Quản Bạ là cửa ngõ đầu tiên của cao nguyên đá khi đi từ Hà Giang lên. Từ cổng trời, thị trấn Tam Sơn hiện ra dưới thung lũng, còn núi đôi là điểm dừng quen thuộc trên đường. Địa hình ở đây mở và thoáng hơn các huyện phía bắc, phù hợp cho chặng nghỉ đầu tiên.",
+    "province": "Hà Giang",
+    "landscape": "Cổng trời & núi đôi",
+    "travelNote": "Cổng trời là điểm dừng ngắn; hạn chế dừng lâu vì lối vào đông xe và bụi. Thời tiết thung lũng đổi nhanh vào buổi chiều.",
+    "highlights": [
+      "Dừng ở cổng trời Quản Bạ vào sáng sớm để nhìn thung lũng Tam Sơn trong sương.",
+      "Ghé núi đôi ở khu vực gần thị trấn, giữ khoảng cách với ruộng đang canh tác.",
+      "Ghép Quản Bạ vào ngày đầu của cung đường Hà Giang trước khi lên Yên Minh."
+    ],
+    "sourceUrl": "https://vi.wikipedia.org/wiki/Qu%E1%BA%A3n_B%E1%BA%A1",
+    "photo": {
+      "cover": {
+        "publicUrl": "/images/destinations/quan-ba-card.webp",
+        "alt": "Núi đá và thung lũng Quản Bạ",
+        "width": 1200,
+        "height": 900
+      },
+      "gallery": {
+        "publicUrl": "/images/destinations/quan-ba-article.webp",
+        "alt": "Núi đá và thung lũng Quản Bạ",
+        "width": 2400,
+        "height": 1603
+      },
+      "attribution": "nv_tan · CC BY 2.0",
+      "source": "https://www.flickr.com/photos/14644229@N08/24491597094"
+    }
+  },
+  {
+    "slug": "sin-ho",
+    "title": "Sìn Hồ",
+    "excerpt": "Một thị trấn nhỏ nằm cao trên núi, sáng sớm thường chìm trong sương.",
+    "body": "Sìn Hồ nằm ở độ cao hơn 1.500 mét, đường lên uốn theo sườn núi và ruộng bậc thang. Thị trấn nhỏ, ít dịch vụ nhưng có không khí núi thật: sáng sớm sương phủ, trưa tan dần để lộ các dãy núi xếp lớp. Chợ huyện họp sớm là điểm bắt đầu tốt cho một ngày đi bộ.",
+    "province": "Lai Châu",
+    "landscape": "Thị trấn trong sương",
+    "travelNote": "Đường lên Sìn Hồ dài và nhiều đoạn quanh co; không nên đi đêm. Nhiệt độ ban đêm thấp quanh năm, kể cả mùa hè.",
+    "highlights": [
+      "Đi chợ sáng của thị trấn, nơi người các xã mang nông sản và đồ thổ cẩm xuống bán.",
+      "Chạy xe theo đường vào một số xã để nhìn ruộng bậc thang hai bên sườn núi.",
+      "Hỏi trước về chỗ nghỉ; thị trấn có ít nhà nghỉ hơn các huyện du lịch khác."
+    ],
+    "sourceUrl": "https://vi.wikipedia.org/wiki/S%C3%ACn_H%E1%BB%93"
+  },
+  {
+    "slug": "o-quy-ho",
+    "title": "Đèo Ô Quy Hồ",
+    "excerpt": "Con đèo nối Sa Pa với Lai Châu, hoàng hôn buông xuống các tầng núi.",
+    "body": "Đèo Ô Quy Hồ nối Lào Cai và Lai Châu, với những khúc cua bám theo sườn núi và tầm nhìn mở xuống thung lũng. Đây là một trong những con đèo dài của vùng, phù hợp chạy xe ban ngày. Chiều muộn, mặt trời lặn sau các tầng núi là thời điểm nhiều người dừng lại.",
+    "province": "Lai Châu",
+    "landscape": "Đèo & hoàng hôn",
+    "travelNote": "Đèo có nhiều đoạn sương mù dày vào cuối ngày; bật đèn và chạy chậm. Không nên đi lần đầu vào buổi tối.",
+    "highlights": [
+      "Chạy trọn đèo vào buổi chiều để bắt hoàng hôn ở phía Lai Châu.",
+      "Dừng xe ở các điểm mở được phép; tránh dừng ở khúc cua khuất tầm nhìn.",
+      "Kiểm tra thời tiết trước khi đi, đèo có thể mù đặc và ẩm ướt vào cuối ngày."
+    ],
+    "sourceUrl": "https://vi.wikipedia.org/wiki/%C4%90%C3%A8o_%C3%94_Quy_H%E1%BB%93",
+    "photo": {
+      "cover": {
+        "publicUrl": "/images/destinations/o-quy-ho-card.webp",
+        "alt": "Đường đèo Ô Quy Hồ giữa hai tỉnh Lào Cai và Lai Châu",
+        "width": 1200,
+        "height": 900
+      },
+      "gallery": {
+        "publicUrl": "/images/destinations/o-quy-ho-article.webp",
+        "alt": "Đường đèo Ô Quy Hồ giữa hai tỉnh Lào Cai và Lai Châu",
+        "width": 2400,
+        "height": 1800
+      },
+      "attribution": "Shutteract · CC BY 2.0",
+      "source": "https://www.flickr.com/photos/189550735@N08/50170377462"
+    }
+  },
+  {
+    "slug": "muong-ang",
+    "title": "Mường Ảng",
+    "excerpt": "Thung lũng rộng giữa các dãy núi, ít khách và còn nhiều góc nhìn mở.",
+    "body": "Mường Ảng nằm giữa các dãy núi của Điện Biên, với cánh đồng lúa trải dọc theo trục đường chính. Đây không phải điểm đến có nhiều dịch vụ, nhưng cảnh quan và nhịp sống bù lại: buổi sáng, cả thung lũng làm việc trên đồng, chiều muộn mặt trời lặn sau núi phía tây.",
+    "province": "Điện Biên",
+    "landscape": "Thung lũng & đồi",
+    "travelNote": "Dịch vụ lưu trú và ăn uống còn ít; nên chủ động kế hoạch nghỉ và nhiên liệu. Đồng ruộng đổi màu theo vụ.",
+    "highlights": [
+      "Chạy xe theo trục đường chính vào sáng sớm để nhìn cánh đồng trong nắng đầu ngày.",
+      "Ghép Mường Ảng vào hành trình Điện Biên như một chặng nghỉ ít khách.",
+      "Mua nông sản theo mùa tại chợ huyện thay vì tìm quà đóng gói sẵn."
+    ],
+    "sourceUrl": "https://vi.wikipedia.org/wiki/M%C6%B0%E1%BB%9Dng_%E1%BA%A2ng"
+  },
+  {
+    "slug": "muong-lay",
+    "title": "Mường Lay",
+    "excerpt": "Thị xã nhỏ nằm giữa hai dòng sông, cửa vào vùng hồ thủy điện Mường Lay.",
+    "body": "Mường Lay nằm ở ngã ba sông Đà và sông Nậm Lay, phần lớn thị xã được quy hoạch lại sau khi thủy điện dâng nước. Cảnh quan mặt nước rộng và các dãy núi hai bên tạo cảm giác yên tĩnh, khác với những thị trấn vùng cao nhiều dốc. Đây là điểm nghỉ hợp lý trên trục đường Điện Biên – Lai Châu.",
+    "province": "Điện Biên",
+    "landscape": "Ngã ba sông",
+    "travelNote": "Đây là thị xã nhỏ, dịch vụ vừa phải; xác nhận giờ ăn của quán trước khi đến muộn.",
+    "highlights": [
+      "Đi bộ dọc kè sông vào buổi tối, nhìn hai dòng sông gặp nhau.",
+      "Hỏi người địa phương về đời sống thị xã sau khi hồ chứa dâng nước.",
+      "Chọn Mường Lay làm điểm nghỉ đêm khi chạy trục Điện Biên – Lai Châu."
+    ],
+    "sourceUrl": "https://vi.wikipedia.org/wiki/M%C6%B0%E1%BB%9Dng_Lay",
+    "photo": {
+      "cover": {
+        "publicUrl": "/images/destinations/muong-lay-card.webp",
+        "alt": "Thị xã Mường Lay bên dòng sông Đà",
+        "width": 1200,
+        "height": 900
+      },
+      "gallery": {
+        "publicUrl": "/images/destinations/muong-lay-article.webp",
+        "alt": "Thị xã Mường Lay bên dòng sông Đà",
+        "width": 2400,
+        "height": 1800
+      },
+      "attribution": "Arian Zwegers · CC BY 2.0",
+      "source": "https://www.flickr.com/photos/67769030@N07/6223799972"
+    }
+  },
+  {
+    "slug": "bat-xat",
+    "title": "Bát Xát",
+    "excerpt": "Huyện biên giới phía bắc Lào Cai, cửa ngõ lên Y Tý và các bản người Hà Nhì.",
+    "body": "Bát Xát kéo dài từ đồng bằng ven sông Hồng lên tận vùng biên giới trên 2.000 mét. Các xã như Phìn Ngan, Mường Hum giữ nhịp bản làng với ruộng, ngô và nhà trình tường. Đây là điểm xuất phát để lên Y Tý, nhưng bản thân các xã dọc đường cũng đáng dừng lại.",
+    "province": "Lào Cai",
+    "landscape": "Thung lũng biên giới",
+    "travelNote": "Một số xã nằm trong khu vực biên giới; mang theo giấy tờ tùy thân. Đường lên các xã cao có thể sạt lở vào mùa mưa.",
+    "highlights": [
+      "Dừng ở các xã dọc đường như Phìn Ngan để đi bộ ngắn qua khu dân cư.",
+      "Tìm hiểu nhà trình tường và đời sống người Hà Nhì qua người địa phương.",
+      "Kiểm tra giấy tờ cá nhân khi dự định lên các xã sát biên giới."
+    ],
+    "sourceUrl": "https://vi.wikipedia.org/wiki/B%C3%A1t_X%C3%A1t",
+    "photo": {
+      "cover": {
+        "publicUrl": "/images/destinations/bat-xat-card.webp",
+        "alt": "Em bé người Hà Nhì ở Bát Xát",
+        "width": 1200,
+        "height": 900
+      },
+      "gallery": {
+        "publicUrl": "/images/destinations/bat-xat-article.webp",
+        "alt": "Em bé người Hà Nhì ở Bát Xát",
+        "width": 2400,
+        "height": 1800
+      },
+      "attribution": "hoaln · CC BY 2.0",
+      "source": "https://www.flickr.com/photos/61859341@N06/6574855673"
+    }
+  },
+  {
+    "slug": "bac-yen",
+    "title": "Bắc Yên",
+    "excerpt": "Cửa ngõ lên Tà Xùa, với những bản nằm rải trên sườn núi phía tây.",
+    "body": "Bắc Yên nằm dưới chân dãy núi dẫn lên Tà Xùa. Thị trấn có chợ và đường nối sang nhiều xã vùng cao, còn phía trên là các bản nằm rải rác giữa sườn núi. Nhiều người qua Bắc Yên trên đường săn mây, nhưng thung lũng và các bản dưới thấp cũng có buổi chiều dễ chịu.",
+    "province": "Sơn La",
+    "landscape": "Núi & mây",
+    "travelNote": "Các bản vùng cao có ít dịch vụ; hỏi trước về chỗ nghỉ và bữa ăn. Nên đổ xăng đầy trước khi đi vào các xã xa.",
+    "highlights": [
+      "Ghép một buổi chiều ở thị trấn để đi bộ chợ và ăn tối cùng người địa phương.",
+      "Đi theo các xã vùng cao nếu muốn ở lại qua đêm giữa các bản thay vì chỉ lên săn mây.",
+      "Xác nhận tình trạng đường lên các xã trước khi đi, tùy theo mùa."
+    ],
+    "sourceUrl": "https://vi.wikipedia.org/wiki/B%E1%BA%AFc_Y%C3%AAn"
   }
 ]

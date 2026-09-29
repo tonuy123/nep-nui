@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { northwestDestinations } from "@/features/destinations/northwest-destinations";
+import { galleryItems } from "@/features/gallery/experience-gallery-data";
 import { weatherPanelPhoto, weatherProvinces } from "@/features/weather/weather-provinces";
 
 export const metadata: Metadata = {
@@ -122,6 +123,23 @@ export default function ImageCreditsPage() {
               {credit.author} ·{" "}
               <a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">Ảnh gốc</a>
               {" "}· <a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">{credit.license}</a>
+            </p>
+          </li>
+        ))}
+      </ul>
+
+      <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Ảnh khoảnh khắc trải nghiệm</h2>
+      <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
+        Tám ảnh trong mục &ldquo;Kỷ niệm trải nghiệm cảnh quan&rdquo; trên trang chủ.
+      </p>
+      <ul className="mt-8 divide-y divide-forest/20 border-y border-forest/20">
+        {galleryItems.map((item) => (
+          <li key={item.id} className="grid gap-2 py-5 sm:grid-cols-[minmax(0,.35fr)_minmax(0,.65fr)] sm:gap-8">
+            <p className="font-display text-xl text-forest-deep">{item.caption}</p>
+            <p className="text-sm leading-7 text-ink/75">
+              {item.author} ·{" "}
+              <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">Ảnh gốc</a>
+              {" "}· <a href={item.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">{item.license}</a>
             </p>
           </li>
         ))}
