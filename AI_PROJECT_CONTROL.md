@@ -1798,6 +1798,20 @@ apps/web/src/lib/auth/safe-next.ts
 | Browser verification | Playwright 47/47 — split đo thực tế 0.333 (panel 389 / carousel 779 @1440); panel full viewport height 900/900; các check khác không hồi quy. |
 | Next action | Paw xem preview; không tự mở phase khác. |
 
+### Entry 023 — Card thời tiết theo bố cục card Cocoon
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-29, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase / status | P4b follow-up, `IMPLEMENTED_UNREVIEWED`. |
+| Authorization | Paw chỉ selector card Cocoon và yêu cầu chỉnh box card giống ảnh. |
+| Scope | `weather-card.tsx`: bỏ border/khung card; ảnh đổi sang khung vuông bo nhẹ `rounded-md` nền xanh khói nhạt; text dưới kiểu Cocoon — tên tỉnh đậm → trạng thái IN HOA nhỏ → nhiệt độ lớn + ô icon vuông nền nhạt bên phải (hover đổi nền forest) → hai dòng thông số mờ (hôm nay/min–max/mưa/ẩm/gió). Toàn card hover: ảnh zoom nhẹ. |
+| Files changed | `apps/web/src/features/weather/weather-card.tsx`; tài liệu này. |
+| Commands run | typecheck/lint/build exit0 (43 pages). |
+| Browser verification | Playwright 47/47 — card render đúng thứ tự mới (Lai Châu › Mưa phùn › 28°C › Hôm nay 21–29°C · Mưa 75% › Độ ẩm 59% · Gió 5 km/h); panel full-screen 1/3, wrap, ảnh load không hồi quy. |
+| Next action | Paw xem preview duyệt visual. |
+
 ### Handoff template
 
 ```text
