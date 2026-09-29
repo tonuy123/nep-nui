@@ -1,11 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { MouseEvent } from "react";
 import { NavLink } from "@/components/navigation/nav-link";
 import { HeaderSearch } from "@/components/navigation/header-search";
-import { primaryCta, primaryNav } from "@/config/navigation";
+import { primaryNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { AccountAction } from "@/features/auth/account-action";
 
@@ -176,12 +175,6 @@ export function MobileNav() {
                 ))}
               </ul>
               <div className="mt-4 flex flex-col gap-2 border-t border-forest/15 pt-4">
-                <Link
-                  href={primaryCta.href}
-                  className="rounded-md bg-gold px-4 py-2.5 text-center text-sm font-semibold text-ink transition-colors hover:bg-gold/90"
-                >
-                  {primaryCta.label}
-                </Link>
                 <AccountAction mobile />
               </div>
             </nav>

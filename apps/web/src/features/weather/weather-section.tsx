@@ -61,12 +61,6 @@ async function fetchProvinceWeather(): Promise<ProvinceWeatherItem[] | null> {
   }
 }
 
-const updateTimeFormatter = new Intl.DateTimeFormat("vi-VN", {
-  hour: "2-digit",
-  minute: "2-digit",
-  timeZone: "Asia/Ho_Chi_Minh",
-});
-
 export async function WeatherSection() {
   const items = await fetchProvinceWeather();
   if (!items) return null;
@@ -84,17 +78,14 @@ export async function WeatherSection() {
               className="object-cover"
             />
             <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-forest-deep via-forest-deep/75 to-forest-deep/30" />
-            <div className="relative flex h-full min-h-[340px] flex-col justify-center p-6 sm:p-8 lg:min-h-0 lg:p-12 xl:p-16">
+            <div className="relative flex h-full min-h-[340px] flex-col items-center justify-center p-6 text-center sm:p-8 lg:min-h-0 lg:p-12 xl:p-16">
               <p className="text-xs font-semibold uppercase tracking-[.2em] text-gold">Dự báo</p>
-              <h2 id="weather-heading" className="mt-4 font-display text-4xl leading-[1.05] text-ivory sm:text-5xl">
+              <h2 id="weather-heading" className="mt-4 font-display text-5xl leading-[1.05] text-ivory sm:text-6xl lg:text-7xl">
                 Thời tiết
                 <span className="block"><em className="font-normal text-gold">Tây Bắc</em></span>
               </h2>
-              <p className="mt-4 max-w-sm text-sm leading-6 text-ivory/80">
-                Nhiệt độ, mưa và độ ẩm của tám tỉnh vùng núi, cập nhật mỗi mười phút.
-              </p>
-              <p className="mt-5 text-[11px] leading-5 text-ivory/65">
-                Cập nhật {updateTimeFormatter.format(new Date())} · Dữ liệu:{" "}
+              <p className="mt-6 text-[11px] leading-5 text-ivory/60">
+                Dữ liệu:{" "}
                 <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ivory">Open-Meteo.com</a>
                 {" "}(CC BY 4.0) · Ảnh:{" "}
                 <a href={weatherPanelPhoto.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ivory">{weatherPanelPhoto.author}</a>

@@ -28,9 +28,6 @@ export function CinematicHero() {
           <CtaLink href="/combo-du-lich" variant="outline" size="lg">Lập chuyến đi</CtaLink>
         </div>
       </div>
-      <div className={styles.bottom}>
-        <a href="#diem-den-noi-bat" className={styles.scrollCue}><span aria-hidden="true">↓</span> Cuộn xuống</a>
-      </div>
     </section>
   );
 }

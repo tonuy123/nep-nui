@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { DesktopNav } from "@/components/navigation/desktop-nav";
 import { HeaderSearch } from "@/components/navigation/header-search";
-import { guestAction, primaryCta, primaryNav } from "@/config/navigation";
+import { guestAction, primaryNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { AccountAction } from "@/features/auth/account-action";
 import { MobileNav } from "./mobile-nav";
@@ -46,12 +46,6 @@ export function SiteHeader() {
 
           <div className="hidden items-center gap-2 xl:flex">
             <AccountAction />
-            <Link
-              href={primaryCta.href}
-              className="inline-flex min-h-11 items-center rounded-full bg-forest px-4 py-2.5 text-xs font-semibold text-ivory transition-colors hover:bg-forest-deep"
-            >
-              {primaryCta.label}
-            </Link>
           </div>
 
           <MobileNav />
@@ -60,7 +54,7 @@ export function SiteHeader() {
       <noscript>
         <style>{`header [aria-controls="mobile-navigation"], [data-cinematic-controls] { display: none !important; }`}</style>
         <nav aria-label="Điều hướng dự phòng" data-noscript-nav className="flex gap-1 overflow-x-auto border-t border-forest/10 px-4 py-2 xl:hidden">
-          {[...primaryNav, guestAction, primaryCta].map((item) => (
+          {[...primaryNav, guestAction].map((item) => (
             <a key={`${item.href}-${item.label}`} href={item.href} className="inline-flex min-h-11 shrink-0 items-center rounded-full px-3 text-sm font-semibold text-forest">
               {item.label}
             </a>
