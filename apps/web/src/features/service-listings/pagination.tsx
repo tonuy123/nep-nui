@@ -28,9 +28,9 @@ function getPageItems(page: number, totalPages: number): PageItem[] {
 }
 
 const linkBase =
-  "inline-flex min-h-10 min-w-10 items-center justify-center rounded-lg border px-3 text-sm font-medium transition-colors";
+  "inline-flex min-h-10 min-w-10 items-center justify-center rounded-lg border px-3 text-sm font-medium transition";
 const linkInteractive =
-  "border-forest/20 text-forest hover:border-forest hover:bg-forest hover:text-ivory";
+  "relative isolate overflow-hidden border-forest/20 text-forest before:absolute before:inset-0 before:-z-10 before:-translate-x-full before:bg-forest before:transition-transform before:duration-300 before:ease-out hover:border-forest hover:text-ivory hover:before:translate-x-0";
 const linkMuted = "pointer-events-none border-forest/10 text-forest/40";
 
 export function Pagination({ page, totalPages, onPageChange }: PaginationProps) {
