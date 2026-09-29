@@ -67,9 +67,6 @@ export default function HomePage() {
       <section aria-labelledby="plan-heading" className="bg-ivory">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)] lg:gap-20 lg:px-8 lg:py-24">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[.2em] text-earth">
-              02 <span className="mx-2 text-gold">/</span> Lên kế hoạch
-            </p>
             <h2
               id="plan-heading"
               className="mt-5 max-w-xl font-display text-4xl leading-[1.08] text-forest-deep sm:text-5xl"

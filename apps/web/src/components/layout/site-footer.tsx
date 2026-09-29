@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { primaryNav } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
@@ -7,7 +8,14 @@ export function SiteFooter() {
     <footer className="border-t border-forest/15 bg-forest text-ivory">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
         <div>
-          <p className="font-display text-2xl font-normal">{siteConfig.name}</p>
+          <Image
+            src="/brand/nep-nui-logo-dark.svg"
+            alt="Nếp Núi"
+            width={146}
+            height={44}
+            unoptimized
+            className="h-11 w-auto"
+          />
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-ivory/80">
             {siteConfig.description}
           </p>

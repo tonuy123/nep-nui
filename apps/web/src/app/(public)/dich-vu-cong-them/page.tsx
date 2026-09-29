@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceHero } from "@/features/service-page/service-hero";
-import { addOnListings, addOnPromos, guides, promoSubtext } from "@/features/service-listings/listings-data";
+import { addOnListings, addOnPromos, guides } from "@/features/service-listings/listings-data";
 import { ListingSection } from "@/features/service-listings/listing-section";
 import { PromoBand } from "@/features/service-listings/promo-band";
 
@@ -15,9 +15,7 @@ export default function AddOnServicesPage() {
   return (
     <>
       <ServiceHero
-        eyebrow="Dịch vụ cộng thêm"
         title={<>Chọn dịch vụ <em className="font-normal">cho chuyến đi</em></>}
-        lead="Ghi nhu cầu xe nối chặng, người dẫn đường hoặc thiết bị để gửi tư vấn."
         image={{ src: "/images/services/addon.webp", alt: "Cảnh quan vùng cao Hà Giang" }}
       />
 
@@ -29,7 +27,7 @@ export default function AddOnServicesPage() {
         showFilter={false}
       />
 
-      <PromoBand items={addOnPromos} subtext={promoSubtext} moreHref="#listing-heading" />
+      <PromoBand items={addOnPromos} moreHref="#listing-heading" />
 
       <GuideBlock content={guides.addon} />
 

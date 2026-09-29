@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { DestinationCard } from "./destination-card";
 import type { DestinationPreview } from "./northwest-destinations";
 import styles from "./northwest-carousel.module.css";
@@ -11,7 +11,6 @@ interface NorthwestCarouselProps {
 
 export function NorthwestCarousel({ destinations }: NorthwestCarouselProps) {
   const trackRef = useRef<HTMLUListElement>(null);
-  const [first, setFirst] = useState(1);
   const provinces = useMemo(
     () => ["Tất cả", ...Array.from(new Set(destinations.map((item) => item.province)))],
     [destinations],
@@ -22,40 +21,9 @@ export function NorthwestCarousel({ destinations }: NorthwestCarouselProps) {
     [destinations, province],
   );
 
-  const syncPosition = useCallback(() => {
-    const track = trackRef.current;
-    const firstCard = track?.firstElementChild;
-    if (!track || !firstCard) return;
-
-    const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
-    const step = firstCard.getBoundingClientRect().width + gap;
-    const next = Math.min(visible.length, Math.round(track.scrollLeft / step) + 1);
-    setFirst((current) => (current === next ? current : next));
-  }, [visible.length]);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const observer = new ResizeObserver(syncPosition);
-    observer.observe(track);
-    track.addEventListener("scroll", syncPosition, { passive: true });
-    syncPosition();
-
-    return () => {
-      observer.disconnect();
-      track.removeEventListener("scroll", syncPosition);
-    };
-  }, [syncPosition]);
-
   useEffect(() => {
     trackRef.current?.scrollTo({ left: 0, behavior: "auto" });
   }, [province]);
-
-  function selectProvince(item: string) {
-    setProvince(item);
-    setFirst(1);
-  }
 
   function move(direction: -1 | 1) {
     const track = trackRef.current;
@@ -85,7 +53,7 @@ export function NorthwestCarousel({ destinations }: NorthwestCarouselProps) {
             key={item}
             type="button"
             aria-pressed={province === item}
-            onClick={() => selectProvince(item)}
+            onClick={() => setProvince(item)}
             className="min-h-10 rounded-full border border-forest/25 bg-white/70 px-4 text-sm font-medium text-forest transition-colors hover:border-forest aria-pressed:border-forest aria-pressed:bg-forest aria-pressed:text-ivory"
           >
             {item}
@@ -126,9 +94,6 @@ export function NorthwestCarousel({ destinations }: NorthwestCarouselProps) {
           <span aria-hidden="true">→</span>
         </button>
       </div>
-      <p className="mt-5 text-center text-xs font-semibold uppercase tracking-[.12em] text-earth sm:tracking-[.18em]">
-        Bộ sưu tập <span className="ml-1 font-display text-lg tracking-normal text-forest-deep sm:ml-2">{String(first).padStart(2, "0")} / {String(visible.length).padStart(2, "0")}</span>
-      </p>
       <noscript>
         <style>{`[data-carousel-controls] { display: none !important; }`}</style>
       </noscript>

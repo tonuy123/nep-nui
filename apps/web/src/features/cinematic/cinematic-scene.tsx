@@ -6,10 +6,9 @@ import styles from "./cinematic.module.css";
 
 export function CinematicScene() {
   const root = useRef<HTMLDivElement>(null);
-  const { snapshot, skip, togglePause, replay } = useCinematicController(root);
+  const { snapshot, skip, togglePause } = useCinematicController(root);
   const active = snapshot.state === "playing" || snapshot.state === "paused";
   const preparing = snapshot.state === "preparing";
-  const reduced = snapshot.reason === "reduced-motion";
 
   return (
     <>
@@ -22,11 +21,7 @@ export function CinematicScene() {
             </button>
             <button type="button" onClick={skip} aria-label="Bỏ qua chuyển động">Bỏ qua</button>
           </>
-        ) : (
-          <button type="button" onClick={replay} disabled={snapshot.state === "preparing" || snapshot.reason === "initial" || reduced} aria-label="Xem lại chuyển động phong cảnh">
-            {reduced ? "Ảnh tĩnh" : "Xem lại cảnh"} <span aria-hidden="true">↻</span>
-          </button>
-        )}
+        ) : null}
       </div>
       <span className={styles.status} role="status" aria-live="polite">
         {snapshot.state === "paused" ? "Chuyển động đã tạm dừng." : ""}

@@ -47,7 +47,7 @@ export function CinematicHeroPlaceholder() {
 
       <div className="mx-auto flex min-h-[72vh] max-w-6xl flex-col justify-center px-4 py-20 sm:px-6 lg:px-8">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-earth">
-          Du lịch vùng sâu, vùng xa
+          Nếp Núi
         </p>
         <h1
           id="hero-title"

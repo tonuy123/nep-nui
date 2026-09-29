@@ -168,7 +168,8 @@ export function MobileNav() {
                   <li key={item.href}>
                     <NavLink
                       item={item}
-                      className="block rounded-md px-3 py-2.5 text-base font-medium text-forest transition-colors hover:bg-forest/10"
+                      withIcon
+                      className="flex items-center gap-2.5 rounded-md px-3 py-2.5 text-base font-medium text-forest transition-colors hover:bg-forest/10"
                       activeClassName="bg-forest text-ivory hover:bg-forest hover:text-ivory"
                     />
                   </li>

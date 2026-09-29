@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceHero } from "@/features/service-page/service-hero";
-import { coachListings, coachPromos, guides, promoSubtext } from "@/features/service-listings/listings-data";
+import { coachListings, coachPromos, guides } from "@/features/service-listings/listings-data";
 import { ListingSection } from "@/features/service-listings/listing-section";
 import { PromoBand } from "@/features/service-listings/promo-band";
 
@@ -15,9 +15,7 @@ export default function CoachPage() {
   return (
     <>
       <ServiceHero
-        eyebrow="Chuyến xe"
         title={<>Xe đường dài.<br /><em className="font-normal">Nối Hà Nội với Tây Bắc.</em></>}
-        lead="Chọn tuyến xe và giờ chạy phù hợp với lịch trình của bạn trước khi đặt."
         image={{ src: "/images/services/coach.webp", alt: "Cung đường đèo nối các tỉnh Tây Bắc" }}
       />
 
@@ -28,7 +26,7 @@ export default function CoachPage() {
         items={coachListings}
       />
 
-      <PromoBand items={coachPromos} subtext={promoSubtext} moreHref="#listing-heading" />
+      <PromoBand items={coachPromos} moreHref="#listing-heading" />
 
       <GuideBlock content={guides.coach} />
 

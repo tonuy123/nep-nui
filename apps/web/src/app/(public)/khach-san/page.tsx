@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceHero } from "@/features/service-page/service-hero";
-import { guides, hotelListings, hotelPromos, promoSubtext } from "@/features/service-listings/listings-data";
+import { guides, hotelListings, hotelPromos } from "@/features/service-listings/listings-data";
 import { ListingSection } from "@/features/service-listings/listing-section";
 import { PromoBand } from "@/features/service-listings/promo-band";
 
@@ -15,9 +15,7 @@ export default function HotelsPage() {
   return (
     <>
       <ServiceHero
-        eyebrow="Khách sạn và lưu trú"
         title={<>Kiểm tra chỗ ở <em className="font-normal">trước khi đặt</em></>}
-        lead="Chọn kiểu lưu trú, rồi kiểm tra đường vào, giờ nhận phòng và chính sách hủy."
         image={{ src: "/images/services/hotel.webp", alt: "Cơ sở lưu trú tại Sa Pa nhìn từ khuôn viên" }}
       />
 
@@ -28,7 +26,7 @@ export default function HotelsPage() {
         items={hotelListings}
       />
 
-      <PromoBand items={hotelPromos} subtext={promoSubtext} moreHref="#listing-heading" />
+      <PromoBand items={hotelPromos} moreHref="#listing-heading" />
 
       <GuideBlock content={guides.hotel} />
 

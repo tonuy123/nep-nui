@@ -1,25 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { DesktopNav } from "@/components/navigation/desktop-nav";
 import { HeaderSearch } from "@/components/navigation/header-search";
 import { guestAction, primaryNav } from "@/config/navigation";
-import { siteConfig } from "@/config/site";
 import { AccountAction } from "@/features/auth/account-action";
 import { MobileNav } from "./mobile-nav";
-
-function LogoMark() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 32 32"
-      className="h-8 w-8 shrink-0"
-      fill="none"
-    >
-      <rect width="32" height="32" rx="6" className="fill-forest" />
-      <path d="M4 24 L12 12 L17 19 L21 14 L28 24 Z" className="fill-gold" />
-      <circle cx="22" cy="9" r="3" className="fill-ivory" />
-    </svg>
-  );
-}
 
 export function SiteHeader() {
   return (
@@ -27,10 +12,26 @@ export function SiteHeader() {
       <div className="relative mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2 rounded-md text-forest focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
+          className="flex shrink-0 items-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
         >
-          <LogoMark />
-          <span className="hidden flex-col sm:flex"><span className="font-display text-lg font-semibold tracking-tight">{siteConfig.shortName}</span><span className="text-[8px] font-semibold uppercase tracking-[.22em] text-earth">Cảnh quan & cộng đồng</span></span>
+          <Image
+            src="/brand/nep-nui-mark.svg"
+            alt="Nếp Núi"
+            width={36}
+            height={36}
+            unoptimized
+            priority
+            className="h-9 w-9 sm:hidden"
+          />
+          <Image
+            src="/brand/nep-nui-logo-light.svg"
+            alt="Nếp Núi"
+            width={146}
+            height={44}
+            unoptimized
+            priority
+            className="hidden h-11 w-auto sm:block"
+          />
         </Link>
 
         <div className="mx-2 hidden min-w-0 flex-1 lg:block xl:mx-4">

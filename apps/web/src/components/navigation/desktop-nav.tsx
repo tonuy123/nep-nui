@@ -9,7 +9,8 @@ export function DesktopNav() {
           <li key={item.href}>
             <NavLink
               item={item}
-              className="inline-flex min-h-11 items-center whitespace-nowrap border-b-2 border-transparent px-3 py-2 text-xs font-semibold text-forest/85 transition-colors hover:border-gold/60 hover:text-forest aria-[current=page]:border-gold"
+              withIcon
+              className="inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap border-b-2 border-transparent px-3 py-2 text-xs font-semibold text-forest/85 transition-colors hover:border-gold/60 hover:text-forest aria-[current=page]:border-gold"
               activeClassName="text-forest"
             />
           </li>

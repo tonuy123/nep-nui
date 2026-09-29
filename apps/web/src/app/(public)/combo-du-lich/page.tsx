@@ -4,7 +4,7 @@ import { ComboPlanner } from "@/features/product-navigation-a/combo-planner";
 import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceHero } from "@/features/service-page/service-hero";
-import { comboPromos, guides, promoSubtext } from "@/features/service-listings/listings-data";
+import { comboPromos, guides } from "@/features/service-listings/listings-data";
 import { PromoBand } from "@/features/service-listings/promo-band";
 
 export const metadata: Metadata = {
@@ -28,15 +28,13 @@ export default async function ComboPage({ searchParams }: ComboPageProps) {
   return (
     <>
       <ServiceHero
-        eyebrow="Combo du lịch"
         title="Tạo bản nháp chuyến đi"
-        lead="Chọn điểm đến, số ngày, kiểu lưu trú và trải nghiệm ưu tiên."
         image={{ src: "/images/services/combo.webp", alt: "Đường đèo quanh co tại đèo Mã Pí Lèng, Hà Giang" }}
       />
 
       <ComboPlanner key={initialSlug} destinations={destinations} initialSlug={initialSlug} />
 
-      <PromoBand items={comboPromos} subtext={promoSubtext} moreHref="#compose-heading" />
+      <PromoBand items={comboPromos} moreHref="#compose-heading" />
 
       <GuideBlock content={guides.combo} />
 

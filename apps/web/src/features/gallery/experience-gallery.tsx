@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { galleryItems } from "./experience-gallery-data";
 
 export function ExperienceGallery() {
@@ -13,12 +12,6 @@ export function ExperienceGallery() {
           >
             Kỷ niệm trải nghiệm cảnh quan
           </h2>
-          <Link
-            href="/nguon-anh"
-            className="text-sm font-semibold text-forest underline underline-offset-4 hover:text-earth"
-          >
-            Chi tiết nguồn ảnh
-          </Link>
         </div>
 
         <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
