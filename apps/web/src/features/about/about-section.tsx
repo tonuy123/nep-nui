@@ -1,11 +1,12 @@
 import Image from "next/image";
+import { AboutStats } from "@/features/about/about-stats";
 import { siteConfig } from "@/config/site";
 
 // Số liệu marketing placeholder cho bản demo — thay bằng số thật khi dự án có dữ liệu.
 const aboutStats = [
-  { value: "30+", caption: "Năm kinh nghiệm" },
-  { value: "10M+", caption: "Lượt khách hàng" },
-  { value: "40+", caption: "Đối tác địa phương" },
+  { value: 30, suffix: "+", caption: "Năm kinh nghiệm" },
+  { value: 10, suffix: "M+", caption: "Lượt khách hàng" },
+  { value: 40, suffix: "+", caption: "Đối tác địa phương" },
 ];
 
 const aboutSummary =
@@ -16,7 +17,7 @@ export function AboutSection() {
     <section aria-labelledby="about-heading" className="bg-ivory">
       <div className="mx-auto max-w-[90rem] px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,.85fr)] lg:gap-10">
-          <div>
+          <div className="lg:pl-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-earth">
               Về chúng tôi
             </p>
@@ -24,22 +25,10 @@ export function AboutSection() {
               id="about-heading"
               className="mt-3 text-balance font-display text-4xl leading-[1.06] text-forest-deep sm:text-5xl"
             >
-              Về <em className="font-normal text-earth">Nếp Núi</em>
+              Nếp <em className="font-normal text-earth">Núi</em>
             </h2>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/75">{aboutSummary}</p>
-            <div className="mt-10 grid grid-cols-3 gap-3 sm:gap-4">
-              {aboutStats.map((stat) => (
-                <div
-                  key={stat.caption}
-                  className="px-2 py-2 text-center"
-                >
-                  <p className="font-display text-4xl text-forest-deep sm:text-5xl">
-                    {stat.value}
-                  </p>
-                  <p className="mt-1 text-sm leading-6 text-ink/70 sm:text-base">{stat.caption}</p>
-                </div>
-              ))}
-            </div>
+            <AboutStats stats={aboutStats} />
           </div>
 
           <div className="flex items-center justify-center">
