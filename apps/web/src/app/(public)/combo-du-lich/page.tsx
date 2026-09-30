@@ -35,7 +35,7 @@ export default async function ComboPage({ searchParams }: ComboPageProps) {
 
       <ComboPlanner key={initialSlug} destinations={destinations} initialSlug={initialSlug} />
 
-      <PromoBand items={comboPromos} moreHref="#compose-heading" />
+      <PromoBand items={comboPromos} />
 
       <ServiceBenefits service="combo" />
 
