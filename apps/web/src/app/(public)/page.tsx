@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CinematicHero } from "@/features/cinematic/cinematic-hero";
 import { ExperienceGallery } from "@/features/gallery/experience-gallery";
-import { FeatureShowcase } from "@/features/showcase/feature-showcase";
+import { IntroVideo } from "@/features/intro-video/intro-video";
 import { WeatherSection } from "@/features/weather/weather-section";
 import { CtaLink } from "@/components/ui/cta-link";
 import { NorthwestCarousel } from "@/features/destinations/northwest-carousel";
@@ -103,7 +103,7 @@ export default function HomePage() {
 
       <ExperienceGallery />
 
-      <FeatureShowcase />
+      <IntroVideo />
     </>
   );
 }
