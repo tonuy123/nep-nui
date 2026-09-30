@@ -57,7 +57,7 @@ export function SiteFooter() {
 
   return (
     <footer id="site-footer" className="border-t border-ivory/15 bg-forest text-ivory">
-      <div className="mx-auto grid max-w-7xl gap-12 pl-5 pr-20 py-12 sm:pl-6 sm:py-16 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,.9fr)_minmax(0,.9fr)] lg:gap-16 lg:pl-8 lg:py-20 2xl:pr-8">
+      <div className="mx-auto grid max-w-6xl gap-12 pl-5 pr-20 py-12 sm:pl-6 sm:py-16 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,.85fr)_minmax(0,.85fr)] lg:gap-12 lg:pl-8 lg:py-20 2xl:pr-8">
         <div>
           <Link href="/" aria-label="Nếp Núi — trang chủ" className="inline-flex">
             <Image
@@ -104,7 +104,7 @@ export function SiteFooter() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Facebook Nếp Núi"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white p-1.5 transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-white p-1.5 transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
                   >
                     <Image src="/images/contact/facebook.svg" alt="" width={32} height={32} unoptimized className="h-full w-full" />
                   </a>
@@ -115,7 +115,7 @@ export function SiteFooter() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Zalo Nếp Núi"
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white p-1.5 transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-white p-1.5 transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-light"
                   >
                     <Image src="/images/contact/zalo.svg" alt="" width={32} height={32} unoptimized className="h-full w-full" />
                   </a>
@@ -139,7 +139,7 @@ export function SiteFooter() {
       </div>
 
       <div className="bg-forest-deep text-ivory">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 pl-5 pr-20 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pl-6 lg:pl-8 2xl:pr-8">
+        <div className="mx-auto flex max-w-6xl flex-col gap-2 pl-5 pr-20 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pl-6 lg:pl-8 2xl:pr-8">
           <p className="text-xs leading-6 text-ivory/85">
             © {new Date().getFullYear()} {siteConfig.name}. <span className="ml-2">Tây Bắc, Việt Nam.</span>
           </p>
