@@ -54,6 +54,41 @@ const serviceBannerCredits = [
   },
 ];
 
+const coachPhotoCredits = [
+  {
+    key: "sapa-bus",
+    name: "Xe khách tại bến (minh họa tuyến Hà Nội – Sa Pa)",
+    author: "Ilya Plekhanov",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Sleeper_bus_in_Vietnam_01.JPG",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+  {
+    key: "hagiang-bus",
+    name: "Khoang giường nằm (minh họa tuyến Hà Nội – Hà Giang)",
+    author: "Ilya Plekhanov",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Thaco_Mobihome_sleeper_bus_interior.jpg",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+  {
+    key: "mocchau-bus",
+    name: "Khoang giường nằm (minh họa tuyến Hà Nội – Mộc Châu)",
+    author: "Ecow",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Sleeper_bus_in_Vietnam.JPG",
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+  },
+  {
+    key: "maichau-bus",
+    name: "Xe giường nằm (minh họa tuyến Hà Nội – Mai Châu)",
+    author: "Ilya Plekhanov",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Sleeper_bus_in_Vietnam_02.JPG",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  },
+];
+
 export default function ImageCreditsPage() {
   return (
     <div className="mx-auto max-w-5xl px-5 py-14 sm:px-6 sm:py-20 lg:px-8">
@@ -93,6 +128,24 @@ export default function ImageCreditsPage() {
       </p>
       <ul className="mt-8 divide-y divide-forest/20 border-y border-forest/20">
         {hotelPhotoCredits.map((credit) => (
+          <li key={credit.key} className="grid gap-2 py-5 sm:grid-cols-[minmax(0,.35fr)_minmax(0,.65fr)] sm:gap-8">
+            <p className="font-display text-xl text-forest-deep">{credit.name}</p>
+            <p className="text-sm leading-7 text-ink/75">
+              {credit.author} ·{" "}
+              <a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">Ảnh gốc</a>
+              {" "}· <a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">{credit.license}</a>
+            </p>
+          </li>
+        ))}
+      </ul>
+
+      <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Ảnh minh họa chuyến xe</h2>
+      <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
+        Bốn ảnh xe khách và khoang giường nằm dùng minh họa cho các card tuyến xe
+        ở trang Chuyến xe; không phải ảnh của nhà xe cụ thể nào.
+      </p>
+      <ul className="mt-8 divide-y divide-forest/20 border-y border-forest/20">
+        {coachPhotoCredits.map((credit) => (
           <li key={credit.key} className="grid gap-2 py-5 sm:grid-cols-[minmax(0,.35fr)_minmax(0,.65fr)] sm:gap-8">
             <p className="font-display text-xl text-forest-deep">{credit.name}</p>
             <p className="text-sm leading-7 text-ink/75">
