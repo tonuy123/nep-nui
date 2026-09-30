@@ -87,6 +87,22 @@ const coachPhotoCredits = [
     license: "CC BY-SA 4.0",
     licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
   },
+  {
+    key: "taxua-bus",
+    name: "Xe giường nằm đỗ bên đường núi (minh họa tuyến Hà Nội – Tà Xùa)",
+    author: "calflier001",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:HYUNDAI_AERODECK_SLEEPER_BUS_NEAR_DA_LAT_VIETNAM_JAN_2012_(6821943988).jpg",
+    license: "CC BY-SA 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
+  },
+  {
+    key: "dienbien-bus",
+    name: "Khoang giường nằm ban đêm (minh họa tuyến Điện Biên – Hà Nội)",
+    author: "Tobias b köhler",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Thanh_Buoi_sleeper_coach.jpg",
+    license: "CC BY-SA 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+  },
 ];
 
 export default function ImageCreditsPage() {
@@ -122,9 +138,9 @@ export default function ImageCreditsPage() {
 
       <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Ảnh cơ sở lưu trú</h2>
       <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
-        Năm ảnh dưới đây chụp đúng cơ sở được ghi tên. Các card Mai Châu Ecolodge,
-        Mù Cang Chải Ecolodge và La Beauté Bắc Hà dùng ảnh khu vực, có chú thích
-        ngay dưới ảnh; tác giả và giấy phép nằm trong danh sách điểm đến.
+        Sáu ảnh dưới đây chụp đúng cơ sở được ghi tên. Các card Mù Cang Chải
+        Ecolodge và La Beauté Bắc Hà dùng ảnh khu vực, có chú thích ngay dưới
+        ảnh; tác giả và giấy phép nằm trong danh sách điểm đến.
       </p>
       <ul className="mt-8 divide-y divide-forest/20 border-y border-forest/20">
         {hotelPhotoCredits.map((credit) => (
@@ -141,7 +157,7 @@ export default function ImageCreditsPage() {
 
       <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Ảnh minh họa chuyến xe</h2>
       <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
-        Bốn ảnh xe khách và khoang giường nằm dùng minh họa cho các card tuyến xe
+        Sáu ảnh xe khách và khoang giường nằm dùng minh họa cho các card tuyến xe
         ở trang Chuyến xe; không phải ảnh của nhà xe cụ thể nào.
       </p>
       <ul className="mt-8 divide-y divide-forest/20 border-y border-forest/20">
