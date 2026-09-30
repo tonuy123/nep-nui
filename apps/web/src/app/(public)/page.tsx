@@ -3,7 +3,6 @@ import { CinematicHero } from "@/features/cinematic/cinematic-hero";
 import { ExperienceGallery } from "@/features/gallery/experience-gallery";
 import { IntroVideo } from "@/features/intro-video/intro-video";
 import { WeatherSection } from "@/features/weather/weather-section";
-import { CtaLink } from "@/components/ui/cta-link";
 import { NorthwestCarousel } from "@/features/destinations/northwest-carousel";
 import { northwestDestinationPreviews } from "@/features/destinations/northwest-destinations";
 
@@ -44,11 +43,6 @@ export default function HomePage() {
               >
                 Điểm đến <em className="font-normal text-earth">Tây Bắc</em>
               </h2>
-            </div>
-            <div className="space-y-5 lg:pb-1">
-              <CtaLink href="/kham-pha" variant="outline">
-                Xem toàn bộ điểm đến
-              </CtaLink>
             </div>
           </div>
 
