@@ -67,6 +67,8 @@ Mở http://localhost:3000
 > terminal như trên. `.env.example` ở root là bản mẫu đầy đủ tên biến.
 > Web lấy nội dung qua same-origin `/api/backend/*`, chuyển tiếp tới API bằng
 > `API_INTERNAL_URL` (mặc định `http://127.0.0.1:3001`) — nên web + API chạy cùng nhau.
+> `npm run dev:web` (dev server) luôn phục vụ code hiện tại ngay khi lưu file —
+> khác với `next start` ở mục "Chạy production" là phục vụ bản build trong `.next`.
 
 ## Database
 
@@ -101,6 +103,12 @@ Chạy lại không cần build (dùng bản đã build `.next-demo`):
 `start-demo.ps1 -SkipBuild -DistDir .next-demo`
 
 **Thủ công**:
+
+> ⚠️ **Quan trọng — bẫy bản build cũ:** `next start` chỉ phục vụ bản build đang
+> có trong `.next`. Nếu sửa code mà **không chạy `npm run build`** (hoặc đang
+> còn server cũ chạy từ trước), web sẽ hiển thị **bản cũ**. Sau mỗi thay đổi
+> code: dừng các server cũ → `npm run build` → start lại. Cách nhanh an toàn
+> nhất là dùng `start-demo.ps1` ở trên (script tự build bản mới mỗi lần chạy).
 
 ```powershell
 npm run build
@@ -216,6 +224,7 @@ API docs: Swagger UI `http://127.0.0.1:3001/api/v1/docs`, JSON
 | Hiện tượng | Nguyên nhân thường gặp | Cách xử lý |
 |---|---|---|
 | API trả 503, trang tài khoản lỗi | PostgreSQL/Docker chưa chạy | Bật Docker Desktop, `npm run db:up` |
+| **Web hiện nội dung cũ hơn code hiện tại** | Đang chạy `next start` với bản build cũ trong `.next`, hoặc mở nhầm một server cũ ở cổng khác | Dừng các server cũ → `npm run build` → start lại (hoặc chạy `scripts/demo/start-demo.ps1` — tự build bản mới); kiểm tra đúng cổng (demo: 8080) và nhấn Ctrl+F5 |
 | Lỗi `PrismaClient` not found | Chưa generate client | `npm install` hoặc `npm run prisma:generate --workspace @webdulich/api` |
 | Đăng nhập không giữ cookie khi dev | API chạy thiếu `NODE_ENV=development` | Đặt `$env:NODE_ENV = 'development'` trước khi start API |
 | Cổng 3000/3001/8080 đang bận | Process cũ còn chạy | Đổi `PORT`/`--port`; demo thì chạy `stop-demo.ps1` trước |
