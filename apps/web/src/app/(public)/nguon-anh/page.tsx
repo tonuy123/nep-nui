@@ -129,16 +129,14 @@ export default function ImageCreditsPage() {
 
       <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Bản đồ</h2>
       <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
-        Bản đồ hành chính các tỉnh phía bắc dùng ở mục &ldquo;Chọn cách đi Tây Bắc&rdquo; trên
-        trang chủ.
+        Sơ đồ tám tỉnh vùng Tây Bắc dùng ở mục &ldquo;Chọn cách đi Tây Bắc&rdquo; trên trang
+        chủ.
       </p>
       <ul className="mt-8 divide-y divide-forest/20 border-y border-forest/20">
         <li className="grid gap-2 py-5 sm:grid-cols-[minmax(0,.35fr)_minmax(0,.65fr)] sm:gap-8">
-          <p className="font-display text-xl text-forest-deep">Bản đồ vùng Tây Bắc</p>
+          <p className="font-display text-xl text-forest-deep">Sơ đồ tám tỉnh vùng Tây Bắc</p>
           <p className="text-sm leading-7 text-ink/75">
-            TUBS ·{" "}
-            <a href="https://commons.wikimedia.org/wiki/File:Vietnam,_administrative_divisions_(regions%2Bprovinces)_-_Nmbrs_-_colored.svg" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">Ảnh gốc</a>
-            {" "}· <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">CC BY-SA 3.0</a>
+            Ảnh sưu tầm — nguồn đang được xác minh, sẽ cập nhật khi có thông tin.
           </p>
         </li>
       </ul>

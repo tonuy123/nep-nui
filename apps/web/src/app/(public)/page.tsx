@@ -19,9 +19,34 @@ const planRegions = [
       "Nơi có Sa Pa, Bắc Hà và những phiên chợ vùng cao. Cung đường dễ đi, phù hợp cả chuyến đầu tiên lẫn những lần quay lại.",
   },
   {
+    name: "Hà Giang",
+    description:
+      "Cao nguyên đá Đồng Văn, đèo Mã Pí Lèng và những cung đường vòng quanh núi. Điểm đến cho người thích lái xe đường dài.",
+  },
+  {
+    name: "Điện Biên",
+    description:
+      "Thung lũng Mường Thanh rộng lớn gắn với di tích Điện Biên Phủ — điểm đến giàu dấu ấn lịch sử ở cực tây.",
+  },
+  {
     name: "Sơn La",
     description:
       "Cao nguyên Mộc Châu và sống núi Tà Xùa — nơi lúa, chè và mây gặp nhau. Điểm dừng lý tưởng cho chuyến 2–3 ngày từ Hà Nội.",
+  },
+  {
+    name: "Yên Bái",
+    description:
+      "Ruộng bậc thang Mù Cang Chải và hồ Thác Bà — điểm nhấn vào mùa lúa chín.",
+  },
+  {
+    name: "Phú Thọ",
+    description:
+      "Vùng đất tổ với đền Hùng và những đồi chè trung du, thuận đường từ Hà Nội lên Tây Bắc.",
+  },
+  {
+    name: "Hòa Bình",
+    description:
+      "Mai Châu, hồ Hòa Bình và các thung lũng xanh — chặng nghỉ cuối tuần từ Hà Nội.",
   },
 ];
 
@@ -62,15 +87,15 @@ export default function HomePage() {
             </h2>
             <figure className="mt-8 border border-forest/15 bg-white p-3">
               <Image
-                src="/images/home/map-north.png"
-                alt="Bản đồ hành chính các tỉnh phía bắc Việt Nam, vùng Tây Bắc nằm bên trái"
-                width={1920}
-                height={1050}
+                src="/images/home/map-northwest.jpg"
+                alt="Sơ đồ tám tỉnh vùng Tây Bắc: Lai Châu, Lào Cai, Hà Giang, Điện Biên, Sơn La, Yên Bái, Phú Thọ, Hòa Bình"
+                width={455}
+                height={369}
                 unoptimized
                 className="h-auto w-full"
               />
               <figcaption className="mt-2 px-1 text-xs leading-5 text-ink/70">
-                Bản đồ vùng Tây Bắc — TUBS, Wikimedia Commons, CC BY-SA 3.0.
+                Sơ đồ tám tỉnh vùng Tây Bắc.
               </figcaption>
             </figure>
           </div>
