@@ -44,16 +44,17 @@ export function AboutSection() {
 
           <div className="flex items-center justify-center rounded-3xl border border-forest/10 bg-white px-8 py-14 shadow-[0_24px_60px_-38px_rgba(23,33,27,0.45)] lg:py-16">
             <div className="flex flex-col items-center gap-5 text-center">
-              <Image
-                src="/brand/nep-nui-mark.svg"
-                alt="Biểu trưng Nếp Núi — núi và ruộng bậc thang"
-                width={144}
-                height={144}
-                unoptimized
-                className="h-28 w-28 sm:h-36 sm:w-36"
-              />
+              <span className="flex size-36 items-center justify-center rounded-full bg-forest-deep sm:size-40">
+                <Image
+                  src="/brand/nep-nui-mark-light.svg"
+                  alt="Biểu trưng Nếp Núi — núi và ruộng bậc thang"
+                  width={144}
+                  height={144}
+                  unoptimized
+                  className="h-24 w-24 sm:h-28 sm:w-28"
+                />
+              </span>
               <p className="font-display text-2xl text-forest-deep">{siteConfig.name}</p>
-              <p className="max-w-[26ch] text-sm leading-6 text-ink/70">{siteConfig.tagline}</p>
             </div>
           </div>
         </div>
