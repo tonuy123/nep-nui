@@ -25,7 +25,16 @@ async function main(): Promise<void> {
     await prisma.$disconnect();
   }
 }
-main().catch(() => {
-  console.error("Admin bootstrap failed. Check explicit inputs, uniqueness, migration, and database availability.");
+main().catch((error: unknown) => {
+  const reason = error instanceof Error ? error.message : "";
+  if (reason === "missing-input") {
+    console.error("Admin bootstrap failed: thieu DATABASE_URL / ADMIN_EMAIL / ADMIN_NAME / ADMIN_PASSWORD trong bien moi truong.");
+  } else if (reason === "weak-password") {
+    console.error("Admin bootstrap failed: mat khau qua yeu. Can >= 16 ky tu, gom chu thuong, chu hoa, so va ky tu dac biet (vi du: NepNui@TayBac2026!).");
+  } else if (reason === "existing-user") {
+    console.error("Admin bootstrap failed: email nay da co tai khoan. Dung email khac, hoac dang nhap bang tai khoan hien co.");
+  } else {
+    console.error("Admin bootstrap failed. Check explicit inputs, uniqueness, migration, and database availability.");
+  }
   process.exitCode = 1;
 });
