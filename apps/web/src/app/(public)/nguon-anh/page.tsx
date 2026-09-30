@@ -3,6 +3,7 @@ import Link from "next/link";
 import { northwestDestinations } from "@/features/destinations/northwest-destinations";
 import { galleryItems } from "@/features/gallery/experience-gallery-data";
 import { weatherPanelPhoto, weatherProvinces } from "@/features/weather/weather-provinces";
+import { hotelPhotoCredits } from "@/features/service-listings/hotel-data";
 
 export const metadata: Metadata = {
   title: "Nguồn và giấy phép ảnh",
@@ -59,9 +60,11 @@ export default function ImageCreditsPage() {
       <p className="text-xs font-semibold uppercase tracking-[.2em] text-earth">Tư liệu / Minh bạch nguồn</p>
       <h1 className="mt-4 font-display text-4xl text-forest-deep sm:text-5xl">Nguồn và giấy phép ảnh</h1>
       <p className="mt-6 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
-        Ảnh chụp dùng trên website lấy từ Wikimedia Commons và Unsplash, đều có
+        Ảnh chụp dùng trên website lấy từ Wikimedia Commons, Flickr, Pexels và Unsplash, đều có
         trang nguồn cùng giấy phép riêng bên dưới. Trình duyệt có thể cắt khung
-        ảnh để vừa card. Những hình do dự án tự tạo được ghi nhãn minh họa.
+        ảnh để vừa card. Bản ảnh đã thu nhỏ và chuyển sang WebP giữ giấy phép
+        tương ứng ở từng dòng; ảnh CC BY-SA được phân phối theo cùng giấy phép.
+        Những hình do dự án tự tạo được ghi nhãn minh họa.
       </p>
 
       <ul className="mt-10 divide-y divide-forest/20 border-y border-forest/20">
@@ -80,6 +83,25 @@ export default function ImageCreditsPage() {
             </li>
           );
         })}
+      </ul>
+
+      <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Ảnh cơ sở lưu trú</h2>
+      <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
+        Năm ảnh dưới đây chụp đúng cơ sở được ghi tên. Các card Mai Châu Ecolodge,
+        Mù Cang Chải Ecolodge và La Beauté Bắc Hà dùng ảnh khu vực, có chú thích
+        ngay dưới ảnh; tác giả và giấy phép nằm trong danh sách điểm đến.
+      </p>
+      <ul className="mt-8 divide-y divide-forest/20 border-y border-forest/20">
+        {hotelPhotoCredits.map((credit) => (
+          <li key={credit.key} className="grid gap-2 py-5 sm:grid-cols-[minmax(0,.35fr)_minmax(0,.65fr)] sm:gap-8">
+            <p className="font-display text-xl text-forest-deep">{credit.name}</p>
+            <p className="text-sm leading-7 text-ink/75">
+              {credit.author} ·{" "}
+              <a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">Ảnh gốc</a>
+              {" "}· <a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-forest">{credit.license}</a>
+            </p>
+          </li>
+        ))}
       </ul>
 
       <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Ảnh khối thời tiết</h2>

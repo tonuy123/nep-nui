@@ -2159,6 +2159,93 @@ apps/web/src/features/auth/auth-form-shell.tsx
 | Risks | Media hero/video UNVERIFIED rights (demo local chấp nhận, chặn public release); Firefox + thiết bị di động thật chưa đo; JS desktop vượt budget nhẹ; rate-limit in-memory; P4b/P5/P6/P4c unreviewed tại thời điểm P7 verify; phiên P4c UI khác còn viết dở trong cây chính (search header) — mọi thay đổi P7 đã tách khỏi file của họ. |
 | Next authorized work | Paw/Codex review P7 (chạy `scripts/demo/start-demo.ps1`, xem `docs/plans/P7_HARDENING_REPORT.md`); entry này sống trong working tree cùng các entry chưa commit của phiên P4c — commit khi cây chính ổn định; không tự gán `VERIFIED`. |
 
+### Entry 026 — Ảnh card và danh mục lưu trú có nguồn
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-30, Asia/Saigon |
+| Agent | Codex; research và UI subagents trong cùng phiên |
+| Phase | Content/UI follow-up theo yêu cầu Paw; không mở phase mới hoặc đổi trạng thái phase cũ |
+| Status | `IMPLEMENTED_UNREVIEWED` |
+| Authorization | Paw yêu cầu tìm ảnh cho các box card, tìm cơ sở lưu trú thật theo vùng và cập nhật thông tin; tiếp tục hoàn tất, giữ nguyên công việc khác trong cây Git. |
+| Result | 20/20 card điểm đến có ảnh; 6 mục trước đây là minh họa đã có ảnh được kiểm tra nguồn/quyền. 8 cơ sở lưu trú thật: Sapa Charm, Hôtel de la Coupole, Nebula Glamping, Phadin, Mai Châu Ecolodge, Mù Cang Chải Ecolodge, La Beauté Bắc Hà, Panhou Retreat. 4 ảnh đúng cơ sở; 4 ảnh khu vực có caption rõ. Không có giá/sao/phòng trống/giảm giá giả trong catalog lưu trú. |
+| Image semantics | Sin Suối Hồ dùng ảnh Kỳ Quan San và caption rõ đây là vùng núi giáp bản; Sìn Hồ dùng ảnh rừng thường xanh gần thị trấn. Caption theo URL ảnh thực sự, không áp caption của bộ ảnh curated cho cover khác do CMS chọn. Trang chi tiết ưu tiên bản gallery lớn hơn khi alt và attribution khớp cover. |
+| Assets | 15 WebP mới: 12 bản card/article điểm đến + 3 ảnh cơ sở. Resize không upscale, quality 86; nguồn ảnh/tác giả/license ở `/nguon-anh`. CC BY-SA derivatives giữ cùng license. |
+| Persistence | DB local `webdulich_dev`: thêm cover/gallery cho đúng 6 slug đang PUBLISHED và thiếu cover, transaction SERIALIZABLE + conditional update; không reset, không sửa body/status. Rerun không tạo thêm media. Media 28 → 40. Sửa dimensions cho 12 asset cũ thuộc 6 nhóm và alt Ô Quy Hồ để khớp file thật; giữ destination fields và media clearance/source. Seed JSON phản ánh cùng metadata cho DB mới. |
+| UI | Card có alt/caption và CTA thật; hotel filter theo khu vực; hotel suggestion dùng forest/gold, không countdown. Bỏ lời khẳng định đặt phòng/ưu đãi chưa có thật trên trang khách sạn. Sửa ảnh bị xóa còn được tham chiếu trong card Hà Giang và ảnh Điện Biên/Lai Châu đặt sai khu vực. |
+| Commands run | Web lint exit 0; web typecheck exit 0; final web build exit 0 (`.next-card-media-11440-final`); focused lint cho copy cuối exit 0; git diff --check exit 0. Một lần lint gọi sai cwd không tìm config, đã chạy lại từ apps/web thành công. Không thêm dependency, migration hoặc commit. |
+| HTTP evidence | 7 public routes 200; 20 destination API/detail routes 200, đủ cover + gallery; 42 URL ảnh trong public HTML trả image/200; 40 file card/article khớp seed dimensions. Evidence TEMP `D:/codex-task-temp/card-media-20260930/http-evidence.json`. |
+| Browser evidence | Chrome thật qua Playwright: hotel/tour/explore ở 1440 và 390, reduced motion; 0 overflow, 0 pageerror; ảnh lazy load đủ sau chuyển carousel; 22/22 checks thao tác lọc/paging/CTA qua. Final hotel smoke trên build cuối ở cả 2 viewport qua: đủ 13 ảnh main, 4 caption khu vực và không còn lời hứa đặt phòng/ưu đãi giả. Screenshot và JSON trong TEMP `D:/codex-task-temp/card-media-20260930/browser/`, gồm `final-hotel.json`. |
+| Preview | Web `http://127.0.0.1:11440/`, PID 25872; API local port 3161, PID 11952. Không dừng process của Paw/DeepSeek. Build directory riêng; thay đổi include tự sinh trong tsconfig đã được gỡ sau khi đối chiếu baseline. |
+| Remaining limits | Chưa có ảnh đúng cơ sở được phép tái sử dụng cho 4 nơi nên dùng ảnh khu vực có nhãn. Chưa có ảnh bản Sin Suối Hồ có quyền rõ; dùng Kỳ Quan San có caption. Giá/tour/chuyến xe ở các trang khác vẫn là demo với nhãn Giá minh họa, không phải inventory/báo giá thật. Không xác nhận public-release readiness hay tự nâng phase thành VERIFIED. |
+| Next authorized work | Paw xem preview và phản hồi; giữ phạm vi này, không tự triển khai phase mới. |
+
+**Files modified trong slice này** (các thay đổi có sẵn ở footer, tour page và phần copy ngoài hotel được giữ nguyên):
+
+```text
+AI_PROJECT_CONTROL.md
+apps/api/prisma/seed-data/northwest-destinations.json
+apps/web/src/app/(public)/diem-den/[slug]/page.tsx
+apps/web/src/app/(public)/khach-san/page.tsx
+apps/web/src/app/(public)/kham-pha/page.tsx
+apps/web/src/app/(public)/nguon-anh/page.tsx
+apps/web/src/features/content/content-ui.tsx
+apps/web/src/features/destinations/destination-card.tsx
+apps/web/src/features/destinations/northwest-destinations.ts
+apps/web/src/features/product-navigation-a/tour-explorer.tsx
+apps/web/src/features/service-listings/listing-card.tsx
+apps/web/src/features/service-listings/listing-section.tsx
+apps/web/src/features/service-listings/listings-data.ts
+apps/web/src/features/service-listings/promo-band.tsx
+apps/web/src/features/service-listings/promo-carousel.tsx
+apps/web/src/features/service-page/service-benefits-data.ts
+```
+
+**Files created — 16:**
+
+```text
+apps/web/src/features/service-listings/hotel-data.ts
+apps/web/public/images/destinations/bac-yen-hang-dong-card.webp
+apps/web/public/images/destinations/bac-yen-hang-dong-article.webp
+apps/web/public/images/destinations/dong-van-card.webp
+apps/web/public/images/destinations/dong-van-article.webp
+apps/web/public/images/destinations/muong-ang-card.webp
+apps/web/public/images/destinations/muong-ang-article.webp
+apps/web/public/images/destinations/ngoc-chien-card.webp
+apps/web/public/images/destinations/ngoc-chien-article.webp
+apps/web/public/images/destinations/sin-ho-card.webp
+apps/web/public/images/destinations/sin-ho-article.webp
+apps/web/public/images/destinations/sin-suoi-ho-ky-quan-san-card.webp
+apps/web/public/images/destinations/sin-suoi-ho-ky-quan-san-article.webp
+apps/web/public/images/hotels/coupole-sapa-card.webp
+apps/web/public/images/hotels/nebula-moc-chau-card.webp
+apps/web/public/images/hotels/phadin-dien-bien-card.webp
+```
+
+### Entry 027 — Ảnh Panhou Retreat xác minh, rà soát 3 lodge và Sìn Suối Hồ
+
+| Field | Value |
+|---|---|
+| Date | 2026-09-30, Asia/Saigon |
+| Agent | opencode CLI (deepseek-flash) |
+| Phase | Content/media follow-up tiếp nối Entry 026; không mở phase mới |
+| Status | `IMPLEMENTED_UNREVIEWED` |
+| Authorization | Paw: "đây là promt của gpt… làm những điều còn lại… chạy web cho tao xem" — tìm ảnh đúng cơ sở cho 4 lodge + ảnh đúng bản Sìn Suối Hồ; chỉ dùng nguồn xác minh được, chưa có thì giữ ảnh hiện tại + chú thích rõ. |
+| Result | Panhou Retreat: tìm được ảnh chụp đúng cơ sở trên Wikimedia Commons (CC BY-SA 4.0, Travelsenseasia) → thay ảnh card thật, bỏ caption khu vực, thêm credit; 5 ảnh đúng cơ sở trên `/nguon-anh`. Mai Châu Ecolodge, Mù Cang Chải Ecolodge, La Beauté Bắc Hà: không có nguồn CC BY/BY-SA dùng được (Commons/Openverse/Pexels; chỉ có 1 ảnh BY-NC-SA của PANGEA Travel — NC không phù hợp nền tảng thương mại) → giữ ảnh khu vực + caption như Entry 026. Sìn Suối Hồ: không có ảnh bản có quyền rõ (đã thử Commons search/category + Openverse nhiều biến thể) → giữ ảnh Kỳ Quan San với caption rõ. Không thay ảnh điểm đến → không đụng seed/DB. |
+| Commands run | Web typecheck exit 0; web lint exit 0; web build exit 0 (`.next-p7`); convert WebP bằng sharp (680×382 → 680×382, không upscale, quality 82, 64KB). |
+| Browser verification | `hotel-media-check.mjs` 15/15: /khach-san 2 trang × 4 card, ảnh load đủ cả desktop 1440 và mobile 390, không overflow, Panhou link cơ sở đúng + noopener, còn đúng 3 caption khu vực, /nguon-anh có credit Travelsenseasia và text "Năm ảnh". verify 29/29; about-check 13/13. Mega-check 3 fail và squares-check crash đến từ file đang viết dở của phiên khác (site-footer, lọc tỉnh trên /khach-san) — ngoài phạm vi slice này, không sửa. |
+| Risks | File Commons ghi chú "Nguồn Vnexpress" trong description — chấp nhận theo license Commons khai báo; ảnh 680×382 chỉ đủ cho card, không dùng cho hero/bài lớn. 3 lodge + Sìn Suối Hồ vẫn chờ nguồn hợp lệ. Không tự nâng phase thành VERIFIED. |
+| Next authorized work | Paw xem `/khach-san` và `/nguon-anh`; khi có ảnh đúng cơ sở có quyền rõ, thay tiếp theo cùng quy trình (WebP không upscale + credit + kiểm tra browser). |
+
+**Files touched trong slice này:**
+
+```text
+AI_PROJECT_CONTROL.md
+apps/web/src/features/service-listings/hotel-data.ts
+apps/web/src/app/(public)/nguon-anh/page.tsx
+apps/web/public/images/hotels/panhou-retreat-card.webp (mới)
+```
+
 ### Handoff template
 
 ```text
