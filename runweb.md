@@ -153,7 +153,10 @@ Admin account created.
 Sau đó:
 
 1. Vào http://127.0.0.1:8080/dang-nhap
-2. Đăng nhập bằng `ADMIN_EMAIL` + `ADMIN_PASSWORD` ở trên
+2. Đăng nhập bằng **đúng cặp email/mật khẩu bạn đặt ở hai biến `ADMIN_EMAIL` /
+   `ADMIN_PASSWORD` phía trên** — theo ví dụ là `admin@nepnui.vn` / `NepNui@TayBac2026!`.
+   ⚠️ Không dùng email nào khác: tài khoản **chỉ tồn tại với đúng email đã đặt
+   trong lệnh** (ví dụ gõ `admin@example.com` sẽ báo "Email hoặc mật khẩu không đúng").
 3. Menu tài khoản sẽ có mục **Quản trị** → mở http://127.0.0.1:8080/admin
 
 ### Lỗi hay gặp ở bước này
@@ -174,7 +177,7 @@ Sau đó:
 - [ ] Trang chủ http://127.0.0.1:8080 mở được, ảnh + bản đồ load đủ
 - [ ] `/kham-pha` có danh sách điểm đến (dữ liệu từ seed)
 - [ ] Đăng ký tài khoản mới ở `/dang-ky` → vào được `/tai-khoan`
-- [ ] Đăng nhập admin → `/admin` thấy dashboard + menu 10 mục
+- [ ] Đăng nhập admin (đúng cặp email/mật khẩu đã set ở mục 6) → `/admin` thấy dashboard + menu 10 mục
 - [ ] Tìm kiếm trên header trả kết quả
 
 ## 8. Cấu hình tùy chọn (OAuth / SMTP / reCAPTCHA)
@@ -234,6 +237,7 @@ API docs: Swagger UI `http://127.0.0.1:3001/api/v1/docs` (dev) ·
 | Hiện tượng | Nguyên nhân thường gặp | Cách xử lý |
 |---|---|---|
 | Web hiện nội dung cũ hơn code | `next start` với bản build cũ trong `.next`, hoặc mở nhầm server cũ ở cổng khác | Dừng server cũ → `npm run build` → start lại (hoặc dùng Cách A); mở đúng cổng 8080; nhấn Ctrl+F5 |
+| Đăng nhập admin báo "Email hoặc mật khẩu không đúng" | Gõ nhầm email, hoặc tài khoản chưa tạo | Dùng đúng cặp email/mật khẩu đã set ở mục 6; nếu chưa tạo thì chạy lại lệnh mục 6 |
 | API trả 503 / trang tài khoản lỗi | PostgreSQL/Docker chưa chạy | Mở Docker Desktop → `npm run db:up` |
 | Lỗi `PrismaClient` not found | Chưa generate client | `npm install` hoặc `npm run prisma:generate --workspace @webdulich/api` |
 | Đăng nhập không giữ cookie khi dev | API chạy thiếu `NODE_ENV=development` | Set `$env:NODE_ENV = 'development'` rồi start lại API |
