@@ -31,7 +31,7 @@ export function AboutSection() {
               {aboutStats.map((stat) => (
                 <div
                   key={stat.caption}
-                  className="border border-forest/15 bg-white px-3 py-5 text-center sm:px-6 sm:py-6"
+                  className="px-2 py-2 text-center"
                 >
                   <p className="font-display text-3xl text-forest-deep sm:text-4xl">
                     {stat.value}
