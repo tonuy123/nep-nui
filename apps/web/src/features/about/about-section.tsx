@@ -42,7 +42,7 @@ export function AboutSection() {
             </div>
           </div>
 
-          <div className="flex items-center justify-center rounded-3xl border border-forest/10 bg-white px-8 py-14 shadow-[0_24px_60px_-38px_rgba(23,33,27,0.45)] lg:py-16">
+          <div className="flex items-center justify-center">
             <div className="flex flex-col items-center gap-5 text-center">
               <span className="flex size-36 items-center justify-center rounded-full bg-forest-deep sm:size-40">
                 <Image
