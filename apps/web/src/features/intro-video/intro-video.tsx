@@ -37,8 +37,7 @@ export function IntroVideo() {
               ))}
             </ul>
             <div className="mt-8 flex flex-wrap gap-3">
-              <CtaLink href="/kham-pha">Xem 10 điểm đến</CtaLink>
-              <CtaLink href="/combo-du-lich" variant="inverseOutline">Lập chuyến đi</CtaLink>
+              <CtaLink href="/tour-tron-goi" square>Xem 10 điểm đến</CtaLink>
             </div>
           </div>
         </div>

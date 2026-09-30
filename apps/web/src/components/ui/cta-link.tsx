@@ -15,6 +15,7 @@ interface CtaLinkProps {
   children: ReactNode;
   variant?: CtaVariant;
   size?: "md" | "lg";
+  square?: boolean;
   className?: string;
 }
 
@@ -23,13 +24,15 @@ export function CtaLink({
   children,
   variant = "primary",
   size = "md",
+  square = false,
   className,
 }: CtaLinkProps) {
   return (
     <Link
       href={href}
       className={cx(
-        "inline-flex min-h-11 max-w-full items-center justify-center gap-3 rounded-full text-center font-semibold transition-colors",
+        "inline-flex min-h-11 max-w-full items-center justify-center gap-3 text-center font-semibold transition-colors",
+        square ? "rounded-none" : "rounded-full",
         size === "lg" ? "px-6 py-3.5 text-sm sm:text-base" : "px-5 py-2.5 text-sm",
         variantClasses[variant],
         className,
