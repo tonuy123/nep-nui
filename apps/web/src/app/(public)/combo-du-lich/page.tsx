@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceBenefits } from "@/features/service-page/service-benefits";
-import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceHero } from "@/features/service-page/service-hero";
-import { comboPromos, guides } from "@/features/service-listings/listings-data";
+import { comboPromos } from "@/features/service-listings/listings-data";
 import { PromoBand } from "@/features/service-listings/promo-band";
 
 export const metadata: Metadata = {
@@ -23,13 +21,6 @@ export default function ComboPage() {
       <PromoBand items={comboPromos} />
 
       <ServiceBenefits service="combo" />
-
-      <GuideBlock content={guides.combo} />
-
-      <ServiceClosing
-        heading="Chốt phương án và bắt đầu đặt dịch vụ"
-        cta={{ label: "Gửi yêu cầu tư vấn", href: "/tai-khoan/yeu-cau-tu-van" }}
-      />
     </>
   );
 }

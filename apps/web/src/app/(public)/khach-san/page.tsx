@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { GuideBlock } from "@/features/service-page/guide-block";
 import { ServiceBenefits } from "@/features/service-page/service-benefits";
-import { ServiceClosing } from "@/features/service-page/service-closing";
 import { ServiceHero } from "@/features/service-page/service-hero";
-import { guides, hotelListings, hotelPromos } from "@/features/service-listings/listings-data";
+import { hotelListings, hotelPromos } from "@/features/service-listings/listings-data";
 import { ListingSection } from "@/features/service-listings/listing-section";
 import { PromoBand } from "@/features/service-listings/promo-band";
 
@@ -31,13 +29,6 @@ export default function HotelsPage() {
       <PromoBand items={hotelPromos} heading="Chỗ nghỉ theo điểm đến" tone="editorial" moreHref="#listing-heading" />
 
       <ServiceBenefits service="hotel" />
-
-      <GuideBlock content={guides.hotel} />
-
-      <ServiceClosing
-        heading="Chưa chắc về chỗ ở?"
-        cta={{ label: "Gửi yêu cầu tư vấn", href: "/tai-khoan/yeu-cau-tu-van" }}
-      />
     </>
   );
 }

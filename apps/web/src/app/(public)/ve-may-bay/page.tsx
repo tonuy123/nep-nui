@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { GuideBlock } from "@/features/service-page/guide-block";
-import { CoachJourneyBanner } from "@/features/service-page/coach-journey-banner";
 import { ServiceBenefits } from "@/features/service-page/service-benefits";
 import { ServiceHero } from "@/features/service-page/service-hero";
-import { coachListings, coachPromos, guides } from "@/features/service-listings/listings-data";
+import { coachListings, coachPromos } from "@/features/service-listings/listings-data";
 import { ListingSection } from "@/features/service-listings/listing-section";
 import { PromoBand } from "@/features/service-listings/promo-band";
 
@@ -29,10 +27,6 @@ export default function CoachPage() {
       <PromoBand items={coachPromos} moreHref="#listing-heading" />
 
       <ServiceBenefits service="coach" />
-
-      <GuideBlock content={guides.coach} />
-
-      <CoachJourneyBanner />
     </>
   );
 }
