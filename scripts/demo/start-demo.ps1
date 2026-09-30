@@ -15,7 +15,7 @@ $root = (Resolve-Path (Join-Path $here "..\..")).Path
 $pidFile = Join-Path $here ".pids.json"
 
 # Optional demo.env (gitignored) chua credentials OAuth / reCAPTCHA / SMTP.
-# Huong dan day du: docs/OAUTH_CAPTCHA_SETUP.md
+# Huong dan day du: README.md (muc "Cau hinh tuy chon: OAuth / SMTP / reCAPTCHA")
 $envFile = Join-Path $here "demo.env"
 if (Test-Path $envFile) {
   Write-Host "[demo] Loading credentials from demo.env"

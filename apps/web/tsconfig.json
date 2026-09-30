@@ -39,7 +39,9 @@
     ".next-p7/types/**/*.ts",
     ".next-p7/dev/types/**/*.ts",
     ".next-auth-preview/types/**/*.ts",
-    ".next-auth-preview/dev/types/**/*.ts"
+    ".next-auth-preview/dev/types/**/*.ts",
+    ".next-demo/types/**/*.ts",
+    ".next-demo/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
