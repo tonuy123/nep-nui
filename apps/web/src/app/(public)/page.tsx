@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { AboutSection } from "@/features/about/about-section";
 import { CinematicHero } from "@/features/cinematic/cinematic-hero";
 import { ExperienceGallery } from "@/features/gallery/experience-gallery";
 import { IntroVideo } from "@/features/intro-video/intro-video";
@@ -98,6 +99,8 @@ export default function HomePage() {
       <ExperienceGallery />
 
       <IntroVideo />
+
+      <AboutSection />
     </>
   );
 }
