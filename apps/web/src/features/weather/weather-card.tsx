@@ -12,7 +12,7 @@ export function WeatherCard({ province, weather }: WeatherCardProps) {
   const described = describeWeather(weather.code);
 
   return (
-    <article className="group flex h-full flex-col">
+    <article className="flex h-full flex-col">
       <div className="relative aspect-[6/7] overflow-hidden rounded-md bg-[#eef1ea]">
         <Image
           src={province.photo.src}
@@ -20,7 +20,7 @@ export function WeatherCard({ province, weather }: WeatherCardProps) {
           fill
           sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
           unoptimized
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.035]"
+          className="object-cover"
         />
       </div>
       <div className="flex flex-1 flex-col pt-4">
@@ -32,7 +32,7 @@ export function WeatherCard({ province, weather }: WeatherCardProps) {
           <p className="font-display text-4xl leading-none text-forest-deep">
             {Math.round(weather.temperature)}°<span className="ml-0.5 align-super text-base text-forest">C</span>
           </p>
-          <span className="grid size-12 shrink-0 place-items-center rounded-md bg-[#eef1ea] text-forest transition-colors group-hover:bg-forest group-hover:text-ivory">
+          <span className="grid size-12 shrink-0 place-items-center rounded-md bg-[#eef1ea] text-forest">
             <WeatherIcon kind={described.icon} className="h-6 w-6" />
           </span>
         </div>

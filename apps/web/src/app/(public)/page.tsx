@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { CinematicHero } from "@/features/cinematic/cinematic-hero";
 import { ExperienceGallery } from "@/features/gallery/experience-gallery";
-import { IntroVideo } from "@/features/intro-video/intro-video";
 import { FeatureShowcase } from "@/features/showcase/feature-showcase";
 import { WeatherSection } from "@/features/weather/weather-section";
 import { CtaLink } from "@/components/ui/cta-link";
@@ -80,9 +79,9 @@ export default function HomePage() {
               </figcaption>
             </figure>
           </div>
-          <ol className="divide-y divide-forest/20 border-y border-forest/20 [&:hover>li:not(:hover)]:pointer-events-none [&:hover>li:not(:hover)]:opacity-0">
+          <ol className="divide-y divide-forest/20 border-y border-forest/20">
             {planRegions.map((region, index) => (
-              <li key={region.name} className="group/item transition-opacity duration-300">
+              <li key={region.name} className="group/item">
                 <div className="grid grid-cols-[2.5rem_minmax(0,1fr)] items-start gap-3 py-6 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-5 sm:py-8">
                   <span className="font-display text-2xl text-earth">{String(index + 1).padStart(2, "0")}</span>
                   <div>
@@ -103,8 +102,6 @@ export default function HomePage() {
       <WeatherSection />
 
       <ExperienceGallery />
-
-      <IntroVideo />
 
       <FeatureShowcase />
     </>

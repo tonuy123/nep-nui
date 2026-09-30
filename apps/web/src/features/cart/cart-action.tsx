@@ -19,7 +19,7 @@ export function CartAction({ mobile = false }: { mobile?: boolean }) {
       href="/gio-hang"
       aria-label="Giỏ hàng — xem thông tin đã đặt"
       title="Giỏ hàng"
-      className="inline-flex min-h-11 w-11 items-center justify-center rounded-md text-forest hover:bg-forest/10"
+      className="inline-flex min-h-11 w-10 items-center justify-center rounded-md text-forest hover:bg-forest/10"
     >
       <CartIcon className="h-5 w-5" />
     </Link>

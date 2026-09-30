@@ -10,7 +10,7 @@ import { MobileNav } from "./mobile-nav";
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-forest/15 bg-white/95 backdrop-blur-md">
-      <div className="relative mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto flex h-[4.5rem] max-w-[90rem] items-center justify-between gap-2 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
           className="flex shrink-0 items-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
@@ -35,8 +35,8 @@ export function SiteHeader() {
           />
         </Link>
 
-        <div className="mx-1.5 hidden min-w-0 flex-1 lg:block xl:mx-2">
-          <div className="mx-auto w-full max-w-md min-w-[10rem]">
+        <div className="hidden min-w-0 flex-1 lg:block">
+          <div className="w-full max-w-md min-w-[8rem]">
             <HeaderSearch />
           </div>
         </div>
