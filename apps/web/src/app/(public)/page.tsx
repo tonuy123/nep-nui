@@ -78,15 +78,15 @@ export default function HomePage() {
       </section>
 
       <section aria-labelledby="plan-heading" className="bg-ivory">
-        <div className="mx-auto grid max-w-[90rem] gap-10 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)] lg:gap-20 lg:px-8 lg:py-24">
-          <div>
-            <h2
-              id="plan-heading"
-              className="font-display text-4xl leading-[1.08] text-forest-deep sm:text-5xl"
-            >
-              Chọn cách đi <em className="font-normal text-earth">Tây Bắc</em>
-            </h2>
-            <figure className="mt-8 border border-forest/15 bg-white p-3">
+        <div className="mx-auto max-w-[90rem] px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <h2
+            id="plan-heading"
+            className="font-display text-4xl leading-[1.08] text-forest-deep sm:text-5xl"
+          >
+            Chọn cách đi <em className="font-normal text-earth">Tây Bắc</em>
+          </h2>
+          <div className="mt-8 grid gap-10 lg:mt-12 lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)] lg:gap-20">
+            <figure className="border border-forest/15 bg-white p-3">
               <Image
                 src="/images/home/map-northwest.jpg"
                 alt="Sơ đồ tám tỉnh vùng Tây Bắc: Lai Châu, Lào Cai, Hà Giang, Điện Biên, Sơn La, Yên Bái, Phú Thọ, Hòa Bình"
@@ -99,7 +99,6 @@ export default function HomePage() {
                 Sơ đồ tám tỉnh vùng Tây Bắc.
               </figcaption>
             </figure>
-          </div>
           <div className="relative">
             <ol
               tabIndex={0}
@@ -127,6 +126,7 @@ export default function HomePage() {
               aria-hidden="true"
               className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ivory via-ivory/70 to-transparent"
             />
+          </div>
           </div>
         </div>
       </section>
