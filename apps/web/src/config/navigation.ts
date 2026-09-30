@@ -9,7 +9,6 @@ export const primaryNav: NavItem[] = [
   { label: "Chuyến xe", href: "/ve-may-bay" },
   { label: "Khách sạn", href: "/khach-san" },
   { label: "Combo du lịch", href: "/combo-du-lich" },
-  { label: "Dịch vụ cộng thêm", href: "/dich-vu-cong-them" },
 ];
 
 export const primaryCta: NavItem = {

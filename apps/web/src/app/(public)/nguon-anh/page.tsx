@@ -51,14 +51,6 @@ const serviceBannerCredits = [
     license: "CC BY 2.0",
     licenseUrl: "https://creativecommons.org/licenses/by/2.0",
   },
-  {
-    key: "addon",
-    name: "Dịch vụ cộng thêm — Hà Giang",
-    author: "Benjamin Smith",
-    sourceUrl: "https://commons.wikimedia.org/wiki/File:H%C3%A0_Giang_province_landscape.jpg",
-    license: "CC BY-SA 4.0",
-    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
-  },
 ];
 
 export default function ImageCreditsPage() {
@@ -111,8 +103,7 @@ export default function ImageCreditsPage() {
 
       <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Ảnh banner trang dịch vụ</h2>
       <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
-        Bốn ảnh banner đầu trang cho các mục Chuyến xe, Khách sạn, Combo du lịch
-        và Dịch vụ cộng thêm.
+        Ba ảnh banner đầu trang cho các mục Chuyến xe, Khách sạn và Combo du lịch.
       </p>
       <ul className="mt-8 divide-y divide-forest/20 border-y border-forest/20">
         {serviceBannerCredits.map((credit) => (

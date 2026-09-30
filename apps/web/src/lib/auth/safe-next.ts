@@ -1,6 +1,6 @@
 const RETURN_ROUTES = new Set([
   "/", "/tour-tron-goi", "/ve-may-bay", "/khach-san",
-  "/combo-du-lich", "/dich-vu-cong-them",
+  "/combo-du-lich",
   "/kham-pha", "/trai-nghiem", "/hanh-trinh", "/ban-do",
   "/chuyen-ban-dia", "/cam-nang", "/tai-khoan", "/tai-khoan/yeu-thich",
   "/tai-khoan/hanh-trinh-da-luu", "/tai-khoan/yeu-cau-tu-van",

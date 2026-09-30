@@ -42,15 +42,6 @@ export function StickerIcon({ className = "h-4 w-4" }: { className?: string }) {
   );
 }
 
-export function CirclePlusIcon({ className = "h-4 w-4" }: { className?: string }) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="9" />
-      <path d="M12 8v8M8 12h8" />
-    </svg>
-  );
-}
-
 export function UserIcon({ className = "h-4 w-4" }: { className?: string }) {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -75,5 +66,4 @@ export const navIcons: Record<string, ComponentType<{ className?: string }>> = {
   "/ve-may-bay": CoachIcon,
   "/khach-san": BuildingsIcon,
   "/combo-du-lich": StickerIcon,
-  "/dich-vu-cong-them": CirclePlusIcon,
 };
