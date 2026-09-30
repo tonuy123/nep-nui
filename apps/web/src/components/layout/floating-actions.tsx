@@ -6,7 +6,7 @@ import { contactConfig } from "@/config/contact";
 
 const iconClass = "h-5 w-5";
 const buttonClass =
-  "flex h-12 w-12 items-center justify-center shadow-[0_2px_10px_rgba(23,33,27,0.25)] transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest";
+  "flex h-12 w-12 items-center justify-center rounded-full shadow-[0_2px_10px_rgba(23,33,27,0.25)] transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest";
 
 function isConfigured(value: string): boolean {
   return value.trim().length > 0;
