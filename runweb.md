@@ -6,6 +6,8 @@ theo đúng thứ tự. Thông tin chung về dự án xem [README.md](README.md
 - Mọi lệnh chạy trong **PowerShell ở thư mục gốc repo** (ví dụ `D:\webdulich`).
 - Các lệnh bên dưới đã được chạy thử lại nguyên văn trước khi bàn giao.
 - PowerShell 5.1 **không hỗ trợ `&&`** — gõ từng lệnh, hoặc ngăn cách bằng `;`.
+- Trên macOS/Linux: thay `$env:TEN = 'giá trị'` bằng `export TEN='giá trị'`; riêng
+  script `scripts/demo/start-demo.ps1` chỉ chạy trên Windows — dùng Cách B hoặc Cách C.
 
 ## 0. Chuẩn bị môi trường
 
@@ -23,6 +25,10 @@ npm install
 
 Cuối lệnh, `postinstall` tự build `packages/contracts` và generate Prisma client.
 Prisma client nằm ở `apps/api/src/generated/prisma` (không commit — sẽ được tạo lại).
+
+> Nếu npm in cảnh báo dạng `npm warn allow-scripts ... not yet covered ...` —
+> **có thể bỏ qua**: các gói cần thiết đều kèm sẵn prebuild hoặc không cần
+> script cài đặt (đã kiểm chứng toàn bộ luồng chạy được ngay sau cảnh báo này).
 
 ## 2. Bật database local (Docker)
 
@@ -154,13 +160,14 @@ Sau đó:
 
 | Thông báo | Lý do | Cách xử lý |
 |---|---|---|
+| `Admin account already exists - skip creation...` | Email đã là ADMIN từ trước | **Không phải lỗi** — lệnh vẫn thành công; chỉ cần đăng nhập bằng mật khẩu đã đặt |
 | `... mat khau qua yeu ...` | Mật khẩu < 16 ký tự hoặc thiếu loại ký tự | Dùng đúng ví dụ `NepNui@TayBac2026!` (18 ký tự, đủ 4 loại) |
-| `... email nay da co tai khoan ...` | Email đã tạo trước đó | Đổi `ADMIN_EMAIL` khác, hoặc đăng nhập luôn tài khoản cũ |
+| `... email nay thuoc mot tai khoan khac (khong phai ADMIN) ...` | Email trùng tài khoản USER thường | Đổi `ADMIN_EMAIL` khác |
 | `... thieu DATABASE_URL ...` | Chưa set biến môi trường | Chạy lại đủ 4 dòng `$env:` như trên trong **cùng terminal** |
-| `Admin bootstrap failed. Check ...` (bản cũ) | Database chưa chạy / chưa migrate | Làm lại bước 2 và bước 3 |
+| `Admin bootstrap failed. Check ...` | Database chưa chạy / chưa migrate | Làm lại bước 2 và bước 3 |
 
-> Nếu máy đã từng tạo admin trước đây thì `admin@nepnui.vn` có thể đã tồn tại —
-> khi đó CLI báo `email nay da co tai khoan`: **bỏ qua bước tạo, đăng nhập thẳng**.
+> Chạy lại lệnh tạo admin trên máy đã tạo trước đó là **bình thường**: CLI báo
+> `already exists - skip creation` và kết thúc thành công — việc cần làm chỉ là đăng nhập.
 
 ## 7. Kiểm tra sau khi chạy (checklist)
 

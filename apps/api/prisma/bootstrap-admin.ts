@@ -17,7 +17,14 @@ async function main(): Promise<void> {
     || !/[0-9]/.test(password) || !/[^A-Za-z0-9]/.test(password)) throw new Error("weak-password");
   const prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString: databaseUrl, connectionTimeoutMillis: 3000, max: 2 }) });
   try {
-    if (await prisma.user.findUnique({ where: { email }, select: { id: true } })) throw new Error("existing-user");
+    const existing = await prisma.user.findUnique({ where: { email }, select: { id: true, role: true } });
+    if (existing) {
+      if (existing.role === "ADMIN") {
+        console.log("Admin account already exists - skip creation. Log in with the existing password.");
+        return;
+      }
+      throw new Error("existing-user");
+    }
     const passwordHash = await new PasswordService().hash(password);
     await prisma.user.create({ data: { email, name, passwordHash, role: "ADMIN", status: "ACTIVE" } });
     console.log("Admin account created.");
@@ -32,7 +39,7 @@ main().catch((error: unknown) => {
   } else if (reason === "weak-password") {
     console.error("Admin bootstrap failed: mat khau qua yeu. Can >= 16 ky tu, gom chu thuong, chu hoa, so va ky tu dac biet (vi du: NepNui@TayBac2026!).");
   } else if (reason === "existing-user") {
-    console.error("Admin bootstrap failed: email nay da co tai khoan. Dung email khac, hoac dang nhap bang tai khoan hien co.");
+    console.error("Admin bootstrap failed: email nay thuoc mot tai khoan khac (khong phai ADMIN). Dung email khac.");
   } else {
     console.error("Admin bootstrap failed. Check explicit inputs, uniqueness, migration, and database availability.");
   }
