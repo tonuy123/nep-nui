@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { CinematicHero } from "@/features/cinematic/cinematic-hero";
 import { ExperienceGallery } from "@/features/gallery/experience-gallery";
+import { IntroVideo } from "@/features/intro-video/intro-video";
 import { FeatureShowcase } from "@/features/showcase/feature-showcase";
 import { WeatherSection } from "@/features/weather/weather-section";
 import { CtaLink } from "@/components/ui/cta-link";
@@ -102,6 +103,8 @@ export default function HomePage() {
       <WeatherSection />
 
       <ExperienceGallery />
+
+      <IntroVideo />
 
       <FeatureShowcase />
     </>

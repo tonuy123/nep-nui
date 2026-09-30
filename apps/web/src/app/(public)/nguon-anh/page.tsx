@@ -143,13 +143,6 @@ export default function ImageCreditsPage() {
         </li>
       </ul>
 
-      <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Minh họa banner chuyến xe</h2>
-      <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
-        Cảnh xe trên đường núi ở cuối trang Chuyến xe là minh họa tạo bằng AI
-        theo thiết kế của Nếp Núi, không phải ảnh chụp một cung đường hay địa
-        điểm cụ thể. Ảnh được xuất thành WebP để tải gọn hơn.
-      </p>
-
       <h2 className="mt-14 font-display text-3xl text-forest-deep sm:text-4xl">Ảnh khoảnh khắc trải nghiệm</h2>
       <p className="mt-4 max-w-2xl text-sm leading-7 text-ink/75 sm:text-base">
         Tám ảnh trong mục &ldquo;Kỷ niệm trải nghiệm cảnh quan&rdquo; trên trang chủ.

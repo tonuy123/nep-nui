@@ -1,22 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import styles from "./coach-journey-banner.module.css";
 
 export function CoachJourneyBanner() {
   return (
     <section className={styles.banner} aria-labelledby="coach-journey-heading">
-      <div className={styles.visual} aria-hidden="true">
-        <Image
-          src="/images/services/coach-journey-banner.webp"
-          alt=""
-          fill
-          sizes="(min-width: 768px) 72vw, 100vw"
-          quality={90}
-          className={styles.image}
-        />
-      </div>
-      <span className={styles.illustrationNote}>Minh họa tạo bằng AI</span>
-
       <div className={styles.inner}>
         <div className={styles.content}>
           <p className={styles.eyebrow}>Chuyến xe đường dài · Nếp Núi</p>
