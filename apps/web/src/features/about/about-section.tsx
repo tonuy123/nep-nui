@@ -16,7 +16,7 @@ export function AboutSection() {
   return (
     <section aria-labelledby="about-heading" className="bg-ivory">
       <div className="mx-auto max-w-[90rem] px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,.85fr)] lg:gap-10">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,.95fr)] lg:gap-8">
           <div className="lg:pl-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-earth">
               Về chúng tôi
@@ -27,23 +27,23 @@ export function AboutSection() {
             >
               Nếp <em className="font-normal text-earth">Núi</em>
             </h2>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/75">{aboutSummary}</p>
+            <p className="mt-6 max-w-3xl text-xl leading-9 text-ink/75">{aboutSummary}</p>
             <AboutStats stats={aboutStats} />
           </div>
 
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center lg:justify-start lg:pl-6">
             <div className="flex flex-col items-center gap-5 text-center">
-              <span className="flex size-44 items-center justify-center rounded-full bg-forest-deep sm:size-56">
+              <span className="flex size-52 items-center justify-center rounded-full bg-forest-deep sm:size-64">
                 <Image
                   src="/brand/nep-nui-mark-light.svg"
                   alt="Biểu trưng Nếp Núi — núi và ruộng bậc thang"
                   width={144}
                   height={144}
                   unoptimized
-                  className="h-32 w-32 sm:h-40 sm:w-40"
+                  className="h-36 w-36 sm:h-48 sm:w-48"
                 />
               </span>
-              <p className="font-display text-3xl text-forest-deep sm:text-4xl">{siteConfig.name}</p>
+              <p className="font-display text-4xl text-forest-deep sm:text-5xl">{siteConfig.name}</p>
             </div>
           </div>
         </div>

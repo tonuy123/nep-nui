@@ -55,11 +55,11 @@ export function AboutStats({ stats }: { stats: readonly AboutStat[] }) {
     <div ref={ref} className="mt-10 grid grid-cols-3 gap-3 sm:gap-4">
       {stats.map((stat, index) => (
         <div key={stat.caption} className="px-2 py-2 text-center">
-          <p className="font-display text-4xl text-forest-deep sm:text-5xl">
+          <p className="font-display text-4xl text-forest-deep sm:text-6xl">
             {counts[index]}
             {stat.suffix}
           </p>
-          <p className="mt-1 text-sm leading-6 text-ink/70 sm:text-base">{stat.caption}</p>
+          <p className="mt-1 text-sm leading-6 text-ink/70 sm:text-lg">{stat.caption}</p>
         </div>
       ))}
     </div>

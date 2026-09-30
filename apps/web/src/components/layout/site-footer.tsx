@@ -139,21 +139,16 @@ export function SiteFooter() {
       </div>
 
       <div className="bg-forest-deep text-ivory">
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 pl-5 pr-20 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pl-6 lg:pl-8 2xl:pr-8">
+        <div className="mx-auto max-w-6xl space-y-1 px-5 py-5 text-center sm:px-6 lg:px-8">
           <p className="text-xs leading-6 text-ivory/85">
-            © {new Date().getFullYear()} {siteConfig.name}. <span className="ml-2">Tây Bắc, Việt Nam.</span>
+            Bản quyền của {siteConfig.name} © {new Date().getFullYear()}. Bảo lưu mọi quyền.
           </p>
-          <nav aria-label="Tài khoản ở chân trang" className="flex flex-wrap gap-x-6">
-            {[
-              { label: "Đăng nhập", href: "/dang-nhap" },
-              { label: "Đăng ký", href: "/dang-ky" },
-              { label: "Tài khoản", href: "/tai-khoan" },
-            ].map((item) => (
-              <Link key={item.href} href={item.href} className="inline-flex min-h-11 items-center text-xs text-ivory/90 hover:text-gold-light hover:underline hover:underline-offset-4">
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          <p className="text-xs leading-6 text-ivory/85">
+            Ghi rõ nguồn &quot;nepnui.vn&quot; khi sử dụng lại thông tin từ website này.
+          </p>
+          <p className="text-xs leading-6 text-ivory/85">
+            Hotline: {contactConfig.phone} · Email: {contactConfig.email}
+          </p>
         </div>
       </div>
     </footer>
