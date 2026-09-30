@@ -8,12 +8,14 @@ export function ServiceBenefits({ service }: { service: ServiceKey }) {
   return (
     <section aria-labelledby="benefits-heading" className="border-t border-forest/15 bg-white">
       <div className="mx-auto max-w-[90rem] px-5 py-14 sm:px-6 sm:py-20 lg:px-8">
-        <p className="text-xs font-bold uppercase tracking-[0.22em] text-earth">Đặt qua Nếp Núi</p>
+        <p className="text-xs font-bold uppercase tracking-[0.22em] text-earth">
+          {content.sectionEyebrow ?? "Đặt qua Nếp Núi"}
+        </p>
         <h2
           id="benefits-heading"
           className="mt-3 max-w-2xl font-display text-3xl leading-tight text-forest sm:text-4xl"
         >
-          Vì sao chọn Nếp Núi
+          {content.sectionTitle ?? "Vì sao chọn Nếp Núi"}
         </h2>
 
         <div className="mt-10 grid gap-10 lg:grid-cols-3 lg:gap-12">

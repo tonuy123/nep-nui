@@ -1,4 +1,4 @@
-// Noi dung gioi thieu cho 5 trang dich vu: vi sao nen di, trai nghiem khi dat, uu dai khi dat qua Nep Nui.
+// Noi dung gioi thieu ngan cho 5 trang dich vu.
 // Van phong quang ba noi bo, khong dung so lieu dia phuong hay gia cu the ngoai du lieu demo da co.
 
 export type ServiceKey = "tour" | "coach" | "hotel" | "combo" | "addon";
@@ -10,6 +10,8 @@ export interface BenefitBlock {
 }
 
 export interface BenefitsContent {
+  sectionEyebrow?: string;
+  sectionTitle?: string;
   why: BenefitBlock;
   experience: BenefitBlock;
   perks: BenefitBlock;
@@ -17,34 +19,33 @@ export interface BenefitsContent {
 
 export const serviceBenefits: Record<ServiceKey, BenefitsContent> = {
   tour: {
+    sectionEyebrow: "Chọn tour Tây Bắc",
+    sectionTitle: "Chọn chuyến đi vừa với bạn",
     why: {
-      heading: "Vì sao nên đi Tây Bắc",
-      intro: "Vùng núi phía bắc là nơi cảnh quan và nhịp sống đổi thay rõ nhất theo từng cung đường.",
+      heading: "Chọn nơi muốn đến",
+      intro: "Ruộng bậc thang Mù Cang Chải, núi trong sương Tà Xùa hay đồi chè Mộc Châu — chọn cảnh quan bạn muốn tìm hiểu trước khi tính lịch đi.",
       items: [
-        "Ruộng bậc thang, sống núi và thung lũng sương phủ tạo nên khung cảnh khác nhau ở mỗi mùa.",
-        "Bản làng, phiên chợ và ẩm thực địa phương gần gũi, dễ tiếp cận với người đi lần đầu.",
-        "Khí hậu mát mẻ quanh năm, phù hợp cả chuyến ngắn cuối tuần lẫn hành trình dài ngày.",
-        "Mười điểm đến trên Nếp Núi đều có bài viết kèm nguồn tham khảo để tìm hiểu trước.",
+        "Lọc điểm đến theo cảnh quan bạn thích.",
+        "Mở bài địa điểm để xem ảnh và thông tin có nguồn.",
+        "So sánh những nơi phù hợp với số ngày bạn có.",
       ],
     },
     experience: {
-      heading: "Trải nghiệm khi đặt tour qua Nếp Núi",
-      intro: "Chọn điểm đến trước, ghép lịch trình sau — mọi thứ nằm trong một luồng.",
+      heading: "Xem nhịp chuyến đi",
+      intro: "Một ảnh đẹp chưa nói hết chuyến đi. Hãy tính cả thời gian di chuyển và thời gian thật sự ở lại.",
       items: [
-        "Lọc điểm đến theo cảnh quan và mùa, đọc bài viết trước khi quyết định.",
-        "Tạo bản nháp chuyến đi theo số ngày và ưu tiên trải nghiệm của bạn.",
-        "Nhận tư vấn lịch trình thực tế trước khi chốt, tránh ghép các chặng quá xa nhau.",
-        "Lưu bản nháp trong tài khoản và điều chỉnh bất cứ lúc nào.",
+        "Điểm khởi hành và số ngày dự kiến có hợp lịch của bạn?",
+        "Chặng nào đi xe lâu, dừng nghỉ ở đâu?",
+        "Mỗi ngày còn bao nhiêu thời gian tự do?",
       ],
     },
     perks: {
-      heading: "Ưu đãi khi đặt qua Nếp Núi",
-      intro: "Đặt trực tiếp qua Nếp Núi đi kèm các quyền lợi áp dụng thống nhất.",
+      heading: "Chuẩn bị yêu cầu tư vấn",
+      intro: "Chọn xong điểm đến, ghi lại số ngày và điều bạn ưu tiên để trao đổi về một lịch trình cụ thể.",
       items: [
-        "Giá hiển thị trọn vẹn, không phụ thu ngoài thỏa thuận.",
-        "Ưu đãi giờ chốt áp dụng cho danh sách tour đang mở bán.",
-        "Xác nhận lịch trình qua tư vấn trước khi thanh toán.",
-        "Hỗ trợ điều chỉnh lịch theo chính sách của từng nhà cung cấp.",
+        "Ghi số người và khoảng thời gian có thể đi.",
+        "Nêu kiểu lưu trú và trải nghiệm bạn muốn ưu tiên.",
+        "Gửi yêu cầu để trao đổi về lịch trình và dịch vụ.",
       ],
     },
   },
@@ -81,34 +82,36 @@ export const serviceBenefits: Record<ServiceKey, BenefitsContent> = {
     },
   },
   hotel: {
+    sectionEyebrow: "Lưu trú",
+    sectionTitle: "Chọn chỗ nghỉ trước khi lên đường",
     why: {
-      heading: "Vì sao nên đi Tây Bắc",
-      intro: "Ở Tây Bắc, nơi lưu trú không chỉ để ngủ — nơi ở là một phần của trải nghiệm.",
+      heading: "Chọn khu vực",
+      intro: "Đối chiếu nơi nghỉ với những điểm bạn muốn ghé.",
       items: [
-        "Homestay bản địa cho bạn bữa tối cùng gia đình chủ nhà và câu chuyện của vùng đất.",
-        "Khách sạn tại trung tâm thị trấn thuận tiện di chuyển, phù hợp gia đình.",
-        "Nhiều nơi nằm ngay sườn đồi — mở cửa là thấy ruộng bậc thang hoặc biển mây.",
-        "Mức giá đa dạng từ tiết kiệm tới tiêu chuẩn, dễ chọn theo ngân sách.",
+        "Xem vị trí cơ sở trên bản đồ.",
+        "Kiểm tra khoảng cách tới điểm bắt đầu hành trình.",
+        "Hỏi về đường vào và nơi đỗ xe nếu tự lái.",
+        "Chọn loại phòng theo số người trong nhóm.",
       ],
     },
     experience: {
-      heading: "Trải nghiệm khi đặt phòng qua Nếp Núi",
-      intro: "Thông tin rõ trước khi đặt, xác nhận chắc trước khi đến.",
+      heading: "Xem thông tin cơ sở",
+      intro: "Mỗi card dẫn tới website hoặc nguồn du lịch của nơi ở.",
       items: [
-        "Xem thông tin phòng, vị trí và chính sách hủy trước khi đặt.",
-        "Chọn lưu trú theo khu vực bạn muốn khám phá, không phải theo thành phố.",
-        "Ghi chú yêu cầu đặc biệt ngay trong đơn — phòng tầng thấp, ăn sáng sớm…",
-        "Nhận xác nhận từ nơi lưu trú trước ngày nhận phòng.",
+        "Mở nguồn để xem ảnh phòng và thông tin liên hệ.",
+        "Đọc chú thích để phân biệt ảnh cơ sở với ảnh khu vực.",
+        "Hỏi trực tiếp về yêu cầu ăn uống hoặc tiếp cận.",
+        "Lưu đầu mối liên hệ trước ngày đến.",
       ],
     },
     perks: {
-      heading: "Ưu đãi khi đặt phòng qua Nếp Núi",
-      intro: "Đặt phòng qua Nếp Núi giữ giá niêm yết cùng các quyền lợi đi kèm.",
+      heading: "Kiểm tra trước khi đặt",
+      intro: "Giá và phòng trống cần xác nhận trực tiếp với cơ sở.",
       items: [
-        "Giá phòng hiển thị theo niêm yết — không phụ thu ẩn.",
-        "Ưu đãi giờ chốt cho một số khách sạn và homestay trong danh sách.",
-        "Hỗ trợ đổi ngày nhận phòng theo chính sách từng nơi.",
-        "Quy trình hủy rõ ràng, không ràng buộc ngoài chính sách.",
+        "Xác nhận giá cho đúng ngày và số khách.",
+        "Hỏi chi phí đã gồm bữa sáng, thuế và phụ phí chưa.",
+        "Đọc điều kiện đổi ngày, hủy phòng và hoàn tiền.",
+        "Giữ xác nhận đặt phòng cùng nội dung đã thỏa thuận.",
       ],
     },
   },

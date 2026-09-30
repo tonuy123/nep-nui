@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ContentCard, ContentEmpty, ContentUnavailable } from "@/features/content/content-ui";
+import { destinationPhotoCaption } from "@/features/destinations/northwest-destinations";
 import { ContentUnavailableError, listDestinations } from "@/lib/content/api";
 
 export const metadata: Metadata = {
@@ -148,6 +149,7 @@ export default async function ExplorePage({ searchParams }: ExplorePageProps) {
                   <ContentCard
                     href={`/diem-den/${destination.slug}`}
                     media={destination.coverMedia}
+                    caption={destinationPhotoCaption(destination.coverMedia?.publicUrl)}
                     title={destination.title}
                     meta={[destination.province, destination.landscape].filter(Boolean).join(" · ")}
                     excerpt={destination.excerpt}

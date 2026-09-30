@@ -4,6 +4,7 @@ export interface DestinationPhoto {
   cardSrc: string;
   articleSrc: string;
   alt: string;
+  caption?: string;
   author: string;
   sourceUrl: string;
   sourceLabel?: string;
@@ -40,7 +41,7 @@ export interface DestinationPreview {
   landscape: string;
   theme: DestinationTheme;
   teaser: string;
-  photo?: Pick<DestinationPhoto, "cardSrc" | "alt">;
+  photo?: Pick<DestinationPhoto, "cardSrc" | "alt" | "caption">;
   illustration?: NorthwestDestination["illustration"];
 }
 
@@ -234,7 +235,17 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     travelNote:
       "Xác nhận giờ mở cửa và quy định sử dụng tại điểm suối khoáng. Ưu tiên dịch vụ do người địa phương vận hành với thông tin rõ ràng.",
     sourceUrl: "https://vietnam.travel/vi/things-to-do/community-based-tourism-vietnam",
-    illustration: "river",
+    photo: {
+      src: "/images/destinations/ngoc-chien-article.webp",
+      cardSrc: "/images/destinations/ngoc-chien-card.webp",
+      articleSrc: "/images/destinations/ngoc-chien-article.webp",
+      alt: "Người phụ nữ vác bó cỏ cạnh nhà gỗ tại Ngọc Chiến, Sơn La",
+      author: "Tong Tuan Anh",
+      sourceUrl: "https://www.flickr.com/photos/onlynick/16527245719/",
+      sourceLabel: "Flickr",
+      license: "CC BY 2.0",
+      licenseUrl: "https://creativecommons.org/licenses/by/2.0/",
+    },
   },
   {
     slug: "mai-chau",
@@ -281,7 +292,18 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     travelNote:
       "Hỏi trước về điều kiện lưu trú, người hướng dẫn và hoạt động phù hợp; tôn trọng quy định của bản trong suốt chuyến đi.",
     sourceUrl: "https://dulich.laichau.gov.vn/vi/blog/details/ban-du-lich-cong-dong-sin-suoi-ho-116",
-    illustration: "village",
+    photo: {
+      src: "/images/destinations/sin-suoi-ho-ky-quan-san-article.webp",
+      cardSrc: "/images/destinations/sin-suoi-ho-ky-quan-san-card.webp",
+      articleSrc: "/images/destinations/sin-suoi-ho-ky-quan-san-article.webp",
+      alt: "Biển mây dưới ánh bình minh nhìn từ đỉnh Kỳ Quan San",
+      caption: "Kỳ Quan San, vùng núi giáp Sin Suối Hồ",
+      author: "NKSTTSSHNVN",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:B%C3%ACnh_minh_K%E1%BB%B3_Quan_San.jpg",
+      sourceLabel: "Wikimedia Commons",
+      license: "CC BY-SA 4.0",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    },
   },
   {
     slug: "muong-thanh",
@@ -328,7 +350,17 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     travelNote:
       "Cao nguyên đá khô và lạnh hơn các vùng lân cận về đêm. Lịch chợ theo phiên từng xã; xác nhận ngày trước khi sắp hành trình.",
     sourceUrl: "https://vi.wikipedia.org/wiki/%C4%90%E1%BB%93ng_V%C4%83n",
-    illustration: "village",
+    photo: {
+      src: "/images/destinations/dong-van-article.webp",
+      cardSrc: "/images/destinations/dong-van-card.webp",
+      articleSrc: "/images/destinations/dong-van-article.webp",
+      alt: "Phố cổ Đồng Văn với mái ngói và dãy núi đá phía sau",
+      author: "HuangWending18072009",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Dong_Van_old_town.jpg",
+      sourceLabel: "Wikimedia Commons",
+      license: "CC0 1.0",
+      licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+    },
   },
   {
     slug: "meo-vac",
@@ -434,7 +466,18 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     travelNote:
       "Đường lên Sìn Hồ dài và nhiều đoạn quanh co; không nên đi đêm. Nhiệt độ ban đêm thấp quanh năm, kể cả mùa hè.",
     sourceUrl: "https://vi.wikipedia.org/wiki/S%C3%ACn_H%E1%BB%93",
-    illustration: "village",
+    photo: {
+      src: "/images/destinations/sin-ho-article.webp",
+      cardSrc: "/images/destinations/sin-ho-card.webp",
+      articleSrc: "/images/destinations/sin-ho-article.webp",
+      alt: "Rừng thường xanh gần thị trấn Sìn Hồ, Lai Châu",
+      caption: "Rừng thường xanh gần thị trấn Sìn Hồ",
+      author: "Chung Van Hoang và cộng sự (2024)",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Habitat_of_Leptobrachella_huynhi_(10.3897-BDJ.12.e136491)_Figure_4.JPG",
+      sourceLabel: "Wikimedia Commons",
+      license: "CC BY 4.0",
+      licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+    },
   },
   {
     slug: "o-quy-ho",
@@ -482,7 +525,17 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     travelNote:
       "Dịch vụ lưu trú và ăn uống còn ít; nên chủ động kế hoạch nghỉ và nhiên liệu. Đồng ruộng đổi màu theo vụ.",
     sourceUrl: "https://vi.wikipedia.org/wiki/M%C6%B0%E1%BB%9Dng_%E1%BA%A2ng",
-    illustration: "river",
+    photo: {
+      src: "/images/destinations/muong-ang-article.webp",
+      cardSrc: "/images/destinations/muong-ang-card.webp",
+      articleSrc: "/images/destinations/muong-ang-article.webp",
+      alt: "Thung lũng và thị trấn Mường Ảng nhìn từ quốc lộ 279",
+      author: "Tycho",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:M%C6%B0%E1%BB%9Dng_%E1%BA%A2ng.JPG",
+      sourceLabel: "Wikimedia Commons",
+      license: "CC BY-SA 3.0",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+    },
   },
   {
     slug: "muong-lay",
@@ -559,12 +612,31 @@ export const northwestDestinations: readonly NorthwestDestination[] = [
     travelNote:
       "Các bản vùng cao có ít dịch vụ; hỏi trước về chỗ nghỉ và bữa ăn. Nên đổ xăng đầy trước khi đi vào các xã xa.",
     sourceUrl: "https://vi.wikipedia.org/wiki/B%E1%BA%AFc_Y%C3%AAn",
-    illustration: "river",
+    photo: {
+      src: "/images/destinations/bac-yen-hang-dong-article.webp",
+      cardSrc: "/images/destinations/bac-yen-hang-dong-card.webp",
+      articleSrc: "/images/destinations/bac-yen-hang-dong-article.webp",
+      alt: "Núi và mây ở Háng Đồng, Bắc Yên, Sơn La",
+      author: "Tong Tuan Anh",
+      sourceUrl: "https://www.flickr.com/photos/onlynick/24545887773/",
+      sourceLabel: "Flickr",
+      license: "CC BY 2.0",
+      licenseUrl: "https://creativecommons.org/licenses/by/2.0/",
+    },
   },
 ];
 
 export function findNorthwestDestination(slug: string) {
   return northwestDestinations.find((destination) => destination.slug === slug);
+}
+
+// Match the displayed asset, so a later CMS cover edit never inherits a caption
+// belonging to a different photograph from the curated collection.
+export function destinationPhotoCaption(publicUrl: string | undefined): string | undefined {
+  if (!publicUrl) return undefined;
+  return northwestDestinations.find(({ photo }) =>
+    photo && [photo.cardSrc, photo.articleSrc].includes(publicUrl),
+  )?.photo?.caption;
 }
 
 export const northwestDestinationPreviews: readonly DestinationPreview[] =
@@ -575,6 +647,6 @@ export const northwestDestinationPreviews: readonly DestinationPreview[] =
     landscape,
     theme,
     teaser,
-    photo: photo ? { cardSrc: photo.cardSrc, alt: photo.alt } : undefined,
+    photo: photo ? { cardSrc: photo.cardSrc, alt: photo.alt, caption: photo.caption } : undefined,
     illustration,
   }));

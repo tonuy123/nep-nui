@@ -9,6 +9,7 @@ import {
   SourceNote,
 } from "@/features/content/content-ui";
 import { FavoriteButton } from "@/features/content/favorite-button";
+import { destinationPhotoCaption } from "@/features/destinations/northwest-destinations";
 import {
   ContentNotFoundError,
   ContentUnavailableError,
@@ -57,7 +58,18 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
     );
   }
 
-  const cover = destination.coverMedia ?? destination.gallery[0] ?? null;
+  const selectedCover = destination.coverMedia ?? destination.gallery[0] ?? null;
+  const cover = selectedCover
+    ? destination.gallery.reduce(
+        (best, media) =>
+          media.alt === selectedCover.alt &&
+          media.attribution === selectedCover.attribution &&
+          media.width > best.width
+            ? media
+            : best,
+        selectedCover,
+      )
+    : null;
   const session = await serverSession();
   const jsonLd = {
     "@context": "https://schema.org",
@@ -79,7 +91,12 @@ export default async function DestinationPage({ params }: DestinationPageProps) 
       />
 
       <div className="mx-auto max-w-6xl px-5 py-10 sm:px-6 sm:py-14 lg:px-8">
-        <CoverFigure media={cover} fallbackAlt={destination.title} priority />
+        <CoverFigure
+          media={cover}
+          caption={destinationPhotoCaption(cover?.publicUrl)}
+          fallbackAlt={destination.title}
+          priority
+        />
 
         <div className="mt-12 grid gap-10 border-t border-forest/20 pt-10 md:grid-cols-[minmax(0,.35fr)_minmax(0,.65fr)] md:gap-16 sm:mt-16 sm:pt-14">
           <aside className="space-y-7 text-sm">

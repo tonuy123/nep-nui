@@ -17,17 +17,18 @@ export default function HotelsPage() {
     <>
       <ServiceHero
         title={<>Kiểm tra chỗ ở <em className="font-normal">trước khi đặt</em></>}
-        image={{ src: "/images/services/hotel.webp", alt: "Cơ sở lưu trú tại Sa Pa nhìn từ khuôn viên" }}
+        image={{ src: "/images/services/hotel.webp", alt: "Mặt tiền Sapa Charm Hotel tại Sa Pa" }}
       />
 
       <ListingSection
         eyebrow="Lưu trú"
-        title="Khách sạn nổi bật Tây Bắc"
-        description="Chọn theo tỉnh — kiểm tra đường vào, giờ nhận phòng và chính sách hủy trước khi đặt."
+        title="Chỗ nghỉ ở Tây Bắc"
+        description="Tìm theo khu vực và mở trang thông tin của cơ sở để xem phòng, giá và điều kiện đặt chỗ."
+        filterLabel="Lọc theo khu vực"
         items={hotelListings}
       />
 
-      <PromoBand items={hotelPromos} moreHref="#listing-heading" />
+      <PromoBand items={hotelPromos} heading="Chỗ nghỉ theo điểm đến" tone="editorial" moreHref="#listing-heading" />
 
       <ServiceBenefits service="hotel" />
 

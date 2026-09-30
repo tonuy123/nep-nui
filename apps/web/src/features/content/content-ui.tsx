@@ -52,12 +52,14 @@ export function ContentEmpty({ label, hint }: { label: string; hint?: string }) 
 
 export function CoverFigure({
   media,
+  caption,
   fallbackAlt,
   fallbackKind = "ridge",
   priority = false,
   aspect = "aspect-[4/3] sm:aspect-[16/9]",
 }: {
   media: PublicMediaDto | null;
+  caption?: string;
   fallbackAlt: string;
   fallbackKind?: "village" | "river" | "ridge";
   priority?: boolean;
@@ -81,6 +83,7 @@ export function CoverFigure({
         )}
       </div>
       <figcaption className="mt-3 text-xs leading-5 text-ink/70">
+        {media && caption ? <span className="mb-1 block font-medium text-forest-deep">{caption}</span> : null}
         {media
           ? media.attribution
             ? `Ảnh: ${media.attribution}${
@@ -123,6 +126,7 @@ export function Prose({ text }: { text: string | null }) {
 export function ContentCard({
   href,
   media,
+  caption,
   title,
   meta,
   excerpt,
@@ -130,6 +134,7 @@ export function ContentCard({
 }: {
   href: string;
   media: PublicMediaDto | null;
+  caption?: string;
   title: string;
   meta?: ReactNode;
   excerpt: string | null;
@@ -140,7 +145,7 @@ export function ContentCard({
       href={href}
       className="group flex h-full flex-col overflow-hidden rounded-xl border border-forest/15 bg-white transition-colors hover:border-forest/40"
     >
-      <span className="relative block aspect-[4/3] bg-[#d9dfd2]">
+      <span className="relative block aspect-[4/3] overflow-hidden bg-[#d9dfd2]">
         {media ? (
           <Image
             src={media.publicUrl}
@@ -153,6 +158,11 @@ export function ContentCard({
         ) : (
           <LandscapeArt kind={fallbackKind} className="h-full w-full" />
         )}
+        {media && caption ? (
+          <span className="absolute inset-x-0 bottom-0 bg-forest-deep/90 px-3 py-2 text-[11px] leading-4 text-white">
+            {caption}
+          </span>
+        ) : null}
       </span>
       <span className="flex flex-1 flex-col p-4">
         {meta ? (

@@ -13,6 +13,7 @@ interface ListingSectionProps {
   description?: string;
   items: ListingCard[];
   showFilter?: boolean;
+  filterLabel?: string;
 }
 
 export function ListingSection({
@@ -21,6 +22,7 @@ export function ListingSection({
   description,
   items,
   showFilter = true,
+  filterLabel = "Lọc theo tỉnh",
 }: ListingSectionProps) {
   const provinces = useMemo(
     () => ["Tất cả", ...Array.from(new Set(items.map((item) => item.province)))],
@@ -65,7 +67,7 @@ export function ListingSection({
           ) : null}
 
           {showFilter ? (
-            <div aria-label="Lọc theo tỉnh" className="mt-6 flex flex-wrap gap-2">
+            <div aria-label={filterLabel} className="mt-6 flex flex-wrap gap-2">
               {provinces.map((province) => (
                 <button
                   key={province}

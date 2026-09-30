@@ -61,8 +61,9 @@ export function TourExplorer({ places }: { places: readonly TourPlace[] }) {
                       href={`/diem-den/${place.slug}`}
                       className="flex h-full flex-col focus-visible:outline-offset-[-4px]"
                       aria-label={`Đọc bài về ${place.name}, ${place.province}`}
+                      aria-describedby={place.photo?.caption ? `tour-photo-caption-${place.slug}` : undefined}
                     >
-                      <div className="relative aspect-[16/10] overflow-hidden bg-[#d9dfd2]">
+                      <figure className="relative aspect-[16/10] overflow-hidden bg-[#d9dfd2]">
                         {place.photo ? (
                           <Image
                             src={place.photo.cardSrc}
@@ -86,7 +87,15 @@ export function TourExplorer({ places }: { places: readonly TourPlace[] }) {
                         <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-ink/25 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                           <span className="rounded-full bg-gold-light px-4 py-2 text-xs font-bold text-ink shadow">Xem nhanh</span>
                         </span>
-                      </div>
+                        {place.photo?.caption ? (
+                          <figcaption
+                            id={`tour-photo-caption-${place.slug}`}
+                            className="absolute inset-x-0 bottom-0 z-10 bg-forest-deep/90 px-3 py-2 text-[11px] leading-4 text-white"
+                          >
+                            {place.photo.caption}
+                          </figcaption>
+                        ) : null}
+                      </figure>
 
                       <div className="flex flex-1 flex-col p-5">
                         <h3 className="font-sans text-base font-bold leading-snug text-forest-deep">{place.name}</h3>

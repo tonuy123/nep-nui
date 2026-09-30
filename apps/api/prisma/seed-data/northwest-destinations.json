@@ -199,7 +199,22 @@
       "Để người chủ nhà dẫn câu chuyện về bản, thay vì áp sẵn một lịch chụp ảnh."
     ],
     "sourceUrl": "https://vietnam.travel/vi/things-to-do/community-based-tourism-vietnam",
-    "photo": null
+    "photo": {
+      "cover": {
+        "publicUrl": "/images/destinations/ngoc-chien-card.webp",
+        "alt": "Người phụ nữ vác bó cỏ cạnh nhà gỗ tại Ngọc Chiến, Sơn La",
+        "width": 1200,
+        "height": 771
+      },
+      "gallery": {
+        "publicUrl": "/images/destinations/ngoc-chien-article.webp",
+        "alt": "Người phụ nữ vác bó cỏ cạnh nhà gỗ tại Ngọc Chiến, Sơn La",
+        "width": 1280,
+        "height": 822
+      },
+      "attribution": "Tong Tuan Anh · CC BY 2.0",
+      "source": "https://www.flickr.com/photos/onlynick/16527245719/"
+    }
   },
   {
     "slug": "mai-chau",
@@ -246,7 +261,22 @@
       "Giữ gìn vệ sinh bản và tôn trọng không gian riêng của gia đình chủ nhà."
     ],
     "sourceUrl": "https://dulich.laichau.gov.vn/vi/blog/details/ban-du-lich-cong-dong-sin-suoi-ho-116",
-    "photo": null
+    "photo": {
+      "cover": {
+        "publicUrl": "/images/destinations/sin-suoi-ho-ky-quan-san-card.webp",
+        "alt": "Biển mây dưới ánh bình minh nhìn từ đỉnh Kỳ Quan San",
+        "width": 1200,
+        "height": 675
+      },
+      "gallery": {
+        "publicUrl": "/images/destinations/sin-suoi-ho-ky-quan-san-article.webp",
+        "alt": "Biển mây dưới ánh bình minh nhìn từ đỉnh Kỳ Quan San",
+        "width": 1280,
+        "height": 720
+      },
+      "attribution": "NKSTTSSHNVN · CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:B%C3%ACnh_minh_K%E1%BB%B3_Quan_San.jpg"
+    }
   },
   {
     "slug": "muong-thanh",
@@ -292,7 +322,23 @@
       "Ghé chợ phiên khu vực nếu đúng ngày, xem người dân bán nông sản và đồ thủ công.",
       "Giữ tốc độ chậm trên các cung đường đá; đây là địa hình dốc và dễ trơn khi mưa."
     ],
-    "sourceUrl": "https://vi.wikipedia.org/wiki/%C4%90%E1%BB%93ng_V%C4%83n"
+    "sourceUrl": "https://vi.wikipedia.org/wiki/%C4%90%E1%BB%93ng_V%C4%83n",
+    "photo": {
+      "cover": {
+        "publicUrl": "/images/destinations/dong-van-card.webp",
+        "alt": "Phố cổ Đồng Văn với mái ngói và dãy núi đá phía sau",
+        "width": 1200,
+        "height": 900
+      },
+      "gallery": {
+        "publicUrl": "/images/destinations/dong-van-article.webp",
+        "alt": "Phố cổ Đồng Văn với mái ngói và dãy núi đá phía sau",
+        "width": 2400,
+        "height": 1800
+      },
+      "attribution": "HuangWending18072009 · CC0 1.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Dong_Van_old_town.jpg"
+    }
   },
   {
     "slug": "meo-vac",
@@ -312,14 +358,14 @@
       "cover": {
         "publicUrl": "/images/destinations/meo-vac-card.webp",
         "alt": "Đèo Mã Pí Lèng nhìn từ trên cao",
-        "width": 1200,
-        "height": 900
+        "width": 1024,
+        "height": 768
       },
       "gallery": {
         "publicUrl": "/images/destinations/meo-vac-article.webp",
         "alt": "Đèo Mã Pí Lèng nhìn từ trên cao",
-        "width": 2400,
-        "height": 1600
+        "width": 1024,
+        "height": 680
       },
       "attribution": "hoaln · CC BY 2.0",
       "source": "https://www.flickr.com/photos/61859341@N06/6361013773"
@@ -343,14 +389,14 @@
       "cover": {
         "publicUrl": "/images/destinations/hoang-su-phi-card.webp",
         "alt": "Phiên chợ vùng cao ở Hoàng Su Phì",
-        "width": 1200,
-        "height": 900
+        "width": 1024,
+        "height": 768
       },
       "gallery": {
         "publicUrl": "/images/destinations/hoang-su-phi-article.webp",
         "alt": "Phiên chợ vùng cao ở Hoàng Su Phì",
-        "width": 2400,
-        "height": 1600
+        "width": 685,
+        "height": 1024
       },
       "attribution": "bmr-mam · CC BY-SA 2.0",
       "source": "https://www.flickr.com/photos/122094967@N08/13663097065"
@@ -374,14 +420,14 @@
       "cover": {
         "publicUrl": "/images/destinations/quan-ba-card.webp",
         "alt": "Núi đá và thung lũng Quản Bạ",
-        "width": 1200,
-        "height": 900
+        "width": 1024,
+        "height": 768
       },
       "gallery": {
         "publicUrl": "/images/destinations/quan-ba-article.webp",
         "alt": "Núi đá và thung lũng Quản Bạ",
-        "width": 2400,
-        "height": 1603
+        "width": 1024,
+        "height": 699
       },
       "attribution": "nv_tan · CC BY 2.0",
       "source": "https://www.flickr.com/photos/14644229@N08/24491597094"
@@ -400,7 +446,23 @@
       "Chạy xe theo đường vào một số xã để nhìn ruộng bậc thang hai bên sườn núi.",
       "Hỏi trước về chỗ nghỉ; thị trấn có ít nhà nghỉ hơn các huyện du lịch khác."
     ],
-    "sourceUrl": "https://vi.wikipedia.org/wiki/S%C3%ACn_H%E1%BB%93"
+    "sourceUrl": "https://vi.wikipedia.org/wiki/S%C3%ACn_H%E1%BB%93",
+    "photo": {
+      "cover": {
+        "publicUrl": "/images/destinations/sin-ho-card.webp",
+        "alt": "Rừng thường xanh gần thị trấn Sìn Hồ, Lai Châu",
+        "width": 1200,
+        "height": 800
+      },
+      "gallery": {
+        "publicUrl": "/images/destinations/sin-ho-article.webp",
+        "alt": "Rừng thường xanh gần thị trấn Sìn Hồ, Lai Châu",
+        "width": 1280,
+        "height": 853
+      },
+      "attribution": "Chung Van Hoang và cộng sự (2024) · CC BY 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Habitat_of_Leptobrachella_huynhi_(10.3897-BDJ.12.e136491)_Figure_4.JPG"
+    }
   },
   {
     "slug": "o-quy-ho",
@@ -419,15 +481,15 @@
     "photo": {
       "cover": {
         "publicUrl": "/images/destinations/o-quy-ho-card.webp",
-        "alt": "Đường đèo Ô Quy Hồ giữa hai tỉnh Lào Cai và Lai Châu",
-        "width": 1200,
-        "height": 900
+        "alt": "Cung đường núi ở Sa Pa hướng về Ô Quy Hồ",
+        "width": 1024,
+        "height": 768
       },
       "gallery": {
         "publicUrl": "/images/destinations/o-quy-ho-article.webp",
-        "alt": "Đường đèo Ô Quy Hồ giữa hai tỉnh Lào Cai và Lai Châu",
-        "width": 2400,
-        "height": 1800
+        "alt": "Cung đường núi ở Sa Pa hướng về Ô Quy Hồ",
+        "width": 1024,
+        "height": 683
       },
       "attribution": "Shutteract · CC BY 2.0",
       "source": "https://www.flickr.com/photos/189550735@N08/50170377462"
@@ -446,7 +508,23 @@
       "Ghép Mường Ảng vào hành trình Điện Biên như một chặng nghỉ ít khách.",
       "Mua nông sản theo mùa tại chợ huyện thay vì tìm quà đóng gói sẵn."
     ],
-    "sourceUrl": "https://vi.wikipedia.org/wiki/M%C6%B0%E1%BB%9Dng_%E1%BA%A2ng"
+    "sourceUrl": "https://vi.wikipedia.org/wiki/M%C6%B0%E1%BB%9Dng_%E1%BA%A2ng",
+    "photo": {
+      "cover": {
+        "publicUrl": "/images/destinations/muong-ang-card.webp",
+        "alt": "Thung lũng và thị trấn Mường Ảng nhìn từ quốc lộ 279",
+        "width": 1200,
+        "height": 675
+      },
+      "gallery": {
+        "publicUrl": "/images/destinations/muong-ang-article.webp",
+        "alt": "Thung lũng và thị trấn Mường Ảng nhìn từ quốc lộ 279",
+        "width": 1920,
+        "height": 1080
+      },
+      "attribution": "Tycho · CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:M%C6%B0%E1%BB%9Dng_%E1%BA%A2ng.JPG"
+    }
   },
   {
     "slug": "muong-lay",
@@ -466,14 +544,14 @@
       "cover": {
         "publicUrl": "/images/destinations/muong-lay-card.webp",
         "alt": "Thị xã Mường Lay bên dòng sông Đà",
-        "width": 1200,
-        "height": 900
+        "width": 1024,
+        "height": 768
       },
       "gallery": {
         "publicUrl": "/images/destinations/muong-lay-article.webp",
         "alt": "Thị xã Mường Lay bên dòng sông Đà",
-        "width": 2400,
-        "height": 1800
+        "width": 1024,
+        "height": 768
       },
       "attribution": "Arian Zwegers · CC BY 2.0",
       "source": "https://www.flickr.com/photos/67769030@N07/6223799972"
@@ -497,14 +575,14 @@
       "cover": {
         "publicUrl": "/images/destinations/bat-xat-card.webp",
         "alt": "Em bé người Hà Nhì ở Bát Xát",
-        "width": 1200,
-        "height": 900
+        "width": 1024,
+        "height": 768
       },
       "gallery": {
         "publicUrl": "/images/destinations/bat-xat-article.webp",
         "alt": "Em bé người Hà Nhì ở Bát Xát",
-        "width": 2400,
-        "height": 1800
+        "width": 1024,
+        "height": 680
       },
       "attribution": "hoaln · CC BY 2.0",
       "source": "https://www.flickr.com/photos/61859341@N06/6574855673"
@@ -523,6 +601,22 @@
       "Đi theo các xã vùng cao nếu muốn ở lại qua đêm giữa các bản thay vì chỉ lên săn mây.",
       "Xác nhận tình trạng đường lên các xã trước khi đi, tùy theo mùa."
     ],
-    "sourceUrl": "https://vi.wikipedia.org/wiki/B%E1%BA%AFc_Y%C3%AAn"
+    "sourceUrl": "https://vi.wikipedia.org/wiki/B%E1%BA%AFc_Y%C3%AAn",
+    "photo": {
+      "cover": {
+        "publicUrl": "/images/destinations/bac-yen-hang-dong-card.webp",
+        "alt": "Núi và mây ở Háng Đồng, Bắc Yên, Sơn La",
+        "width": 1024,
+        "height": 443
+      },
+      "gallery": {
+        "publicUrl": "/images/destinations/bac-yen-hang-dong-article.webp",
+        "alt": "Núi và mây ở Háng Đồng, Bắc Yên, Sơn La",
+        "width": 1024,
+        "height": 443
+      },
+      "attribution": "Tong Tuan Anh · CC BY 2.0",
+      "source": "https://www.flickr.com/photos/onlynick/24545887773/"
+    }
   }
 ]

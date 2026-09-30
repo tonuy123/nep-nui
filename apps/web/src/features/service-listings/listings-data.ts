@@ -1,4 +1,4 @@
-// Dữ liệu danh sách dịch vụ cho 5 trang trong menu header.
+// Dữ liệu danh sách dịch vụ cho các trang trong menu header.
 // Giá, sao, mã, ngày khởi hành là số minh họa cho bản demo (theo yêu cầu), không phải giá bán thật.
 // Ảnh dùng lại bộ ảnh đã có credit ở /nguon-anh.
 
@@ -7,9 +7,13 @@ export interface ListingCard {
   name: string;
   province: string;
   image: string;
+  imageAlt?: string;
+  imageCaption?: string;
+  href?: string;
+  sourceUrl?: string;
   description: string;
   stars?: number;
-  priceFrom: number;
+  priceFrom?: number;
   priceUnit: string;
   badge?: string;
   code?: string;
@@ -24,9 +28,15 @@ export interface PromoCard {
   id: string;
   name: string;
   image: string;
-  priceFrom: number;
-  priceOld: number;
-  discount: number;
+  imageAlt?: string;
+  imageCaption?: string;
+  href?: string;
+  sourceUrl?: string;
+  description?: string;
+  province?: string;
+  priceFrom?: number;
+  priceOld?: number;
+  discount?: number;
   unit: string;
   code?: string;
   duration?: string;
@@ -46,26 +56,18 @@ const d = (v: number) => v.toLocaleString("vi-VN");
 
 export const formatPrice = (value: number) => `${d(value)}đ`;
 
-// --- Khách sạn & lưu trú ---
-export const hotelListings: ListingCard[] = [
-  { id: "sapa-charm", name: "Sapa Charm Hotel", province: "Lào Cai", image: "/images/services/hotel.webp", description: "Trung tâm Sa Pa, đi bộ ra quảng trường và nhà thờ đá.", stars: 4, priceFrom: 1023068, priceUnit: "/ đêm", badge: "Tiêu chuẩn", code: "KS-SAPA-01", seats: 6 },
-  { id: "moc-chau-farm", name: "Farmstay Đồi Chè", province: "Sơn La", image: "/images/destinations/moc-chau-card.webp", description: "Nhà gỗ giữa đồi chè Mộc Châu, có bếp chung và vườn.", stars: 3, priceFrom: 650000, priceUnit: "/ đêm", code: "KS-MC-02", seats: 4 },
-  { id: "ta-xua-cloud", name: "Săn mây Tà Xùa Homestay", province: "Sơn La", image: "/images/destinations/ta-xua-card.webp", description: "View sống lưng khủng long, phòng đôi và phòng tập thể.", stars: 3, priceFrom: 450000, priceUnit: "/ đêm", badge: "Tiết kiệm", code: "KS-TX-03", seats: 8 },
-  { id: "mai-chau-stilt", name: "Nhà sàn Bản Lác", province: "Phú Thọ", image: "/images/destinations/mai-chau-card.webp", description: "Nhà sàn truyền thống người Thái, bữa tối cùng gia đình chủ nhà.", stars: 3, priceFrom: 520000, priceUnit: "/ đêm", code: "KS-MAIC-04", seats: 6 },
-  { id: "muong-thanh-hotel", name: "Khách sạn Thung lũng", province: "Điện Biên", image: "/images/destinations/muong-thanh-card.webp", description: "Nhìn toàn cảnh cánh đồng Mường Thanh, thuận tiện thăm di tích.", stars: 4, priceFrom: 780000, priceUnit: "/ đêm", code: "KS-MT-05", seats: 5 },
-  { id: "ha-giang-lodge", name: "Nhà nghỉ Cao Nguyên", province: "Hà Giang", image: "/images/services/addon.webp", description: "Điểm dừng chân trên cung đường Hà Giang, có bãi đỗ xe máy.", stars: 3, priceFrom: 380000, priceUnit: "/ đêm", code: "KS-HG-06", seats: 7 },
-  { id: "mucangchai-guest", name: "Homestay Bản Mù Cang", province: "Lào Cai", image: "/images/destinations/mu-cang-chai-card.webp", description: "Sát ruộng bậc thang, mùa lúa chín mở cửa sổ là thấy vàng.", stars: 3, priceFrom: 420000, priceUnit: "/ đêm", badge: "Tiết kiệm", code: "KS-MCC-07", seats: 3 },
-  { id: "bac-ha-house", name: "Nhà cổ Bắc Hà", province: "Lào Cai", image: "/images/destinations/bac-ha-card.webp", description: "Gần chợ phiên Bắc Hà, kiến trúc gỗ giữ nguyên nếp cũ.", stars: 4, priceFrom: 690000, priceUnit: "/ đêm", code: "KS-BH-08", seats: 4 },
-];
+// --- Khách sạn & lưu trú đã đối chiếu nguồn ---
+export { hotelListings, hotelPromos } from "./hotel-data";
+
 
 // --- Chuyến xe đường dài (cho trang Chuyến xe) ---
 export const coachListings: ListingCard[] = [
-  { id: "hn-sapa", name: "Hà Nội → Sa Pa", province: "Lào Cai", image: "/images/destinations/sa-pa-card.webp", description: "Xe giường nằm, khởi hành 7:00 và 22:00, khoảng 5 giờ.", priceFrom: 280000, priceUnit: "/ khách", badge: "Phổ biến", code: "CX-HN-SAPA", duration: "5 giờ", departureFrom: "Hà Nội", seats: 12, dates: ["07:00", "22:00"] },
-  { id: "hn-hagiang", name: "Hà Nội → Hà Giang", province: "Hà Giang", image: "/images/services/addon.webp", description: "Xe limousine 9 chỗ, trả khách tại trung tâm thành phố Hà Giang.", priceFrom: 320000, priceUnit: "/ khách", code: "CX-HN-HG", duration: "7 giờ", departureFrom: "Hà Nội", seats: 9, dates: ["06:30", "21:00"] },
-  { id: "hn-mocchau", name: "Hà Nội → Mộc Châu", province: "Sơn La", image: "/images/destinations/moc-chau-card.webp", description: "Xe giường nằm, khoảng 4 giờ, dừng nghỉ giữa chặng.", priceFrom: 200000, priceUnit: "/ khách", badge: "Tiết kiệm", code: "CX-HN-MC", duration: "4 giờ", departureFrom: "Hà Nội", seats: 14, dates: ["06:00", "09:00", "14:00", "20:00"] },
-  { id: "hn-maichau", name: "Hà Nội → Mai Châu", province: "Phú Thọ", image: "/images/destinations/mai-chau-card.webp", description: "Xe 16 chỗ, khoảng 3 giờ, đón tại bến Mỹ Đình.", priceFrom: 180000, priceUnit: "/ khách", code: "CX-HN-MAIC", duration: "3 giờ", departureFrom: "Hà Nội", seats: 10, dates: ["07:30", "13:30"] },
-  { id: "hn-taxua", name: "Hà Nội → Tà Xùa", province: "Sơn La", image: "/images/destinations/ta-xua-card.webp", description: "Xe giường nằm tới Bắc Yên rồi trung chuyển lên Tà Xùa.", priceFrom: 350000, priceUnit: "/ khách", code: "CX-HN-TX", duration: "6 giờ", departureFrom: "Hà Nội", seats: 8, dates: ["20:30"] },
-  { id: "dienbien-hanoi", name: "Điện Biên → Hà Nội", province: "Điện Biên", image: "/images/services/coach.webp", description: "Xe giường nằm VIP, khoảng 12 giờ, nhận đón tại trung tâm thành phố.", priceFrom: 420000, priceUnit: "/ khách", code: "CX-DB-HN", duration: "12 giờ", departureFrom: "Điện Biên", seats: 6, dates: ["18:00"] },
+  { id: "hn-sapa", name: "Hà Nội → Sa Pa", province: "Lào Cai", image: "/images/destinations/sa-pa-card.webp", description: "Xe giường nằm, khởi hành 7:00 và 22:00, khoảng 5 giờ.", priceFrom: 280000, priceUnit: "/ khách", badge: "Phổ biến", code: "CX-HN-SAPA", duration: "5 giờ", departureFrom: "Hà Nội", seats: 12, dates: ["07:00", "22:00"], href: "/diem-den/sa-pa" },
+  { id: "hn-hagiang", name: "Hà Nội → Hà Giang", province: "Hà Giang", image: "/images/services/combo.webp", description: "Xe limousine 9 chỗ, trả khách tại trung tâm thành phố Hà Giang.", priceFrom: 320000, priceUnit: "/ khách", code: "CX-HN-HG", duration: "7 giờ", departureFrom: "Hà Nội", seats: 9, dates: ["06:30", "21:00"], href: "/diem-den/meo-vac" },
+  { id: "hn-mocchau", name: "Hà Nội → Mộc Châu", province: "Sơn La", image: "/images/destinations/moc-chau-card.webp", description: "Xe giường nằm, khoảng 4 giờ, dừng nghỉ giữa chặng.", priceFrom: 200000, priceUnit: "/ khách", badge: "Tiết kiệm", code: "CX-HN-MC", duration: "4 giờ", departureFrom: "Hà Nội", seats: 14, dates: ["06:00", "09:00", "14:00", "20:00"], href: "/diem-den/moc-chau" },
+  { id: "hn-maichau", name: "Hà Nội → Mai Châu", province: "Phú Thọ", image: "/images/destinations/mai-chau-card.webp", description: "Xe 16 chỗ, khoảng 3 giờ, đón tại bến Mỹ Đình.", priceFrom: 180000, priceUnit: "/ khách", code: "CX-HN-MAIC", duration: "3 giờ", departureFrom: "Hà Nội", seats: 10, dates: ["07:30", "13:30"], href: "/diem-den/mai-chau" },
+  { id: "hn-taxua", name: "Hà Nội → Tà Xùa", province: "Sơn La", image: "/images/destinations/ta-xua-card.webp", description: "Xe giường nằm tới Bắc Yên rồi trung chuyển lên Tà Xùa.", priceFrom: 350000, priceUnit: "/ khách", code: "CX-HN-TX", duration: "6 giờ", departureFrom: "Hà Nội", seats: 8, dates: ["20:30"], href: "/diem-den/ta-xua" },
+  { id: "dienbien-hanoi", name: "Điện Biên → Hà Nội", province: "Điện Biên", image: "/images/destinations/muong-thanh-card.webp", description: "Xe giường nằm VIP, khoảng 12 giờ, nhận đón tại trung tâm thành phố.", priceFrom: 420000, priceUnit: "/ khách", code: "CX-DB-HN", duration: "12 giờ", departureFrom: "Điện Biên", seats: 6, dates: ["18:00"], href: "/diem-den/muong-thanh" },
 ];
 
 // --- Dịch vụ cộng thêm ---
@@ -77,26 +79,17 @@ export const addOnListings: ListingCard[] = [
 ];
 
 // --- Ưu đãi theo trang ---
-export const hotelPromos: PromoCard[] = [
-  { id: "p-sapa", name: "Sapa Charm Hotel", image: "/images/services/hotel.webp", priceFrom: 715000, priceOld: 1023068, discount: 30, unit: "/ đêm", code: "KS-SAPA-01", seats: 6 },
-  { id: "p-mocchau", name: "Farmstay Đồi Chè", image: "/images/destinations/moc-chau-card.webp", priceFrom: 455000, priceOld: 650000, discount: 30, unit: "/ đêm", code: "KS-MC-02", seats: 4 },
-  { id: "p-bacha", name: "Nhà cổ Bắc Hà", image: "/images/destinations/bac-ha-card.webp", priceFrom: 483000, priceOld: 690000, discount: 30, unit: "/ đêm", code: "KS-BH-08", seats: 4 },
-  { id: "p-muong", name: "Khách sạn Thung lũng", image: "/images/destinations/muong-thanh-card.webp", priceFrom: 546000, priceOld: 780000, discount: 30, unit: "/ đêm", code: "KS-MT-05", seats: 5 },
-  { id: "p-mucang", name: "Homestay Bản Mù Cang", image: "/images/destinations/mu-cang-chai-card.webp", priceFrom: 294000, priceOld: 420000, discount: 30, unit: "/ đêm", code: "KS-MCC-07", seats: 3 },
-  { id: "p-hagiang", name: "Nhà nghỉ Cao Nguyên", image: "/images/services/addon.webp", priceFrom: 266000, priceOld: 380000, discount: 30, unit: "/ đêm", code: "KS-HG-06", seats: 7 },
-  { id: "p-maichau", name: "Nhà sàn Bản Lác", image: "/images/destinations/mai-chau-card.webp", priceFrom: 364000, priceOld: 520000, discount: 30, unit: "/ đêm", code: "KS-MAIC-04", seats: 6 },
-  { id: "p-taxua", name: "Săn mây Tà Xùa Homestay", image: "/images/destinations/ta-xua-card.webp", priceFrom: 315000, priceOld: 450000, discount: 30, unit: "/ đêm", code: "KS-TX-03", seats: 8 },
-];
+
 
 export const coachPromos: PromoCard[] = [
-  { id: "p-hn-sapa", name: "Hà Nội → Sa Pa", image: "/images/destinations/sa-pa-card.webp", priceFrom: 196000, priceOld: 280000, discount: 30, unit: "/ khách", code: "CX-HN-SAPA", duration: "5 giờ", departureFrom: "Hà Nội", seats: 12 },
-  { id: "p-hn-hg", name: "Hà Nội → Hà Giang", image: "/images/services/addon.webp", priceFrom: 224000, priceOld: 320000, discount: 30, unit: "/ khách", code: "CX-HN-HG", duration: "7 giờ", departureFrom: "Hà Nội", seats: 9 },
-  { id: "p-hn-mc", name: "Hà Nội → Mộc Châu", image: "/images/destinations/moc-chau-card.webp", priceFrom: 140000, priceOld: 200000, discount: 30, unit: "/ khách", code: "CX-HN-MC", duration: "4 giờ", departureFrom: "Hà Nội", seats: 14 },
-  { id: "p-hn-tx", name: "Hà Nội → Tà Xùa", image: "/images/destinations/ta-xua-card.webp", priceFrom: 245000, priceOld: 350000, discount: 30, unit: "/ khách", code: "CX-HN-TX", duration: "6 giờ", departureFrom: "Hà Nội", seats: 8 },
-  { id: "p-hn-maic", name: "Hà Nội → Mai Châu", image: "/images/destinations/mai-chau-card.webp", priceFrom: 126000, priceOld: 180000, discount: 30, unit: "/ khách", code: "CX-HN-MAIC", duration: "3 giờ", departureFrom: "Hà Nội", seats: 10 },
-  { id: "p-db-hn", name: "Điện Biên → Hà Nội", image: "/images/services/coach.webp", priceFrom: 294000, priceOld: 420000, discount: 30, unit: "/ khách", code: "CX-DB-HN", duration: "12 giờ", departureFrom: "Điện Biên", seats: 6 },
-  { id: "p-hn-mcc", name: "Hà Nội → Mù Cang Chải", image: "/images/destinations/mu-cang-chai-card.webp", priceFrom: 266000, priceOld: 380000, discount: 30, unit: "/ khách", code: "CX-HN-MCC", duration: "6 giờ", departureFrom: "Hà Nội", seats: 8 },
-  { id: "p-hn-bacha", name: "Hà Nội → Bắc Hà", image: "/images/destinations/bac-ha-card.webp", priceFrom: 259000, priceOld: 370000, discount: 30, unit: "/ khách", code: "CX-HN-BACHA", duration: "5 giờ", departureFrom: "Hà Nội", seats: 10 },
+  { id: "p-hn-sapa", name: "Hà Nội → Sa Pa", image: "/images/destinations/sa-pa-card.webp", priceFrom: 196000, priceOld: 280000, discount: 30, unit: "/ khách", code: "CX-HN-SAPA", duration: "5 giờ", departureFrom: "Hà Nội", seats: 12, href: "/diem-den/sa-pa" },
+  { id: "p-hn-hg", name: "Hà Nội → Hà Giang", image: "/images/services/combo.webp", imageAlt: "Cung đường đèo Mã Pí Lèng ở Hà Giang", priceFrom: 224000, priceOld: 320000, discount: 30, unit: "/ khách", code: "CX-HN-HG", duration: "7 giờ", departureFrom: "Hà Nội", seats: 9, href: "/diem-den/meo-vac" },
+  { id: "p-hn-mc", name: "Hà Nội → Mộc Châu", image: "/images/destinations/moc-chau-card.webp", priceFrom: 140000, priceOld: 200000, discount: 30, unit: "/ khách", code: "CX-HN-MC", duration: "4 giờ", departureFrom: "Hà Nội", seats: 14, href: "/diem-den/moc-chau" },
+  { id: "p-hn-tx", name: "Hà Nội → Tà Xùa", image: "/images/destinations/ta-xua-card.webp", priceFrom: 245000, priceOld: 350000, discount: 30, unit: "/ khách", code: "CX-HN-TX", duration: "6 giờ", departureFrom: "Hà Nội", seats: 8, href: "/diem-den/ta-xua" },
+  { id: "p-hn-maic", name: "Hà Nội → Mai Châu", image: "/images/destinations/mai-chau-card.webp", priceFrom: 126000, priceOld: 180000, discount: 30, unit: "/ khách", code: "CX-HN-MAIC", duration: "3 giờ", departureFrom: "Hà Nội", seats: 10, href: "/diem-den/mai-chau" },
+  { id: "p-db-hn", name: "Điện Biên → Hà Nội", image: "/images/destinations/muong-thanh-card.webp", priceFrom: 294000, priceOld: 420000, discount: 30, unit: "/ khách", code: "CX-DB-HN", duration: "12 giờ", departureFrom: "Điện Biên", seats: 6, href: "/diem-den/muong-thanh" },
+  { id: "p-hn-mcc", name: "Hà Nội → Mù Cang Chải", image: "/images/destinations/mu-cang-chai-card.webp", priceFrom: 266000, priceOld: 380000, discount: 30, unit: "/ khách", code: "CX-HN-MCC", duration: "6 giờ", departureFrom: "Hà Nội", seats: 8, href: "/diem-den/mu-cang-chai" },
+  { id: "p-hn-bacha", name: "Hà Nội → Bắc Hà", image: "/images/destinations/bac-ha-card.webp", priceFrom: 259000, priceOld: 370000, discount: 30, unit: "/ khách", code: "CX-HN-BACHA", duration: "5 giờ", departureFrom: "Hà Nội", seats: 10, href: "/diem-den/bac-ha" },
 ];
 
 export const addOnPromos: PromoCard[] = [
@@ -107,34 +100,34 @@ export const addOnPromos: PromoCard[] = [
 ];
 
 export const tourPromos: PromoCard[] = [
-  { id: "p-tour-sapa", name: "Sa Pa 3 ngày 2 đêm", image: "/images/destinations/sa-pa-card.webp", priceFrom: 2490000, priceOld: 3550000, discount: 30, unit: "/ khách", code: "TB-SAPA-3N2D", duration: "3N2D", departureFrom: "Hà Nội", seats: 6 },
-  { id: "p-tour-hg", name: "Hà Giang mùa hoa", image: "/images/services/addon.webp", priceFrom: 3190000, priceOld: 4550000, discount: 30, unit: "/ khách", code: "TB-HG-4N3D", duration: "4N3D", departureFrom: "Hà Nội", seats: 8 },
-  { id: "p-tour-mc", name: "Mộc Châu trọn gói", image: "/images/destinations/moc-chau-card.webp", priceFrom: 1790000, priceOld: 2550000, discount: 30, unit: "/ khách", code: "TB-MC-2N1D", duration: "2N1D", departureFrom: "Hà Nội", seats: 10 },
-  { id: "p-tour-tx", name: "Tà Xùa săn mây", image: "/images/destinations/ta-xua-card.webp", priceFrom: 1990000, priceOld: 2840000, discount: 30, unit: "/ khách", code: "TB-TX-2N1D", duration: "2N1D", departureFrom: "Hà Nội", seats: 7 },
-  { id: "p-tour-mcc", name: "Mù Cang Chải mùa lúa", image: "/images/destinations/mu-cang-chai-card.webp", priceFrom: 2590000, priceOld: 3700000, discount: 30, unit: "/ khách", code: "TB-MCC-3N2D", duration: "3N2D", departureFrom: "Hà Nội", seats: 6 },
-  { id: "p-tour-bh", name: "Bắc Hà mùa chợ phiên", image: "/images/destinations/bac-ha-card.webp", priceFrom: 2030000, priceOld: 2900000, discount: 30, unit: "/ khách", code: "TB-BH-3N2D", duration: "3N2D", departureFrom: "Hà Nội", seats: 8 },
-  { id: "p-tour-db", name: "Điện Biên — Mường Thanh", image: "/images/destinations/muong-thanh-card.webp", priceFrom: 3290000, priceOld: 4700000, discount: 30, unit: "/ khách", code: "TB-DB-4N3D", duration: "4N3D", departureFrom: "Hà Nội", seats: 6 },
-  { id: "p-tour-lc", name: "Lai Châu mùa chè", image: "/images/services/combo.webp", priceFrom: 2870000, priceOld: 4100000, discount: 30, unit: "/ khách", code: "TB-LC-3N2D", duration: "3N2D", departureFrom: "Hà Nội", seats: 8 },
+  { id: "p-tour-sapa", name: "Sa Pa 3 ngày 2 đêm", image: "/images/destinations/sa-pa-card.webp", priceFrom: 2490000, priceOld: 3550000, discount: 30, unit: "/ khách", code: "TB-SAPA-3N2D", duration: "3N2D", departureFrom: "Hà Nội", seats: 6, href: "/diem-den/sa-pa" },
+  { id: "p-tour-hg", name: "Hà Giang mùa hoa", image: "/images/services/combo.webp", priceFrom: 3190000, priceOld: 4550000, discount: 30, unit: "/ khách", code: "TB-HG-4N3D", duration: "4N3D", departureFrom: "Hà Nội", seats: 8, href: "/diem-den/meo-vac" },
+  { id: "p-tour-mc", name: "Mộc Châu trọn gói", image: "/images/destinations/moc-chau-card.webp", priceFrom: 1790000, priceOld: 2550000, discount: 30, unit: "/ khách", code: "TB-MC-2N1D", duration: "2N1D", departureFrom: "Hà Nội", seats: 10, href: "/diem-den/moc-chau" },
+  { id: "p-tour-tx", name: "Tà Xùa săn mây", image: "/images/destinations/ta-xua-card.webp", priceFrom: 1990000, priceOld: 2840000, discount: 30, unit: "/ khách", code: "TB-TX-2N1D", duration: "2N1D", departureFrom: "Hà Nội", seats: 7, href: "/diem-den/ta-xua" },
+  { id: "p-tour-mcc", name: "Mù Cang Chải mùa lúa", image: "/images/destinations/mu-cang-chai-card.webp", priceFrom: 2590000, priceOld: 3700000, discount: 30, unit: "/ khách", code: "TB-MCC-3N2D", duration: "3N2D", departureFrom: "Hà Nội", seats: 6, href: "/diem-den/mu-cang-chai" },
+  { id: "p-tour-bh", name: "Bắc Hà mùa chợ phiên", image: "/images/destinations/bac-ha-card.webp", priceFrom: 2030000, priceOld: 2900000, discount: 30, unit: "/ khách", code: "TB-BH-3N2D", duration: "3N2D", departureFrom: "Hà Nội", seats: 8, href: "/diem-den/bac-ha" },
+  { id: "p-tour-db", name: "Điện Biên — Mường Thanh", image: "/images/destinations/muong-thanh-card.webp", priceFrom: 3290000, priceOld: 4700000, discount: 30, unit: "/ khách", code: "TB-DB-4N3D", duration: "4N3D", departureFrom: "Hà Nội", seats: 6, href: "/diem-den/muong-thanh" },
+  { id: "p-tour-lc", name: "Lai Châu mùa chè", image: "/images/provinces/lai-chau-card.webp", priceFrom: 2870000, priceOld: 4100000, discount: 30, unit: "/ khách", code: "TB-LC-3N2D", duration: "3N2D", departureFrom: "Hà Nội", seats: 8, href: "/diem-den/o-quy-ho" },
 ];
 
 export const comboPromos: PromoCard[] = tourPromos;
 
 export const guides: Record<"tour" | "coach" | "hotel" | "combo" | "addon", GuideContent> = {
   tour: {
-    title: "Cách đặt tour và tiêu chuẩn dịch vụ",
-    bookHeading: "Cách đặt tour",
+    title: "Trước khi quyết định một chuyến đi",
+    bookHeading: "Lịch đi cần rõ",
     bookSteps: [
-      "Chọn điểm đến theo cảnh quan hoặc mùa bạn muốn đi.",
-      "Gửi yêu cầu tư vấn để chốt lịch trình, số ngày và mức ngân sách.",
-      "Xác nhận danh sách dịch vụ trong lịch trình trước khi đặt cọc.",
-      "Nhận lịch trình chi tiết và đầu mối liên hệ trước ngày khởi hành.",
+      "Ngày khởi hành và điểm đón.",
+      "Thời gian di chuyển từng chặng.",
+      "Điểm dừng và nơi nghỉ mỗi đêm.",
+      "Khoảng thời gian tự do.",
     ],
-    standardHeading: "Tiêu chuẩn dịch vụ",
+    standardHeading: "Chi phí và điều kiện cần hỏi",
     standards: [
-      "Lịch trình công bố rõ từng ngày, không phát sinh mục ngoài thỏa thuận.",
-      "Hướng dẫn viên nói tiếng Việt, am hiểu tuyến và điểm đến.",
-      "Xe đưa đón đúng số chỗ, có bảo hiểm chuyến đi.",
-      "Điểm lưu trú được xác nhận trước và có phương án thay thế tương đương.",
+      "Dịch vụ nào đã bao gồm, mục nào bạn tự trả.",
+      "Phụ phí có thể phát sinh trong trường hợp nào.",
+      "Điều kiện đổi ngày hoặc hủy chuyến.",
+      "Đầu mối liên hệ khi lịch trình thay đổi.",
     ],
   },
   coach: {
@@ -155,7 +148,7 @@ export const guides: Record<"tour" | "coach" | "hotel" | "combo" | "addon", Guid
     ],
   },
   hotel: {
-    title: "Cách đặt khách sạn và tiêu chuẩn dịch vụ",
+    title: "Những điều cần hỏi nơi lưu trú",
     bookHeading: "Cách đặt khách sạn",
     bookSteps: [
       "Chọn khu vực gần điểm bạn muốn khám phá nhất.",
@@ -163,12 +156,12 @@ export const guides: Record<"tour" | "coach" | "hotel" | "combo" | "addon", Guid
       "Đặt qua kênh chính thức của cơ sở lưu trú hoặc đối tác được ủy quyền.",
       "Lưu lại xác nhận đặt phòng và đầu mối liên hệ của nơi ở.",
     ],
-    standardHeading: "Tiêu chuẩn dịch vụ",
+    standardHeading: "Điều kiện phòng và chi phí",
     standards: [
-      "Ảnh và mô tả phòng sát thực tế, có thông tin rõ về loại phòng.",
-      "Vệ sinh phòng và khu vực chung theo từng ngày lưu trú.",
-      "Có người trực 24/7 hoặc số liên hệ khẩn cấp.",
-      "Hóa đơn và phụ phí công khai, không thu thêm ngoài báo giá.",
+      "Loại giường và số người tối đa trong phòng.",
+      "Giờ nhận, trả phòng và phí khi đến sớm hoặc về muộn.",
+      "Dịch vụ nào đã gồm trong giá, mục nào trả riêng.",
+      "Số liên hệ khi cần hỗ trợ trong thời gian lưu trú.",
     ],
   },
   combo: {

@@ -20,8 +20,9 @@ export function DestinationCard({ destination }: DestinationCardProps) {
         href={`/diem-den/${destination.slug}`}
         className="flex h-full flex-col focus-visible:outline-offset-[-4px]"
         aria-label={`Đọc bài về ${destination.name}, ${destination.province}`}
+        aria-describedby={destination.photo?.caption ? `destination-photo-caption-${destination.slug}` : undefined}
       >
-        <div className="relative aspect-[16/10] overflow-hidden bg-[#d9dfd2]">
+        <figure className="relative aspect-[16/10] overflow-hidden bg-[#d9dfd2]">
           {destination.photo ? (
             <Image
               src={destination.photo.cardSrc}
@@ -48,7 +49,15 @@ export function DestinationCard({ destination }: DestinationCardProps) {
           <span className="pointer-events-none absolute inset-0 flex items-center justify-center bg-ink/25 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
             <span className="rounded-full bg-gold-light px-4 py-2 text-xs font-bold text-ink shadow">Xem nhanh</span>
           </span>
-        </div>
+          {destination.photo?.caption ? (
+            <figcaption
+              id={`destination-photo-caption-${destination.slug}`}
+              className="absolute inset-x-0 bottom-0 z-10 bg-forest-deep/90 px-3 py-2 text-[11px] leading-4 text-white"
+            >
+              {destination.photo.caption}
+            </figcaption>
+          ) : null}
+        </figure>
 
         <div className="flex flex-1 flex-col p-5">
           <h3 className="font-sans text-[17px] font-bold leading-snug text-forest-deep">{destination.name}</h3>

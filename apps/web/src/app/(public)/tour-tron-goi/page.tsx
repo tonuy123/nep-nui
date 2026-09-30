@@ -31,8 +31,8 @@ export default function ToursPage() {
       <GuideBlock content={guides.tour} />
 
       <ServiceClosing
-        heading="Tạo bản nháp từ điểm đến đã chọn"
-        cta={{ label: "Tạo bản nháp chuyến đi", href: "/combo-du-lich" }}
+        heading="Đã chọn được nơi muốn đi?"
+        cta={{ label: "Gửi yêu cầu tư vấn", href: "/tai-khoan/yeu-cau-tu-van" }}
       />
     </>
   );
