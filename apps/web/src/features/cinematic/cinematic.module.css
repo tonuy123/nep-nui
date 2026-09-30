@@ -58,20 +58,32 @@
   display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
   width: max-content; max-width: calc(100% - 32px);
 }
-.actions a { border-radius: 999px; min-height: 48px; }
-.actions a:last-child { background: #fff; }
-.actions a:last-child:hover { background: #183d30; }
+.scrollCue {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 12px 26px; border-radius: 999px;
+  background: #fff; color: #183d30; font-size: .95rem; font-weight: 600;
+  text-decoration: none; box-shadow: 0 12px 32px rgba(9, 23, 15, .3);
+  transition: background-color .25s ease, color .25s ease;
+  animation: cueFloat 2.6s ease-in-out infinite;
+}
+.scrollCue:hover, .scrollCue:focus-visible { background: #183d30; color: #f7f3e9; }
+.scrollCue svg { flex-shrink: 0; }
+@keyframes cueFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
 @media (max-width:767px) {
   .hero { height: max(700px, 88svh); min-height: 700px; }
   .title { top: 43%; font-size: clamp(1.75rem, 8.7vw, 3.2rem); width: 94%; }
   .actions { bottom: 102px; flex-direction: column; width: min(290px, calc(100% - 40px)); gap: 8px; }
-  .actions a { font-size: .85rem; padding: 11px 18px; min-height: 46px; }
+  .scrollCue { font-size: .85rem; padding: 11px 18px; min-height: 46px; }
 }
 @media (max-height:500px) and (min-width:768px) {
   .hero { height: 660px; min-height: 660px; }
   .title { font-size: 4rem; }
 }
 @media (prefers-reduced-motion:reduce) {
+  .scrollCue { animation: none; }
   .scene { display: none; }
   .hero[data-scene-boot="pending"] .poster,
   .hero[data-scene-boot="pending"] .foreground,
