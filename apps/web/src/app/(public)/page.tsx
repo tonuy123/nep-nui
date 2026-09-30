@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { AboutSection } from "@/features/about/about-section";
 import { CinematicHero } from "@/features/cinematic/cinematic-hero";
+import planRegionsStyles from "./plan-regions.module.css";
 import { ExperienceGallery } from "@/features/gallery/experience-gallery";
 import { IntroVideo } from "@/features/intro-video/intro-video";
 import { WeatherSection } from "@/features/weather/weather-section";
@@ -99,23 +100,34 @@ export default function HomePage() {
               </figcaption>
             </figure>
           </div>
-          <ol className="divide-y divide-forest/20 border-y border-forest/20">
-            {planRegions.map((region, index) => (
-              <li key={region.name} className="group/item">
-                <div className="grid grid-cols-[2.5rem_minmax(0,1fr)] items-start gap-3 py-6 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-5 sm:py-8">
-                  <span className="font-display text-2xl text-earth">{String(index + 1).padStart(2, "0")}</span>
-                  <div>
-                    <h3 className="font-display text-2xl leading-tight text-forest-deep transition-transform duration-300 motion-reduce:transition-none group-hover/item:-translate-y-1 sm:text-3xl">
-                      {region.name}
-                    </h3>
-                    <p className="max-h-0 overflow-hidden text-sm leading-6 text-ink/70 opacity-0 transition-all duration-300 motion-reduce:transition-none group-hover/item:mt-2 group-hover/item:max-h-44 group-hover/item:opacity-100">
-                      {region.description}
-                    </p>
+          <div className="relative">
+            <ol
+              tabIndex={0}
+              aria-label="Danh sách tám tỉnh vùng Tây Bắc — cuộn để xem tiếp"
+              className={`${planRegionsStyles.scroller} max-h-[21.5rem] divide-y divide-forest/20 overflow-y-auto overscroll-contain border-y border-forest/20 pb-24 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest sm:max-h-[27.5rem]`}
+            >
+              {planRegions.map((region, index) => (
+                <li key={region.name} className="group/item">
+                  <div className="grid grid-cols-[2.5rem_minmax(0,1fr)] items-start gap-3 py-6 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-5 sm:py-8">
+                    <span className="font-display text-2xl text-earth">{String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <h3 className="font-display text-2xl leading-tight text-forest-deep transition-transform duration-300 motion-reduce:transition-none group-hover/item:-translate-y-1 sm:text-3xl">
+                        {region.name}
+                      </h3>
+                      <p className="max-h-0 overflow-hidden text-sm leading-6 text-ink/70 opacity-0 transition-all duration-300 motion-reduce:transition-none group-hover/item:mt-2 group-hover/item:max-h-44 group-hover/item:opacity-100">
+                        {region.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ol>
+                </li>
+              ))}
+            </ol>
+            <div
+              data-plan-fade
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ivory via-ivory/70 to-transparent"
+            />
+          </div>
         </div>
       </section>
 
